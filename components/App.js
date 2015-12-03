@@ -2,24 +2,32 @@ import React from 'react'
 import * as actions from '../redux/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { Link } from 'react-router'
+import Create from './Create';
+import Results from './Results';
+import Header from './Header';
 
 var App = React.createClass({
 
   render: function() {
     return (
       <div>
-        <h3>begin header</h3>
-        <Link to="/">go to home/create</Link><br/>
-        <Link to="/song/1">go to song with id 1</Link>
-        <h3>end header</h3>
-        <br/>
-        <br/>
-        {this.props.children}
+        <Header/>
+        <Create search={this.props.actions.search}/>
+        <Results results={this.props.results}/>
       </div>
     )
   }
 
 });
 
-module.exports = App;
+var mapStateToProps = function (state) {
+  return state;
+};
+
+var mapDispatchToProps = function (dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  };
+}
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(App);

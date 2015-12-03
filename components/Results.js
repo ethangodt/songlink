@@ -1,9 +1,18 @@
-import React from 'react'
+import React from 'react';
+import Result from './Result';
 
 var Results = React.createClass({
 
   render: function() {
-    return <div>search results: {this.props.results}</div>
+    return (
+      <ul>
+      {
+        this.props.results.map(function (result, i) {
+          return <Result key={i} result={result}/>;
+        })
+      }
+      </ul>
+    )
   }
 
 });

@@ -1,15 +1,15 @@
 var reducers = {
 
-  resultsReducer: function (state, action) {
-    state = state || '';
+  resultsReducer: function (results, action) {
+    results = results || '';
 
     switch (action.type) {
 
-      case 'SEARCH':
-        return action.text;
+      case 'UPDATE_RESULTS':
+        return action.results;
 
       default: 
-        return state;
+        return results;
     }
   }
   
