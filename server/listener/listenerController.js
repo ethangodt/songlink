@@ -4,6 +4,10 @@ var Mustache = require('mustache');
 var fs = require('fs');
 var path = require('path');
 
+// notes for saving mixed data in mongo (for providers parameter on listenermodel)
+// person.anything = { x: [3, 4, { y: "changed" }] };
+// person.markModified('anything');
+// person.save(); // anything will now get saved
 
 module.exports = {
 
@@ -13,20 +17,33 @@ module.exports = {
       if (err) console.log(err);
     });
 
+    //testdata
     var person = {
-        firstName: "Kurtis",
-        lastName: "W",
-        blogURL: "info"
+      title: "Hello",
+      artist: "Adele",
+      albumart: "http://ichef.bbci.co.uk/images/ic/256xn/p035xwsg.jpg",
+      providers: 
+        [{name:"Spotify", url:"http://spotify.url/helloidnumber"},
+        {name:"iTunes", url:"ituneslink.com/helloidnumber"},
+        {name:"Youtube", url:"youtube.com/helloidnumber"}]
     };
     var person2 = {
-        firstName: "Ethan",
-        lastName: "GODT",
-        blogURL: "test 2"
+      title: "Hotline Bling",
+      artist: "Drake",
+      albumart: "http://cdn.pitchfork.com/tracks/17609/homepage_large.ee5af306.jpg",
+      providers: 
+        [{name:"Spotify", url:"http://spotify.url/hotlineidnumber"},
+        {name:"iTunes", url:"ituneslink.com/hotlineidnumber"},
+        {name:"Youtube", url:"youtube.com/hotlineidnumber"}]
     };
     var person3 = {
-        firstName: "nikolai",
-        lastName: "stobie",
-        blogURL: "more info"
+      title: "Shake it Off",
+      artist: "Taylor Swift",
+      albumart: "https://upload.wikimedia.org/wikipedia/en/c/c4/Taylor_Swift_-_Shake_It_Off.png",
+      providers: 
+        [{name:"Spotify", url:"http://spotify.url/shakeitoffnumber"},
+        {name:"iTunes", url:"ituneslink.com/shakeitoffnumber"},
+        {name:"Youtube", url:"youtube.com/shakeitoffnumber"}]
     };
 
     var html = Mustache.render(template, person);
