@@ -1,4 +1,4 @@
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
   require('dotenv').load();
 }
 
@@ -12,11 +12,7 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var expressRouter = express.Router();
 var router = require('./router.js'); 
 
-
-var echobest = require('echo-best');
-
-var key = process.env.ECHONEST_KEY;
-// var echo = echobest(key);
+var plainText = require('./plainTextSearch.js');
 
 var app = express();
 var port = 3000;
@@ -27,21 +23,7 @@ app.use(webpackHotMiddleware(compiler));
 
 app.use(express.static('./dist'));
 
-app.get('/search', function (req, res) {
-  var opts = {
-    combined: req.query.search,
-    results: 10
-  };
-  
-  echo('song/search', opts, function(error, response) {
-    if (error) {
-      console.error(error);
-    } else {
-      console.log(response.songs);
-      res.send(response.songs);
-    }
-  });
-});
+app.get('/search', plainText.appleSearch);
 
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
