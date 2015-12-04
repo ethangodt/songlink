@@ -90,21 +90,6 @@ var actions = {
     return function (dispatch, getState) {
       
       dispatch(actions.toggleLoadingLink(true));
-
-      // $.ajax({
-      //   url: 'link',
-      //   data: {
-      //     song: song
-      //   },
-      //   cache: false,
-      //   error: function(err) {
-      //     console.error(err);
-      //   },
-      //   success: function(res) {
-      //     dispatch(actions.toggleLoadingLink(false));
-      //     dispatch(actions.addLink(link));
-      //   }
-      // });
       
       setTimeout(function () {
         dispatch(actions.addLink(song));

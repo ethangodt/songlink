@@ -7,6 +7,7 @@ var reducers = {
     switch (action.type) {
 
       case 'UPDATE_RESULTS':
+        console.log(action.results);
         return action.results;
 
       default: 
@@ -29,7 +30,11 @@ var reducers = {
   
   loadingReducer: function (loading, action) {
 
-    loading = loading || false;
+    loading = loading || {
+      link: false,
+      preference: false,
+      search: false
+    };
 
     switch (action.type) {
       case 'TOGGLE_LOADING_LINK':

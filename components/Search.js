@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Results from './Results';
 
-var Create = React.createClass({
+var Search = React.createClass({
 
   handleSubmit: function (e) {
     e.preventDefault();
@@ -15,7 +15,7 @@ var Create = React.createClass({
   },
 
   updateSearch: function(val) {
-    this.props.search(val);
+    this.props.actions.search(val);
   },
 
   handleChange: function (e) {
@@ -57,4 +57,4 @@ var Create = React.createClass({
   }
 });
 
-module.exports = Create;
+module.exports = Search;

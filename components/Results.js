@@ -4,19 +4,23 @@ import Result from './Result';
 var Results = React.createClass({
 
   render: function() {
-    return (
-      <div>
-        <h4>Results:</h4>
-        {this.props.loading.search ? <div>results are loading...</div> : <div><br/></div>}
+    return this.renderResultsOrLoading();
+  },
+
+  renderResultsOrLoading: function () {
+    if (this.props.loading.search) {
+      return <div>results are loading...</div>
+    } else {
+      return (
         <ul>
           {
             this.props.results.map(function (result, i) {
-              return <Result key={i} title={result} createLink={this.props.createLink}/>;
+              return <Result key={i} result={result} createLink={this.props.createLink}/>;
             }.bind(this))
           }
-        </ul>        
-      </div>
-    )
+        </ul>
+      )
+    }
   }
 
 });
