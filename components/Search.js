@@ -6,14 +6,6 @@ import Results from './Results';
 
 var Search = React.createClass({
 
-  handleSubmit: function (e) {
-    e.preventDefault();
-    this.props.actions.search(this.state.text);
-    this.setState({
-      text: ''
-    });
-  },
-
   updateSearch: function(val) {
     this.props.actions.search(val);
   },
@@ -21,8 +13,13 @@ var Search = React.createClass({
   handleChange: function (e) {
     this.setState({
       text: e.target.value
+    }, function () {
+      if (this.state.text.length > 3) {
+        this.updateSearch(e.target.value);
+      } else if (!this.state.text.length) {
+        this.props.actions.clearResults();
+      }
     });
-    this.updateSearch(e.target.value);
   },
 
   getInitialState: function () {
@@ -35,16 +32,13 @@ var Search = React.createClass({
 
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <input
             type="text"
             placeholder="Search for song"
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange}/>
-          <input 
-            type="submit"
-            value="Search"/>
         </form>
 
         <Results 

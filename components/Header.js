@@ -6,8 +6,12 @@ var Header = React.createClass({
   render: function() {
     return (
       <div>
-        <h1>music-share</h1>
-        <h4><Link to="/">main</Link><span> </span><Link to="/preferences">preferences</Link></h4>
+        <h1>songl.ink</h1>
+        <h4>
+          <Link to="/">main</Link>
+          <span> </span>
+          <Link to="/preferences">preferences</Link>
+        </h4>
       </div>
     )
   }

@@ -7,8 +7,10 @@ var reducers = {
     switch (action.type) {
 
       case 'UPDATE_RESULTS':
-        console.log(action.results);
         return action.results;
+
+      case 'CLEAR_RESULTS':
+        return [];
 
       default: 
         return results;
