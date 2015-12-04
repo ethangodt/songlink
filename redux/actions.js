@@ -23,8 +23,8 @@ var actions = {
         },
         success: function(res) {
           console.log(res);
-          var titles = res.map(function (song) {
-            return song.title;
+          var titles = res.results.map(function (song) {
+            return {title: song.trackName, artist: song.artistName, artwork: song.artworkUrl60};
           })
           dispatch(actions.updateResults(titles));
         }

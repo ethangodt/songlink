@@ -13,10 +13,15 @@ var Create = React.createClass({
     });
   },
 
+  updateSearch: function(val) {
+    this.props.search(val);
+  },
+
   handleChange: function (e) {
     this.setState({
       text: e.target.value
     });
+    this.updateSearch(e.target.value);
   },
 
   getInitialState: function () {
@@ -29,7 +34,6 @@ var Create = React.createClass({
 
     return (
       <div>
-
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"

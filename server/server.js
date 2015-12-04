@@ -12,7 +12,7 @@ var webpackHotMiddleware = require('webpack-hot-middleware');
 var expressRouter = express.Router();
 var router = require('./router.js'); 
 
-var plainText = require('./plainTextSearch.js');
+var plainText = require('./requests/plainTextSearch.js');
 
 var app = express();
 var port = 3000;

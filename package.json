@@ -21,6 +21,7 @@
     "history": "^1.13.1",
     "ituner": "^0.1.4",
     "jquery": "^2.1.4",
+    "mustache": "^2.2.0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
