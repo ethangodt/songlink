@@ -11,7 +11,7 @@ module.exports = {
 
     var template = fs.readFileSync(path.join(__dirname, '../mustache/template.html'),'utf-8', function(err, data) {
       if (err) console.log(err);
-    }); 
+    });
 
     var person = {
         firstName: "Kurtis",
