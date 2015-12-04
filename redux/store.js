@@ -1,5 +1,5 @@
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
-import { resultsReducer } from './reducers';
+import * as reducers from './reducers';
 import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
@@ -8,7 +8,9 @@ var finalCreateStore = compose(
 )(createStore);
 
 var rootReducer = combineReducers({
-  results: resultsReducer
+  links: reducers.linksReducer,
+  loading: reducers.loadingReducer,
+  results: reducers.resultsReducer
 });
 
 var configureStore = function(initialState) {

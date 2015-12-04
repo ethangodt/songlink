@@ -23,6 +23,7 @@
     "jquery": "^2.1.4",
     "mustache": "^2.2.0",
     "react": "^0.14.3",
+    "react-copy-to-clipboard": "^3.0.4",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.0",
     "react-transform-hmr": "^1.0.1",

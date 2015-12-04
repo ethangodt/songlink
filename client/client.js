@@ -5,7 +5,11 @@ import { Provider } from 'react-redux';
 import App from '../components/App';
 
 var initialState = {
-  results: ['result num 1', 'result num 2']
+  loading: {
+    link: false,
+    search: false
+  },
+  results: []
 }
 
 var store =  require('../redux/store')(initialState);

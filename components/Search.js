@@ -2,12 +2,13 @@ import React from 'react';
 import * as actions from '../redux/actions'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import Results from './Results';
 
 var Create = React.createClass({
 
   handleSubmit: function (e) {
     e.preventDefault();
-    this.props.search(this.state.text);
+    this.props.actions.search(this.state.text);
     this.setState({
       text: ''
     });
@@ -30,7 +31,7 @@ var Create = React.createClass({
     };
   },
 
-  render: function() {
+  render: function () {
 
     return (
       <div>
@@ -40,11 +41,16 @@ var Create = React.createClass({
             placeholder="Search for song"
             autoFocus="true"
             value={this.state.text}
-            onChange={this.handleChange} />
+            onChange={this.handleChange}/>
           <input 
             type="submit"
-            value="Search" />
+            value="Search"/>
         </form>
+
+        <Results 
+          loading={this.props.loading}
+          results={this.props.results}
+          createLink={this.props.actions.createLink}/>
 
       </div>
     )
