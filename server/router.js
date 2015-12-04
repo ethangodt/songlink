@@ -11,7 +11,6 @@ module.exports = function (router) {
   router.get('/test3', listenerController.render);
   router.get('/test4', listenerController.render2);
 
-
 };
 
 

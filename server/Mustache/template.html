@@ -10,13 +10,19 @@
 <body>
   <div>
     <img src='{{albumart}}'></img>
-    <h1> Play {{title}} <br> by {{artist}} on:</h1>
+    <h1 onclick="console.log('yeee')"> Play {{title}} <br> by {{artist}} on:</h1>
   </div>
 
+  <button onClick="click()">test</button>
   <div>
   {{#providers}}
     <li>{{name}}: <a>{{url}}</a></li>
   {{/providers}}
   </div>
 
+  <script>
+  function click(){
+    console.log("yes");
+  }
+  </script>
 </body>
