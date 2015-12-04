@@ -13,6 +13,18 @@ module.exports = {
 
   render : function (req, res, next) {
 
+    console.log('test1')
+    Listener.create({
+      title: 'I want it that way',
+      artist: 'Backstreet Boys',
+      albumart: 'https://i.ytimg.com/vi/eZx5NsZt_vw/hqdefault.jpg',
+      providers: [{name:"Spotify", url:"http://spotify.url/helloidnumber"},
+        {name:"iTunes", url:"ituneslink.com/helloidnumber"},
+        {name:"Youtube", url:"youtube.com/helloidnumber"}]
+      }).then(function(data){
+        console.log(data._id);
+      })
+
     var template = fs.readFileSync(path.join(__dirname, '../mustache/template.html'),'utf-8', function(err, data) {
       if (err) console.log(err);
     });
@@ -57,6 +69,20 @@ module.exports = {
     } else if (req.url === '/test3') {
       res.send(html3);
     }
+  },
+
+  render2 : function (req, res, next) {
+
+    var template = fs.readFileSync(path.join(__dirname, '../mustache/template.html'),'utf-8', function(err, data) {
+      if (err) console.log(err);
+    });
+
+    Listener.findOne({
+      title: 'I want it that way'}).then(function(person){
+        var html = Mustache.render(template, person);
+        res.send(html);
+      });
+
   }
   
 }

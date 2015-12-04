@@ -4,6 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var mongoose = require('mongoose'); 
+
 
 var expressRouter = express.Router();
 var router = require('./router.js');
@@ -29,6 +31,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(express.static('./dist'));
 
+mongoose.connect('mongodb://localhost/songlink');
 app.get('/search', plainText.appleSearch);
 
 app.get('/preferences', function(req, res) {
