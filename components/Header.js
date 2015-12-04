@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import { Link } from 'react-router';
 
 var Header = React.createClass({
 
   render: function() {
-    return <h1>music-share</h1>
+    return (
+      <div>
+        <h1>music-share</h1>
+        <h4><Link to="/">main</Link><span> </span><Link to="/preferences">preferences</Link></h4>
+      </div>
+    )
   }
 
 });

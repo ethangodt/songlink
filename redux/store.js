@@ -10,6 +10,7 @@ var finalCreateStore = compose(
 var rootReducer = combineReducers({
   links: reducers.linksReducer,
   loading: reducers.loadingReducer,
+  preference: reducers.preferenceReducer,
   results: reducers.resultsReducer
 });
 

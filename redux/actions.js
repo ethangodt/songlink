@@ -23,11 +23,39 @@ var actions = {
     }
   },
 
+  toggleLoadingPreference: function (isLoading) {
+    return {
+      type: 'TOGGLE_LOADING_PREFERENCE',
+      isLoading: isLoading
+    }
+  },
+
   toggleLoadingSearch: function (isLoading) {
     return {
       type: 'TOGGLE_LOADING_SEARCH',
       isLoading: isLoading
     }
+  },
+
+  updatePreference: function (preference) {
+    return {
+      type: 'UPDATE_PREFERENCE',
+      preference: preference
+    }
+  },
+
+  submitPreference: function (preference) {
+
+    return function (dispatch, getState) {
+      
+      dispatch(actions.toggleLoadingPreference(true));
+
+      setTimeout(function () {
+        dispatch(actions.toggleLoadingPreference(false));
+        dispatch(actions.updatePreference(preference));
+      }, 1300)
+
+    };
   },
 
   search: function (text) {
