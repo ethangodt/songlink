@@ -16,6 +16,10 @@ var plainText = require('./requests/plainTextSearch.js');
 
 var app = express();
 var port = 3000;
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/songlink');
+
+var createHandler = require('./routes/createHandler');
 
 var compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
@@ -28,6 +32,8 @@ app.get('/search', plainText.appleSearch);
 app.get('/preferences', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
+
+app.post('/create', createHandler);
 
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
