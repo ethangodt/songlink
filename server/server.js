@@ -9,10 +9,14 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
+var expressRouter = express.Router();
+var router = require('./router.js'); 
+
+
 var echobest = require('echo-best');
 
 var key = process.env.ECHONEST_KEY;
-var echo = echobest(key);
+// var echo = echobest(key);
 
 var app = express();
 var port = 3000;
@@ -42,6 +46,10 @@ app.get('/search', function (req, res) {
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
+
+
+app.use('/', expressRouter); 
+router(expressRouter); 
 
 app.listen(port, function(error) {
   if (error) {
