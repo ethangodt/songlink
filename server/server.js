@@ -10,7 +10,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
 var expressRouter = express.Router();
-var router = require('./router.js'); 
+var router = require('./router.js');
 
 var plainText = require('./requests/plainTextSearch.js');
 
@@ -34,8 +34,8 @@ app.get('/', function(req, res) {
 });
 
 
-app.use('/', expressRouter); 
-router(expressRouter); 
+app.use('/', expressRouter);
+router(expressRouter);
 
 app.listen(port, function(error) {
   if (error) {
