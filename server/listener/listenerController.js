@@ -77,8 +77,7 @@ module.exports = {
       if (err) console.log(err);
     });
 
-    Listener.findOne({
-      title: 'I want it that way'}).then(function(person){
+    Listener.findOne({title: 'I want it that way'}).then(function(person){
         var html = Mustache.render(template, person);
         res.send(html);
       });
