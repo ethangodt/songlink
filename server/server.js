@@ -25,6 +25,10 @@ app.use(express.static('./dist'));
 
 app.get('/search', plainText.appleSearch);
 
+app.get('/preferences', function(req, res) {
+  res.sendFile(path.resolve('client/index.html'));
+});
+
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });

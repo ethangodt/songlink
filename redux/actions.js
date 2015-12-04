@@ -9,9 +9,61 @@ var actions = {
     };
   },
 
-  search: function(text) {
+  addLink: function (link) {
+    return {
+      type: 'ADD_LINK',
+      link: link
+    }
+  },
 
-    return function(dispatch, getState) {
+  toggleLoadingLink: function (isLoading) {
+    return {
+      type: 'TOGGLE_LOADING_LINK',
+      isLoading: isLoading
+    }
+  },
+
+  toggleLoadingPreference: function (isLoading) {
+    return {
+      type: 'TOGGLE_LOADING_PREFERENCE',
+      isLoading: isLoading
+    }
+  },
+
+  toggleLoadingSearch: function (isLoading) {
+    return {
+      type: 'TOGGLE_LOADING_SEARCH',
+      isLoading: isLoading
+    }
+  },
+
+  updatePreference: function (preference) {
+    return {
+      type: 'UPDATE_PREFERENCE',
+      preference: preference
+    }
+  },
+
+  submitPreference: function (preference) {
+
+    return function (dispatch, getState) {
+      
+      dispatch(actions.toggleLoadingPreference(true));
+
+      setTimeout(function () {
+        dispatch(actions.toggleLoadingPreference(false));
+        dispatch(actions.updatePreference(preference));
+      }, 1300)
+
+    };
+  },
+
+  search: function (text) {
+
+    return function (dispatch, getState) {
+      
+      dispatch(actions.toggleLoadingSearch(true));
+
       $.ajax({
         url: 'search',
         data: {
@@ -22,15 +74,29 @@ var actions = {
           console.error(err);
         },
         success: function(res) {
-          console.log(res);
-          var titles = res.results.map(function (song) {
+          var songs = res.results.map(function (song) {
             return {title: song.trackName, artist: song.artistName, artwork: song.artworkUrl60};
-          })
-          dispatch(actions.updateResults(titles));
+          });
+          dispatch(actions.toggleLoadingSearch(false));
+          dispatch(actions.updateResults(songs));
         }
       });
     };
 
+  },
+
+  createLink: function (song) {
+
+    return function (dispatch, getState) {
+      
+      dispatch(actions.toggleLoadingLink(true));
+      
+      setTimeout(function () {
+        dispatch(actions.addLink(song));
+        dispatch(actions.toggleLoadingLink(false));
+      }, 1000)
+
+    }
   }
 
 };
