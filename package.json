@@ -6,8 +6,10 @@
   "author": "juvenile-orca",
   "license": "ISC",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --debug server/index.js --ignore components --ignore containers"
+    "postinstall": "webpack",
+    "start": "node server/index.js",
+    "serve": "nodemon --debug server/index.js --ignore components --ignore containers",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "babel-core": "^5.8.3",
