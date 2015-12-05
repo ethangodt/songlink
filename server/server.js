@@ -14,8 +14,7 @@ var app = express();
 
 var port = 3000;
 var mongoose = require('mongoose');
-// var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
-var mongoUrl = 'mongodb://localhost/songlink';
+var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
 mongoose.connect(mongoUrl);
 
 var createHandler = require('./routes/createHandler');
