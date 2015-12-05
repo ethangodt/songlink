@@ -41,9 +41,6 @@ app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
 
-app.get('/test', function(req, res) {
-  res.sendStatus(200);
-});
 
 
 app.use('/', expressRouter);
