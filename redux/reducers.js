@@ -1,96 +1,60 @@
-var reducers = {
-
-  resultsReducer: function (results, action) {
-
-    results = results || [];
-
-    switch (action.type) {
-
-      case 'UPDATE_RESULTS':
-        return action.results;
-
-      case 'CLEAR_RESULTS':
-        return [];
-
-      default: 
-        return results;
-    }
-  },
-
-
-  linksReducer: function (links, action) {
-
-    links = links || [];
-
-    switch (action.type) {
-      case 'ADD_LINK':
-        return [action.link, ...links];
-      default: 
-        return links;
-    }
-  },
-  
-  loadingReducer: function (loading, action) {
-
-    loading = loading || {
-      link: false,
-      preference: false,
-      search: false
-    };
-
-    switch (action.type) {
-      case 'TOGGLE_LOADING_LINK':
-        return Object.assign(
-          {}, 
-          loading,
-          {
-            link: action.isLoading,
-            preference: loading.preference,
-            search: loading.search
-          }
-        );
-
-      case 'TOGGLE_LOADING_PREFERENCE':
-        return Object.assign(
-          {}, 
-          loading,
-          {
-            link: loading.link,
-            preference: action.isLoading,
-            search: loading.search
-          }
-        );
-
-      case 'TOGGLE_LOADING_SEARCH':
-        return Object.assign(
-          {}, 
-          loading,
-          {
-            link: loading.link,
-            preference: loading.preference,
-            search: action.isLoading
-          }
-        );
-
-      default: 
-        return loading;
-    }
-  },
-
-  preferenceReducer: function (preference, action) {
-    
-    preference = preference || 'none';
-
-    switch (action.type) {
-
-      case 'UPDATE_PREFERENCE':
-        return action.preference
-
-      default: 
-        return preference;
-    }
-
+export function linksReducer(links = [], action) {
+  switch (action.type) {
+    case 'ADD_LINK':
+      return [action.link, ...links]
+    default: 
+      return links
   }
-};
+}
 
-module.exports = reducers;
+export function loadingReducer(loading, action) {
+  
+  loading = loading || {
+    link: false,
+    preference: false,
+    search: false
+  }
+
+  switch (action.type) {
+    case 'TOGGLE_LOADING_LINK':
+      return Object.assign({}, loading, {
+        link: action.isLoading,
+        preference: loading.preference,
+        search: loading.search
+      })
+    case 'TOGGLE_LOADING_PREFERENCE':
+      return Object.assign({}, loading, {
+        link: loading.link,
+        preference: action.isLoading,
+        search: loading.search
+      })
+    case 'TOGGLE_LOADING_SEARCH':
+      return Object.assign({}, loading, {
+        link: loading.link,
+        preference: loading.preference,
+        search: action.isLoading
+      })
+    default: 
+      return loading
+  }
+}
+
+export function preferenceReducer(preference = 'none', action) {
+  switch (action.type) {
+    case 'UPDATE_PREFERENCE':
+      return action.preference
+    default: 
+      return preference
+  }
+}
+
+export function resultsReducer(results = [], action) {
+  switch (action.type) {
+    case 'UPDATE_RESULTS':
+      return action.results
+    case 'CLEAR_RESULTS':
+      return []
+    default: 
+      return results
+  }
+}
