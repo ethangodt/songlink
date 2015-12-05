@@ -6,7 +6,7 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
 var expressRouter = express.Router();
-var router = require('./router.js');
+var router = require('./routes/routes.js');
 
 var plainText = require('./requests/plainTextSearch.js');
 

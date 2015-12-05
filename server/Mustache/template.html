@@ -1,13 +1,22 @@
-
 <head>
   <style>
-    body {background-color:lightgrey;}
+    body {background-color:white;}
     h1   {color:blue;}
-    p    {color:green;}
+    li   {color:black;}
   </style>
 </head>
 
 <body>
-  <h1>{{firstName}} {{lastName}}</h1>
-  <p>Blog: {{blogURL}}</p>
+  <div>
+    <img src='{{album_art}}'></img>
+    <h1> Play {{title}} <br> by {{artist}} on:</h1>
+  </div>
+
+  <div>
+  {{#providers}}
+    <li>{{name}}: <a href='{{url}}'>{{url}}</a></li>
+  {{/providers}}
+  </div>
+
+
 </body>

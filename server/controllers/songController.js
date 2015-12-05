@@ -2,7 +2,7 @@ var Song = require('../models/song');
 
 var get = function (songObj, callback) {
   // allows you to search with misc. song criteria
-  Song.find(songObj, function (err, response) {
+  Song.findOne(songObj, function (err, response) {
     if (err) {
       console.error(err);
     }
