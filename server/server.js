@@ -31,7 +31,6 @@ if (process.env.NODE_ENV !== 'production') {
 
 app.use(express.static('./dist'));
 
-mongoose.connect('mongodb://localhost/songlink');
 app.get('/search', plainText.appleSearch);
 
 app.get('/preferences', function(req, res) {

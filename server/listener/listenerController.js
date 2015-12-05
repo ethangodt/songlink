@@ -13,7 +13,7 @@ module.exports = {
 
   render : function (req, res, next) {
 
-    console.log('test1')
+    console.log('params',req.params.id);
     Listener.create({
       title: 'I want it that way',
       artist: 'Backstreet Boys',
@@ -62,11 +62,11 @@ module.exports = {
     var html2 = Mustache.render(template, song2);
     var html3 = Mustache.render(template, song3);
 
-    if (req.url === '/test1') {
+    if (req.params.id === '1') {
       res.send(html);
-    } else if (req.url === '/test2') {
+    } else if (req.params.id === '2') {
       res.send(html2);
-    } else if (req.url === '/test3') {
+    } else if (req.params.id === '3') {
       res.send(html3);
     }
   },

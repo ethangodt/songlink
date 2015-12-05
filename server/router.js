@@ -6,10 +6,7 @@ var listenerController = require('./listener/listenerController.js');
 
 module.exports = function (router) {
 
-  router.get('/test1', listenerController.render);
-  router.get('/test2', listenerController.render);
-  router.get('/test3', listenerController.render);
-  router.get('/test4', listenerController.render2);
+  router.get('/test/:id', listenerController.render);
 
 };
 
