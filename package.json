@@ -44,6 +44,7 @@
     "redux": "^3.0.4",
     "redux-logger": "^2.0.4",
     "redux-thunk": "^1.0.0",
+    "request": "^2.67.0",
     "supertest": "^1.1.0",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
