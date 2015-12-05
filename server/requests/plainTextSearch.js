@@ -1,5 +1,6 @@
 // var echobest = require('echo-best');
 var client = (require('ituner')());
+var spotify = require('spotify');
 
 // var key = process.env.ECHONEST_KEY;
 // var echo = echobest(key);
@@ -25,8 +26,29 @@ var client = (require('ituner')());
 // }
 
 exports.appleSearch = function(req, res) {
-  
-  client.search(req.query.search, function (err, results) {
+  // if (text.slice(0,4) === "http") {
+  //   if (text.includes("itun.es")) {
+  //     var arr = text.split('=');
+  //     var itunesID = arr[arr.length - 1];
+  //     console.log(spotifyID);
+  //   } else if (text.includes("spotify")) {
+  //     var arr = text.split('/');
+  //     var spotifyID = arr[arr.length - 1];
+  //     spotify.lookup({ type: 'track', id: spotifyID}, function(err, data) {
+  //         if ( err ) {
+  //             console.log('Error occurred: ' + err);
+  //             return;
+  //         }
+  //         console.log(data);      
+  //     });
+  //   }
+  // } else if (text.slice(0,8) === "spotify:") {
+  //   var arr = text.split(':');
+  //   var spotifyID = arr[arr.length - 1];
+  //   console.log(spotifyID)
+  // } else {
+  var text = req.query.search;
+  client.search(text, function (err, results) {
     if (err) {
       console.error(err);
     }
