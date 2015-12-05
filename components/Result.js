@@ -3,11 +3,11 @@ import React from 'react'
 var Result = React.createClass({
 
   handleClick: function () {
-    this.props.createLink(this.props.result.artwork);
+    this.props.actions.createLink(this.props.result.artwork);
+    this.props.actions.clearResults();
   },
 
   render: function() {
-    console.log(this.props.result);
     return (
       <li onClick={this.handleClick}>
         {this.props.result.title} - {this.props.result.artist}

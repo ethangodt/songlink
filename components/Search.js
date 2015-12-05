@@ -4,27 +4,41 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Results from './Results';
 
+const elapsedTime = 450;
+
 var Search = React.createClass({
 
-  updateSearch: function(val) {
-    this.props.actions.search(val);
+  updateSearch: function() {
+    if (Date.now() - this.state.last >= elapsedTime) {
+      this.props.actions.search(this.state.text);
+    }
   },
 
   handleChange: function (e) {
+
     this.setState({
-      text: e.target.value
-    }, function () {
-      if (this.state.text.length > 3) {
-        this.updateSearch(e.target.value);
-      } else if (!this.state.text.length) {
-        this.props.actions.clearResults();
-      }
+      text: e.target.value,
+      last: Date.now()
     });
+
+    if (e.target.value === '') {
+      this.props.actions.clearResults();
+    } else {
+      setTimeout(this.updateSearch, elapsedTime);
+    }
+
+  },
+
+  handleFocus: function (e) {
+    if(this.state.text.length) {
+      this.props.actions.search(this.state.text);
+    }
   },
 
   getInitialState: function () {
     return {
-      text: ''
+      text: '',
+      last: Date.now()
     };
   },
 
@@ -38,13 +52,14 @@ var Search = React.createClass({
             placeholder="Search for song"
             autoFocus="true"
             value={this.state.text}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}/>
         </form>
 
         <Results 
           loading={this.props.loading}
           results={this.props.results}
-          createLink={this.props.actions.createLink}/>
+          actions={this.props.actions}/>
 
       </div>
     )

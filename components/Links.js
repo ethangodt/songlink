@@ -11,7 +11,7 @@ var Links = React.createClass({
         <ul>
           {
             this.props.links.map(function (link, i) {
-              return <Link key={i} link={link}/>;
+              return <Link key={i} index={i} link={link}/>;
             })
           }
         </ul>       
