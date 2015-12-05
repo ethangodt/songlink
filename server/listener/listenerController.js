@@ -30,7 +30,7 @@ module.exports = {
     });
 
     //testdata
-    var person = {
+    var song = {
       title: "Hello",
       artist: "Adele",
       albumart: "http://ichef.bbci.co.uk/images/ic/256xn/p035xwsg.jpg",
@@ -39,16 +39,16 @@ module.exports = {
         {name:"iTunes", url:"ituneslink.com/helloidnumber"},
         {name:"Youtube", url:"youtube.com/helloidnumber"}]
     };
-    var person2 = {
+    var song2 = {
       title: "Hotline Bling",
       artist: "Drake",
       albumart: "http://cdn.pitchfork.com/tracks/17609/homepage_large.ee5af306.jpg",
       providers: 
-        [{name:"Spotify", url:"http://spotify.url/hotlineidnumber"},
-        {name:"iTunes", url:"ituneslink.com/hotlineidnumber"},
-        {name:"Youtube", url:"youtube.com/hotlineidnumber"}]
+        [{name:"Spotify", url:"spotify:track:0ENSn4fwAbCGeFGVUbXEU3"},
+        {name:"iTunes", url:"https://open.spotify.com/track/0ENSn4fwAbCGeFGVUbXEU3"},
+        {name:"Youtube", url:"https://www.youtube.com/watch?v=42Gtm4-Ax2U"}]
     };
-    var person3 = {
+    var song3 = {
       title: "Shake it Off",
       artist: "Taylor Swift",
       albumart: "https://upload.wikimedia.org/wikipedia/en/c/c4/Taylor_Swift_-_Shake_It_Off.png",
@@ -58,9 +58,9 @@ module.exports = {
         {name:"Youtube", url:"youtube.com/shakeitoffnumber"}]
     };
 
-    var html = Mustache.render(template, person);
-    var html2 = Mustache.render(template, person2);
-    var html3 = Mustache.render(template, person3);
+    var html = Mustache.render(template, song);
+    var html2 = Mustache.render(template, song2);
+    var html3 = Mustache.render(template, song3);
 
     if (req.url === '/test1') {
       res.send(html);
@@ -77,8 +77,8 @@ module.exports = {
       if (err) console.log(err);
     });
 
-    Listener.findOne({title: 'I want it that way'}).then(function(person){
-        var html = Mustache.render(template, person);
+    Listener.findOne({title: 'I want it that way'}).then(function(song){
+        var html = Mustache.render(template, song);
         res.send(html);
       });
 

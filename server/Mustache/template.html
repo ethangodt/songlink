@@ -1,4 +1,3 @@
-
 <head>
   <style>
     body {background-color:white;}
@@ -10,19 +9,14 @@
 <body>
   <div>
     <img src='{{albumart}}'></img>
-    <h1 onclick="console.log('yeee')"> Play {{title}} <br> by {{artist}} on:</h1>
+    <h1> Play {{title}} <br> by {{artist}} on:</h1>
   </div>
 
-  <button onClick="click()">test</button>
   <div>
   {{#providers}}
-    <li>{{name}}: <a>{{url}}</a></li>
+    <li>{{name}}: <a href='{{url}}'>{{url}}</a></li>
   {{/providers}}
   </div>
 
-  <script type="text/javascript">
-  function click(){
-    console.log("yes");
-  }
-  </script>
+
 </body>
