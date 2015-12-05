@@ -10,12 +10,16 @@ var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 
 var expressRouter = express.Router();
-var router = require('./router.js'); 
+var router = require('./router.js');
 
 var plainText = require('./requests/plainTextSearch.js');
 
 var app = express();
 var port = 3000;
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/songlink');
+
+var createHandler = require('./routes/createHandler');
 
 var compiler = webpack(config);
 app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
@@ -29,13 +33,15 @@ app.get('/preferences', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
 
+app.post('/create', createHandler);
+
 app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
 
 
-app.use('/', expressRouter); 
-router(expressRouter); 
+app.use('/', expressRouter);
+router(expressRouter);
 
 app.listen(port, function(error) {
   if (error) {
