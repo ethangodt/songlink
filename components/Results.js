@@ -15,7 +15,7 @@ var Results = React.createClass({
         <ul>
           {
             this.props.results.map(function (result, i) {
-              return <Result key={i} result={result} createLink={this.props.createLink}/>;
+              return <Result key={i} result={result} actions={this.props.actions}/>;
             }.bind(this))
           }
         </ul>

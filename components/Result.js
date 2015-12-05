@@ -3,7 +3,8 @@ import React from 'react'
 var Result = React.createClass({
 
   handleClick: function () {
-    this.props.createLink(this.props.result.artwork);
+    this.props.actions.createLink(this.props.result.artwork);
+    this.props.actions.clearResults();
   },
 
   render: function() {

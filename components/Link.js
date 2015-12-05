@@ -8,7 +8,18 @@ var Link = React.createClass({
   },
 
   handleFocusOnLoad: function (el) {
-    el.select();
+    if (!this.state.hasLoaded) {
+      el.select();
+    }  
+    this.setState({
+      hasLoaded: true
+    });
+  },
+
+  getInitialState: function () {
+    return {
+      hasLoaded: false
+    };
   },
 
   render: function() {
@@ -18,7 +29,7 @@ var Link = React.createClass({
         <input 
           type="text"
           value={this.props.link}
-          ref={!this.props.index ? this.handleFocusOnLoad : undefined}
+          ref={!this.props.index && !this.state.hasLoaded ? this.handleFocusOnLoad : undefined}
           onFocus={this.handleFocus}/>
 
         <CopyToClipboard text={this.props.link}>

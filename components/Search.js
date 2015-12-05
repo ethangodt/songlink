@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Results from './Results';
 
-const elapsedTime = 700;
+const elapsedTime = 450;
 
 var Search = React.createClass({
 
@@ -29,6 +29,12 @@ var Search = React.createClass({
 
   },
 
+  handleFocus: function (e) {
+    if(this.state.text.length) {
+      this.props.actions.search(this.state.text);
+    }
+  },
+
   getInitialState: function () {
     return {
       text: '',
@@ -46,13 +52,14 @@ var Search = React.createClass({
             placeholder="Search for song"
             autoFocus="true"
             value={this.state.text}
-            onChange={this.handleChange}/>
+            onChange={this.handleChange}
+            onFocus={this.handleFocus}/>
         </form>
 
         <Results 
           loading={this.props.loading}
           results={this.props.results}
-          createLink={this.props.actions.createLink}/>
+          actions={this.props.actions}/>
 
       </div>
     )
