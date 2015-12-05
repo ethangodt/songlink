@@ -7,7 +7,6 @@ var Result = React.createClass({
   },
 
   render: function() {
-    console.log(this.props.result);
     return (
       <li onClick={this.handleClick}>
         {this.props.result.title} - {this.props.result.artist}

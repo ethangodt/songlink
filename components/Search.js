@@ -4,27 +4,35 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import Results from './Results';
 
+const elapsedTime = 700;
+
 var Search = React.createClass({
 
-  updateSearch: function(val) {
-    this.props.actions.search(val);
+  updateSearch: function() {
+    if (Date.now() - this.state.last >= elapsedTime) {
+      this.props.actions.search(this.state.text);
+    }
   },
 
   handleChange: function (e) {
+
     this.setState({
-      text: e.target.value
-    }, function () {
-      if (this.state.text.length > 3) {
-        this.updateSearch(e.target.value);
-      } else if (!this.state.text.length) {
-        this.props.actions.clearResults();
-      }
+      text: e.target.value,
+      last: Date.now()
     });
+
+    if (e.target.value === '') {
+      this.props.actions.clearResults();
+    } else {
+      setTimeout(this.updateSearch, elapsedTime);
+    }
+
   },
 
   getInitialState: function () {
     return {
-      text: ''
+      text: '',
+      last: Date.now()
     };
   },
 
