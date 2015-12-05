@@ -5,11 +5,18 @@
   "main": "server.js",
   "author": "juvenile-orca",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/juvenile-orca/songlink"
+  },
+  "engines": {
+    "node": "5.0.0"
+  },
   "scripts": {
     "postinstall": "webpack",
     "start": "node server/index.js",
     "serve": "nodemon --debug server/index.js --ignore components --ignore containers",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test"
   },
   "dependencies": {
     "babel-core": "^5.8.3",
@@ -17,11 +24,13 @@
     "babel-plugin-react-display-name": "^2.0.0",
     "babel-plugin-react-transform": "^1.1.0",
     "babel-runtime": "^5.8.20",
+    "chai": "^3.4.1",
     "dotenv": "^1.2.0",
     "express": "^4.13.3",
     "history": "^1.13.1",
     "ituner": "^0.1.4",
     "jquery": "^2.1.4",
+    "mocha": "^2.3.4",
     "mongo": "^0.1.0",
     "mongoose": "^4.2.9",
     "mustache": "^2.2.0",
@@ -35,6 +44,7 @@
     "redux": "^3.0.4",
     "redux-logger": "^2.0.4",
     "redux-thunk": "^1.0.0",
+    "supertest": "^1.1.0",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"

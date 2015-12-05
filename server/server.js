@@ -41,6 +41,10 @@ app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
 
+app.get('/test', function(req, res) {
+  res.sendStatus(200);
+});
+
 
 app.use('/', expressRouter);
 router(expressRouter);
@@ -52,3 +56,5 @@ app.listen(port, function(error) {
     console.log("Express server listening on port", port);
   }
 });
+
+module.exports = app; 

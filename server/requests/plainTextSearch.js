@@ -30,6 +30,6 @@ exports.appleSearch = function(req, res) {
     if (err) {
       console.error(err);
     }
-   res.send(results)
+   res.status(200).send(results)
   });
 }
