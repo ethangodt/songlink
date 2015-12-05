@@ -14,7 +14,7 @@ module.exports = {
     songCtrl.get({ hash_id : req.params.id }, function(err, response) {
       if (err) console.log(err);
 
-      var template = fs.readFileSync(path.join(__dirname, '../mustache/template.html'),'utf-8', function(err, data) {
+      var template = fs.readFileSync(path.join(__dirname, '../Mustache/template.html'),'utf-8', function(err, data) {
         if (err) console.log(err);
       });
       console.log('response', response);
