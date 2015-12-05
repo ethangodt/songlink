@@ -44,6 +44,12 @@ var actions = {
     }
   },
 
+  clearResults: function () {
+    return {
+      type: 'CLEAR_RESULTS'
+    }
+  },
+
   submitPreference: function (preference) {
 
     return function (dispatch, getState) {

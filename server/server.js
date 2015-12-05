@@ -1,7 +1,3 @@
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
-}
-
 var config = require('../webpack.config');
 var express = require('express');
 var path = require('path');
@@ -15,15 +11,21 @@ var router = require('./router.js');
 var plainText = require('./requests/plainTextSearch.js');
 
 var app = express();
+
 var port = 3000;
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/songlink');
+var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
+mongoose.connect(mongoUrl);
 
 var createHandler = require('./routes/createHandler');
+var port = process.env.PORT || 3000;
 
-var compiler = webpack(config);
-app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-app.use(webpackHotMiddleware(compiler));
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').load();
+  var compiler = webpack(config);
+  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
+  app.use(webpackHotMiddleware(compiler));
+}
 
 app.use(express.static('./dist'));
 
@@ -39,6 +41,10 @@ app.get('/', function(req, res) {
   res.sendFile(path.resolve('client/index.html'));
 });
 
+app.get('/test', function(req, res) {
+  res.sendStatus(200);
+});
+
 
 app.use('/', expressRouter);
 router(expressRouter);
@@ -50,3 +56,5 @@ app.listen(port, function(error) {
     console.log("Express server listening on port", port);
   }
 });
+
+module.exports = app; 

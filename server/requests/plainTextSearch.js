@@ -1,8 +1,8 @@
-var echobest = require('echo-best');
+// var echobest = require('echo-best');
 var client = (require('ituner')());
 
-var key = process.env.ECHONEST_KEY;
-var echo = echobest(key);
+// var key = process.env.ECHONEST_KEY;
+// var echo = echobest(key);
 
 
 // exports.echoSearch = function(req, res) {
@@ -30,6 +30,6 @@ exports.appleSearch = function(req, res) {
     if (err) {
       console.error(err);
     }
-   res.send(results)
+   res.status(200).send(results)
   });
 }
