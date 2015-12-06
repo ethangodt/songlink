@@ -6,7 +6,7 @@ class Links extends Component {
   render() {
     return (
       <div>
-        <h4>LINKS</h4>
+        <div>LINKS</div>
         <span>
           {this.props.loading.link ? 'new link loading...' : ''} 
         </span>

@@ -12,8 +12,13 @@ class Results extends Component {
       <ul>
         {
           this.props.results.map((result, i) => {
-            return <Result key={i} result={result} actions={this.props.actions}/>
-          })
+            return (
+              <Result 
+                key={i} 
+                result={result}
+                clearText={this.props.clearText}
+                actions={this.props.actions}/>
+          )})
         }
       </ul>
     ) 

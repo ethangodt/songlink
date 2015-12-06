@@ -9,6 +9,7 @@ class Result extends Component {
   handleClick() {
     this.props.actions.createLink(this.props.result)
     this.props.actions.clearResults()
+    this.props.clearText()
   }
 
   render() {
@@ -26,6 +27,7 @@ class Result extends Component {
 
 Result.propTypes = {
   actions: PropTypes.object.isRequired,
+  clearText: PropTypes.func.isRequired,
   result: PropTypes.object.isRequired
 }
 

@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import * as actions from '../redux/actions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import Links from './Links';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Search from './Search';
 
 class Main extends Component {

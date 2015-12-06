@@ -1,5 +1,24 @@
 import $ from 'jquery'
 
+const testSongs = [
+  {
+    name: 'Help!',
+    album_name: 'Help!',
+    artist: 'The Beatles',
+    itunes_id: 'some_itunes_string',
+    album_art: 'http://is3.mzstatic.com/image/thumb/Music/v4/98/10/bd/9810bd86-9023-fb20-c6d8-d15e6a25222e/source/100x100bb.jpg',
+    album_art_size: 10000
+  },
+  {
+    name: 'Stairway to Heaven',
+    album_name: 'Led Zeppelin IV',
+    artist: 'Led Zeppelin',
+    itunes_id: 'another_itunes_string',
+    album_art: 'http://is2.mzstatic.com/image/thumb/Music1/v4/b0/43/4d/b0434dcd-2cef-1a9d-a35d-486b8dbe2f2c/source/100x100bb.jpg',
+    album_art_size: 10000
+  }
+]
+
 export function addLink(link) {
   return {
     type: 'ADD_LINK',
@@ -27,9 +46,11 @@ export function createLink(song) {
         console.error(err)
       },
       success: res => {
-        console.log('got a response from post to /create')
+        console.log('received res from /create:', res)
       }
     })
+
+    // Mimicking res from '/create with song.album_art url'
     setTimeout( () => {
       dispatch(addLink(song.album_art))
       dispatch(toggleLoadingLink(false))
@@ -60,10 +81,18 @@ export function search(text) {
             album_art_size: song.album_art_size
           }
         })
-        dispatch(toggleLoadingSearch(false))
-        dispatch(updateResults(songs))
+        console.log('received res from /search:', songs)
+        // dispatch(toggleLoadingSearch(false))
+        // dispatch(updateResults(songs))
       }
     })
+
+    // Mimicking res from '/search'
+    setTimeout(() => {
+      dispatch(toggleLoadingSearch(false))
+      dispatch(updateResults(testSongs)) 
+    }, 1000)
+
   }
 }
 

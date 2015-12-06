@@ -1,10 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import * as actions from '../redux/actions';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
 import Links from './Links';
-import Search from './Search';
 import RadioGroup from 'react-radio-group';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import Search from './Search';
 
 class Preferences extends Component {
 

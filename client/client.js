@@ -1,12 +1,12 @@
 import React from 'react';
+import App from '../components/App';
 import { createHistory } from 'history';
+import Main from '../components/Main';
+import Preferences from '../components/Preferences';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { IndexRoute, Route, Router } from 'react-router';
 import configureStore from '../redux/store';
-import App from '../components/App';
-import Main from '../components/Main';
-import Preferences from '../components/Preferences';
 
 const initialState = {
   loading: {
@@ -17,7 +17,6 @@ const initialState = {
   preference: 'spotify',
   results: []
 }
-
 
 render(
   <Provider store={ configureStore() }>
