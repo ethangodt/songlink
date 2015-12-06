@@ -13,7 +13,7 @@ var Result = React.createClass({
         <div>{this.props.result.name}</div>
         <div>{this.props.result.artist}</div>
         <div>{this.props.result.album_name}</div>
-        <img src={this.props.result.artwork} height='30px'></img>
+        <img src={this.props.result.album_art} height='30px'></img>
       </li>
     )
   }

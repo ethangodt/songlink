@@ -31,7 +31,7 @@ export function createLink(song) {
       }
     })
     setTimeout( () => {
-      dispatch(addLink(song))
+      dispatch(addLink(song.album_art))
       dispatch(toggleLoadingLink(false))
     }, 1000)
   }
