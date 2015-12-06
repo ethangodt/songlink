@@ -10,5 +10,4 @@ To run the app in development mode:
   
 To run the app in production mode:
 
-`npm run build` to bundle the js files into `/dist` folder, then
 `npm run serve:prod` to run locally in production mode (without webpack middleware)
