@@ -4,9 +4,8 @@ var songBuilder = require('../songBuilder/songBuilder');
 
 module.exports = function (req, res) {
   // depending on the specific case, clientData could be an object with some song data, or it could be a raw provider url/uri
-  // todo should make this so that song data from searches is not passed up from the client
+  // todo should make this so that song data from searches is not passed up from the client, but instead pulled from redis or something
   // todo refactor this so that the function declarations don't happen in the string condition
-  debugger;
 
   // todo setup body parser and think about handling string payloads
   // typeof req.body === 'string'
@@ -15,22 +14,18 @@ module.exports = function (req, res) {
     // todo make sure to add album name to make searches more specific
 
     var songData = {
-      name: 'Pyramids',
+      title: 'Pyramids',
       artist: 'Frank Ocean',
       album_name: 'Channel Orange',
       spotify_id: '4QhWbupniDd44EDtnh2bFJ'
     };
 
     (function checkDb(songData) {
-      // todo make sure that Stobie knows how to name keys like db
-      songCtrl.get(songData, function (err, response) {
-        debugger;
-        var song = response[0]; // todo fix this to show actual db object
-        if (song === undefined) {
-          console.log('the song doesn\'t exists');
+      songCtrl.get(songData, function (err, song) {
+        if (!song) {
           startBuild(songData);
         } else {
-          res.send(utils.makeLinkString(song.hash_id));
+          // res.send(utils.makeLinkString(song.hash_id));
         }
       })
     })(songData); // iife for testing - change to Stobie's function when we're solid
@@ -41,7 +36,6 @@ module.exports = function (req, res) {
         //addSong(fullSongObj)
       });
     }
-    //
     //function addSong(fullSongObj) {
     //  songCtrl.create(fullSongObj, function (err) {
     //    console.error(err); // this is duplicate log, but will allow us to handle errors later
