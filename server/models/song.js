@@ -5,6 +5,7 @@ var songSchema = new mongoose.Schema({
   artist: String,
   album: String,
   hash_id: String,
+  album_name: String,
   album_art: String,
   album_art_size: Number,
   youtube_id: String,
