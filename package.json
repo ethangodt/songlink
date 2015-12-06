@@ -46,6 +46,7 @@
     "redux-thunk": "^1.0.0",
     "request": "^2.67.0",
     "supertest": "^1.1.0",
+    "spotify": "^0.3.0",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"
