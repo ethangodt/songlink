@@ -16,9 +16,9 @@ class Result extends Component {
     return (
       <li onClick={this.handleClick.bind(this)}>
         <span><img src={this.props.result.album_art} height='30px'></img></span>
-        <span>{this.props.result.name}</span><br/>
+        <span>{this.props.result.title}</span><br/>
         <span>{this.props.result.artist} </span>
-        <span> {this.props.result.album_name}</span>
+        <span> {this.props.result.album}</span>
       </li>
     )
   }

@@ -2,16 +2,16 @@ import $ from 'jquery'
 
 const testSongs = [
   {
-    name: 'Help!',
-    album_name: 'Help!',
-    artist: 'The Beatles',
+    title: 'Intro',
+    album: 'This Is All Yours',
+    artist: 'Alt-J',
     itunes_id: 'some_itunes_string',
-    album_art: 'http://is3.mzstatic.com/image/thumb/Music/v4/98/10/bd/9810bd86-9023-fb20-c6d8-d15e6a25222e/source/100x100bb.jpg',
+    album_art: 'http://is2.mzstatic.com/image/thumb/Music2/v4/09/26/76/092676ce-d446-9406-e1c6-79aecce2d0d7/source/100x100bb.jpg',
     album_art_size: 10000
   },
   {
-    name: 'Stairway to Heaven',
-    album_name: 'Led Zeppelin IV',
+    title: 'Stairway to Heaven',
+    album: 'Led Zeppelin IV',
     artist: 'Led Zeppelin',
     itunes_id: 'another_itunes_string',
     album_art: 'http://is2.mzstatic.com/image/thumb/Music1/v4/b0/43/4d/b0434dcd-2cef-1a9d-a35d-486b8dbe2f2c/source/100x100bb.jpg',
@@ -73,8 +73,8 @@ export function search(text) {
       success: res => {
         const songs = res.map(song => {
           return {
-            name: song.name,
-            album_name: song.album_name,
+            title: song.name,
+            album: song.album_name,
             artist: song.artist,
             itunes_id: song.itunes_id,
             album_art: song.album_art,
@@ -99,6 +99,8 @@ export function search(text) {
 export function submitPreference(preference) {
   return dispatch => {
     dispatch(toggleLoadingPreference(true))
+
+    // Mimicking res from '/preference'
     setTimeout(() => {
       dispatch(toggleLoadingPreference(false))
       dispatch(updatePreference(preference))
