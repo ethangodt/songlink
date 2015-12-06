@@ -12,7 +12,6 @@ var plainText = require('./requests/plainTextSearch.js');
 
 var app = express();
 
-var port = 3000;
 var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
 mongoose.connect(mongoUrl);
@@ -54,4 +53,4 @@ app.listen(port, function(error) {
   }
 });
 
-module.exports = app; 
+module.exports = app;
