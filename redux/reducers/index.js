@@ -1,7 +1,7 @@
-import { combineReducers } from 'redux'
 import links from './links'
 import loading from './loading'
 import preference from './preference'
+import { combineReducers } from 'redux'
 import results from './results'
 
 const rootReducer = combineReducers({

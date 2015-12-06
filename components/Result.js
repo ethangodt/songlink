@@ -1,23 +1,34 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 
-var Result = React.createClass({
+class Result extends Component {
 
-  handleClick: function () {
-    this.props.actions.createLink(this.props.result);
-    this.props.actions.clearResults();
-  },
+  constructor(props, context) {
+    super(props, context)
+  }
 
-  render: function() {
+  handleClick() {
+    this.props.actions.createLink(this.props.result)
+    this.props.actions.clearResults()
+    this.props.clearText()
+  }
+
+  render() {
     return (
-      <li onClick={this.handleClick}>
-        <div>{this.props.result.name}</div>
-        <div>{this.props.result.artist}</div>
-        <div>{this.props.result.album_name}</div>
-        <img src={this.props.result.album_art} height='30px'></img>
+      <li onClick={this.handleClick.bind(this)}>
+        <span><img src={this.props.result.album_art} height='30px'></img></span>
+        <span>{this.props.result.title}</span><br/>
+        <span>{this.props.result.artist} </span>
+        <span> {this.props.result.album}</span>
       </li>
     )
   }
 
-});
+}
 
-module.exports = Result;
+Result.propTypes = {
+  actions: PropTypes.object.isRequired,
+  clearText: PropTypes.func.isRequired,
+  result: PropTypes.object.isRequired
+}
+
+export default Result

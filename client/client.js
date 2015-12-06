@@ -1,13 +1,14 @@
 import React from 'react';
+import App from '../components/App';
 import { createHistory } from 'history';
+import Main from '../components/Main';
+import Preferences from '../components/Preferences';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { IndexRoute, Route, Router } from 'react-router';
-import App from '../components/App';
-import Main from '../components/Main';
-import Preferences from '../components/Preferences';
+import configureStore from '../redux/store';
 
-var initialState = {
+const initialState = {
   loading: {
     link: false,
     preference: false,
@@ -17,14 +18,12 @@ var initialState = {
   results: []
 }
 
-var store =  require('../redux/store')(initialState);
-
 render(
-  <Provider store={store}>
-    <Router history={createHistory()}>
-      <Route path="/" component={App}>
-        <IndexRoute component={Main}/>
-        <Route path="preferences" component={Preferences}/>
+  <Provider store={ configureStore() }>
+    <Router history={ createHistory() }>
+      <Route path="/" component={ App }>
+        <IndexRoute component={ Main }/>
+        <Route path="preferences" component={ Preferences }/>
       </Route>
     </Router>
   </Provider>,
