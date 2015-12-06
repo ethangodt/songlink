@@ -13,9 +13,12 @@
     "node": "5.0.0"
   },
   "scripts": {
-    "postinstall": "webpack",
+    "build": "NODE_ENV=production webpack --config webpack.production.config.js",
+    "postinstall": "build",
     "start": "node server/index.js",
     "serve": "nodemon --debug server/index.js --ignore components --ignore containers",
+    "preserve": "rm -rf dist",
+    "serve:prod": "NODE_ENV=production nodemon --debug server/index.js --ignore components --ignore containers",
     "test": "mocha test/models test/controllers"
   },
   "dependencies": {
