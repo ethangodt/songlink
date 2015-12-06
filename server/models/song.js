@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
 
 var songSchema = new mongoose.Schema({
-  name: String,
+  title: String,
   artist: String,
-  album: String,
   hash_id: String,
-  album_name: String,
+  album_title: String,
   album_art: String,
   album_art_size: Number,
   youtube_id: String,
