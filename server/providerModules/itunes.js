@@ -22,7 +22,7 @@ module.exports = function (searchInfo, callback) {
     for (var key in songObject) {
       if (songObject.hasOwnProperty(key)) { // check to make sure the keys are not on prototype
         // songInfoString is a search string that iTunes search api recognizes
-        if (key === 'name' || key === 'artist' || key === 'album_name') {
+        if (key === 'title' || key === 'artist' || key === 'album_name') {
           songInfoString += songObject[key].split(' ').join('+');
           songInfoString += '+';
         }
@@ -52,12 +52,12 @@ module.exports = function (searchInfo, callback) {
       var song = body.results[0];
 
       var formattedSongInfo = {
-        name: song.trackName,
+        title: song.trackName,
         artist: song.artistName,
-        album_name: song.collectionName,
+        album_title: song.collectionName,
         album_art: song.artworkUrl100,
         album_art_size: 10000,
-        itunes_id: song.trackId
+        itunes_id: '' + song.trackId
       };
 
       callback(err, formattedSongInfo);
