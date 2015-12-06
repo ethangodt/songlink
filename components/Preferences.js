@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react'
 import * as actions from '../redux/actions';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -6,35 +6,32 @@ import Links from './Links';
 import Search from './Search';
 import RadioGroup from 'react-radio-group';
 
-var Preferences = React.createClass({
+class Preferences extends Component {
 
-  handleSubmit: function () {
-    this.props.actions.submitPreference(this.state.preference);
-    this.setState({
-      hasSubmitted: true
-    });
-  },
-
-  handleChange: function (value) {
-    this.setState({
-      preference: value
-    });
-  },
-
-  getInitialState: function () {
-    return {
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
       hasSubmitted: false,
       preference: this.props.preference
     }
-  },
+  }
 
-  render: function() {
+  handleSubmit() {
+    this.props.actions.submitPreference(this.state.preference)
+    this.setState({ hasSubmitted: true })
+  }
+
+  handleChange(value) {
+    this.setState({ preference: value })
+  }
+
+  render() {
     return (
       <div>
         <h4>your current preference is: {this.props.preference}</h4>
         <RadioGroup
           name="preference"
-          onChange={this.handleChange}
+          onChange={this.handleChange.bind(this)}
           selectedValue={this.state.preference}>
           {Radio => (
             <div>
@@ -45,25 +42,33 @@ var Preferences = React.createClass({
             </div>
           )}
         </RadioGroup>
-        <button onClick={this.handleSubmit}>update preferences</button>
+        <button onClick={this.handleSubmit.bind(this)}>update preferences</button>
         <div>{this.props.loading.preference ? 'updating preference...' : this.state.hasSubmitted ? 'updated successfully' : ' '}</div>
       </div>
     )
   }
 
-});
+}
 
-var mapStateToProps = function (state) {
+Preferences.propTypes = {
+  loading: PropTypes.object.isRequired,
+  preference: PropTypes.string.isRequired
+}
+
+function mapStateToProps(state) {
   return {
     loading: state.loading,
     preference: state.preference
-  };
-};
-
-var mapDispatchToProps = function (dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  };
+  }
 }
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Preferences);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(actions, dispatch)
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Preferences)

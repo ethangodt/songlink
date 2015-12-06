@@ -1,9 +1,9 @@
-import React from 'react'
-import Header from './Header';
+import React, { Component, PropTypes } from 'react'
+import Header from './Header'
 
-var App = React.createClass({
+class App extends Component {
 
-  render: function() {
+  render() {
     return (
       <div>
         <Header/>
@@ -12,7 +12,7 @@ var App = React.createClass({
     )
   }
 
-});
+}
 
 
-module.exports = App;
+export default App

@@ -1,21 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router';
+import React, { Component, PropTypes } from 'react'
+import { Link } from 'react-router'
 
-var Header = React.createClass({
+class Header extends Component {
 
-  render: function() {
+  render() {
     return (
       <div>
         <h1>songl.ink</h1>
         <h4>
-          <Link to="/">main</Link>
-          <span> </span>
+          <Link style={ {paddingRight: 20} } to="/">main</Link>
           <Link to="/preferences">preferences</Link>
         </h4>
       </div>
     )
   }
 
-});
+}
 
-module.exports = Header;
+export default Header

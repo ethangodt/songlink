@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import Link from './Link';
 
-var Links = React.createClass({
+class Links extends Component {
 
-  render: function() {
+  render() {
     return (
       <div>
-        <h4>Links:</h4>
-        {this.props.loading.link ? <div>new link loading...</div> : <div><br/></div>} 
+        <h4>LINKS</h4>
+        <span>
+          {this.props.loading.link ? 'new link loading...' : ''} 
+        </span>
         <ul>
           {
-            this.props.links.map(function (link, i) {
-              return <Link key={i} index={i} link={link}/>;
+            this.props.links.map((link, i) => {
+              return <Link key={i} index={i} link={link}/>
             })
           }
         </ul>       
@@ -19,6 +21,11 @@ var Links = React.createClass({
     )
   }
 
-});
+}
 
-module.exports = Links;
+Links.propTypes = {
+  loading: PropTypes.object.isRequired,
+  links: PropTypes.array.isRequired
+}
+
+export default Links
