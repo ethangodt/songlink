@@ -35,6 +35,10 @@ var Search = React.createClass({
     }
   },
 
+  handleSubmit: function (e) {
+    e.preventDefault();
+  },
+
   getInitialState: function () {
     return {
       text: '',
@@ -46,7 +50,7 @@ var Search = React.createClass({
 
     return (
       <div>
-        <form>
+        <form onSubmit={this.handleSubmit}>
           <input
             type="text"
             placeholder="Search for song"
