@@ -38,9 +38,8 @@ export function createLink(song) {
     $.ajax({
       url: 'create',
       method: 'POST',
-      data: {
-        song: song
-      },
+      data: JSON.stringify(song),
+      contentType: "application/json",
       cache: false,
       error: err => {
         console.error(err)
@@ -59,7 +58,7 @@ export function createLink(song) {
 }
 
 export function search(text) {
-  return (dispatch, getState) => {  
+  return (dispatch, getState) => {
     dispatch(toggleLoadingSearch(true))
     $.ajax({
       url: 'search',
@@ -90,7 +89,7 @@ export function search(text) {
     // Mimicking res from '/search'
     setTimeout(() => {
       dispatch(toggleLoadingSearch(false))
-      dispatch(updateResults(testSongs)) 
+      dispatch(updateResults(testSongs))
     }, 1000)
 
   }
