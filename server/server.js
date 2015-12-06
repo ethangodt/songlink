@@ -4,6 +4,7 @@ var path = require('path');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var bodyParser = require('body-parser');
 
 var expressRouter = express.Router();
 var router = require('./routes/routes.js');
@@ -27,6 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use(express.static('./dist'));
+app.use(bodyParser.json());
 
 app.get('/search', plainText.appleSearch);
 
