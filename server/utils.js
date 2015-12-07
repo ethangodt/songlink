@@ -12,7 +12,7 @@ var makeSpotifyUrl = function (spotify_id) {
 }
 
 var makeItunesUrl = function (itunes_id) {
-  return 'https://itun.es/us/sSXQ-?i=' + itunes_id;
+  return 'https://itun.es/us/' + itunes_id;
 }
 
 

@@ -49,9 +49,9 @@ module.exports = {
       artist:"Adele",
       album_art:"http://images.musictimes.com/data/images/full/47589/adele-25-album-artwork.jpg?w=775", 
       hash_id: '1',
-      spotify_id : "spotify:track:0ENSn4fwAbCGeFGVUbXEU3",
-      youtube_id : "https://www.youtube.com/watch?v=YQHsXMglC9A",
-      itunes_id : "https://itun.es/us/sSXQ-?i=1051400980"}, function(err, response){
+      spotify_id : "0ENSn4fwAbCGeFGVUbXEU3",
+      youtube_id : "YQHsXMglC9A",
+      itunes_id : "sSXQ-?i=1051400980"}, function(err, response){
       if (err) console.log(err);
       console.log('object written to data for testing', response);
     });
