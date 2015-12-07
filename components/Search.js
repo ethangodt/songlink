@@ -11,14 +11,16 @@ class Search extends Component {
   constructor(props, context) {
     super(props, context)
     this.state = { 
+      last: Date.now(),
       text: '',
-      last: Date.now()
+      link: undefined
     }
   }
 
   clearText() {
     this.setState({
-      text: ''
+      text: '',
+      link: undefined
     })
   }
 
@@ -36,22 +38,55 @@ class Search extends Component {
     }, () => {
       if (this.state.text === '') {
         this.props.actions.clearResults()
+        this.setState({ link: undefined })
       } else {
-        setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
+        const link = this.getLinkInfo(this.state.text)
+        if (!link) {
+          setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
+        } else {
+          this.props.actions.clearResults()
+          this.setState({ link: link })
+        }
       }
     })
 
   }
 
+  getLinkInfo(text) {
+    if (text.slice(0,4) === "http") {
+      if (text.includes("itun.es")) {
+        const arr = text.split('=')
+        return { service: 'itunes', id: arr[arr.length - 1] }
+      } else if (text.includes("spotify")) {
+        const arr = text.split('/')
+        return { service: 'spotify', id: arr[arr.length - 1] }
+      }
+    } else if (text.slice(0,8) === "spotify:") {
+      const arr = text.split(':')
+      return {service: 'spotify', id: arr[arr.length - 1] }
+    }
+    return undefined
+  }
+
   handleFocus(e) {
-    if (this.state.text.length) {
+    if (this.state.text.length && !this.state.link) {
       this.props.actions.search(this.state.text)
     }
   }
 
+  handleBlur(e) {
+    this.props.actions.clearResults()
+  }
+
   handleSubmit(e) {
     e.preventDefault()
-    this.props.actions.search(this.state.text)
+    if (this.state.link) {
+      let song = {}
+      song[ this.state.link.service + '_id' ] = this.state.link.id
+      this.props.actions.createLink(song)
+    } else {
+      this.props.actions.search(this.state.text)
+    }
   }
 
   render() {
@@ -66,13 +101,16 @@ class Search extends Component {
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
-            onFocus={this.handleFocus.bind(this)}/>
+            onFocus={this.handleFocus.bind(this)}
+            onBlur={this.handleBlur.bind(this)}/>
           <input
             type="submit"
-            value="Search"/>
+            value={ this.state.link ? 'create link' : 'search' }/>
         </form>
 
-        <Results 
+        <div>{this.state.link ? this.state.link.service + ' link detected' : ' '}</div>
+
+        <Results
           loading={this.props.loading}
           results={this.props.results}
           actions={this.props.actions}
