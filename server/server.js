@@ -4,6 +4,7 @@ var path = require('path');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var bodyParser = require('body-parser');
 
 var expressRouter = express.Router();
 var router = require('./routes/routes.js');
@@ -12,7 +13,6 @@ var plainText = require('./requests/plainTextSearch.js');
 
 var app = express();
 
-var port = 3000;
 var mongoose = require('mongoose');
 var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
 mongoose.connect(mongoUrl);
@@ -28,6 +28,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.use(express.static('./dist'));
+app.use(bodyParser.json());
 
 app.get('/search', plainText.appleSearch);
 
@@ -54,4 +55,4 @@ app.listen(port, function(error) {
   }
 });
 
-module.exports = app; 
+module.exports = app;

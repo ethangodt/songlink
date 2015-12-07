@@ -24,6 +24,7 @@
     "babel-plugin-react-display-name": "^2.0.0",
     "babel-plugin-react-transform": "^1.1.0",
     "babel-runtime": "^5.8.20",
+    "body-parser": "^1.14.1",
     "chai": "^3.4.1",
     "dotenv": "^1.2.0",
     "express": "^4.13.3",
@@ -45,8 +46,8 @@
     "redux-logger": "^2.0.4",
     "redux-thunk": "^1.0.0",
     "request": "^2.67.0",
-    "supertest": "^1.1.0",
     "spotify": "^0.3.0",
+    "supertest": "^1.1.0",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"
