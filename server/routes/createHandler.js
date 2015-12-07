@@ -33,18 +33,18 @@ module.exports = function (req, res) {
 
     function startBuild(songData) {
       songBuilder(songData, function (err, fullSongObj) {
-        res.send(fullSongObj);
-        hasher.createHash(fullSongObj.title+fullSongObj.artist+fullSongObj.album_name, function(urlhash) {
-          console.log(urlhash);
-          //addSong(fullSongObj)
+        hasher.createHash(fullSongObj.title+fullSongObj.artist+fullSongObj.album_name, function(hash_id) {
+          fullSongObj.hash_id = hash_id;
+          res.send(fullSongObj);
+          addSong(fullSongObj);
         });
       });
     }
-    //function addSong(fullSongObj) {
-    //  songCtrl.create(fullSongObj, function (err) {
-    //    console.error(err); // this is duplicate log, but will allow us to handle errors later
-    //  });
-    //}
+    function addSong(fullSongObj) {
+     songCtrl.create(fullSongObj, function (err) {
+       console.error(err); // this is duplicate log, but will allow us to handle errors later
+     });
+    }
   }
 };
 
