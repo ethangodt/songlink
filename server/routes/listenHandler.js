@@ -14,7 +14,7 @@ module.exports = {
     songCtrl.get({ hash_id : req.params.id }, function(err, response) {
       if (err) console.log(err);
 
-      var template = fs.readFileSync(path.join(__dirname, '../mustache/template.html'),'utf-8', function(err, data) {
+      var template = fs.readFileSync(path.join(__dirname, '../Mustache/template.html'),'utf-8', function(err, data) {
         if (err) console.log(err);
       });
       console.log('response', response);
@@ -45,12 +45,14 @@ module.exports = {
       artist:"Adele",
       album_art:"http://images.musictimes.com/data/images/full/47589/adele-25-album-artwork.jpg?w=775", 
       hash_id:1,
-      spotify_id : "spotifylink.com",
-      youtube_id : "youtube.com/adfasdfas"}, function(err, response){
+      spotify_id : "spotify:track:0ENSn4fwAbCGeFGVUbXEU3",
+      youtube_id : "https://www.youtube.com/watch?v=YQHsXMglC9A",
+      itunes_id : "https://itun.es/us/sSXQ-?i=1051400980"}, function(err, response){
       if (err) console.log(err);
       console.log('object written to data for testing', response);
     });
 
+    res.send("");
   }
 
 };
