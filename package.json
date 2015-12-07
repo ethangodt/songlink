@@ -42,7 +42,6 @@
     "mustache": "^2.2.0",
     "node-sass": "^3.4.2",
     "react": "^0.14.3",
-    "react-copy-to-clipboard": "^3.0.4",
     "react-dom": "^0.14.3",
     "react-radio-group": "^2.2.0",
     "react-redux": "^4.0.0",
