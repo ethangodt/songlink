@@ -25,7 +25,7 @@ describe('Song controller', function () {
       var songs = [
         {
           title: 'Stairway to Heaven',
-          album: 'Led Zeppelin IV',
+          album_title: 'Led Zeppelin IV',
           artist: 'Led Zeppelin',
           itunes_id: 'another_itunes_string',
           album_art: 'http://is2.mzstatic.com/image/thumb/Music1/v4/b0/43/4d/b0434dcd-2cef-1a9d-a35d-486b8dbe2f2c/source/100x100bb.jpg',
@@ -33,7 +33,7 @@ describe('Song controller', function () {
         },
         {
           title: 'Intro',
-          album: 'This Is All Yours',
+          album_title: 'This Is All Yours',
           artist: 'Alt-J',
           itunes_id: 'yet_another_itunes_string',
           album_art: 'http://is2.mzstatic.com/image/thumb/Music1/v4/b0/43/4d/b0434dcd-2cef-1a9d-a35d-486b8dbe2f2c/source/100x100bb.jpg',
@@ -55,7 +55,7 @@ describe('Song controller', function () {
         throw err;
       }
       expect(song).to.be.an('object');
-      expect(song.album).to.equal('This Is All Yours');
+      expect(song.album_title).to.equal('This Is All Yours');
       done();
     });
 
@@ -66,7 +66,7 @@ describe('Song controller', function () {
     var newSong = {
       title: 'Cream on Chrome',
       artist: 'Ratatat',
-      album: 'Magnifique',
+      album_title: 'Magnifique',
       itunes_id: 'and_yet_another_id',
       album_art: 'http://is2.mzstatic.com/image/thumb/Music1/v4/b0/43/4d/b0434dcd-2cef-1a9d-a35d-486b8dbe2f2c/source/100x100bb.jpg',
       album_art_size: 10000
@@ -80,7 +80,7 @@ describe('Song controller', function () {
           throw err;
         }
         expect(song).to.be.an('object');
-        expect(song.album).to.equal('Magnifique');
+        expect(song.album_title).to.equal('Magnifique');
         done();
       });
     });
