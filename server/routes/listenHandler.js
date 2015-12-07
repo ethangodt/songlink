@@ -28,11 +28,11 @@ module.exports = {
         album_art : response.album_art,
         providers : [
           {name : 'Spotify',
-            url : response.spotify_id},
+            url : utils.makeSpotifyUrl(response.spotify_id)},
           {name : 'Youtube',
-            url : response.youtube_id},
+            url : utils.makeYoutubeUrl(response.youtube_id)},
           {name : 'Itunes',
-            url : response.itunes_id}
+            url : utils.makeItunesUrl(response.itunes_id)}
         ],
         clicks : response.clicks,
         creates : response.creates
