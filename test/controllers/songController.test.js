@@ -19,6 +19,10 @@ describe('Song controller', function () {
     mongoose.connect(mongoUrl, done);
   });
 
+  after(function (done) {
+    mongoose.connection.close(done);
+  });
+
   beforeEach(function (done) {
     clearDB(function () {
 

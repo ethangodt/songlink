@@ -20,7 +20,7 @@
     "preserve": "rm -rf dist",
     "preserve:prod": "npm run build",
     "serve:prod": "NODE_ENV=production nodemon --debug server/index.js --ignore components --ignore containers",
-    "test": "mocha test/models test/controllers"
+    "test": "NODE_ENV=production mocha test/models test/controllers test/server"
   },
   "dependencies": {
     "babel-core": "^5.8.3",
