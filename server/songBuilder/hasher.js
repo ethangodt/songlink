@@ -12,7 +12,7 @@ module.exports = {
       if (err) console.error(err);
 
       if (response === null) {
-        callback(temp);
+        callback(url_hash);
       } else {
         module.exports.createHash(str+'new', callback);
       }
