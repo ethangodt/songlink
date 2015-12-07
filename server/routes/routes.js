@@ -25,6 +25,7 @@ module.exports = function (router) {
     res.sendFile(path.resolve('client/index.html'));
   });
 
-  router.get('/test/:id', listenHandler.render);// test2/:id should be changed to :id, where id is the req.param that identifies the song id in the database
+  router.get('/:id', listenHandler.render);
+
   router.post('/test', listenHandler.test); //for adding data for testing
 };
