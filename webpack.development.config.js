@@ -18,7 +18,8 @@ module.exports = {
     new webpack.NoErrorsPlugin()
   ],
   module: {
-    loaders: [{
+    loaders: [
+    {
       test: /\.js$/,
       loader: 'babel-loader',
       exclude: /node_modules/,
@@ -45,6 +46,11 @@ module.exports = {
           }
         }
       }
-    }]
+    },
+    {
+      test: /\.scss$/,
+      loaders: ["style", "css", "sass"]
+    }
+    ]
   }
 }

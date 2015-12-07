@@ -1,4 +1,4 @@
-var config = require('../webpack.config');
+var config = require('../webpack.development.config');
 var express = require('express');
 var path = require('path');
 var webpack = require('webpack');

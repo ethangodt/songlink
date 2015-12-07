@@ -2,8 +2,12 @@
 
 This is the README for music-share by juvenile-orca
 
-To start the app:
-
 `npm install` to download dependencies
-`npm run serve` to run locally on at `http://localhost:3000`
+
+To run the app in development mode:
+
+`npm run serve` to run locally
   
+To run the app in production mode:
+
+`npm run serve:prod` to run locally in production mode (without webpack middleware)
