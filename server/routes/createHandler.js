@@ -1,6 +1,7 @@
 var songCtrl = require('../controllers/songController');
 var utils = require('../utils');
 var songBuilder = require('../songBuilder/songBuilder');
+var hasher = require('../songBuilder/hasher');
 
 module.exports = function (req, res) {
   // depending on the specific case, clientData could be an object with some song data, or it could be a raw provider url/uri
@@ -33,7 +34,10 @@ module.exports = function (req, res) {
     function startBuild(songData) {
       songBuilder(songData, function (err, fullSongObj) {
         res.send(fullSongObj);
-        //addSong(fullSongObj)
+        hasher.createHash(fullSongObj.title+fullSongObj.artist+fullSongObj.album_name, function(urlhash) {
+          console.log(urlhash);
+          //addSong(fullSongObj)
+        });
       });
     }
     //function addSong(fullSongObj) {
@@ -43,3 +47,4 @@ module.exports = function (req, res) {
     //}
   }
 };
+
