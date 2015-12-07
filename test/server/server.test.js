@@ -74,7 +74,6 @@ describe('server', function () {
 
   });
 
-  
   it('should 404 everything else', function (done) {
     request(server)
       .get('/foo/bar')
