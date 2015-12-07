@@ -42,6 +42,7 @@ class Search extends Component {
       } else {
         const link = this.getLinkInfo(this.state.text)
         if (!link) {
+          this.setState({ link: undefined })
           setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
         } else {
           this.props.actions.clearResults()
@@ -75,8 +76,9 @@ class Search extends Component {
   }
 
   handleBlur(e) {
+    e.preventDefault()
     this.props.actions.clearResults()
-  }
+  } 
 
   handleSubmit(e) {
     e.preventDefault()
@@ -101,8 +103,7 @@ class Search extends Component {
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
-            onFocus={this.handleFocus.bind(this)}
-            onBlur={this.handleBlur.bind(this)}/>
+            onFocus={this.handleFocus.bind(this)}/>
           <input
             type="submit"
             value={ this.state.link ? 'create link' : 'search' }/>
