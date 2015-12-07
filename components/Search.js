@@ -95,7 +95,7 @@ class Search extends Component {
     return (
       <div>
 
-        <div>{this.props.loading.search ? 'loading...' : 'SEARCH'}</div>
+        <div>{this.props.loading.search ? 'Search loading...' : 'Search'}</div>
         <form onSubmit={this.handleSubmit.bind(this)}>
           <input
             type="text"
