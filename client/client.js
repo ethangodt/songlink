@@ -8,16 +8,6 @@ import { Provider } from 'react-redux';
 import { IndexRoute, Route, Router } from 'react-router';
 import configureStore from '../redux/store';
 
-const initialState = {
-  loading: {
-    link: false,
-    preference: false,
-    search: false
-  },
-  preference: 'spotify',
-  results: []
-}
-
 render(
   <Provider store={ configureStore() }>
     <Router history={ createHistory() }>
