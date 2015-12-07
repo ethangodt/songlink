@@ -2,11 +2,8 @@ import React, { Component, PropTypes } from 'react'
 
 class Result extends Component {
 
-  constructor(props, context) {
-    super(props, context)
-  }
-
   handleClick() {
+    console.log('handle click called')
     this.props.actions.createLink(this.props.result)
     this.props.actions.clearResults()
     this.props.clearText()

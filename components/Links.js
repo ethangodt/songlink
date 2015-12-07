@@ -6,10 +6,7 @@ class Links extends Component {
   render() {
     return (
       <div>
-        <div>LINKS</div>
-        <span>
-          {this.props.loading.link ? 'new link loading...' : ''} 
-        </span>
+        <div>{this.props.loading.link ? 'Link loading...' : 'Link'}</div>
         <ul>
           {
             this.props.links.map((link, i) => {

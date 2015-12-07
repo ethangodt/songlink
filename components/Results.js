@@ -16,8 +16,8 @@ class Results extends Component {
               <Result 
                 key={i} 
                 result={result}
-                clearText={this.props.clearText}
-                actions={this.props.actions}/>
+                actions={this.props.actions}
+                clearText={this.props.clearText}/>
           )})
         }
       </ul>
@@ -27,6 +27,8 @@ class Results extends Component {
 }
 
 Results.propTypes = {
+  actions: PropTypes.object.isRequired,
+  clearText: PropTypes.func.isRequired,
   results: PropTypes.array.isRequired
 }
 

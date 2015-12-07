@@ -51,7 +51,8 @@ export function createLink(song) {
 
     // Mimicking res from '/create with song.album_art url'
     setTimeout( () => {
-      dispatch(addLink(song.album_art))
+      console.log('yoooo')
+      dispatch(addLink('http://nytimes.com'))
       dispatch(toggleLoadingLink(false))
     }, 1000)
   }
