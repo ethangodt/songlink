@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Header from './Header'
+import '../styles/main.scss'
 
 class App extends Component {
 
@@ -13,6 +14,5 @@ class App extends Component {
   }
 
 }
-
 
 export default App

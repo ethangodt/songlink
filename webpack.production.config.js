@@ -8,10 +8,16 @@ module.exports = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: [node_modules_dir],
-      loader: 'babel-loader'
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: [node_modules_dir],
+        loader: 'babel-loader'
+      },
+      {
+        test: /\.scss$/,
+        loaders: ["style", "css", "sass"]
+      }
+    ]
   }
 };

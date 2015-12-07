@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react'
-import CopyToClipboard from 'react-copy-to-clipboard'
 
 class Link extends Component {
 
@@ -19,6 +18,14 @@ class Link extends Component {
     this.setState({ inputHasLoaded: true })
   }
 
+  getCorrectCopyShortcut() {
+    if (navigator.appVersion.indexOf("Win") !=-1 ) {
+      return 'control + C'
+    } else {
+      return 'command + C'
+    }
+  }
+
   render() {
     return (
       <div>
@@ -30,9 +37,7 @@ class Link extends Component {
             this.handleFocusOnLoad.bind(this) : undefined}
           onFocus={this.handleFocus.bind(this)}/>
 
-        <CopyToClipboard text={this.props.link}>
-          <button>Copy to clipboard</button>
-        </CopyToClipboard>
+        <span> {this.getCorrectCopyShortcut()} to copy link</span>
 
       </div>
     )
