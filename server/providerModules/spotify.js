@@ -15,7 +15,8 @@ module.exports = function (searchInfo, callback) {
   };
 
   var searchSpotifyByObj = function (songObject) {
-    spotify.search({ type: 'track', album: obj.album_name, track: obj.name, artist: obj.artist, limit: 1}, function(err, data) {
+    var searchQuery = songObject.name + ' ' + songObject.artist + ' ' + songObject.album_name;
+    spotify.search({ type: 'track', query: searchQuery}, function(err, data) {
         if ( err ) {
           callback(error)
           return;
