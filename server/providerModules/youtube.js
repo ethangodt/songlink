@@ -4,18 +4,27 @@ youtube.setKey('AIzaSyB1XCSK0lbdnvCo-tKOfFxjV3LuGk7QOUE');
 
 var params = {
     maxResults: 10,
-    kind: "youtube#video"
-  }
+    kind: "youtube#video",
+    id: {
+      kind: "youtube#video"
+    }
+  };
 
 exports.search = function() {
-  youtube.searchWithParams('deadmau5', params, function(resultData) {
+  var ids = [];
+  youtube.searchWithParams('deadmau5 the veldt', params, function(resultData) {
       var results = resultData;
-      // var ids = results
-      console.log(resultData.items[0]);
+      for (var i = 0; i < resultData.items.length; i++){
+        ids.push(resultData.items[i].id.videoId)
+      };
+      console.log(ids);
   });
-  // youtube.getById('UCYEK6xds6eo-3tr4xRdflmQ', function(r){
-  //   console.log(r)
-  // })
+  var par = {
+    id: ids
+  }
+  youtube.getById(par, function(r){
+    console.log(r)
+  })
 }
 
 
