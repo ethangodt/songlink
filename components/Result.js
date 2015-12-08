@@ -15,7 +15,7 @@ class Result extends Component {
         <span><img src={this.props.result.album_art} height='30px'></img></span>
         <span>{this.props.result.title}</span><br/>
         <span>{this.props.result.artist} </span>
-        <span> {this.props.result.album}</span>
+        <span> {this.props.result.album_title}</span>
       </li>
     )
   }

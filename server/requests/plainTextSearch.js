@@ -11,8 +11,8 @@ exports.appleSearch = function(req, res) {
     var songs = [];
     for (var i=0; i<arr.length; i++) {
       songs.push({
-        name: arr[i].trackName,
-        album_name: arr[i].collectionName,
+        title: arr[i].trackName,
+        album_title: arr[i].collectionName,
         artist: arr[i].artistName,
         itunes_id: arr[i].trackId,
         album_art: arr[i].artworkUrl100,

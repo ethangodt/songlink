@@ -74,8 +74,8 @@ export function search(text) {
       success: res => {
         const songs = res.map(song => {
           return {
-            title: song.name,
-            album: song.album_name,
+            title: song.title,
+            album_title: song.album_title,
             artist: song.artist,
             itunes_id: song.itunes_id,
             album_art: song.album_art,
