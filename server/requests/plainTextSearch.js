@@ -16,10 +16,10 @@ exports.appleSearch = function(req, res) {
         artist: arr[i].artistName,
         itunes_id: arr[i].trackId,
         album_art: arr[i].artworkUrl100,
-        album_art_size: 1000
+        album_art_size: 1000,
+        track_length: arr[i].trackTimeMillis
       })
     }
-    console.log(songs);
     res.status(200).send(songs)
   });
 }
