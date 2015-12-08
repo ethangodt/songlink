@@ -20,26 +20,27 @@ module.exports = {
 
       if (response === null) {
         res.status(404).send('Sorry cant find that url!');
+      } else {
+        var templateObj = {
+          title : response.title,
+          artist : response.artist,
+          album_art : response.album_art,
+          providers : [
+            {name : 'Spotify',
+              url : utils.makeSpotifyUrl(response.spotify_id)},
+            {name : 'Youtube',
+              url : utils.makeYoutubeUrl(response.youtube_id)},
+            {name : 'Itunes',
+              url : utils.makeItunesUrl(response.itunes_id)}
+          ],
+          clicks : response.clicks,
+          creates : response.creates
+        };
+
+        var html = Mustache.render(template, templateObj);
+        res.send(html);
       }
 
-      var templateObj = {
-        title : response.title,
-        artist : response.artist,
-        album_art : response.album_art,
-        providers : [
-          {name : 'Spotify',
-            url : utils.makeSpotifyUrl(response.spotify_id)},
-          {name : 'Youtube',
-            url : utils.makeYoutubeUrl(response.youtube_id)},
-          {name : 'Itunes',
-            url : utils.makeItunesUrl(response.itunes_id)}
-        ],
-        clicks : response.clicks,
-        creates : response.creates
-      };
-
-      var html = Mustache.render(template, templateObj);
-      res.send(html);
     }); 
   },
   test : function (req, res) {
