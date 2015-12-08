@@ -52,10 +52,10 @@ export function createLink(song) {
     })
 
     // Mimicking res from '/create with song.album_art url'
-    setTimeout( () => {
-      dispatch(addLink(song.itunes_id))
-      dispatch(toggleLoadingLink(false))
-    }, 1000)
+    // setTimeout( () => {
+    //   dispatch(addLink(song.itunes_id))
+    //   dispatch(toggleLoadingLink(false))
+    // }, 1000)
   }
 }
 
