@@ -1,9 +1,4 @@
-// todo itunes and youtube api calls working
-var requests = {
-  itunes: require('../providerModules/itunes'),
-  spotify: null, // fill these out with functions
-  youtube: null // fill these out with functions
-};
+var utils = require('../utils');
 
 var mergeData = function (mainData, newData, provider) {
   // currently, in addition to adding <provider>_id, this function only maximizes the image size of the url, but it could do anything
@@ -19,15 +14,24 @@ var mergeData = function (mainData, newData, provider) {
   }
 };
 
+var getNumberOfIds = function (songData) {
+  // just gets the number of ids to determine the number of providers this song currently supports
+  var keys = Object.keys(songData);
+  var keyExpression = /(\w+(_id))/i;
+  var ids = keys.filter(function (key) {
+    return keyExpression.test(key);
+  });
+  return ids.length;
+};
+
 var songBuilder = function (songData, callback) {
-  // todo consider breaking this list out into a utils object
-  var providers = ['itunes'];
+  var providers = Object.keys(utils.providers);
 
   providers.forEach(function (provider, index) {
-    if (!songData[provider + '_id']) {
-      requests[provider](songData, function(err, newData) {
+    if (!songData[provider + '_id']) { // if no id for this provider
+      utils.providers[provider].getData(songData, function(err, newData) {
         mergeData(songData, newData, provider);
-        if (index === providers.length - 1) {
+        if (getNumberOfIds(songData) === providers.length) {
           callback(null, songData);
         }
       });
