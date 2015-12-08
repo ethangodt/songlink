@@ -17,7 +17,7 @@ var mergeData = function (mainData, newData, provider) {
 var getNumberOfIds = function (songData) {
   // just gets the number of ids to determine the number of providers this song currently supports
   var keys = Object.keys(songData);
-  var keyExpression = /(\w+(_id))/ig;
+  var keyExpression = /(\w+(_id))/i;
   var ids = keys.filter(function (key) {
     return keyExpression.test(key);
   });
