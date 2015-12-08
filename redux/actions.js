@@ -39,22 +39,23 @@ export function createLink(song) {
       url: 'create',
       method: 'POST',
       data: JSON.stringify(song),
-      contentType: "application/json",
+      contentType: 'application/json',
       cache: false,
       error: err => {
         console.error(err)
       },
       success: res => {
-        console.log('received res from /create:', res)
+        console.log('received res from /create', res)
+        dispatch(addLink(res))
+        dispatch(toggleLoadingLink(false))
       }
     })
 
     // Mimicking res from '/create with song.album_art url'
-    setTimeout( () => {
-      console.log('yoooo')
-      dispatch(addLink('http://nytimes.com'))
-      dispatch(toggleLoadingLink(false))
-    }, 1000)
+    // setTimeout( () => {
+    //   dispatch(addLink(song.itunes_id))
+    //   dispatch(toggleLoadingLink(false))
+    // }, 1000)
   }
 }
 
@@ -73,8 +74,8 @@ export function search(text) {
       success: res => {
         const songs = res.map(song => {
           return {
-            title: song.name,
-            album: song.album_name,
+            title: song.title,
+            album_title: song.album_title,
             artist: song.artist,
             itunes_id: song.itunes_id,
             album_art: song.album_art,
@@ -83,16 +84,16 @@ export function search(text) {
           }
         })
         console.log('received res from /search:', songs)
-        // dispatch(toggleLoadingSearch(false))
-        // dispatch(updateResults(songs))
+        dispatch(toggleLoadingSearch(false))
+        dispatch(updateResults(songs))
       }
     })
 
     // Mimicking res from '/search'
-    setTimeout(() => {
-      dispatch(toggleLoadingSearch(false))
-      dispatch(updateResults(testSongs))
-    }, 1000)
+    // setTimeout(() => {
+    //   dispatch(toggleLoadingSearch(false))
+    //   dispatch(updateResults(testSongs))
+    // }, 1000)
 
   }
 }
