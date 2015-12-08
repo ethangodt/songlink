@@ -10,7 +10,7 @@ module.exports = function (searchInfo, callback) {
           callback(error)
           return;
         }
-        makePrettyObject(data);      
+        makePrettyObject(err, data);      
     });
   };
 
@@ -20,7 +20,7 @@ module.exports = function (searchInfo, callback) {
           callback(error)
           return;
         }
-        makePrettyObject(data);      
+        makePrettyObject(err, data);      
     });
   };
 
@@ -28,7 +28,7 @@ module.exports = function (searchInfo, callback) {
     lookupById(songUrl);
   };
 
-  var makePrettyObject = function(obj) {
+  var makePrettyObject = function(err, obj) {
     var formattedSongInfo = {
       title: obj.tracks.items[0].name,
       artist: obj.tracks.items[0].artists[0].name,
@@ -37,7 +37,7 @@ module.exports = function (searchInfo, callback) {
       album_art_size: 10000,
       spotify_id: obj.tracks.items[0].id
     };
-    console.log(formattedSongInfo);
+    callback(err, formattedSongInfo);
   };
 
   typeof searchInfo === "string" ? searchSpotifyByUrl(searchInfo) : searchSpotifyByObj(searchInfo)
