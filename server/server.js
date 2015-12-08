@@ -4,7 +4,6 @@ var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
 var bodyParser = require('body-parser');
-var youtube = require('./providerModules/youtube.js')
 
 var expressRouter = express.Router();
 var router = require('./routes/routes.js');
