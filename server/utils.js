@@ -3,8 +3,8 @@ var spotify = require('./providerModules/spotify');
 var youtube = require('./providerModules/youtube');
 
 // this function simply takes hash_id and makes a song link string
-var makeSongLinkUrl = function (hash_id) {
-  return 'http://songl.ink/' + hash_id;
+var makeSongLinkUrl = function (host, hash_id) {
+  return 'http://' + host + '/' + hash_id;
 };
 
 var providers = {
