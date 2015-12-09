@@ -1,42 +1,31 @@
-var config = require('../webpack.development.config');
-var express = require('express');
-var webpack = require('webpack');
-var webpackDevMiddleware = require('webpack-dev-middleware');
-var webpackHotMiddleware = require('webpack-hot-middleware');
+require('dotenv').load();
+
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
+var db = require('./config/db.config');
+var express = require('express');
+var routes = require('./routes');
 
-var expressRouter = express.Router();
-var router = require('./routes/routes.js');
+db();
 
 var app = express();
 
-var mongoose = require('mongoose');
-var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
-mongoose.connect(mongoUrl);
-
-var port = process.env.PORT || 3000;
-
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').load();
-  var compiler = webpack(config);
-  app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
-  app.use(webpackHotMiddleware(compiler));
-}
-
 app.use(express.static('./dist'));
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
-app.use('/', expressRouter);
-router(expressRouter);
+if (process.env.NODE_ENV === 'development') {
+  require('./config/server.development.config')(app);
+}
+
+routes(app);
+
+var port = process.env.PORT || 3000;
 
 app.listen(port, function(error) {
-  if (error) {
-    console.error(error);
-  } else {
-    console.log("Express server listening on port", port);
-  }
+  if (error) throw error
+  console.log("Express server listening on port", port);
 });
 
 module.exports = app;

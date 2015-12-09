@@ -16,7 +16,7 @@
     "build": "NODE_ENV=production webpack --config webpack.production.config.js",
     "postinstall": "npm run build",
     "start": "node server/index.js",
-    "serve": "nodemon --debug server/index.js --ignore components --ignore containers",
+    "serve": "nodemon --debug server/server.js --ignore components --ignore containers",
     "preserve": "rm -rf dist",
     "preserve:prod": "npm run build",
     "serve:prod": "NODE_ENV=production nodemon --debug server/index.js --ignore components --ignore containers",
