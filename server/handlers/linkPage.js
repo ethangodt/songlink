@@ -29,8 +29,8 @@ function render(req, res) {
         providers : [
           {name : 'Spotify',
             url : providers.spotify.makeUriFromId(songFromDb.spotify_id)},
-          // {name : 'Youtube',
-          //  url : utils.providers.youtube.makeLinkFromId(songFromDb.youtube_id)},
+          {name : 'Youtube',
+           url : providers.youtube.makeLinkFromId(songFromDb.youtube_id)},
           {name : 'Itunes',
             url : songFromDb.itunes_app_uri}
         ],
