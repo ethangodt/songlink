@@ -33,6 +33,7 @@ module.exports = function (searchInfo, callback) {
   };
 
   var handleError = function(err, song) {
+    console.log(err);
     callback(err, song);
   };
 
@@ -43,7 +44,7 @@ module.exports = function (searchInfo, callback) {
 function searchYoutube(song, callback) {
   var query = song.title + " " + song.artist;
 
-  youtube.search(query, 5, function(err, res) {
+  youtube.search(query, 10, function(err, res) {
     if (err) {
       callback(err, null);
     } else {
@@ -63,6 +64,7 @@ function searchYoutube(song, callback) {
 }
 
 function checkDurations(song, callback) {
+  console.log(song)
   youtube.getById(song.youtube_id.toString(), function (err, res) {
     if (err) {
       callback(err, null);
@@ -114,6 +116,7 @@ function convertYoutubeDuration(str) {
 }
 
 function compareDurations(vidDuration, songDuration) {
+  console.log(vidDuration, songDuration);
   return (Math.abs(vidDuration - songDuration) / songDuration) < 0.05;
 }
 

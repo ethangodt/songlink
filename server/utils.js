@@ -19,13 +19,13 @@ var providers = {
     makeLinkFromId: function (itunes_id) {
       return 'https://itun.es/us/' + itunes_id;
     }
+  },
+  youtube: {
+   getData: youtube,
+   makeLinkFromId: function (youtube_id) {
+     return 'https://www.youtube.com/watch?v=' + youtube_id;
+   }
   }
-  //youtube: {
-  //  getData: youtube,
-  //  makeLinkFromId: function (youtube_id) {
-  //    return 'https://www.youtube.com/watch?v=' + youtube_id;
-  //  }
-  //}
 };
 
 module.exports = {
