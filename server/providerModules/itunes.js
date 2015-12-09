@@ -57,7 +57,8 @@ module.exports = function (searchInfo, callback) {
         album_title: song.collectionName,
         album_art: song.artworkUrl100,
         album_art_size: 10000,
-        itunes_id: '' + song.trackId
+        itunes_id: '' + song.trackId,
+        itunes_app_uri: 'itmss' + song.trackViewUrl.substring(5)
       };
 
       callback(err, formattedSongInfo);

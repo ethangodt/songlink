@@ -80,7 +80,8 @@ export function search(text) {
             itunes_id: song.itunes_id,
             album_art: song.album_art,
             album_art_size: song.album_art_size,
-            track_length: song.track_length
+            track_length: song.track_length,
+            itunes_app_uri: song.itunes_app_uri
           }
         })
         console.log('received res from /search:', songs)

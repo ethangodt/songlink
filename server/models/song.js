@@ -10,6 +10,7 @@ var songSchema = new mongoose.Schema({
   youtube_id: String,
   spotify_id: String,
   itunes_id: String,
+  itunes_app_uri: String,
   clicks: Number,
   creates: Number
 });
