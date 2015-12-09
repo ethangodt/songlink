@@ -17,7 +17,8 @@ function fetchSongById(spotifyId, callback) {
 };
 
 function fetchSongBySearch(song, callback) {
-  var searchQuery = song.title + ' ' + song.artist;
+  var searchQuery = createQuery(song);
+  console.log(searchQuery);
   spotify.search({type: 'track', query: searchQuery}, function(err, data) {
     var tracks = data.tracks.items;
     if ( err ) {
@@ -30,7 +31,7 @@ function fetchSongBySearch(song, callback) {
 
 function makeUriFromId(spotifyId) {
   return 'spotify:track:' + spotifyId;
-}
+};
 
 function makePrettyObject(obj) {
   return {
@@ -57,4 +58,10 @@ function verify(song, spotifyTracks, callback) {
   }
 
   callback(new Error('No spotify tracks verified'), null);
+};
+
+function createQuery(songObj) {
+  var str = songObj.title + ' ' + songObj.artist;
+  var query = str.replace(/[^\w\s]|\bfeat\b|\bft\b|\bprod\b|\s{2,}/gi,'').replace(/\s+/g, " ");
+  return query;
 }
