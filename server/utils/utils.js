@@ -28,7 +28,7 @@ function build(song, callback) {
     if (!song[provider + '_id']) {
       providers[provider].fetchSongBySearch(song, function(err, songFromSearch) {
         if (!songFromSearch) {
-          callback(new Error('No song found:', err));
+          callback(new Error('No song found for '+provider+':', err));
         } else {
           // after async process, if songObject has all providers invoke callback
           if (getNumberOfIds(songFromSearch) === providersList.length) {
