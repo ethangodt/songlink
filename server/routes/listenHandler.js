@@ -27,9 +27,8 @@ module.exports = {
           providers : [
             {name : 'Spotify',
               url : utils.providers.spotify.makeLinkFromId(song.spotify_id)},
-            // commented out because the youtube function are not completed yet
-            //{name : 'Youtube',
-            //  url : utils.providers.youtube.makeLinkFromId(song.youtube_id)},
+            {name : 'Youtube',
+             url : utils.providers.youtube.makeLinkFromId(song.youtube_id)},
             {name : 'Itunes',
               url : utils.providers.itunes.makeLinkFromId(song.itunes_id)}
           ],

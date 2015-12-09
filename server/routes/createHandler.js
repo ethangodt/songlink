@@ -5,19 +5,21 @@ var hasher = require('../songBuilder/hasher');
 
 module.exports = function (req, res) {
   // JUST FOR TESTING
-  var testFromLink = true;
-  if (testFromLink) {
-    var testSong = {
-      itunes_id: '541953607'
-    };
-  } else {
-    var testSong = {
-      title: 'Pyramids',
-      artist: 'Frank Ocean',
-      album_name: 'Channel Orange',
-      spotify_id: '4QhWbupniDd44EDtnh2bFJ'
-    };
-  }
+  // var testFromLink = true;
+  // if (testFromLink) {
+  //   var testSong = {
+  //     itunes_id: '541953607'
+  //   };
+  // } else {
+  //   var testSong = {
+  //     title: 'Pyramids',
+  //     artist: 'Frank Ocean',
+  //     album_name: 'Channel Orange',
+  //     spotify_id: '4QhWbupniDd44EDtnh2bFJ'
+  //   };
+  // }
+
+  var testSong = req.body;
 
   var songIsNotVerified = !testSong.title;
   if (songIsNotVerified) {
@@ -63,7 +65,7 @@ module.exports = function (req, res) {
       if (err) {
         console.error(err); // this is duplicate log, but will allow us to handle errors later
       }
-      res.send(utils.makeLinkString(songFromDb.hash_id));
+      res.send(utils.makeLinkString(req.headers.host, songFromDb.hash_id));
     });
   }
 };
