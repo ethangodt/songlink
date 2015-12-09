@@ -9,9 +9,9 @@ module.exports = {
 function fetchSongById(spotifyId, callback) {
   spotify.lookup({ type: 'track', id: spotifyId}, function(err, data) {
     if ( err ) {
-      callback(err, null)
+      callback(err, null);
     } else {
-      callback(null, data)
+      callback(null, makePrettyObject(data));
     }
   });
 };
@@ -23,7 +23,7 @@ function fetchSongBySearch(song, callback) {
     if ( err ) {
       callback(err, null)
     } else {
-      tracks.length ? verify(song, tracks, callback) : callback(new Error('No results'), null);
+      tracks.length ? verify(song, tracks, callback) : callback(new Error('No results from spt'), null);
     }
   });
 };
@@ -32,18 +32,17 @@ function makeUriFromId(spotifyId) {
   return 'spotify:track:' + spotifyId;
 }
 
-// function makePrettyObject(err, obj) {
-//   var formattedSongInfo = {
-//     title: obj.name,
-//     artist: obj.artists[0].name,
-//     album_title: obj.album.name,
-//     album_art: obj.album.images[0].url,
-//     album_art_size: 409600,
-//     spotify_id: obj.id,
-//     track_length: obj.duration_ms
-//   };
-//   callback(err, formattedSongInfo);
-// };
+function makePrettyObject(obj) {
+  return {
+    title: obj.name,
+    artist: obj.artists[0].name,
+    album_title: obj.album.name,
+    album_art: obj.album.images[0].url,
+    album_art_size: 409600,
+    spotify_id: obj.id,
+    track_length: obj.duration_ms
+  };
+};
 
 function verify(song, spotifyTracks, callback) {
 

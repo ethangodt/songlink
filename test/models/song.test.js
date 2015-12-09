@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
-var Song = require('../../server/models/song');
+var Song = require('../../server/db/models/song');
 
 describe('Song model', function () {
 

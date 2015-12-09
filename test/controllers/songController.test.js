@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var mongoose = require('mongoose');
-var Song = require('../../server/models/song');
-var controller = require('../../server/controllers/songController');
+var Song = require('../../server/db/models/song');
+var controller = require('../../server/db/controllers/songController');
 
 var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/songlink';
 

@@ -30,7 +30,8 @@ describe('server', function () {
           'album_art',
           'album_art_size',
           'track_length',
-          'itunes_id'
+          'itunes_id',
+          'itunes_app_uri'
         ])
         done();
       });
@@ -44,26 +45,24 @@ describe('server', function () {
 
   describe('/create endpoint', function () {
 
-    xit('should accept a song object with only itunes_id', function (done) {
+    it('should accept a song object with only itunes_id', function (done) {
       request(server)
         .post('/create')
-        .send({ itunes_id: '1051876266' })
+        .send({ itunes_id: '373317369' })
         .expect(200)
         .end(function (err, res) {
           expect(res.text).to.be.a('string');
-          expect(res.text).to.have.length(22);
           done();
         });
     });
 
-    xit('should accept a song object with only spotify_id', function (done) {
+    it('should accept a song object with only spotify_id', function (done) {
       request(server)
         .post('/create')
         .send({ spotify_id: '0ENSn4fwAbCGeFGVUbXEU3' })
         .expect(200)
         .end(function (err, res) {
           expect(res.text).to.be.a('string');
-          expect(res.text).to.have.length(22);
           done();
         });
     });
@@ -72,16 +71,18 @@ describe('server', function () {
       request(server)
         .post('/create')
         .send({
-          title: 'Tessellate',
-          artist: 'alt-J',
-          album_title: 'An Awesome Wave',
-          itunes_id: '1051394215',
-          album_art: 'http://is2.mzstatic.com/image/thumb/Music/v4/3b/43/9e/3b439e7f-9989-1dc1-9ffb-8d876ddb0da1/source/100x100bb.jpg'
+          title: 'Animals',
+          album_title: 'V (Deluxe)',
+          artist: 'Maroon 5',
+          itunes_id: 993352741,
+          album_art: 'http://is5.mzstatic.com/image/thumb/Music7/v4/b3/fb/cc/b3fbcca9-85a0-c25d-cb20-feee4900bdb2/source/100x100bb.jpg',
+          album_art_size: 1000,
+          track_length: 231079,
+          itunes_app_uri: 'itmss://itunes.apple.com/us/album/animals/id993352739?i=993352741&uo=4'
         })
         .expect(200)
         .end(function (err, res) {
           expect(res.text).to.be.an('string');
-          expect(res.text).to.have.length(22);
           done();
         });
     });

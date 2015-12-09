@@ -19,7 +19,9 @@ function fetchSongBySearch(song, callback) {
       callback(err, null);
     } else {
       // verify this somehow, like stobie did with spt
-      callback(null, songs[0]);
+      song.itunes_id = songs[0].itunes_id;
+      song.itunes_app_uri = songs[0].itunes_app_uri;
+      callback(null, song);
     }
   });
 }
