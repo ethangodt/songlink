@@ -30,7 +30,7 @@ function create(req, res) {
                     if (err) {
                       console.error(err)
                     } else {
-                      res.send(utils.makeLinkString(req.headers.host, songFromDb.hash_id));
+                      res.send(utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id));
                     }
                   });
                 });
@@ -43,7 +43,6 @@ function create(req, res) {
           if (err) {
             console.error(err);
           } else {
-            console.log(songFromBuild);
             utils.createHash(songFromBuild, 0, function(songFromHasher) {
               utils.addSongToDb(songFromHasher, function (err, songFromDb) {
                 if (err) {

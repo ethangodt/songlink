@@ -27,8 +27,13 @@ function build(song, callback) {
   providersList.forEach(function (provider) {
     if (!song[provider + '_id']) {
       providers[provider].fetchSongBySearch(song, function(err, songFromSearch) {
-        if (getNumberOfIds(songFromSearch) === providersList.length) { // after async process, if songObject has all providers invoke callback
-          callback(null, songFromSearch);
+        if (!songFromSearch) {
+          callback(new Error('No song found:', err));
+        } else {
+          // after async process, if songObject has all providers invoke callback
+          if (getNumberOfIds(songFromSearch) === providersList.length) {
+            callback(null, songFromSearch);
+          }
         }
       });
     }
@@ -87,8 +92,9 @@ function verifyId(song, callback) {
       providers[provider].fetchSongById(song[provider + '_id'], function (err, verifiedSong) {
         if (err) {
           callback(new Error('Could not verify song by' + provider + 'ID', null));
-        }
+        } else {
           callback(null, verifiedSong);
+        }
       })
     }
   }
