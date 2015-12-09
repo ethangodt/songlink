@@ -26,7 +26,6 @@ var getNumberOfIds = function (songData) {
 
 var songBuilder = function (songData, callback) {
   var providers = Object.keys(utils.providers);
-
   providers.forEach(function (provider) {
     if (!songData[provider + '_id']) { // if no id for this provider
       utils.providers[provider].getData(songData, function(err, newData) {

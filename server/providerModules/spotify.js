@@ -1,11 +1,12 @@
 // accept id
 // handle case when link is bad for single track
 var spotify = require('spotify');
+var verify = require('./spotifyVerification.js');
 
 module.exports = function (searchInfo, callback) {
 
-  var lookupById = function(id) {
-    spotify.lookup({ type: 'track', id: spotifyID}, function(err, data) {
+  var searchSpotifyByUrl = function(spotifyId) {
+    spotify.lookup({ type: 'track', id: spotifyId}, function(err, data) {
       if ( err ) {
         callback(error)
         return;
@@ -15,31 +16,29 @@ module.exports = function (searchInfo, callback) {
   };
 
   var searchSpotifyByObj = function (songObject) {
-    var searchQuery = songObject.title + ' ' + songObject.artist + ' ' + songObject.album_title;
-    spotify.search({ type: 'track', query: searchQuery}, function(err, data) {
+    var searchQuery = songObject.title + ' ' + songObject.artist;
+    spotify.search({type: 'track', query: searchQuery}, function(err, data) {
       if ( err ) {
         callback(error)
         return;
       }
-      makePrettyObject(err, data);
+      verify(songObject, data, makePrettyObject, err);
+      // makePrettyObject(err, pick);
     });
-  };
-
-  var searchSpotifyByUrl = function (songUrl) {
-    lookupById(songUrl);
   };
 
   var makePrettyObject = function(err, obj) {
     var formattedSongInfo = {
-      title: obj.tracks.items[0].name,
-      artist: obj.tracks.items[0].artists[0].name,
-      album_title: obj.tracks.items[0].album.name,
-      album_art: obj.tracks.items[0].album.images[0].url,
-      album_art_size: 10000,
-      spotify_id: obj.tracks.items[0].id
+      title: obj.name,
+      artist: obj.artists[0].name,
+      album_title: obj.album.name,
+      album_art: obj.album.images[0].url,
+      album_art_size: 409600,
+      spotify_id: obj.id,
+      track_length: obj.duration_ms
     };
     callback(err, formattedSongInfo);
   };
 
-  typeof searchInfo === "string" ? searchSpotifyByUrl(searchInfo) : searchSpotifyByObj(searchInfo)
+  typeof searchInfo === "string" ? searchSpotifyByUrl(searchInfo) : searchSpotifyByObj(searchInfo);
 };

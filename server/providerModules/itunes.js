@@ -22,7 +22,7 @@ module.exports = function (searchInfo, callback) {
     for (var key in songObject) {
       if (songObject.hasOwnProperty(key)) { // check to make sure the keys are not on prototype
         // songInfoString is a search string that iTunes search api recognizes
-        if (key === 'title' || key === 'artist' || key === 'album_name') {
+        if (key === 'title' || key === 'artist' || key === 'album_title') {
           songInfoString += songObject[key].split(' ').join('+');
           songInfoString += '+';
         }
