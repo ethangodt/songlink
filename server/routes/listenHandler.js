@@ -30,7 +30,7 @@ module.exports = {
             {name : 'Youtube',
              url : utils.providers.youtube.makeLinkFromId(song.youtube_id)},
             {name : 'Itunes',
-              url : utils.providers.itunes.makeLinkFromId(song.itunes_id)}
+              url : song.itunes_app_uri}
           ],
           clicks : song.clicks,
           creates : song.creates

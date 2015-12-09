@@ -1,5 +1,4 @@
-// var echobest = require('echo-best');
-var itunes = (require('ituner')());
+var itunes = require('ituner')();
 
 exports.appleSearch = function(req, res) {
   var text = req.query.search;
@@ -17,7 +16,8 @@ exports.appleSearch = function(req, res) {
         itunes_id: arr[i].trackId,
         album_art: arr[i].artworkUrl100,
         album_art_size: 1000,
-        track_length: arr[i].trackTimeMillis
+        track_length: arr[i].trackTimeMillis,
+        itunes_app_uri: 'itmss' + arr[i].trackViewUrl.substring(5)
       })
     }
     res.status(200).send(songs)

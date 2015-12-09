@@ -29,6 +29,8 @@ var songBuilder = function (songData, callback) {
   providers.forEach(function (provider) {
     if (!songData[provider + '_id']) { // if no id for this provider
       utils.providers[provider].getData(songData, function(err, newData) {
+        console.log('songData:', songData);
+        console.log('newData:', newData);
         mergeData(songData, newData, provider);
         if (getNumberOfIds(songData) === providers.length) { // after async process, if songObject has all providers invoke callback
           callback(null, songData);
