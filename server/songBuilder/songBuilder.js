@@ -7,7 +7,7 @@ var mergeData = function (mainData, newData, provider) {
   // add newData's provider id
   mainData[provider + '_id'] = newData[provider + '_id'];
 
-  // choose largest album art dimensions
+  // choose largest album art
   if (mainData.album_art_size < newData.album_art_size) {
     mainData.album_art = newData.album_art;
     mainData.album_art_size = newData.album_art_size;
@@ -27,11 +27,11 @@ var getNumberOfIds = function (songData) {
 var songBuilder = function (songData, callback) {
   var providers = Object.keys(utils.providers);
 
-  providers.forEach(function (provider, index) {
+  providers.forEach(function (provider) {
     if (!songData[provider + '_id']) { // if no id for this provider
       utils.providers[provider].getData(songData, function(err, newData) {
         mergeData(songData, newData, provider);
-        if (getNumberOfIds(songData) === providers.length) {
+        if (getNumberOfIds(songData) === providers.length) { // after async process, if songObject has all providers invoke callback
           callback(null, songData);
         }
       });

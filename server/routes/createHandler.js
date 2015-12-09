@@ -4,28 +4,26 @@ var songBuilder = require('../songBuilder/songBuilder');
 var hasher = require('../songBuilder/hasher');
 
 module.exports = function (req, res) {
-
-  // var testFromLink = true;
-  // if (testFromLink) {
-  //   var testSong = {
-  //     itunes_id: '541953607'
-  //   };
-  // } else {
-  //   var testSong = {
-  //     title: 'Pyramids',
-  //     artist: 'Frank Ocean',
-  //     album_name: 'Channel Orange',
-  //     spotify_id: '4QhWbupniDd44EDtnh2bFJ'
-  //   };
-  // }
-
-  var song = req.body;
-  console.log(req.body);
-  var songIsNotVerified = !song.title;
-  if (songIsNotVerified) {
-    verifySong(song);
+  // JUST FOR TESTING
+  var testFromLink = true;
+  if (testFromLink) {
+    var testSong = {
+      itunes_id: '541953607'
+    };
   } else {
-    checkDb(song);
+    var testSong = {
+      title: 'Pyramids',
+      artist: 'Frank Ocean',
+      album_name: 'Channel Orange',
+      spotify_id: '4QhWbupniDd44EDtnh2bFJ'
+    };
+  }
+
+  var songIsNotVerified = !testSong.title;
+  if (songIsNotVerified) {
+    verifySong(testSong);
+  } else {
+    checkDb(testSong);
   }
 
   function verifySong(songData) {

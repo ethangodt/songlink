@@ -8,47 +8,47 @@ var path = require('path');
 
 
 module.exports = {
-  
-  render : function (req, res){ 
-    console.log('id', req.params.id);
-    songCtrl.get({ hash_id : req.params.id }, function(err, response) {
+  render : function (req, res){
+    songCtrl.get({ hash_id : req.params.id }, function(err, song) {
       if (err) console.log(err);
-
-      var template = fs.readFileSync(path.join(__dirname, '../Mustache/template.html'),'utf-8', function(err, data) {
-        if (err) console.log(err);
-      });
-
-      if (response === null) {
+      if (song === null) {
         res.status(404).send('Sorry cant find that url!');
+      } else if (utils.providers[req.cookies.providerPreference]) { // ensures we support whatever string is set on cookie
+        var provider = req.cookies.providerPreference;
+        res.status(302).redirect(utils.providers[provider].makeLinkFromId(song[provider + '_id']));
       } else {
+        var template = fs.readFileSync(path.join(__dirname, '../Mustache/template.html'),'utf-8', function(err, data) {
+          if (err) console.log(err);
+        });
         var templateObj = {
-          title : response.title,
-          artist : response.artist,
-          album_art : response.album_art,
+          title : song.title,
+          artist : song.artist,
+          album_art : song.album_art,
           providers : [
             {name : 'Spotify',
-              url : utils.makeSpotifyUrl(response.spotify_id)},
-            {name : 'Youtube',
-              url : utils.makeYoutubeUrl(response.youtube_id)},
+              url : utils.providers.spotify.makeLinkFromId(song.spotify_id)},
+            // commented out because the youtube function are not completed yet
+            //{name : 'Youtube',
+            //  url : utils.providers.youtube.makeLinkFromId(song.youtube_id)},
             {name : 'Itunes',
-              url : utils.makeItunesUrl(response.itunes_id)}
+              url : utils.providers.itunes.makeLinkFromId(song.itunes_id)}
           ],
-          clicks : response.clicks,
-          creates : response.creates
+          clicks : song.clicks,
+          creates : song.creates
         };
 
         var html = Mustache.render(template, templateObj);
         res.send(html);
       }
 
-    }); 
+    });
   },
-  test : function (req, res) {
 
+  test : function (req, res) {
     songCtrl.create(
       {title:"Hello",
       artist:"Adele",
-      album_art:"http://images.musictimes.com/data/images/full/47589/adele-25-album-artwork.jpg?w=775", 
+      album_art:"http://images.musictimes.com/data/images/full/47589/adele-25-album-artwork.jpg?w=775",
       hash_id: '1',
       spotify_id : "0ENSn4fwAbCGeFGVUbXEU3",
       youtube_id : "YQHsXMglC9A",
@@ -59,5 +59,4 @@ module.exports = {
 
     res.send("");
   }
-
 };
