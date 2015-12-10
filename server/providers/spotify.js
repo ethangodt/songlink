@@ -1,10 +1,18 @@
 var spotify = require('spotify');
 
 module.exports = {
+  createQuery: createQuery,
   fetchSongById: fetchSongById,
   fetchSongBySearch: fetchSongBySearch,
-  makeUriFromId: makeUriFromId
+  makeUriFromId: makeUriFromId,
+  verify: verify
 };
+
+function createQuery(songObj) {
+  var str = songObj.title + ' ' + songObj.artist;
+  var query = str.replace(/[^\w\s]|\bfeat\b|\bft\b|\bprod\b|\s{2,}/gi,' ').replace(/\s+/g, " ");
+  return query;
+}
 
 function fetchSongById(spotifyId, callback) {
   spotify.lookup({ type: 'track', id: spotifyId}, function(err, data) {
@@ -60,8 +68,3 @@ function verify(song, spotifyTracks, callback) {
   callback(new Error('No spotify tracks verified'), null);
 };
 
-function createQuery(songObj) {
-  var str = songObj.title + ' ' + songObj.artist;
-  var query = str.replace(/[^\w\s]|\bfeat\b|\bft\b|\bprod\b|\s{2,}/gi,' ').replace(/\s+/g, " ");
-  return query;
-}
