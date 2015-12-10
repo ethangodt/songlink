@@ -14,7 +14,7 @@ function fetchSongById(itunesId, callback) {
 }
 
 function fetchSongBySearch(song, callback) {
-  search(makeSearchUrlWithSong(song), 10, function (err, songs) {
+  search(makeSearchUrlWithSong(song), 50, function (err, songs) {
     if (err || !songs.length) {
       callback(new Error('Error fetching itunes song by search:', err), null);
     } else {
