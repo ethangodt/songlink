@@ -22,6 +22,7 @@ function create(req, res) {
             console.error(err);
           } else {
             utils.build(songFromVerification, function (err, songFromBuild) {
+              console.log('song from build in utils.build (appPage.js)', songFromBuild);
               if (err) {
                 console.error(err);
               } else {
