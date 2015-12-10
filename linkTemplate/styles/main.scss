@@ -15,7 +15,10 @@ body {
 	margin-bottom: 100px;
 }
 
-#topStrip {
+.topStrip {
+	position: absolute;
+	top: 0;
+	width: 100%;
 	height: 10px;
 	background: linear-gradient(to right, $slpurple, $slorange);
 }
@@ -95,3 +98,4 @@ button.settings:hover .gear-icon {
 }
 
 @import "songView";
+@import "modal";
