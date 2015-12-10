@@ -13,11 +13,25 @@ body {
 	font-weight: 400;
 	-webkit-font-smoothing: antialiased;
 	margin-bottom: 100px;
+	font-size: 19px;
 }
+
+p {
+	line-height: 24px;
+}
+
+// setup reusableComponent
+// setup generic styles
+// setup header styles
+// clean song view styles
+// clean modal
+// setup info and button styles
 
 .topStrip {
 	position: absolute;
 	top: 0;
+	left: 0;
+	right: 0;
 	width: 100%;
 	height: 10px;
 	background: linear-gradient(to right, $slpurple, $slorange);
@@ -25,7 +39,7 @@ body {
 
 // todo fix the y-scroll oversize
 header {
-	margin-top: 40px;
+	margin: 40px 20px 0 20px;
 	overflow: auto;
 }
 
@@ -56,14 +70,20 @@ header {
 	color: #646464;
 	font-size: 14px;
 	letter-spacing: 2px;
+	line-height: normal;
 }
 
 button {
 	background-color: white;
 	border: 1px solid $sllightgrey;
 	border-radius: 8px;
-	padding: 15px 30px;
 	cursor: pointer;
+	font-size: 18px;
+	text-align: center;
+}
+
+button.settings {
+	padding: 15px 30px;
 }
 
 button:hover {
@@ -84,6 +104,14 @@ button.settings:hover .gear-icon {
 	transform: rotate(20deg);
 }
 
+main {
+	transition: 200ms filter;
+}
+
+.blur {
+	-webkit-filter: blur(3px);
+}
+
 .infoBlurb {
 	margin-top: 55px;
 	text-align: center;
@@ -95,6 +123,7 @@ button.settings:hover .gear-icon {
 	margin-top: 6px;
 	fill: $sldarkgrey;
 	width: 32px;
+	float: left;
 }
 
 @import "songView";

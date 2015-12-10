@@ -1,0 +1,42 @@
+.modalEnvironment {
+	position: fixed;
+	display: none;
+	top: 0; bottom: 0; left: 0; right: 0;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, .8);
+}
+
+.modalContainer {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	margin-top: 70px;
+	width: 355px;
+	background-color: white;
+	padding: 65px;
+	box-shadow: 0 10px 13px rgba(0, 0, 0, .2);
+	color: #363636;
+}
+
+.modalButtonContainer {
+	text-align: center;
+	margin: 45px 0;
+}
+
+.modalContainer button {
+	width: 90px;
+	margin: 5px;
+	padding: 12px 25px;
+}
+
+button.spotify-mini {
+
+}
+
+.apple-mini {
+
+}
+
+.youtube-mini {
+
+}
