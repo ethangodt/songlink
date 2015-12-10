@@ -31,10 +31,16 @@ function fetchSongBySearch(song, callback) {
     if ( err ) {
       callback(err, null)
     } else {
-      tracks.length ? verify(song, tracks, callback) : callback(new Error('No results from spt'), null);
+      tracks.length ? verify(song, tracks, callback) : passOnWithUndefined(song, callback);
     }
   });
 };
+
+function passOnWithUndefined(song, callback) {
+  song.spotify_id = undefined;
+  new Error('No results from spotify');
+  callback(null, song);
+}
 
 function makeUriFromId(spotifyId) {
   return 'spotify:track:' + spotifyId;
