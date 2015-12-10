@@ -14,14 +14,11 @@ function fetchSongById(itunesId, callback) {
 }
 
 function fetchSongBySearch(song, callback) {
-  search(makeSearchUrlWithSong(song), 10, function (err, songs) {
-    if (err) {
-      callback(err, null);
+  search(makeSearchUrlWithSong(song), 50, function (err, songs) {
+    if (err || !songs.length) {
+      callback(new Error('Error fetching itunes song by search:', err), null);
     } else {
-      // verify this somehow, like stobie did with spt
-      song.itunes_id = songs[0].itunes_id;
-      song.itunes_app_uri = songs[0].itunes_app_uri;
-      callback(null, song);
+      songs.length ? verify(song, songs, callback) : callback(new Error('No results from itunes'), null);
     }
   });
 }
@@ -32,7 +29,7 @@ function makeSearchUrlWithSong(song) {
   var queryString = '';
 
   for (var key in song) {
-    if (key === 'title' || key === 'artist' || key === 'album_title') {
+    if (key === 'title' || key === 'artist') { // || key === 'album_title'
       queryString += song[key].split(' ').join('+');
       queryString += '+';
     }
@@ -80,4 +77,21 @@ function search(searchUrl, numResults, callback) {
       callback(err, numResults === 1 ? songs[0] : songs.slice(0, numResults));
     }
   })
+}
+
+function verify(song, itunesTracks, callback) {
+
+  for (var i = 0; i < itunesTracks.length; i++) {
+    var durationsMatch = (Math.abs(song.track_length - itunesTracks[i].track_length) / itunesTracks[i].track_length) < 0.03;
+    var artistMatch = song.artist === itunesTracks[i].artist;
+
+    if (durationsMatch && artistMatch) {
+      song.itunes_id = itunesTracks[i].itunes_id;
+      song.itunes_app_uri = itunesTracks[i].itunes_app_uri;
+
+      return callback(null, song);  
+    }
+  }
+
+  callback(new Error('No spotify tracks verified'), null);
 }
