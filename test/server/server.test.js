@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var request = require('supertest');
 
-describe('server', function () {
+xdescribe('server', function () {
   
   var server;
 

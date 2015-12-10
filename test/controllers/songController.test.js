@@ -49,7 +49,8 @@ describe('Song controller', function () {
     });
   });
 
-  // TODO: Write your tests for jobController here
+  // TODO: title, artist, album, itunes_id, whatever else comes from server
+  // add one for finding based on hash_id, one for itunes_id, one for spt_id, 
   it('should retrieve single song with title and artist', function (done) {
 
     var songObj = { title: 'Intro', artist: 'Alt-J' }
@@ -65,6 +66,7 @@ describe('Song controller', function () {
 
   });
 
+  // TODO: make this a full song object
   it('should create a new song', function (done) {
     
     var newSong = {
