@@ -14,9 +14,9 @@
         <h1 class="logo mainLogo">songlink</h1>
         <p class="tagline">share with anyone</p>
       </div>
-      <button class="settings">
+      <button class="mini settings">
         <?xml version="1.0" encoding="utf-8"?>
-        <svg class="gear-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-3093 613 412 412" style="enable-background:new -3093 613 412 412;" xml:space="preserve">
+        <svg class="buttonImage" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-3093 613 412 412" style="enable-background:new -3093 613 412 412;" xml:space="preserve">
           <path id="gear-icon" d="M-2681,846.7v-55.5l-30-10.7c-11.4-4.1-20.6-12.8-25.3-24c0,0,0,0,0,0c-4.7-11.2-4.3-23.9,0.9-34.9
             l13.7-28.7l-39.2-39.2l-28.7,13.7c-11,5.2-23.7,5.5-34.9,0.9c0,0,0,0,0,0c-11.2-4.6-19.9-13.8-24-25.3l-10.7-30h-55.5l-10.7,30
             c-4.1,11.4-12.8,20.6-24,25.3c0,0,0,0,0,0c-11.2,4.7-23.9,4.3-34.9-0.9l-28.7-13.7l-39.2,39.2l13.7,28.7c5.2,11,5.5,23.7,0.9,34.9
@@ -47,12 +47,12 @@
             c2.5,4.1,3.3,5.4,5.8,10.1C-2847.1,905.5-2871.8,928.2-2890.4,934.8z M-2832,747.1c-12.8,10.9-31.8,10.7-42.4-0.5
             c-10.6-11.2-8.8-29.1,4-40c12.8-10.9,31.8-10.7,42.4,0.5C-2817.4,718.3-2819.2,736.2-2832,747.1z"></path>
         </svg>
-        <p style="float: right; margin-right: 10px;">Select a provider below to have <span style="font-weight: 600; color: #505050;">songl.ink</span> urls <br/> automatically open in that application in the future.</p>
+        <p>Select a provider below to have <span style="font-weight: 600; color: #505050;">songl.ink</span> urls <br/> automatically open in that application in the future.</p>
       </div>
-      <div class="providerButtonsContainer">
-        <button class="spotify">play now in Spotify</button>
-        <button class="apple">play now in Apple Music</button>
-        <button class="youtube">play now in YouTube</button>
+      <div class="listenLinks">
+        <button class="fullWidth spotify">play now in Spotify</button>
+        <button class="fullWidth apple">play now in Apple Music</button>
+        <button class="fullWidth youtube">play now in YouTube</button>
       </div>
     </div>
   </div>
@@ -62,19 +62,20 @@
       <div class="topStrip"></div>
       <p>Songlink works best when you tell us where you listen to music. Next time we’ll open our links in that app for you automatically.</p>
       <div class="modalButtonContainer">
-        <button class="spotify-mini">
-          <img src="styles/images/spotify-logo.jpg" alt="Spotify Button" height="40px"/>
+        <button class="mini">
+          <img class="buttonImage" src="styles/images/spotify-logo.jpg" alt="Spotify Button"/>
         </button>
-        <button class="apple-mini">
-          <img src="styles/images/apple-logo.png" alt="Apple Music Button" height="40px"/>
+        <button class="mini">
+          <img class="buttonImage" src="styles/images/apple-logo.png" alt="Apple Music Button"/>
         </button>
-        <button class="youtube-mini">
-          <img src="styles/images/youtube-logo.png" alt="YouTube Button" height="40px"/>
+        <button class="mini youtube">
+          <img class="buttonImage" src="styles/images/youtube-logo.png" alt="YouTube Button"/>
         </button>
-        <button>skip</button>
-        <button>save</button>
+        <br/>
+        <button class="mini special">skip</button>
+        <button class="mini special">save</button>
       </div>
-      <p>By the way, you can always go to songl.ink and change this later.</p>
+      <p>You can always go to songl.ink and change this later.</p>
     </div>
   </div>
   <script src=""></script>

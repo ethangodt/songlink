@@ -1,8 +1,7 @@
 @import 'reset';
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,600);
-// todo add open sans font
-// todo add colors into a basic variables import
 
+// GENERIC SITE STYLES //
 $slorange: #ff671d;
 $slpurple: #3e48ce;
 $sllightgrey: #cecece;
@@ -20,111 +19,19 @@ p {
 	line-height: 24px;
 }
 
-// setup reusableComponent
-// setup generic styles
-// setup header styles
-// clean song view styles
-// clean modal
-// setup info and button styles
-
-.topStrip {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
-	height: 10px;
-	background: linear-gradient(to right, $slpurple, $slorange);
-}
-
-// todo fix the y-scroll oversize
-header {
-	margin: 40px 20px 0 20px;
-	overflow: auto;
-}
-
 .page {
 	width: 800px;
 	margin: 0 auto;
 }
 
-.branding {
-	text-align: center;
-}
-
-.branding.mainBranding {
-	float: left;
-}
-
-.logo {
-	color: $slorange;
-	font-weight: 800;
-}
-
-.mainLogo {
-	font-size: 35px;
-	margin-bottom: 10px;
-}
-
-.tagline {
-	color: #646464;
-	font-size: 14px;
-	letter-spacing: 2px;
-	line-height: normal;
-}
-
-button {
-	background-color: white;
-	border: 1px solid $sllightgrey;
-	border-radius: 8px;
-	cursor: pointer;
-	font-size: 18px;
-	text-align: center;
-}
-
-button.settings {
-	padding: 15px 30px;
-}
-
-button:hover {
-	border: 1px #a8a8a8 solid;
-}
-
-button.settings {
-	float: right;
-}
-
-button.settings .gear-icon {
-	fill: $sldarkgrey;
-	width: 25px;
-	transition: 100ms transform;
-}
-
-button.settings:hover .gear-icon {
-	transform: rotate(20deg);
-}
-
 main {
 	transition: 200ms filter;
 }
+// END GENERIC STYLES //
 
-.blur {
-	-webkit-filter: blur(3px);
-}
-
-.infoBlurb {
-	margin-top: 55px;
-	text-align: center;
-	color: grey;
-	line-height: 22px;
-}
-
-.infoBlurb .infoIcon {
-	margin-top: 6px;
-	fill: $sldarkgrey;
-	width: 32px;
-	float: left;
-}
-
-@import "songView";
-@import "modal";
+@import 'reusableComponents';
+@import 'header';
+@import 'songView';
+@import 'infoBlurb'; // includes .contentContainer
+@import 'listenLinks';
+@import 'modal';

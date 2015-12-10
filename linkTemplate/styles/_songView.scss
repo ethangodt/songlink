@@ -14,7 +14,7 @@
 .songInfo {
 	position: relative;
 	float: right;
-	margin: 45px 0 45px 45px;
+	margin: 45px 0 45px 35px;
 	font-size: 30px;
 	color: $slorange;
 }
@@ -27,43 +27,4 @@
 
 .songInfo .songAlbum {
 	display: inline;
-}
-
-.providerButtonsContainer {
-	margin-top: 20px;
-	left: 100px;
-	text-align: center;
-}
-
-.contentContainer {
-	width: 480px;
-	margin: 0 auto;
-}
-
-.providerButtonsContainer button {
-	width: 100%;
-	margin: 10px 0;
-	font-family: 'Open Sans', sans-serif;
-	font-weight: 600;
-	font-size: 20px;
-	color: #4d4d4d;
-	padding: 20px;
-}
-
-button.spotify {
-	background: url('images/spotify-logo.jpg') no-repeat;
-	background-size: 45px;
-	background-position: 25px 11px;
-}
-
-button.apple {
-	background: url('images/apple-logo.png') no-repeat;
-	background-size: 35px;
-	background-position: 29px 14px;
-}
-
-button.youtube {
-	background: url('images/youtube-logo.png') no-repeat;
-	background-size: 83px;
-	background-position: 5px 2px;
 }

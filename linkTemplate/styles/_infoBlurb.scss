@@ -1,0 +1,24 @@
+.contentContainer {
+	width: 480px;
+	margin: 0 auto;
+}
+
+.infoBlurb {
+	margin-top: 55px;
+	text-align: center;
+	color: grey;
+	overflow: auto;
+}
+
+.infoBlurb p {
+	font-size: 16px;
+	margin-right: 22px;
+	float: right;
+}
+
+.infoBlurb .infoIcon {
+	margin: 6px 0 0 20px;
+	fill: $sldarkgrey;
+	width: 34px;
+	float: left;
+}

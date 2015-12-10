@@ -1,3 +1,7 @@
+.blur {
+	-webkit-filter: blur(3px);
+}
+
 .modalEnvironment {
 	position: fixed;
 	display: none;
@@ -14,7 +18,7 @@
 	width: 355px;
 	background-color: white;
 	padding: 65px;
-	box-shadow: 0 10px 13px rgba(0, 0, 0, .2);
+	box-shadow: 0 10px 16px rgba(0, 0, 0, .2);
 	color: #363636;
 }
 
@@ -24,19 +28,12 @@
 }
 
 .modalContainer button {
-	width: 90px;
 	margin: 5px;
-	padding: 12px 25px;
 }
 
-button.spotify-mini {
-
-}
-
-.apple-mini {
-
-}
-
-.youtube-mini {
-
+.mini.youtube {
+	padding: 13px 20px;
+	// strange position anomaly that is pushing the last button down
+	position: relative;
+	top: -5px;
 }
