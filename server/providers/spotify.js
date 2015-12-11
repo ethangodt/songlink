@@ -27,10 +27,10 @@ function fetchSongById(spotifyId, callback) {
 function fetchSongBySearch(song, callback) {
   var searchQuery = createQuery(song);
   spotify.search({type: 'track', query: searchQuery}, function(err, data) {
-    var tracks = data.tracks.items;
     if ( err ) {
       callback(err, null)
     } else {
+      var tracks = data.tracks.items;
       tracks.length ? verify(song, tracks, callback) : passOnWithUndefined(song, callback);
     }
   });
@@ -38,7 +38,7 @@ function fetchSongBySearch(song, callback) {
 
 function passOnWithUndefined(song, callback) {
   song.spotify_id = undefined;
-  new Error('No results from spotify');
+  console.log('No results from spotify (spotify.js)');
   callback(null, song);
 }
 
@@ -71,6 +71,6 @@ function verify(song, spotifyTracks, callback) {
     }
   }
 
-  callback(new Error('No spotify tracks verified'), null);
+  passOnWithUndefined(song, callback);
 };
 

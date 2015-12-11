@@ -22,7 +22,6 @@ function create(req, res) {
             console.error(err);
           } else {
             utils.build(songFromVerification, function (err, songFromBuild) {
-              console.log('song from build in utils.build (appPage.js)', songFromBuild);
               if (err) {
                 console.error(err);
               } else {
@@ -41,6 +40,7 @@ function create(req, res) {
         });
       } else {
         utils.build(song, function (err, songFromBuild) {
+          console.log('songfrombuild',songFromBuild)
           if (err) {
             console.error(err);
           } else {
@@ -49,6 +49,7 @@ function create(req, res) {
                 if (err) {
                   console.error(err)
                 } else {
+                  console.log('yes');
                   res.send(utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id));
                 }
               });

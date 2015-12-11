@@ -69,7 +69,7 @@ function getVideosByIds(ids, callback) {
 
 function passOnWithUndefined(song, callback) {
   song.youtube_id = undefined;
-  new Error('No results from youtube');
+  console.log('No results from youtube (youtube.js)');
   callback(null, song);
 }
 
@@ -100,6 +100,6 @@ function verify(song, vids, callback) {
       return callback(null, song);
     }
   }
-
-  callback(new Error('No youtube vids verified'), null);
+  
+  passOnWithUndefined(song, callback);
 }
