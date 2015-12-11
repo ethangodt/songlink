@@ -40,25 +40,22 @@ function render(req, res) {
 
 function createProvidersArray (song) {
 
-  var providersArray = [];
-
-  console.log('song', song);
-
-  if (song.spotify_id) {
-    providersArray.push(
-      {name: 'Spotify', 
-      url : providers.spotify.makeUriFromId(song.spotify_id)});
-  }
-  if (song.youtube_id) {
-    providersArray.push(
-      {name: 'Youtube', 
-      url : providers.youtube.makeLinkFromId(song.youtube_id)});
-  }
-  if (song.itunes_id) {
-    providersArray.push(
-      {name: 'Itunes', 
-      url : song.itunes_app_uri});
-  }
+  var providersArray = [{
+    name: 'Spotify', 
+    url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
+    text : song.spotify_id ? 'Listen on Spotify' : 'Not Available on Spotify',
+    className : song.spotify_id ? '' : 'greyedOut'
+  },{
+    name: 'Youtube', 
+    url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
+    text : song.youtube_id ? 'Listen on Youtube' : 'Not Available on Youtube',
+    className : song.youtube_id ? '' : 'greyedOut'
+  },{
+    name: 'Itunes', 
+    url : song.itunes_id ? song.itunes_app_uri : undefined,
+    text : song.itunes_id ? 'Listen on Itunes' : 'Not Available on Itunes',
+    className : song.itunes_id ? '' : 'greyedOut'
+  }];
 
   return providersArray;
 
