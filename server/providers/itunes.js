@@ -3,10 +3,11 @@ var request = require('request');
 module.exports = {
   fetchSongById: fetchSongById,
   fetchSongBySearch: fetchSongBySearch,
-  // makeFetchByIdUrl: makeFetchByIdUrl,
-  // makeSearchUrlWithSong: makeSearchUrlWithSong,
+  makeFetchByIdUrl: makeFetchByIdUrl,
+  makeSearchUrlWithSong: makeSearchUrlWithSong,
   makeSearchUrlWithString: makeSearchUrlWithString,
-  search: search
+  search: search,
+  verify: verify
 };
 
 function fetchSongById(itunesId, callback) {

@@ -4,6 +4,7 @@ module.exports = {
   createQuery: createQuery,
   fetchSongById: fetchSongById,
   fetchSongBySearch: fetchSongBySearch,
+  makePrettyObject: makePrettyObject,
   makeUriFromId: makeUriFromId,
   verify: verify
 };
