@@ -6,3 +6,5 @@ npm-debug.log
 PSD/
 .idea/
 dist
+*.css
+*.css.*
