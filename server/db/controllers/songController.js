@@ -20,6 +20,7 @@ function get(songObj, callback) {
     if (err) {
       console.error(err);
     }
+    console.log('response', response);
     callback(err, response);
   })
 }

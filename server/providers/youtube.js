@@ -49,7 +49,7 @@ function fetchSongBySearch(song, callback) {
         if (err) {
           callback(err, null);
         } else {
-          verify(song, vids, callback);
+          vids.length ? verify(song, vids, callback) : passOnWithUndefined(song, callback);
         }
       });
     }
@@ -65,6 +65,12 @@ function getVideosByIds(ids, callback) {
       callback(null, res.items);
     }
   });
+}
+
+function passOnWithUndefined(song, callback) {
+  song.youtube_id = undefined;
+  console.log('No results from youtube (youtube.js)');
+  callback(null, song);
 }
 
 function makeLinkFromId(youtubeId) {
@@ -94,6 +100,6 @@ function verify(song, vids, callback) {
       return callback(null, song);
     }
   }
-
-  callback(new Error('No youtube vids verified'), null);
+  
+  passOnWithUndefined(song, callback);
 }
