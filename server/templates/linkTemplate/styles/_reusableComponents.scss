@@ -1,0 +1,83 @@
+@keyframes gradientFade {
+	0%  { background-position: -20% 0; }
+	50% { background-position: -100% 0; }
+	100% { background-position: -20% 0; }
+}
+
+.topStrip {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 10px;
+	//background: url(images/apple-logo.png);
+	background: linear-gradient(to right, $slpurple, $slorange);
+	animation: gradientFade 2s infinite;
+}
+
+button {
+	background: none;
+	border: 1px solid $sllightgrey;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 18px;
+	text-align: center;
+	outline: none;
+}
+
+button:hover {
+	border: 1px #a8a8a8 solid;
+}
+
+// make exception for apple logo
+button.mini {
+	padding: 10px 20px;
+}
+
+button.mini .buttonImage {
+	width: 27px;
+}
+
+button.fullWidth {
+	width: 100%;
+	margin: 10px 0;
+	font-weight: 600;
+	font-size: 20px;
+	color: $sldarkgrey;
+	padding: 20px;
+}
+
+button.special {
+	background-color: #e7e7e7;
+	border: none;
+	transition: 200ms background;
+}
+
+button.special:hover {
+	background-color: #bebebe;
+}
+
+.branding {
+	text-align: center;
+}
+
+.branding h1.logo {
+	color: $slorange;
+	font-weight: 800;
+}
+
+.branding p.tagline {
+	color: $sldarkgrey;
+	font-size: 14px;
+	letter-spacing: 2px;
+	line-height: normal;
+}
+
+// setup mini button
+
+
+
+// for each provider
+// setup wide selectable buttons
+// setup mini buttons

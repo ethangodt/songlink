@@ -1,0 +1,30 @@
+.songContainer {
+	display: inline-block;
+	position: relative;
+	left: 50%;
+	transform: translate(-50%, 0);
+	margin-top: 40px;
+}
+
+.albumArt {
+	float: left;
+	box-shadow: 0 3px 6px #bebebe;
+}
+
+.songInfo {
+	position: relative;
+	float: right;
+	margin: 45px 0 45px 35px;
+	font-size: 30px;
+	color: $slorange;
+}
+
+.songInfo span {
+	font-size: 20px;
+	margin-right: 10px;
+	color: #797979;
+}
+
+.songInfo .songAlbum {
+	display: inline;
+}

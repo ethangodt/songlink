@@ -1,0 +1,29 @@
+// todo fix the y-scroll oversize
+header {
+	margin: 40px 20px 0 20px;
+	overflow: auto;
+}
+
+.branding.mainBranding {
+	float: left;
+}
+
+.logo.mainLogo {
+	font-size: 35px;
+	margin-bottom: 10px;
+}
+
+button.settings {
+	padding: 15px 30px;
+	float: right;
+}
+
+button.settings .buttonImage {
+	fill: $sldarkgrey;
+	transition: 100ms transform;
+	margin-bottom: -2px
+}
+
+button.settings:hover .buttonImage {
+	transform: rotate(20deg);
+}

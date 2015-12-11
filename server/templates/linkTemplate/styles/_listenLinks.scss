@@ -1,0 +1,23 @@
+.listenLinks {
+	margin-top: 40px;
+	left: 100px;
+	text-align: center;
+}
+
+.listenLinks button.spotify {
+	background: url('images/spotify-logo.jpg') no-repeat;
+	background-size: 40px;
+	background-position: 21px 11px;
+}
+
+.listenLinks button.apple {
+	background: url('images/apple-logo.png') no-repeat;
+	background-size: 35px;
+	background-position: 25px 12px;
+}
+
+.listenLinks button.youtube {
+	background: url('images/youtube-logo.png') no-repeat;
+	background-size: 45px;
+	background-position: 22px 15px;
+}
