@@ -26,14 +26,7 @@ function render(req, res) {
         title : songFromDb.title,
         artist : songFromDb.artist,
         album_art : songFromDb.album_art,
-        providers : [
-          {name : 'Spotify',
-            url : providers.spotify.makeUriFromId(songFromDb.spotify_id)},
-          {name : 'Youtube',
-           url : providers.youtube.makeLinkFromId(songFromDb.youtube_id)},
-          {name : 'Itunes',
-            url : songFromDb.itunes_app_uri}
-        ],
+        providers : createProvidersArray(songFromDb),
         clicks : songFromDb.clicks,
         creates : songFromDb.creates
       };
@@ -44,3 +37,30 @@ function render(req, res) {
 
   });
 }
+
+function createProvidersArray (song) {
+
+  var providersArray = [];
+
+  console.log('song', song);
+
+  if (song.spotify_id) {
+    providersArray.push(
+      {name: 'Spotify', 
+      url : providers.spotify.makeUriFromId(song.spotify_id)});
+  }
+  if (song.youtube_id) {
+    providersArray.push(
+      {name: 'Youtube', 
+      url : providers.youtube.makeLinkFromId(song.youtube_id)});
+  }
+  if (song.itunes_id) {
+    providersArray.push(
+      {name: 'Itunes', 
+      url : song.itunes_app_uri});
+  }
+
+  return providersArray;
+
+}
+
