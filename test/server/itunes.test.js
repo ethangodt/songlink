@@ -9,7 +9,7 @@ describe('itunes module', function () {
       title: 'some title',
       artist: 'some artist',
       album_title: 'some album',
-      spotify_id: 'some_spotify_id',
+      spotify_id: 'some_spotify_id'
     };
 
     it('creates an itunes search url', function () {
@@ -43,45 +43,73 @@ describe('itunes module', function () {
 
   describe('verify function', function () {
 
-    var song = {
-      title: 'first track',
-      artist: 'artist one',
-      track_length: 4010
-    };
+    var song;
+    var itunesTracks;
 
-    var itunesTracks = [
-      {
+    beforeEach(function () {
+      song = {
         title: 'first track',
-        artist: 'artist one',
-        track_length: 2000,
-        itunes_id: 1
-      },
-      {
-        title: 'first track',
-        artist: 'artist one',
-        track_length: 4000,
-        itunes_id: 2
-      }
-    ];
+        artist: 'kurt',
+        track_length: 4010
+      };
+
+      itunesTracks = [
+        {
+          title: 'first track',
+          artist: 'kurt',
+          track_length: 4000,
+          itunes_id: 1
+        },
+        {
+          title: 'first track',
+          artist: 'kurt',
+          track_length: 4000,
+          itunes_id: 2
+        }
+      ];
+    });
 
     it('verifies song based on duration', function (done) {
+
+      itunesTracks[0].track_length = 2000;
+
       itunes.verify(song, itunesTracks, function(err, verifiedSong) {
         expect(verifiedSong.itunes_id).to.equal(2);
         done();
       });
     });
 
-    it('verifies song based on artist name with exact match', function (done) {
-      song.duration = 2000;
-      song.artist = 'artist one feat. timbaland';
+    it('verifies song with artist (exact match)', function (done) {
+
+      itunesTracks[1].artist = 'stobie';
+
       itunes.verify(song, itunesTracks, function(err, verifiedSong) {
-        console.log(verifiedSong);
         expect(verifiedSong.itunes_id).to.equal(1);
         done();
       });
     });
 
-    it('verifies song based on artist name with partial match', function () {
+    xit('verifies song with artist (partial match: song has more info)', function () {
+      
+      song.artist = 'kurt feat. timbaland';
+      itunesTracks[1].artist = 'stobie';
+      
+      itunes.verify(song, itunesTracks, function(err, verifiedSong) {
+        expect(verifiedSong.itunes_id).to.equal(1);
+        done();
+      });
+
+    });
+
+    xit('verifies song with artist (partial match: result has more info)', function () {
+
+      itunesTracks[0].artist = 'kurt feat. timbaland';
+      itunesTracks[1].artist = 'stobie';
+
+      itunes.verify(song, itunesTracks, function(err, verifiedSong) {
+        expect(verifiedSong.itunes_id).to.equal(1);
+        done();
+      });
 
     });
 

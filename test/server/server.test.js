@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var request = require('supertest');
 
-xdescribe('server', function () {
+describe('server', function () {
   
   var server;
 
@@ -15,7 +15,7 @@ xdescribe('server', function () {
       .expect(200, done);
   });
 
-  it('responds to /search with search results', function (done) {
+  xit('responds to /search with search results', function (done) {
     request(server)
       .get('/search')
       .query({ search: 'hello' })
@@ -43,7 +43,7 @@ xdescribe('server', function () {
       .expect(404, done);
   });
 
-  describe('/create endpoint', function () {
+  xdescribe('/create endpoint', function () {
 
     it('should accept a song object with only itunes_id', function (done) {
       request(server)
