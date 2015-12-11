@@ -44,7 +44,7 @@
     <div class="contentContainer">
       <div class="listenLinks">
         {{#providers}}
-        <button class="{{className}}" href="{{url}}">{{text}}</button>
+        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{url}}')">{{text}}</button>
         {{/providers}}
       </div>
     </div>
@@ -55,22 +55,23 @@
       <div class="topStrip"></div>
       <p>Songlink works best when you tell us where you listen to music. Next time we’ll open our links in that app for you automatically.</p>
       <div class="modalButtonContainer">
-        <button class="mini">
+        <button class="mini spotify" onclick="modalSelection.click('spotify', this)">
           <img class="buttonImage" src="styles/images/spotify-logo.jpg" alt="Spotify Button"/>
         </button>
-        <button class="mini">
+        <button class="mini itunes" onclick="modalSelection.click('itunes', this)">
           <img class="buttonImage" src="styles/images/apple-logo.png" alt="Apple Music Button"/>
         </button>
-        <button class="mini youtube">
+        <button class="mini youtube" onclick="modalSelection.click('youtube', this)">
           <img class="buttonImage" src="styles/images/youtube-logo.png" alt="YouTube Button"/>
         </button>
         <br/>
-        <button class="mini special">skip</button>
-        <button class="mini special">save</button>
+        <button class="mini special" onclick="preferenceClick(modalSelection.preference)">skip</button>
+        <button class="mini special" onclick="preferenceClick(modalSelection.preference)">save</button>
       </div>
       <p>You can always go to songl.ink and change this later.</p>
     </div>
   </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="listenerTools.js"></script>
 </body>
 </html>
