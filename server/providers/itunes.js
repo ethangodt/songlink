@@ -1,4 +1,5 @@
 var request = require('request');
+var utils = require('./providerUtils.js')
 
 module.exports = {
   fetchSongById: fetchSongById,
@@ -16,8 +17,9 @@ function fetchSongById(itunesId, callback) {
 
 function fetchSongBySearch(song, callback) {
   search(makeSearchUrlWithSong(song), 50, function (err, songs) {
-    if (err) {
-      callback(new Error('Error fetching itunes song by search:', err), null);
+    if (err || !songs.length) {
+
+      callback(new Error('Error fetching itunes song by search:'), null);
     } else {
       songs.length ? verify(song, songs, callback) : passOnWithUndefined(song, callback);
     }
@@ -62,7 +64,9 @@ function makeFetchByIdUrl(itunesId) {
 function search(searchUrl, numResults, callback) {
   request(searchUrl, function (err, response, body) {
     body = JSON.parse(body);
-    if (err) {
+    if (body.results.length === 0) {
+      callback(new Error("Link is not valid"), null)
+    } else if (err) {
       callback(err, null);
     } else {
       var songs = [];
@@ -86,19 +90,18 @@ function search(searchUrl, numResults, callback) {
   })
 }
 
-function verify(song, itunesTracks, callback) {
-
-  for (var i = 0; i < itunesTracks.length; i++) {
-    var durationsMatch = (Math.abs(song.track_length - itunesTracks[i].track_length) / itunesTracks[i].track_length) < 0.03;
-    var artistMatch = song.artist === itunesTracks[i].artist;
-
-    if (durationsMatch && artistMatch) {
+function verify(song, spotifyTracks, callback){
+  for (var i=0; i<spotifyTracks.length; i++) {
+    var itunesArtist = utils.convertArtist(itunesTracks[i].artist);
+    var otherArtist = utils.convertArtist(song.artist);
+    var artistsMatch = utils.verifyArtistMatch(itunesArtist, otherArtist);
+    var durationsMatch = utils.verifyMsMatch(itunesTracks[i].track_length, song.track_length);
+    if (durationsMatch && artistsMatch) {
       song.itunes_id = itunesTracks[i].itunes_id;
       song.itunes_app_uri = itunesTracks[i].itunes_app_uri;
-
-      return callback(null, song);  
+      return callback(null, song);
     }
   }
-
   passOnWithUndefined(song, callback);
 }
+

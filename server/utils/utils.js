@@ -41,7 +41,10 @@ function build(song, callback) {
 }
 
 function checkDb(song, callback) {
+  console.log(song);
   songCtrl.get(song, function (err, songFromDb) {
+    console.log(songFromDb);
+    console.log(err);
     if (!songFromDb || err) {
       callback(new Error('Song not found in db'), null);
     } else {
