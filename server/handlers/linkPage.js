@@ -26,7 +26,7 @@ function render(req, res) {
         res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
       }
     } else {
-      var template = fs.readFileSync(path.join(__dirname, '../linkTemplate/template.html'),'utf-8', function(err, data) {
+      var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
         if (err) {
           console.error(err);
         }
@@ -54,17 +54,17 @@ function createProvidersArray (song) {
     provider: 'spotify', 
     url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
     text : song.spotify_id ? 'Play now in Spotify' : 'Not available on Spotify',
-    className : song.spotify_id ? 'fullWidth spotify' : 'fullWidth greyedOut spotify'
+    className : song.spotify_id ? 'fullWidth spotify' : 'fullWidth disabled spotify'
   },{
     provider: 'youtube', 
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
     text : song.youtube_id ? 'Play now in Youtube' : 'Not available on Youtube',
-    className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth greyedOut youtube'
+    className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth disabled youtube'
   },{
     provider: 'itunes', 
     url : song.itunes_id ? song.itunes_app_uri : undefined,
     text : song.itunes_id ? 'Play now in Apple Music' : 'Not available on Itunes',
-    className : song.itunes_id ? 'fullWidth apple' : 'fullWidth greyedOut apple'
+    className : song.itunes_id ? 'fullWidth apple' : 'fullWidth disabled apple'
   }];
 
   return providersArray;
