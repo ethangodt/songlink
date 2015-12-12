@@ -26,7 +26,7 @@ function render(req, res) {
         res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
       }
     } else {
-      var template = fs.readFileSync(path.join(__dirname, '../linkTemplate/template.html'),'utf-8', function(err, data) {
+      var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
         if (err) {
           console.error(err);
         }

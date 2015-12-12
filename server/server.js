@@ -12,6 +12,8 @@ var app = express();
 
 app.use(express.static('./dist'));
 
+app.use(express.static('./templates')); //for use in development
+
 app.use(bodyParser.json());
 app.use(cookieParser());
 
