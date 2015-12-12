@@ -18,7 +18,7 @@
     "sass" : "node-sass server/templates/linkTemplate/scssStyles/main.scss dist/main.css & cp -a server/static/. dist/",
     "postinstall": "npm run build",
     "start": "node server/server.js",
-    "serve": "nodemon --debug server/server.js --ignore components --ignore containers & npm run sass",
+    "serve": "npm run sass & nodemon --debug server/server.js --ignore components --ignore containers",
     "preserve": "rm -f dist/bundle.js",
     "preserve:prod": "npm run build",
     "serve:prod": "NODE_ENV=production nodemon --debug server/server.js --ignore components --ignore containers",
