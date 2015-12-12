@@ -1,0 +1,41 @@
+@import 'reset';
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,600);
+
+// GENERIC SITE STYLES //
+$slorange: #ff671d;
+$slpurple: #3e48ce;
+$sllightgrey: #cecece;
+$sldarkgrey: #545454;
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  margin-bottom: 100px;
+  font-size: 19px;
+}
+
+p {
+  line-height: 24px;
+}
+
+.page {
+  // background-color: lightblue;
+  width: 800px;
+  margin: 0 auto;
+}
+
+main {
+  transition: 200ms filter;
+}
+// END GENERIC STYLES //
+
+@import 'reusableComponents';
+@import 'header';
+@import 'search';
+@import 'results';
+@import 'links';
+// @import 'songView';
+// @import 'infoBlurb'; // includes .contentContainer
+// @import 'listenLinks';
+// @import 'modal';

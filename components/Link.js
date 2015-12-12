@@ -19,25 +19,27 @@ class Link extends Component {
   }
 
   getCorrectCopyShortcut() {
-    if (navigator.appVersion.indexOf("Win") !=-1 ) {
-      return 'control + C'
+    if (navigator.appVersion.indexOf("Win") !== -1 ) {
+      return 'ctrl+C'
     } else {
-      return 'command + C'
+      return '\u2318+C'
     }
   }
 
   render() {
     return (
-      <div>
-
+      <div className="link">
+        <div className="linkInfo">{this.props.link.title} by {this.props.link.artist}</div>
         <input 
           type="text"
-          value={this.props.link}
+          value={this.props.link.url}
           ref={this.props.index === 0 && !this.state.inputHasLoaded ? 
             this.handleFocusOnLoad.bind(this) : undefined}
           onFocus={this.handleFocus.bind(this)}/>
 
-        <span> {this.getCorrectCopyShortcut()} to copy link</span>
+        <button>{this.getCorrectCopyShortcut()}</button>
+        <button>fb</button>
+        <button className="lastButton">tw</button>
 
       </div>
     )
@@ -47,7 +49,7 @@ class Link extends Component {
 
 Link.propTypes = {
   index: PropTypes.number.isRequired,
-  link: PropTypes.string.isRequired
+  link: PropTypes.object.isRequired
 }
 
 export default Link

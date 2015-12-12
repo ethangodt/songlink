@@ -5,15 +5,14 @@ class Links extends Component {
 
   render() {
     return (
-      <div>
-        <div>{this.props.loading.link ? 'Link loading...' : 'Link'}</div>
-        <ul>
-          {
-            this.props.links.map((link, i) => {
-              return <Link key={i} index={i} link={link}/>
-            })
-          }
-        </ul>       
+      <div className="linksContainer">
+      
+        {
+          this.props.links.map((link, i) => {
+            return <Link key={i} index={i} link={link}/>
+          })
+        }
+
       </div>
     )
   }

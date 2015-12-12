@@ -1,4 +1,4 @@
-export default function links(links = [], action) {
+export default function links(links = [{url: 'http://localhost:3000/34fa4', artist: 'Jack White', title: 'Lazaretto'}], action) {
   switch (action.type) {
     case 'ADD_LINK':
       return [action.link, ...links]

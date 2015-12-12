@@ -1,0 +1,31 @@
+.searchContainer {
+  width: 500px;
+  margin: 40px auto 0 auto;
+}
+
+.searchContainer input {
+  box-sizing: border-box;
+  height: 48px;
+  border-radius: 4px 0 0 4px;
+  background-color: #e1e1e1;
+  outline: none;
+  border-style: none;
+  padding: 0 0 0 16px;
+  width: 80%;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.searchContainer button {
+  height: 48px;
+  border-radius:0 4px 4px 0;
+  background-color: #483e52;
+  outline: none; 
+  border-style: none;
+  padding: 0;
+  width: 20%;
+  color: #716771;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 12px;
+}

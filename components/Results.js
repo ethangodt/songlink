@@ -8,8 +8,9 @@ class Results extends Component {
   }
 
   render() {
+
     return (
-      <ul>
+      <div className="resultsContainer">
         {
           this.props.results.map((result, i) => {
             return (
@@ -20,7 +21,7 @@ class Results extends Component {
                 clearText={this.props.clearText}/>
           )})
         }
-      </ul>
+      </div>
     ) 
   }
 
