@@ -17,7 +17,6 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 if (process.env.NODE_ENV === 'development') {
-  app.use(express.static('./server/static'));
   require('./config/server.development.config')(app);
 }
 

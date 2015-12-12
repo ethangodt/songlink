@@ -14,10 +14,12 @@
   },
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.production.config.js",
+    "postbuild": "npm run sass",
+    "sass" : "node-sass server/templates/linkTemplate/scssStyles/main.scss dist/main.css & cp -a server/static/. dist/",
     "postinstall": "npm run build",
     "start": "node server/server.js",
-    "serve": "nodemon --debug server/server.js --ignore components --ignore containers",
-    "preserve": "rm -rf dist",
+    "serve": "nodemon --debug server/server.js --ignore components --ignore containers & npm run sass",
+    "preserve": "rm -f dist/bundle.js",
     "preserve:prod": "npm run build",
     "serve:prod": "NODE_ENV=production nodemon --debug server/server.js --ignore components --ignore containers",
     "test": "NODE_ENV=production mocha test/models test/controllers test/server"
@@ -63,5 +65,8 @@
     "youtube-node": "^1.3.0",
     "youtube-node-with-params": "^1.0.2",
     "youtube-search": "^1.0.4"
+  },
+  "devDependencies": {
+    "node-sass": "^3.4.2"
   }
 }
