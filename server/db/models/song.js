@@ -12,7 +12,8 @@ var songSchema = new mongoose.Schema({
   itunes_id: String,
   itunes_app_uri: String,
   clicks: Number,
-  creates: Number
+  creates: Number,
+  track_length: Number
 });
 
 var Song = mongoose.model('song', songSchema);
