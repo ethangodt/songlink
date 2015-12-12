@@ -16,7 +16,7 @@ function render(req, res) {
       var provider = req.cookies.providerPreference;
       res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
     } else {
-      var template = fs.readFileSync(path.join(__dirname, '../templates/template.html'),'utf-8', function(err, data) {
+      var template = fs.readFileSync(path.join(__dirname, '../linkTemplate/template.html'),'utf-8', function(err, data) {
         if (err) {
           console.error(err);
         }
@@ -43,18 +43,18 @@ function createProvidersArray (song) {
   var providersArray = [{
     name: 'Spotify', 
     url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
-    text : song.spotify_id ? 'Listen on Spotify' : 'Not Available on Spotify',
-    className : song.spotify_id ? '' : 'greyedOut'
+    text : song.spotify_id ? 'play now in Spotify' : 'Not Available on Spotify',
+    className : song.spotify_id ? 'fullWidth spotify' : 'greyedOut spotify'
   },{
     name: 'Youtube', 
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
-    text : song.youtube_id ? 'Listen on Youtube' : 'Not Available on Youtube',
-    className : song.youtube_id ? '' : 'greyedOut'
+    text : song.youtube_id ? 'play now in Youtube' : 'Not Available on Youtube',
+    className : song.youtube_id ? 'fullWidth youtube' : 'greyedOut youtube'
   },{
     name: 'Itunes', 
     url : song.itunes_id ? song.itunes_app_uri : undefined,
-    text : song.itunes_id ? 'Listen on Itunes' : 'Not Available on Itunes',
-    className : song.itunes_id ? '' : 'greyedOut'
+    text : song.itunes_id ? 'play now in Apple Music' : 'Not Available on Itunes',
+    className : song.itunes_id ? 'fullWidth apple' : 'greyedOut apple'
   }];
 
   return providersArray;
