@@ -8,3 +8,4 @@ PSD/
 dist
 *.css
 *.css.*
+.sass-cache

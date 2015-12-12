@@ -92,11 +92,14 @@ class Search extends Component {
   }
 
   render() {
-    return (
-      <div>
 
-        <div>{this.props.loading.search ? 'Search loading...' : 'Search'}</div>
-        <form onSubmit={this.handleSubmit.bind(this)}>
+    return (
+      <div className="searchContainer">
+
+        <div>{this.state.link ? this.state.link.service + ' link detected' : ' '}</div>
+
+        <div style={ {position: 'relative'} }>
+          
           <input
             type="text"
             placeholder="Search for song"
@@ -104,12 +107,11 @@ class Search extends Component {
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}/>
-          <input
-            type="submit"
-            value={ this.state.link ? 'create link' : 'search' }/>
-        </form>
+          <button onClick={this.handleSubmit.bind(this)}>
+            { this.state.link ? 'create' : 'search' }
+          </button>
 
-        <div>{this.state.link ? this.state.link.service + ' link detected' : ' '}</div>
+        </div>
 
         <Results
           loading={this.props.loading}

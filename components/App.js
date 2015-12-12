@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import Header from './Header'
-// import '../dist/styles/main.scss'
+import '../styles/main.scss'
 
 class App extends Component {
 
   render() {
     return (
       <div>
-        <Header/>
-        {this.props.children}
+        <div className="topStrip"></div>
+        <div className="page">
+          <Header/>
+          {this.props.children}
+        </div>  
       </div>
     )
   }

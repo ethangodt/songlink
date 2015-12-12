@@ -1,0 +1,48 @@
+.resultsContainer {
+  position: absolute;
+  background-color: white;
+  width: inherit;
+}
+
+.resultsContainer img,
+.resultsContainer ul {
+  float: left;
+}
+
+.result {
+  height: 100px;
+  overflow: auto;
+  border-bottom: 1px solid darkgrey;
+  border-right: 1px solid darkgrey;
+  border-left: 1px solid darkgrey;
+  cursor: pointer;
+
+  &:first-of-type {
+    border-radius: 4px 4px 0 0;
+  }
+}
+
+.resultItem {
+  box-sizing: border-box;
+  height: 100px;
+  padding: 5px 0;
+  line-height: 30px;
+}
+
+.resultItem li {
+  width: 358px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 20px 0 20px;
+}
+
+.resultTitle {
+  font-size: 22px;
+}
+
+.resultArtist,
+.resultAlbum {
+  color: darkgrey;
+  font-size: 18px;
+}

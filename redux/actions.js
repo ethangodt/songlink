@@ -46,7 +46,11 @@ export function createLink(song) {
       },
       success: res => {
         console.log('received res from /create', res)
-        dispatch(addLink(res))
+        dispatch(addLink({
+          url: res,
+          artist: song.artist,
+          title: song.title
+        }))
         dispatch(toggleLoadingLink(false))
       }
     })
