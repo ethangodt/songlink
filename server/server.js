@@ -25,7 +25,7 @@ routes(app);
 var port = process.env.PORT || 3000;
 
 app.listen(port, function(error) {
-  if (error) throw error
+  if (error) throw error;
   console.log("Express server listening on port", port);
 });
 
