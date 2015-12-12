@@ -12,9 +12,19 @@ function render(req, res) {
   songCtrl.get({ hash_id : req.params.id }, function(err, songFromDb) {
     if (err || !songFromDb) {
       res.status(404).send('Sorry cant find that url!');
-    } else if (providers[req.cookies.providerPreference]) { // ensures we support whatever string is set on cookie
+    } else if (providers[req.cookies.providerPreference] && req.cookies.providerPreference !== 'none') { // ensures we support whatever string is set on cookie
       var provider = req.cookies.providerPreference;
-      res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
+      console.log(provider);
+      if (provider === 'youtube') {
+        console.log(1)
+        res.status(302).redirect(providers[provider].makeLinkFromId(songFromDb[provider + '_id']));
+      } else if (provider === 'itunes') {
+        console.log(2)
+        res.status(302).redirect(songFromDb.itunes_app_uri);
+      } else if (provider === 'spotify'){
+        console.log(3)
+        res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
+      }
     } else {
       var template = fs.readFileSync(path.join(__dirname, '../linkTemplate/template.html'),'utf-8', function(err, data) {
         if (err) {
@@ -41,20 +51,20 @@ function render(req, res) {
 function createProvidersArray (song) {
 
   var providersArray = [{
-    name: 'Spotify', 
+    provider: 'spotify', 
     url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
-    text : song.spotify_id ? 'play now in Spotify' : 'Not Available on Spotify',
-    className : song.spotify_id ? 'fullWidth spotify' : 'greyedOut spotify'
+    text : song.spotify_id ? 'Play now in Spotify' : 'Not available on Spotify',
+    className : song.spotify_id ? 'fullWidth spotify' : 'fullWidth greyedOut spotify'
   },{
-    name: 'Youtube', 
+    provider: 'youtube', 
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
-    text : song.youtube_id ? 'play now in Youtube' : 'Not Available on Youtube',
-    className : song.youtube_id ? 'fullWidth youtube' : 'greyedOut youtube'
+    text : song.youtube_id ? 'Play now in Youtube' : 'Not available on Youtube',
+    className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth greyedOut youtube'
   },{
-    name: 'Itunes', 
+    provider: 'itunes', 
     url : song.itunes_id ? song.itunes_app_uri : undefined,
-    text : song.itunes_id ? 'play now in Apple Music' : 'Not Available on Itunes',
-    className : song.itunes_id ? 'fullWidth apple' : 'greyedOut apple'
+    text : song.itunes_id ? 'Play now in Apple Music' : 'Not available on Itunes',
+    className : song.itunes_id ? 'fullWidth apple' : 'fullWidth greyedOut apple'
   }];
 
   return providersArray;
