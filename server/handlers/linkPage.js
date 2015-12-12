@@ -64,7 +64,7 @@ function createProvidersArray (song) {
     provider: 'itunes', 
     url : song.itunes_id ? song.itunes_app_uri : undefined,
     text : song.itunes_id ? 'Play now in Apple Music' : 'Not available on Itunes',
-    className : song.itunes_id ? 'fullWidth apple' : 'fullWidth disabled apple'
+    className : song.itunes_id ? 'fullWidth itunes' : 'fullWidth disabled itunes'
   }];
 
   return providersArray;

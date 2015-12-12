@@ -43,5 +43,9 @@
 }
 
 .highlighted {
-  background-color: blue;
+  border: 1px orange solid;
+}
+
+.highlighted:hover {
+  border: 1px orange solid;
 }
