@@ -44,7 +44,7 @@
     <div class="contentContainer">
       <div class="listenLinks">
         {{#providers}}
-        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{url}}')">{{text}}</button>
+        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">{{text}}</button>
         {{/providers}}
       </div>
     </div>
@@ -65,8 +65,8 @@
           <img class="buttonImage" src="styles/images/youtube-logo.png" alt="YouTube Button"/>
         </button>
         <br/>
-        <button class="mini special" onclick="preferenceClick(modalSelection.preference)">skip</button>
-        <button class="mini special" onclick="preferenceClick(modalSelection.preference)">save</button>
+        <button class="mini special" onclick="preferenceSkip()">skip</button>
+        <button class="mini special save" onclick="preferenceSave(modalSelection.preference)">save</button>
       </div>
       <p>You can always go to songl.ink and change this later.</p>
     </div>

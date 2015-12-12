@@ -53,18 +53,18 @@ function createProvidersArray (song) {
   var providersArray = [{
     provider: 'spotify', 
     url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
-    text : song.spotify_id ? 'play now in Spotify' : 'Not Available on Spotify',
-    className : song.spotify_id ? 'fullWidth spotify' : 'greyedOut spotify'
+    text : song.spotify_id ? 'Play now in Spotify' : 'Not available on Spotify',
+    className : song.spotify_id ? 'fullWidth spotify' : 'fullWidth greyedOut spotify'
   },{
     provider: 'youtube', 
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
-    text : song.youtube_id ? 'play now in Youtube' : 'Not Available on Youtube',
-    className : song.youtube_id ? 'fullWidth youtube' : 'greyedOut youtube'
+    text : song.youtube_id ? 'Play now in Youtube' : 'Not available on Youtube',
+    className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth greyedOut youtube'
   },{
     provider: 'itunes', 
     url : song.itunes_id ? song.itunes_app_uri : undefined,
-    text : song.itunes_id ? 'play now in Apple Music' : 'Not Available on Itunes',
-    className : song.itunes_id ? 'fullWidth apple' : 'greyedOut apple'
+    text : song.itunes_id ? 'Play now in Apple Music' : 'Not available on Itunes',
+    className : song.itunes_id ? 'fullWidth apple' : 'fullWidth greyedOut apple'
   }];
 
   return providersArray;
