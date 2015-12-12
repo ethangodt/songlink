@@ -22,7 +22,7 @@ class Link extends Component {
     if (navigator.appVersion.indexOf("Win") !== -1 ) {
       return 'ctrl+C'
     } else {
-      return '\u2318+C'
+      return '\u2318+C to copy'
     }
   }
 
@@ -37,7 +37,7 @@ class Link extends Component {
             this.handleFocusOnLoad.bind(this) : undefined}
           onFocus={this.handleFocus.bind(this)}/>
 
-        <button>{this.getCorrectCopyShortcut()}</button>
+        <button className="copyInstruction">{this.getCorrectCopyShortcut()}</button>
         <button>fb</button>
         <button className="lastButton">tw</button>
 
