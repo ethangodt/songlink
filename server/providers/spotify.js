@@ -19,7 +19,6 @@ function createQuery(songObj) {
 function fetchSongById(spotifyId, callback) {
   spotify.lookup({ type: 'track', id: spotifyId}, function(err, data) {
     if ( data.error ) {
-      // console.log(data);
       callback(new Error('Link is not valid'), null);
     } else {
       callback(null, makePrettyObject(data));
@@ -63,12 +62,14 @@ function makePrettyObject(obj) {
 
 function verify(song, spotifyTracks, callback){
   for (var i=0; i<spotifyTracks.length; i++) {
+    console.log(spotifyTracks[i].album.images[0].url);
     var spotifyArtist = utils.convertArtist(spotifyTracks[i].artists[0].name);
     var otherArtist = utils.convertArtist(song.artist);
     var artistsMatch = utils.verifyArtistMatch(spotifyArtist, otherArtist);
     var durationsMatch = utils.verifyMsMatch(spotifyTracks[i].duration_ms, song.track_length);
     if (durationsMatch && artistsMatch) {
       song.spotify_id = spotifyTracks[i].id;
+      song.spotify_image = spotifyTracks[i].album.images[0].url;
       return callback(null, song);
     }
   }

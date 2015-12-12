@@ -90,8 +90,8 @@ function search(searchUrl, numResults, callback) {
   })
 }
 
-function verify(song, spotifyTracks, callback){
-  for (var i=0; i<spotifyTracks.length; i++) {
+function verify(song, itunesTracks, callback){
+  for (var i=0; i<itunesTracks.length; i++) {
     var itunesArtist = utils.convertArtist(itunesTracks[i].artist);
     var otherArtist = utils.convertArtist(song.artist);
     var artistsMatch = utils.verifyArtistMatch(itunesArtist, otherArtist);
