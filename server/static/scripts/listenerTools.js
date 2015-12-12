@@ -74,13 +74,13 @@ var preferenceSave = function (provider) {
   if (provider === 'none') {
     return;
   }
-  docCookies.setItem('providerPreference', provider);
+  docCookies.setItem('providerPreference', provider, Infinity);
   $('.modalEnvironment').css('display','none');
   document.location.reload(true);
 }
 
 var preferenceSkip = function () {
-  docCookies.setItem('providerPreference', 'none');
+  docCookies.setItem('providerPreference', 'none', Infinity);
   $('.modalEnvironment').css('display','none');
   if (!modalSelection.originalUrl) {
     document.location.reload(true);
