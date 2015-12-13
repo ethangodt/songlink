@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import Result from './Result'
+import ResultsLoadingSpinner from './ResultsLoadingSpinner'
 
 class Results extends Component {
 
@@ -11,6 +12,9 @@ class Results extends Component {
 
     return (
       <div className="resultsContainer">
+
+        { this.props.loading.search ? <ResultsLoadingSpinner/> : undefined }
+
         {
           this.props.results.map((result, i) => {
             return (

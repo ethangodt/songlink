@@ -102,7 +102,7 @@ class Search extends Component {
           
           <input
             type="text"
-            placeholder="Search for song"
+            placeholder="Find song to share"
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
@@ -114,6 +114,7 @@ class Search extends Component {
         </div>
 
         <Results
+          style={ this.props.results ? {} : {display: 'none'} }
           loading={this.props.loading}
           results={this.props.results}
           actions={this.props.actions}

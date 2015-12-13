@@ -65,6 +65,7 @@ export function createLink(song) {
 
 export function search(text) {
   return (dispatch, getState) => {
+    dispatch(clearResults())
     dispatch(toggleLoadingSearch(true))
     $.ajax({
       url: 'search',

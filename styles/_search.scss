@@ -4,7 +4,8 @@
 }
 
 .searchContainer input {
-  box-sizing: border-box;
+  // font: inherit;
+  font-family: 'Open Sans', sans-serif;
   height: 48px;
   border-radius: 4px 0 0 4px;
   background-color: #e1e1e1;
@@ -17,6 +18,7 @@
 }
 
 .searchContainer button {
+  font-family: 'Open Sans', sans-serif;
   height: 48px;
   border-radius:0 4px 4px 0;
   background-color: #483e52;
