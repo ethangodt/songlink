@@ -84,7 +84,6 @@ function search(searchUrl, numResults, callback) {
           track_length: results[i].trackTimeMillis
         });
       }
-
       callback(err, numResults === 1 ? songs[0] : songs.slice(0, numResults));
     }
   })

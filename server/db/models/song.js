@@ -14,7 +14,7 @@ var songSchema = new mongoose.Schema({
   clicks: Number,
   creates: Number,
   track_length: Number,
-  spotify_image: String
+  spotify_images: Object
 });
 
 var Song = mongoose.model('song', songSchema);
