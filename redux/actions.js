@@ -43,6 +43,7 @@ export function createLink(song) {
       cache: false,
       error: err => {
         console.error(err)
+        dispatch(toggleLoadingLink(false))
       },
       success: res => {
         console.log('received res from /create', res)
@@ -75,6 +76,7 @@ export function search(text) {
       cache: false,
       error: err => {
         console.error(err)
+        dispatch(toggleLoadingSearch(false))
       },
       success: res => {
         const songs = res.map(song => {

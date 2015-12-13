@@ -12,9 +12,6 @@ class Results extends Component {
 
     return (
       <div className="resultsContainer">
-
-        { this.props.loading.search ? <ResultsLoadingSpinner/> : undefined }
-
         {
           this.props.results.map((result, i) => {
             return (

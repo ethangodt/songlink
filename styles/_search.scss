@@ -31,3 +31,16 @@
   font-weight: 600;
   line-height: 12px;
 }
+
+.circle-wrapper {
+  margin: 0 auto;
+  line-height: 40px;
+}
+
+.spinner .circle {
+  padding: 0;
+  &:before {
+    background-color: white;
+  }
+
+}

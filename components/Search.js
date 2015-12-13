@@ -91,6 +91,14 @@ class Search extends Component {
     }
   }
 
+  renderButtonText() {
+    if (this.props.loading.search || this.props.loading.link) {
+      return <span className="fa fa-spinner fa-spin"></span>
+    } else {
+      return this.state.link ? 'create' : 'search'
+    }
+  }
+
   render() {
 
     return (
@@ -102,13 +110,13 @@ class Search extends Component {
           
           <input
             type="text"
-            placeholder="Find song to share"
+            placeholder={this.props.loading.link ? "Creating link..." : "Find song to share"}
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}/>
           <button onClick={this.handleSubmit.bind(this)}>
-            { this.state.link ? 'create' : 'search' }
+            { this.renderButtonText() }
           </button>
 
         </div>
