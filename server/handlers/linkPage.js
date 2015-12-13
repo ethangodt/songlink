@@ -14,38 +14,50 @@ function render(req, res) {
       res.status(404).send('Sorry cant find that url!');
     } else if (providers[req.cookies.providerPreference] && req.cookies.providerPreference !== 'none') { // ensures we support whatever string is set on cookie
       var provider = req.cookies.providerPreference;
-      console.log(provider);
       if (provider === 'youtube') {
-        console.log(1)
-        res.status(302).redirect(providers[provider].makeLinkFromId(songFromDb[provider + '_id']));
+        if (!songFromDb[provider+'_id']) {
+          sendNonProvider(req, res, songFromDb);
+        } else {
+          res.status(302).redirect(providers[provider].makeLinkFromId(songFromDb[provider + '_id']));
+        }
       } else if (provider === 'itunes') {
-        console.log(2)
-        res.status(302).redirect(songFromDb.itunes_app_uri);
+        if (!songFromDb[provider+'_id']) {
+          sendNonProvider(req, res, songFromDb);
+        } else {
+          res.status(302).redirect(songFromDb.itunes_app_uri);
+        }
       } else if (provider === 'spotify'){
-        console.log(3)
-        res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
+        if (!songFromDb[provider+'_id']) {
+          sendNonProvider(req, res, songFromDb);
+        } else {
+          res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
+        }
       }
     } else {
-      var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
-        if (err) {
-          console.error(err);
-        }
-      });
-
-      var templateObj = {
-        title : songFromDb.title,
-        artist : songFromDb.artist,
-        album_art : songFromDb.album_art,
-        providers : createProvidersArray(songFromDb),
-        clicks : songFromDb.clicks,
-        creates : songFromDb.creates
-      };
-
-      var html = Mustache.render(template, templateObj);
-      res.send(html);
+      sendNonProvider(req, res, songFromDb);
     }
 
   });
+}
+
+function sendNonProvider (req, res, songFromDb) {
+  var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
+    if (err) {
+      console.error(err);
+    }
+  });
+
+  var templateObj = {
+    title : songFromDb.title,
+    artist : songFromDb.artist,
+    album_art : songFromDb.album_art,
+    providers : createProvidersArray(songFromDb),
+    clicks : songFromDb.clicks,
+    creates : songFromDb.creates
+  };
+
+  var html = Mustache.render(template, templateObj);
+  res.send(html);
 }
 
 function createProvidersArray (song) {
@@ -64,7 +76,7 @@ function createProvidersArray (song) {
     provider: 'itunes', 
     url : song.itunes_id ? song.itunes_app_uri : undefined,
     text : song.itunes_id ? 'Play now in Apple Music' : 'Not available on Itunes',
-    className : song.itunes_id ? 'fullWidth apple' : 'fullWidth disabled apple'
+    className : song.itunes_id ? 'fullWidth itunes' : 'fullWidth disabled itunes'
   }];
 
   return providersArray;
