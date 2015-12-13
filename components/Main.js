@@ -20,7 +20,7 @@ class Main extends Component {
 
   render() {
     return (
-      <div>
+      <div className="wrapper">
 
         <Search 
           actions={this.props.actions}

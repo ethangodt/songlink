@@ -11,13 +11,15 @@ class Result extends Component {
 
   render() {
     return (
-      <div className="result" onClick={this.handleClick.bind(this)}>
-        <img src={this.props.result.album_art} height="100px" width="100px"></img>
-        <ul className="resultItem">
-          <li className="resultTitle">{this.props.result.title}</li>
-          <li className="resultArtist">{this.props.result.artist} </li>
-          <li className="resultAlbum"> {this.props.result.album_title}</li>
-        </ul>
+      <div className="result" onMouseDown={this.handleClick.bind(this)}>
+        <div className="result-art">
+          <img src={this.props.result.album_art}></img>
+        </div>
+        <div className="result-info">
+          <div className="result-info-item title">{this.props.result.title}</div>
+          <div className="result-info-item artist">{this.props.result.artist} </div>
+          <div className="result-info-item album"> {this.props.result.album_title}</div>
+        </div>
       </div>
     )
   }

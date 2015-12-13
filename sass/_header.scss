@@ -1,0 +1,33 @@
+header {
+  @include paper;
+  height: $header-height;
+  line-height: $header-height;
+  margin-bottom: 40px;
+  overflow: auto;
+}
+
+header .logo {
+  color: $color-main;
+  float: left;
+  font-family: 'Satisfy', 'Open Sans', cursive;
+  font-size: 30px;
+  font-weight: 600;
+  padding-left: 16px;
+}
+
+header button {
+  @include button;
+  float: right;
+  font-size: 26px;
+  line-height: $header-height;
+  width: 60px;
+}
+
+header .fa-cog {
+  color: $color-main;
+  transition: 100ms transform;
+}
+
+header button:hover .fa-cog {
+  transform: rotate(20deg);
+}

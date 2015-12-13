@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import Result from './Result'
-import ResultsLoadingSpinner from './ResultsLoadingSpinner'
 
 class Results extends Component {
 
@@ -11,7 +10,7 @@ class Results extends Component {
   render() {
 
     return (
-      <div className="resultsContainer">
+      <div className="results wrapper">
         {
           this.props.results.map((result, i) => {
             return (

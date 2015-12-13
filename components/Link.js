@@ -1,4 +1,6 @@
 import React, { Component, PropTypes } from 'react'
+import { FacebookButton, TwitterButton } from 'react-social'
+import ClipboardButton from 'react-clipboard.js'
 
 class Link extends Component {
 
@@ -18,28 +20,40 @@ class Link extends Component {
     this.setState({ inputHasLoaded: true })
   }
 
-  getCorrectCopyShortcut() {
-    if (navigator.appVersion.indexOf("Win") !== -1 ) {
-      return 'ctrl+C'
-    } else {
-      return '\u2318+C to copy'
-    }
-  }
-
   render() {
     return (
       <div className="link">
-        <div className="linkInfo">{this.props.link.title} by {this.props.link.artist}</div>
-        <input 
-          type="text"
-          value={this.props.link.url}
-          ref={this.props.index === 0 && !this.state.inputHasLoaded ? 
-            this.handleFocusOnLoad.bind(this) : undefined}
-          onFocus={this.handleFocus.bind(this)}/>
 
-        <button className="copyInstruction">{this.getCorrectCopyShortcut()}</button>
-        <button>fb</button>
-        <button className="lastButton">tw</button>
+        <div className="link-header">
+          <span className="emphasis">share </span>
+          <span className="title">{this.props.link.title} </span> 
+          by
+          <span className="artist"> {this.props.link.artist} </span> 
+        </div>
+
+        <div className="link-container">
+
+          <input 
+            type="text"
+            value={this.props.link.url}
+            ref={this.props.index === 0 && !this.state.inputHasLoaded ? 
+              this.handleFocusOnLoad.bind(this) : undefined}
+            onFocus={this.handleFocus.bind(this)}/>
+
+          <ClipboardButton className="copy" data-clipboard-text={this.props.link.url}>
+            <span className="fa fa-clipboard"></span>
+          </ClipboardButton>
+     
+          <FacebookButton className="facebook" url={this.props.link.url}>
+            <span className="fa fa-facebook"></span>
+          </FacebookButton>
+
+
+          <TwitterButton className="twitter" url={this.props.link.url}>
+            <span className="fa fa-twitter"></span>
+          </TwitterButton>
+
+        </div>
 
       </div>
     )

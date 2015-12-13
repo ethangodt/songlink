@@ -1,0 +1,48 @@
+.result {
+  cursor: pointer;
+  height: $search-result-height;
+  overflow: auto;
+
+  &:hover {
+    background-color: mix($color-main, white, 6%);
+  }
+}
+
+.result .result-art,
+.result .result-info {
+  height: 100%;
+  padding: $search-result-info-item-padding;
+}
+
+.result .result-art {
+  float: left;
+  width: $search-result-height;
+}
+
+.result .result-art img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+.result .result-info {
+  display: block;
+  height: 100%;
+  line-height: ($search-result-height - ($search-result-info-item-padding * 2)) / 3;
+  width: 100%;
+}
+
+.result .result-info .result-info-item {
+    @include no-wrap;
+    padding: 0 10px;
+}
+
+.result .title {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.result .artist,
+.result .album {
+  font-size: 16px;
+}

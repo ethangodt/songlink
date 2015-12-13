@@ -1,0 +1,42 @@
+.search {
+  width: 100%;
+  // margin: 40px auto 0 auto;
+}
+
+.search .search-bar {
+  @include paper;
+  outline: none;
+}
+
+.search input {
+  border-style: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 300;
+  height: $search-input-height;
+  outline: none;
+  padding: 0 0 0 16px;
+  width: 86%;
+}
+
+.search button {
+  @include button;
+
+  font-family: 'Open Sans', sans-serif;
+  height: $search-input-height;
+  padding: 0;
+  width: 14%;
+  color: $color-main;//mix($color-main, white, 80%);
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.search button .fa {
+  font-size: 20px;
+}
+
+.search button .fa-search {
+  transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+}

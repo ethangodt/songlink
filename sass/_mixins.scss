@@ -1,0 +1,39 @@
+@mixin border-box {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; 
+}
+
+@mixin button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  text-align: center;
+}
+
+@mixin paper {
+  background-color: white;
+  //border: 1px solid rgba(0, 0, 0, .18);
+  border-radius: 2px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, 0.24);
+  outline: none;
+}
+
+@mixin no-wrap {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+%clearfix {
+    *zoom: 1;
+    &:before, 
+    &:after {
+        content: " ";
+        display: table;
+    }
+    &:after {
+        clear: both;
+    }
+}
