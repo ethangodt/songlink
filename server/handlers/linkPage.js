@@ -52,7 +52,7 @@ function sendNonProvider (req, res, songFromDb) {
     pageUrl : utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id),
     title : songFromDb.title,
     artist : songFromDb.artist,
-    album_art : songFromDb.album_art,
+    album_art : songFromDb.spotify_images.large_image.url ? songFromDb.spotify_images.large_image.url : songFromDb.album_art,
     providers : createProvidersArray(songFromDb),
     clicks : songFromDb.clicks,
     creates : songFromDb.creates
