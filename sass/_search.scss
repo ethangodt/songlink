@@ -1,6 +1,5 @@
 .search {
   width: 100%;
-  // margin: 40px auto 0 auto;
 }
 
 .search .search-bar {
@@ -21,14 +20,14 @@
 
 .search button {
   @include button;
-
   font-family: 'Open Sans', sans-serif;
   height: $search-input-height;
-  padding: 0;
+  padding-right: 16px;
   width: 14%;
-  color: $color-main;//mix($color-main, white, 80%);
+  color: $color-main;
   font-size: 16px;
   font-weight: 800;
+  text-align: right;
 }
 
 .search button .fa {
@@ -39,4 +38,21 @@
   transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   -webkit-transform: rotateY(-180deg);
+}
+
+@media #{$breakpoint-small} {
+
+  .search input {
+    font-size: 14px;
+    height: $search-input-height-small;
+  }
+
+  .search button {
+    height: $search-input-height-small;
+  }
+
+  .search button .fa {
+    font-size: 14px;
+  }
+   
 }

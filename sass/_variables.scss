@@ -6,9 +6,12 @@ $color-background: mix(black, white, 5%);
 $grid-max-width: 700px;
 
 $header-height: 76px;
+$header-height-small: 52px;
 $search-input-height: 60px;
+$search-input-height-small: 40px;
 $search-result-height: 86px;
 $search-result-info-item-padding: 6px;
 $link-input-height: 48px;
+$link-input-height-small: 36px;
 
-// $breakpoint-small: "only screen and (min-width: 600px)";
+$breakpoint-small: "only screen and (max-width: 600px)";

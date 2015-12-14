@@ -20,7 +20,9 @@ header button {
   float: right;
   font-size: 26px;
   line-height: $header-height;
+  padding-right: 16px;
   width: 60px;
+  text-align: right;
 }
 
 header .fa-cog {
@@ -30,4 +32,23 @@ header .fa-cog {
 
 header button:hover .fa-cog {
   transform: rotate(20deg);
+}
+
+@media #{$breakpoint-small} {
+
+  header {
+    height: $header-height-small;
+    line-height: $header-height-small;
+  }
+
+  header .logo {
+    font-size: 18px;
+  }
+
+  header button {
+    font-size: 16px;
+  line-height: $header-height-small;
+
+  }
+   
 }
