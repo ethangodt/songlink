@@ -62,6 +62,7 @@ function sendNonProvider (req, res, songFromDb) {
   res.send(html);
 }
 
+
 function createProvidersArray (song) {
 
   var providersArray = [{
