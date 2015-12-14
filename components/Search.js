@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import * as actions from '../redux/actions'
+import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Results from './Results'
@@ -53,17 +54,24 @@ class Search extends Component {
 
   }
 
+  isInvalid() {
+    return this.state.link && this.state.link.id in this.props.invalidLinks
+  }
+
   getLinkInfo(text) {
     if (text.slice(0,4) === "http") {
       if (text.includes("itun.es")) {
         const arr = text.split('=')
+        const id = arr[arr.length - 1]
         return { service: 'itunes', id: arr[arr.length - 1] }
       } else if (text.includes("spotify")) {
         const arr = text.split('/')
-        return { service: 'spotify', id: arr[arr.length - 1] }
+        const id = arr[arr.length - 1]
+        return { service: 'spotify', id: id }
       }
     } else if (text.slice(0,8) === "spotify:") {
       const arr = text.split(':')
+      const id = arr[arr.length - 1]
       return {service: 'spotify', id: arr[arr.length - 1] }
     }
     return undefined
@@ -76,28 +84,45 @@ class Search extends Component {
   }
 
   handleBlur(e) {
-    console.log(e.target)
     e.preventDefault()
     this.props.actions.clearResults()
   } 
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.state.link) {
+    if (!this.isInvalid()) {
       let song = {}
       song[ this.state.link.service + '_id' ] = this.state.link.id
-      this.props.actions.createLink(song)
+      this.props.actions.createLink(song, this.state.link.id)
     } else {
       if (this.state.text.length) this.props.actions.search(this.state.text)
     }
   }
 
-  renderButtonText() {
-    if (this.props.loading.search || this.props.loading.link) {
-      return <span className="fa fa-spinner fa-spin"></span>
-    } else {
-      return this.state.link ? 'CREATE' : <span className="fa fa-search"></span>
+  handleKeyUp(e) {
+    e.preventDefault()
+    if (e.keyCode === 13) {
+      this.handleSubmit(e)
     }
+  }
+
+  getButtonClasses() {
+    if (this.props.loading.search || this.props.loading.link) {
+      return classnames('fa', 'fa-spinner', 'fa-spin')
+    } else {
+      return classnames({
+        'fa': true,
+        'fa-search': !this.state.link,
+        'fa-sign-in': this.state.link
+      })
+    }
+  }
+
+  renderLinkInformation() {
+    if (this.isInvalid()) {
+      return 'invalid song URL'
+    }
+    return undefined;
   }
 
   render() {
@@ -105,20 +130,27 @@ class Search extends Component {
     return (
       <div className="search">
 
-        <div>{this.state.link ? this.state.link.service + ' link detected' : ' '}</div>
+        <div 
+          className={classnames({
+            'search-bar': true,
+            'is-invalid': this.isInvalid()
+          })}>
 
-        <div className="search-bar">
-          
           <input
+            className={classnames({
+              'is-invalid': this.isInvalid()
+            })}
             type="text"
             placeholder={this.props.loading.link ? "Creating link..." : "Search or paste song URL"}
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}
-            onBlur={this.handleBlur.bind(this)}/>
+            onBlur={this.handleBlur.bind(this)}
+            onKeyUp={this.handleKeyUp.bind(this)}/>
+
           <button onClick={this.handleSubmit.bind(this)}>
-            { this.renderButtonText() }
+            <span className={this.getButtonClasses()}></span>
           </button>
 
           <Results
@@ -130,6 +162,8 @@ class Search extends Component {
 
         </div>
 
+        <div className="link-information">{ this.renderLinkInformation() }</div>
+
       </div>
     )
   }
@@ -138,6 +172,7 @@ class Search extends Component {
 
 Search.propTypes = {
   actions: PropTypes.object.isRequired,
+  invalidLinks: PropTypes.object.isRequired,
   loading: PropTypes.object.isRequired,
   results: PropTypes.array.isRequired
 }

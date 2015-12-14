@@ -1,10 +1,16 @@
 .search {
+  position: relative;
   width: 100%;
 }
 
 .search .search-bar {
   @include paper;
   outline: none;
+}
+
+.search .search-bar.is-invalid {
+  background-color: $color-light-red;
+  border: 1px solid red;
 }
 
 .search input {
@@ -15,19 +21,21 @@
   height: $search-input-height;
   outline: none;
   padding: 0 0 0 16px;
-  width: 86%;
+  width: 90%;
+}
+
+.search input.is-invalid {
+  background-color: $color-light-red;
 }
 
 .search button {
   @include button;
   font-family: 'Open Sans', sans-serif;
   height: $search-input-height;
-  padding-right: 16px;
-  width: 14%;
+  width: 10%;
   color: $color-main;
   font-size: 16px;
   font-weight: 800;
-  text-align: right;
 }
 
 .search button .fa {
@@ -40,15 +48,26 @@
   -webkit-transform: rotateY(-180deg);
 }
 
+.search .link-information {
+  color: red;
+  font-size: 16px;
+  font-weight: 400;
+  left: 16px;
+  position: absolute;
+  top: $search-input-height + 10;
+}
+
 @media #{$breakpoint-small} {
 
   .search input {
     font-size: 16px;
     height: $search-input-height-small;
+    width: 80%;
   }
 
   .search button {
     height: $search-input-height-small;
+    width: 20%;
   }
 
   .search button .fa {

@@ -26,13 +26,20 @@ export function addLink(link) {
   }
 }
 
+export function addInvalidLink(id) {
+  return {
+    type: 'ADD_INVALID_LINK',
+    invalidLink: id
+  }
+}
+
 export function clearResults() {
   return {
     type: 'CLEAR_RESULTS'
   }
 }
 
-export function createLink(song) {
+export function createLink(song, id) {
   return (dispatch, getState) => {
     dispatch(toggleLoadingLink(true))
     $.ajax({
@@ -44,6 +51,9 @@ export function createLink(song) {
       error: err => {
         console.error(err)
         dispatch(toggleLoadingLink(false))
+        if (err.responseText === 'Link is not valid') {
+          dispatch(addInvalidLink(id))
+        }
       },
       success: res => {
         console.log('received res from /create', res)
