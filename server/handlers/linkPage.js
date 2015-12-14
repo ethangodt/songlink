@@ -3,6 +3,7 @@ var Mustache = require('mustache');
 var path = require('path');
 var providers = require('../providers');
 var songCtrl = require('../db/controllers/songController');
+var utils = require('../utils/utils');
 
 module.exports = {
   render: render
@@ -48,6 +49,7 @@ function sendNonProvider (req, res, songFromDb) {
   });
 
   var templateObj = {
+    pageUrl : utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id),
     title : songFromDb.title,
     artist : songFromDb.artist,
     album_art : songFromDb.album_art,
