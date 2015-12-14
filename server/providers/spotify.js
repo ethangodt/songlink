@@ -62,7 +62,6 @@ function makePrettyObject(obj) {
 
 function verify(song, spotifyTracks, callback){
   for (var i=0; i<spotifyTracks.length; i++) {
-    console.log(spotifyTracks[i].album.images[0].url);
     var spotifyArtist = utils.convertArtist(spotifyTracks[i].artists[0].name);
     var otherArtist = utils.convertArtist(song.artist);
     var artistsMatch = utils.verifyArtistMatch(spotifyArtist, otherArtist);
