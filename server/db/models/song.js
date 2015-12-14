@@ -13,7 +13,8 @@ var songSchema = new mongoose.Schema({
   itunes_app_uri: String,
   clicks: Number,
   creates: Number,
-  track_length: Number
+  track_length: Number,
+  spotify_images: Object
 });
 
 var Song = mongoose.model('song', songSchema);

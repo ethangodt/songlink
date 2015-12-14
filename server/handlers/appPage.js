@@ -20,6 +20,7 @@ function create(req, res) {
         utils.verifyId(song, function (err, songFromVerification) {
           if (err) {
             console.error(err);
+            res.status(400).send("Link is not valid");
           } else {
             utils.build(songFromVerification, function (err, songFromBuild) {
               if (err) {
