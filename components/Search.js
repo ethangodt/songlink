@@ -76,6 +76,7 @@ class Search extends Component {
   }
 
   handleBlur(e) {
+    console.log(e.target)
     e.preventDefault()
     this.props.actions.clearResults()
   } 
@@ -87,37 +88,47 @@ class Search extends Component {
       song[ this.state.link.service + '_id' ] = this.state.link.id
       this.props.actions.createLink(song)
     } else {
-      this.props.actions.search(this.state.text)
+      if (this.state.text.length) this.props.actions.search(this.state.text)
+    }
+  }
+
+  renderButtonText() {
+    if (this.props.loading.search || this.props.loading.link) {
+      return <span className="fa fa-spinner fa-spin"></span>
+    } else {
+      return this.state.link ? 'CREATE' : <span className="fa fa-search"></span>
     }
   }
 
   render() {
 
     return (
-      <div className="searchContainer">
+      <div className="search">
 
         <div>{this.state.link ? this.state.link.service + ' link detected' : ' '}</div>
 
-        <div style={ {position: 'relative'} }>
+        <div className="search-bar">
           
           <input
             type="text"
-            placeholder="Search for song"
+            placeholder={this.props.loading.link ? "Creating link..." : "Search or paste song URL"}
             autoFocus="true"
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
-            onFocus={this.handleFocus.bind(this)}/>
+            onFocus={this.handleFocus.bind(this)}
+            onBlur={this.handleBlur.bind(this)}/>
           <button onClick={this.handleSubmit.bind(this)}>
-            { this.state.link ? 'create' : 'search' }
+            { this.renderButtonText() }
           </button>
 
-        </div>
+          <Results
+            style={ this.props.results ? {} : {display: 'none'} }
+            loading={this.props.loading}
+            results={this.props.results}
+            actions={this.props.actions}
+            clearText={this.clearText.bind(this)}/>
 
-        <Results
-          loading={this.props.loading}
-          results={this.props.results}
-          actions={this.props.actions}
-          clearText={this.clearText.bind(this)}/>
+        </div>
 
       </div>
     )

@@ -1,0 +1,58 @@
+.search {
+  width: 100%;
+}
+
+.search .search-bar {
+  @include paper;
+  outline: none;
+}
+
+.search input {
+  border-style: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 20px;
+  font-weight: 300;
+  height: $search-input-height;
+  outline: none;
+  padding: 0 0 0 16px;
+  width: 86%;
+}
+
+.search button {
+  @include button;
+  font-family: 'Open Sans', sans-serif;
+  height: $search-input-height;
+  padding-right: 16px;
+  width: 14%;
+  color: $color-main;
+  font-size: 16px;
+  font-weight: 800;
+  text-align: right;
+}
+
+.search button .fa {
+  font-size: 20px;
+}
+
+.search button .fa-search {
+  transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  -webkit-transform: rotateY(-180deg);
+}
+
+@media #{$breakpoint-small} {
+
+  .search input {
+    font-size: 16px;
+    height: $search-input-height-small;
+  }
+
+  .search button {
+    height: $search-input-height-small;
+  }
+
+  .search button .fa {
+    font-size: 16px;
+  }
+   
+}

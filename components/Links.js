@@ -5,7 +5,7 @@ class Links extends Component {
 
   render() {
     return (
-      <div className="linksContainer">
+      <div className="links">
       
         {
           this.props.links.map((link, i) => {

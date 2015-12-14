@@ -1,0 +1,36 @@
+@import 'reset';
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,800,600);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
+@import url(https://fonts.googleapis.com/css?family=Satisfy);
+
+@import 'variables';
+@import 'mixins';
+
+*,
+*:before,
+*:after {
+  @include border-box;
+  
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $color-background;
+  color: black;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 19px;
+  font-weight: 300;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+@import 'grid';
+@import 'header';
+@import 'search';
+@import 'results';
+@import 'result';
+@import 'explanation';
+@import 'links';
+@import 'link';

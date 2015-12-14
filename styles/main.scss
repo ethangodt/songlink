@@ -1,11 +1,23 @@
 @import 'reset';
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,600);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css);
 
 // GENERIC SITE STYLES //
 $slorange: #ff671d;
 $slpurple: #3e48ce;
 $sllightgrey: #cecece;
 $sldarkgrey: #545454;
+
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; 
+}
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -35,6 +47,7 @@ main {
 @import 'search';
 @import 'results';
 @import 'links';
+@import 'explanation';
 // @import 'songView';
 // @import 'infoBlurb'; // includes .contentContainer
 // @import 'listenLinks';

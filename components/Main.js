@@ -4,6 +4,7 @@ import Links from './Links';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Search from './Search';
+import Explanation from './Explanation'
 
 class Main extends Component {
 
@@ -11,16 +12,27 @@ class Main extends Component {
     super(props, context)
   }
 
+  renderExplanation() {
+    return this.props.results.length ||
+      this.props.links.length ?
+        undefined : <Explanation/>
+  }
+
   render() {
     return (
-      <div>
+      <div className="wrapper">
+
         <Search 
           actions={this.props.actions}
           loading={this.props.loading}
           results={this.props.results}/>
+
+        { this.renderExplanation() }
+
         <Links 
           links={this.props.links}
           loading={this.props.loading}/>
+
       </div>
     )
   }

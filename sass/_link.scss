@@ -1,0 +1,111 @@
+.link {
+  @include paper;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.link .link-header {
+  color: black;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.link .link-header .emphasis {
+  color: $color-main;
+  font-family: 'Satisfy', 'Open Sans', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  padding: 0 6px;
+}
+
+.link .link-header .title,
+.link .link-header .artist {
+  font-weight: 400;
+}
+
+.link-container {
+  height: $link-input-height;
+  width: 100%;
+}
+
+.link input{
+  border: 1px solid lightgrey;
+  border-radius: 4px 0 0 4px;
+  border-right: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 300;
+  height: 100%;
+  outline: none;
+  padding-left: 16px;
+  width: 64%;
+}
+
+.link button {
+  @include button;
+  color: white;
+  height: $link-input-height;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: $link-input-height;
+  padding: auto;
+  margin: auto;
+  width: 12%;
+}
+
+.link button.copy {
+  color: white;
+  background-color: $color-main;
+  border-bottom: 1px solid $color-main;
+  // border-top: 0px solid lightgrey;
+}
+
+.link button.facebook {
+  background-color: $color-facebook;
+  border-bottom: 1px solid $color-facebook;
+  // border-top: 1px solid $color-facebook;
+}
+
+.link button.twitter {
+  background-color: $color-twitter;
+  border: 1px solid $color-twitter;
+  border-left: none;
+  border-top: none;
+  border-radius: 0 4px 4px 0;
+}
+
+@media #{$breakpoint-small} {
+
+  .link {
+    padding: 10px;
+  }
+  
+  .link .link-header {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
+
+  .link .link-header .emphasis {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 6px;
+  }
+  
+  .link-container {
+    height: $link-input-height-small;
+    width: 100%;
+  }
+
+  .link input{
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .link button {
+    height: $link-input-height-small;
+    font-size: 12px;
+    line-height: $link-input-height-small;
+    margin-top: -2px;
+  }
+   
+}

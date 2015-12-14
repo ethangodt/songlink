@@ -10,7 +10,7 @@ class Results extends Component {
   render() {
 
     return (
-      <div className="resultsContainer">
+      <div className="results wrapper">
         {
           this.props.results.map((result, i) => {
             return (
