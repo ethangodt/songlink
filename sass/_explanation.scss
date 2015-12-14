@@ -20,18 +20,18 @@
   margin-right: 6px;
 }
 
-// @media #{$breakpoint-small} {
+@media #{$breakpoint-small} {
 
-//   .explanation {
-//     line-height: 26px;
-//   }
+  .explanation {
+    line-height: 26px;
+  }
 
-//   .explanation .primary {
-//     font-size: 14px;
-//   }
+  .explanation .primary {
+    font-size: 14px;
+  }
 
-//   .explanation .emphasis {
-//     font-size: 18px;
-//   }
+  .explanation .emphasis {
+    font-size: 18px;
+  }
    
-// }
+}

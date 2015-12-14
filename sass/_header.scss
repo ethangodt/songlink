@@ -7,11 +7,21 @@ header {
   overflow: auto;
 }
 
+// header .top-strip {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   right: 0;
+//   width: 100%;
+//   height: 10px;
+//   background: linear-gradient(to right, $color-purple, $color-main);
+//   animation: gradientFade 2s infinite;
+// }
+
 header .logo {
   color: white;
   float: left;
-  font-family: 'Satisfy', 'Open Sans', cursive;
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 600;
   padding-left: 16px;
 }
@@ -35,21 +45,21 @@ header button:hover .fa-cog {
   transform: rotate(20deg);
 }
 
-// @media #{$breakpoint-small} {
+@media #{$breakpoint-small} {
 
-//   header {
-//     height: $header-height-small;
-//     line-height: $header-height-small;
-//   }
+  header {
+    height: $header-height-small;
+    line-height: $header-height-small;
+  }
 
-//   header .logo {
-//     font-size: 18px;
-//   }
+  header .logo {
+    font-size: 18px;
+  }
 
-//   header button {
-//     font-size: 16px;
-//   line-height: $header-height-small;
+  header button {
+    font-size: 16px;
+  line-height: $header-height-small;
 
-//   }
+  }
    
-// }
+}

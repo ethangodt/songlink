@@ -40,19 +40,19 @@
   -webkit-transform: rotateY(-180deg);
 }
 
-// @media #{$breakpoint-small} {
+@media #{$breakpoint-small} {
 
-//   .search input {
-//     font-size: 14px;
-//     height: $search-input-height-small;
-//   }
+  .search input {
+    font-size: 16px;
+    height: $search-input-height-small;
+  }
 
-//   .search button {
-//     height: $search-input-height-small;
-//   }
+  .search button {
+    height: $search-input-height-small;
+  }
 
-//   .search button .fa {
-//     font-size: 14px;
-//   }
+  .search button .fa {
+    font-size: 16px;
+  }
    
-// }
+}

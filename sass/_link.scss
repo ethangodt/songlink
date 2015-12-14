@@ -74,38 +74,38 @@
   border-radius: 0 4px 4px 0;
 }
 
-// @media #{$breakpoint-small} {
+@media #{$breakpoint-small} {
 
-//   .link {
-//     padding: 10px;
-//   }
+  .link {
+    padding: 10px;
+  }
   
-//   .link .link-header {
-//     font-size: 12px;
-//     margin-bottom: 10px;
-//   }
+  .link .link-header {
+    font-size: 12px;
+    margin-bottom: 10px;
+  }
 
-//   .link .link-header .emphasis {
-//     font-size: 16px;
-//     font-weight: 600;
-//     padding: 0 6px;
-//   }
+  .link .link-header .emphasis {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 0 6px;
+  }
   
-//   .link-container {
-//     height: $link-input-height-small;
-//     width: 100%;
-//   }
+  .link-container {
+    height: $link-input-height-small;
+    width: 100%;
+  }
 
-//   .link input{
-//     font-size: 12px;
-//     padding: 10px;
-//   }
+  .link input{
+    font-size: 12px;
+    padding: 10px;
+  }
 
-//   .link button {
-//     height: $link-input-height-small;
-//     font-size: 12px;
-//     line-height: $link-input-height-small;
-//     margin-top: -2px;
-//   }
+  .link button {
+    height: $link-input-height-small;
+    font-size: 12px;
+    line-height: $link-input-height-small;
+    margin-top: -2px;
+  }
    
-// }
+}
