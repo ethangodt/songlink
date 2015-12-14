@@ -34,21 +34,21 @@ header button:hover .fa-cog {
   transform: rotate(20deg);
 }
 
-@media #{$breakpoint-small} {
+// @media #{$breakpoint-small} {
 
-  header {
-    height: $header-height-small;
-    line-height: $header-height-small;
-  }
+//   header {
+//     height: $header-height-small;
+//     line-height: $header-height-small;
+//   }
 
-  header .logo {
-    font-size: 18px;
-  }
+//   header .logo {
+//     font-size: 18px;
+//   }
 
-  header button {
-    font-size: 16px;
-  line-height: $header-height-small;
+//   header button {
+//     font-size: 16px;
+//   line-height: $header-height-small;
 
-  }
+//   }
    
-}
+// }
