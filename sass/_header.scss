@@ -1,5 +1,6 @@
 header {
   @include paper;
+  background-color: $color-main;
   height: $header-height;
   line-height: $header-height;
   margin-bottom: 40px;
@@ -7,7 +8,7 @@ header {
 }
 
 header .logo {
-  color: $color-main;
+  color: white;
   float: left;
   font-family: 'Satisfy', 'Open Sans', cursive;
   font-size: 30px;
@@ -26,7 +27,7 @@ header button {
 }
 
 header .fa-cog {
-  color: $color-main;
+  color: white;//$color-main;
   transition: 100ms transform;
 }
 

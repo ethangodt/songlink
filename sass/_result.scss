@@ -11,15 +11,17 @@
 .result .result-art,
 .result .result-info {
   height: 100%;
-  padding: $search-result-info-item-padding;
+  padding: $search-result-info-item-padding 0;
 }
 
 .result .result-art {
   float: left;
+  padding-left: 20px;
   width: $search-result-height;
 }
 
 .result .result-art img {
+  border-radius: 100%;
   display: block;
   height: 100%;
   width: auto;
@@ -29,12 +31,13 @@
   display: block;
   height: 100%;
   line-height: ($search-result-height - ($search-result-info-item-padding * 2)) / 3;
+  padding-left: 0;
   width: 100%;
 }
 
 .result .result-info .result-info-item {
     @include no-wrap;
-    padding: 0 10px;
+    padding-right: 10px;
 }
 
 .result .title {
