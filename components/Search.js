@@ -152,6 +152,10 @@ class Search extends Component {
             'is-invalid': this.isInvalid()
           })}>
 
+          <button onClick={this.handleSubmit.bind(this)}>
+            <span className={this.getButtonClasses()}></span>
+          </button>
+
           <input
             className={classnames({
               'is-invalid': this.isInvalid()
@@ -164,10 +168,6 @@ class Search extends Component {
             onFocus={this.handleFocus.bind(this)}
             onBlur={this.handleBlur.bind(this)}
             onKeyUp={this.handleKeyUp.bind(this)}/>
-
-          <button onClick={this.handleSubmit.bind(this)}>
-            <span className={this.getButtonClasses()}></span>
-          </button>
 
           <Results
             style={ this.props.results ? {} : {display: 'none'} }

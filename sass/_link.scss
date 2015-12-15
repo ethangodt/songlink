@@ -13,6 +13,7 @@
 }
 
 .link .link-header img {
+  @include paper;
   float: left;
   height: auto;
   margin-right: 20px;
@@ -32,12 +33,12 @@
 }
 
 .link .link-header .artist {
-  color: grey;
+  // color: grey;
   font-size: 16px;
 }
 
 .link .link-header .album {
-  color: grey;
+  // color: grey;
   font-size: 16px;
   font-weight: 300;
 }
@@ -49,6 +50,7 @@
 }
 
 .link input {
+  display: inline-block;
   border: 1px solid lightgrey;
   border-radius: 4px;
   font-family: 'Open Sans', sans-serif;
@@ -57,7 +59,7 @@
   height: 100%;
   outline: none;
   padding-left: 16px;
-  width: 100%;
+  width: 86%;
 }
 
 .link .button-container {

@@ -20,8 +20,7 @@
   font-weight: 300;
   height: $search-input-height;
   outline: none;
-  padding: 0 0 0 16px;
-  width: 86%;
+  width: 92%;
 }
 
 .search input.is-invalid {
@@ -35,18 +34,18 @@
   font-size: 16px;
   font-weight: 800;
   height: $search-input-height;
-  width: 14%;
+  width: 8%;
 }
 
 .search button .fa {
   font-size: 20px;
 }
 
-.search button .fa-search {
-  transform: rotateY(-180deg);
-  -ms-transform: rotateY(-180deg);
-  -webkit-transform: rotateY(-180deg);
-}
+// .search button .fa-search {
+//   transform: rotateY(-180deg);
+//   -ms-transform: rotateY(-180deg);
+//   -webkit-transform: rotateY(-180deg);
+// }
 
 .search .search-information {
   font-size: 16px;
@@ -54,6 +53,14 @@
   left: 0;
   position: absolute;
   top: $search-input-height + 10;
+}
+
+.search .search-information {
+  padding-left: 2px;
+}
+
+.search .search-information .fa {
+  margin-right: 4px;
 }
 
 .search .search-information.invalid {
@@ -71,12 +78,12 @@
   .search input {
     font-size: 16px;
     height: $search-input-height-small;
-    width: 82%;
+    width: 86%;
   }
 
   .search button {
     height: $search-input-height-small;
-    width: 18%;
+    width: 14%;
   }
 
   .search button .fa {
