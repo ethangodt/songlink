@@ -5,7 +5,7 @@ npm-debug.log
 .DS_Store
 PSD/
 .idea/
-dist
+dist/
 *.css
 *.css.*
 .sass-cache
