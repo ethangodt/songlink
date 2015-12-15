@@ -58,9 +58,11 @@ export function createLink(song, id) {
       success: res => {
         console.log('received res from /create', res)
         dispatch(addLink({
-          url: res,
-          artist: song.artist,
-          title: song.title
+          url: res.share_link,
+          artist: res.artist,
+          title: res.title,
+          album_title: res.album_title,
+          album_art: res.album_art
         }))
         dispatch(toggleLoadingLink(false))
       }
@@ -87,6 +89,9 @@ export function search(text) {
       error: err => {
         console.error(err)
         dispatch(toggleLoadingSearch(false))
+        if (err.responseText === 'Search returned no results') {
+          dispatch(clearResults())
+        }
       },
       success: res => {
         const songs = res.map(song => {

@@ -26,11 +26,11 @@ class Link extends Component {
       <div className="link">
 
         <div className="link-header">
-          <img src="https://i.scdn.co/image/618eb67cdb1ab203e051d3b028a5b5f7b35325a1"></img>
+          <img src={this.props.link.album_art}></img>
           <div className="link-info">
             <span className="title">{this.props.link.title}</span><br/>
             <span className="artist">{this.props.link.artist}</span><br/>
-            <span className="album">Awesome Album Title</span>
+            <span className="album">{this.props.link.album_title}</span>
           </div>
         </div>
 

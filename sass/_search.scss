@@ -30,7 +30,6 @@
 
 .search button {
   @include button;
-  // background-color: $color-main;
   color: $color-main;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
@@ -49,14 +48,23 @@
   -webkit-transform: rotateY(-180deg);
 }
 
-.search .link-information {
-  color: red;
+.search .search-information {
   font-size: 16px;
   font-weight: 400;
-  left: 16px;
+  left: 0;
   position: absolute;
   top: $search-input-height + 10;
 }
+
+.search .search-information.invalid {
+  color: red;
+}
+
+.search .search-information.no-results {
+  color: #c29500;
+}
+
+
 
 @media #{$breakpoint-small} {
 
@@ -75,7 +83,7 @@
     font-size: 16px;
   }
 
-  .search .link-information {
+  .search .search-information {
     font-size: 14px;
     top: $search-input-height-small + 10;
   }

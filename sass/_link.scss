@@ -92,7 +92,7 @@
 @media #{$breakpoint-small} {
 
   .link {
-    padding: 10px;
+    padding: 16px;
   }
   
   .link .link-header {
@@ -136,6 +136,7 @@
 
   .link button {
     font-size: 12px;
+    margin-right: 14px;
     width: $link-input-height-small;
   }
    

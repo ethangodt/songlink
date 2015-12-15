@@ -33,12 +33,15 @@ class Search extends Component {
 
   handleChange(e) {
 
+    this.props.actions.toggleLoadingSearch(true)
+
     this.setState({
       text: e.target.value,
       last: Date.now()
     }, () => {
       if (this.state.text === '') {
         this.props.actions.clearResults()
+        this.props.actions.toggleLoadingSearch(false)
         this.setState({ link: undefined })
       } else {
         const link = this.getLinkInfo(this.state.text)
@@ -103,6 +106,8 @@ class Search extends Component {
     e.preventDefault()
     if (e.keyCode === 13) {
       this.handleSubmit(e)
+    } else if (e.keyCode === 8 && this.state.text === '') {
+      this.props.actions.clearResults()
     }
   }
 
@@ -120,9 +125,18 @@ class Search extends Component {
 
   renderLinkInformation() {
     return (
-      <div className="link-information">
+      <div className="search-information invalid">
         <span className="fa fa-warning"></span> 
         <span> invalid link url</span>
+      </div>
+    )
+  }
+
+  renderNoResults() {
+    return (
+      <div className="search-information no-results">
+        <span className="fa fa-warning"></span> 
+        <span> no results found</span>
       </div>
     )
   }
@@ -165,6 +179,9 @@ class Search extends Component {
         </div>
 
         { this.isInvalid() ? this.renderLinkInformation() : undefined }
+
+        { this.state.text.length && !this.props.loading.search && !this.props.results.length ? 
+          this.renderNoResults() : undefined }
 
       </div>
     )
