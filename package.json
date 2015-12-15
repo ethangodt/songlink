@@ -15,7 +15,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.production.config.js",
     "postbuild": "npm run static",
-    "static": "cp -a server/static/. dist/ && node-sass server/templates/linkTemplate/scssStyles/main.scss dist/main.css",
+    "static": "grunt mini && cp -a server/static/images dist/ && node-sass server/templates/linkTemplate/scssStyles/main.scss server/static/styles/main.css",
     "postinstall": "npm run build",
     "start": "node server/server.js",
     "serve": "npm run static && nodemon --debug server/server.js --ignore components --ignore containers",
@@ -36,6 +36,9 @@
     "css-loader": "^0.23.0",
     "dotenv": "^1.2.0",
     "express": "^4.13.3",
+    "grunt": "^0.4.5",
+    "grunt-contrib-cssmin": "^0.14.0",
+    "grunt-contrib-uglify": "^0.11.0",
     "history": "^1.13.1",
     "ituner": "^0.1.4",
     "jquery": "^2.1.4",
