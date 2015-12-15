@@ -19,8 +19,7 @@ function create(req, res) {
       if (!song.title) {
         utils.verifyId(song, function (err, songFromVerification) {
           if (err) {
-            console.error(err);
-            res.status(400).send("Link is not valid");
+            res.status(400).send(err.message);
           } else {
             utils.build(songFromVerification, function (err, songFromBuild) {
               if (err) {
@@ -31,7 +30,13 @@ function create(req, res) {
                     if (err) {
                       console.error(err)
                     } else {
-                      res.send(utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id));
+                      var obj = {};
+                      obj.share_link = utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id);
+                      obj.artist = songFromDb.artist;
+                      obj.title = songFromDb.title;
+                      obj.album_title = songFromDb.album_title;
+                      obj.album_art = songFromDb.album_art;
+                      res.send(obj);
                     }
                   });
                 });
@@ -69,7 +74,7 @@ function search(req, res) {
   var queryString = providers.itunes.makeSearchUrlWithString(req.query.search);
   providers.itunes.search(queryString, 10, function (err, songs) {
     if (err) {
-      console.error(err);
+      res.status(400).send(err.message);
     } else {
       res.status(200).send(songs)
     }

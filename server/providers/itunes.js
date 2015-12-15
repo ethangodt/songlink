@@ -17,9 +17,9 @@ function fetchSongById(itunesId, callback) {
 
 function fetchSongBySearch(song, callback) {
   search(makeSearchUrlWithSong(song), 50, function (err, songs) {
-    if (err || !songs.length) {
-
-      callback(new Error('Error fetching itunes song by search:'), null);
+    if (err) {
+      passOnWithUndefined(song, callback);
+      callback(new Error('iTunes search returned no results'), null);
     } else {
       songs.length ? verify(song, songs, callback) : passOnWithUndefined(song, callback);
     }
@@ -65,13 +65,12 @@ function search(searchUrl, numResults, callback) {
   request(searchUrl, function (err, response, body) {
     body = JSON.parse(body);
     if (body.results.length === 0) {
-      callback(new Error("Link is not valid"), null)
+      callback(new Error("Search returned no results"), null)
     } else if (err) {
       callback(err, null);
     } else {
       var songs = [];
       var results = body.results;
-
       for (var i = 0; i < results.length; i++) {
         songs.push({
           title: results[i].trackName,

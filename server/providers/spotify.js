@@ -21,6 +21,7 @@ function fetchSongById(spotifyId, callback) {
     if ( data.error ) {
       callback(new Error('Link is not valid'), null);
     } else {
+      // console.log(makePrettyObject(data));
       callback(null, makePrettyObject(data));
     }
   });
