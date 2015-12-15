@@ -119,10 +119,12 @@ class Search extends Component {
   }
 
   renderLinkInformation() {
-    if (this.isInvalid()) {
-      return 'invalid song URL'
-    }
-    return undefined;
+    return (
+      <div className="link-information">
+        <span className="fa fa-warning"></span> 
+        <span> invalid link url</span>
+      </div>
+    )
   }
 
   render() {
@@ -162,7 +164,7 @@ class Search extends Component {
 
         </div>
 
-        <div className="link-information">{ this.renderLinkInformation() }</div>
+        { this.isInvalid() ? this.renderLinkInformation() : undefined }
 
       </div>
     )

@@ -21,7 +21,7 @@
   height: $search-input-height;
   outline: none;
   padding: 0 0 0 16px;
-  width: 90%;
+  width: 86%;
 }
 
 .search input.is-invalid {
@@ -30,12 +30,13 @@
 
 .search button {
   @include button;
-  font-family: 'Open Sans', sans-serif;
-  height: $search-input-height;
-  width: 10%;
+  // background-color: $color-main;
   color: $color-main;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 800;
+  height: $search-input-height;
+  width: 14%;
 }
 
 .search button .fa {
@@ -62,16 +63,21 @@
   .search input {
     font-size: 16px;
     height: $search-input-height-small;
-    width: 80%;
+    width: 82%;
   }
 
   .search button {
     height: $search-input-height-small;
-    width: 20%;
+    width: 18%;
   }
 
   .search button .fa {
     font-size: 16px;
+  }
+
+  .search .link-information {
+    font-size: 14px;
+    top: $search-input-height-small + 10;
   }
    
 }
