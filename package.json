@@ -60,6 +60,7 @@
     "spotify": "^0.3.0",
     "style-loader": "^0.13.0",
     "supertest": "^1.1.0",
+    "uglify-js": "^2.6.1",
     "underscore": "^1.8.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
@@ -69,6 +70,7 @@
     "youtube-search": "^1.0.4"
   },
   "devDependencies": {
-    "node-sass": "^3.4.2"
+    "node-sass": "^3.4.2",
+    "uglify-js": "^2.6.1"
   }
 }
