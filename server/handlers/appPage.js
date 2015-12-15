@@ -14,7 +14,13 @@ function create(req, res) {
 
   utils.checkDb(song, function (err, songFromDb) {
     if (songFromDb) {
-      res.send(utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id));
+      var obj = {};
+      obj.share_link = utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id);
+      obj.artist = songFromDb.artist;
+      obj.title = songFromDb.title;
+      obj.album_title = songFromDb.album_title;
+      obj.album_art = songFromDb.album_art;
+      res.send(obj);
     } else {
       if (!song.title) {
         utils.verifyId(song, function (err, songFromVerification) {
@@ -54,7 +60,13 @@ function create(req, res) {
                 if (err) {
                   console.error(err)
                 } else {
-                  res.send(utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id));
+                  var obj = {};
+                  obj.share_link = utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id);
+                  obj.artist = songFromDb.artist;
+                  obj.title = songFromDb.title;
+                  obj.album_title = songFromDb.album_title;
+                  obj.album_art = songFromDb.album_art;
+                  res.send(obj);
                 }
               });
             });

@@ -6,92 +6,123 @@
 
 .link .link-header {
   color: black;
-  font-size: 18px;
+  display: table;
+  font-weight: 400;
+  height: $link-header-height;
   margin-bottom: 20px;
 }
 
-.link .link-header .emphasis {
-  color: $color-main;
-  font-family: 'Satisfy', 'Open Sans', sans-serif;
-  font-size: 24px;
-  font-weight: 600;
-  padding: 0 6px;
+.link .link-header img {
+  @include paper;
+  float: left;
+  height: auto;
+  margin-right: 20px;
+  width: $link-header-height;
 }
 
-.link .link-header .title,
-.link .link-header .artist {
-  font-weight: 400;
-}
-
-.link-container {
-  height: $link-input-height;
+.link .link-header .link-info {
+  display: table-cell;
+  height: 100%;
+  line-height: 22px;
+  vertical-align: middle;
   width: 100%;
 }
 
-.link input{
+.link .link-header .title {
+  font-size: 18px;
+}
+
+.link .link-header .artist {
+  // color: grey;
+  font-size: 16px;
+}
+
+.link .link-header .album {
+  // color: grey;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.link .link-container {
+  height: $link-input-height;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.link input {
+  display: inline-block;
   border: 1px solid lightgrey;
-  border-radius: 4px 0 0 4px;
-  border-right: none;
+  border-radius: 4px;
   font-family: 'Open Sans', sans-serif;
   font-size: 18px;
   font-weight: 300;
   height: 100%;
   outline: none;
   padding-left: 16px;
-  width: 64%;
+  width: 86%;
+}
+
+.link .button-container {
+  height: $link-input-height;
 }
 
 .link button {
   @include button;
+  @include paper;
+  border-radius: 100%;
   color: white;
-  height: $link-input-height;
+  height: 100%;
   font-size: 20px;
   font-weight: 600;
-  line-height: $link-input-height;
-  padding: auto;
-  margin: auto;
-  width: 12%;
+  margin-right: 20px;
+  width: $link-input-height;
 }
 
 .link button.copy {
   color: white;
   background-color: $color-main;
-  border-bottom: 1px solid $color-main;
-  // border-top: 0px solid lightgrey;
 }
 
 .link button.facebook {
   background-color: $color-facebook;
-  border-bottom: 1px solid $color-facebook;
-  // border-top: 1px solid $color-facebook;
 }
 
 .link button.twitter {
   background-color: $color-twitter;
-  border: 1px solid $color-twitter;
-  border-left: none;
-  border-top: none;
-  border-radius: 0 4px 4px 0;
 }
 
 @media #{$breakpoint-small} {
 
   .link {
-    padding: 10px;
+    padding: 16px;
   }
   
   .link .link-header {
     font-size: 12px;
-    margin-bottom: 10px;
+    height: $link-header-height-small;
   }
 
-  .link .link-header .emphasis {
-    font-size: 16px;
-    font-weight: 600;
-    padding: 0 6px;
+  .link .link-header img {
+    width: $link-header-height-small;
+  }
+
+  .link .link-header .link-info {
+    line-height: 18px;
+  }
+
+  .link .link-header .title {
+    font-size: 14px;
+  }
+
+  .link .link-header .artist {
+    font-size: 12px;
+  }
+
+  .link .link-header .album {
+    font-size: 12px;
   }
   
-  .link-container {
+  .link .link-container {
     height: $link-input-height-small;
     width: 100%;
   }
@@ -101,11 +132,14 @@
     padding: 10px;
   }
 
-  .link button {
+  .link .button-container {
     height: $link-input-height-small;
+  }
+
+  .link button {
     font-size: 12px;
-    line-height: $link-input-height-small;
-    margin-top: -2px;
+    margin-right: 14px;
+    width: $link-input-height-small;
   }
    
 }

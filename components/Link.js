@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { FacebookButton, TwitterButton } from 'react-social'
 import ClipboardButton from 'react-clipboard.js'
+import ReactTooltip from 'react-tooltip'
 
 class Link extends Component {
 
@@ -25,10 +26,12 @@ class Link extends Component {
       <div className="link">
 
         <div className="link-header">
-          <span className="emphasis">share </span>
-          <span className="title">{this.props.link.title} </span> 
-          by
-          <span className="artist"> {this.props.link.artist} </span> 
+          <img src={this.props.link.album_art}></img>
+          <div className="link-info">
+            <span className="title">{this.props.link.title}</span><br/>
+            <span className="artist">{this.props.link.artist}</span><br/>
+            <span className="album">{this.props.link.album_title}</span>
+          </div>
         </div>
 
         <div className="link-container">
@@ -40,18 +43,36 @@ class Link extends Component {
               this.handleFocusOnLoad.bind(this) : undefined}
             onFocus={this.handleFocus.bind(this)}/>
 
-          <ClipboardButton className="copy" data-clipboard-text={this.props.link.url}>
-            <span className="fa fa-clipboard"></span>
-          </ClipboardButton>
-     
-          <FacebookButton className="facebook" url={this.props.link.url}>
-            <span className="fa fa-facebook"></span>
-          </FacebookButton>
+        </div>
 
+        <div className="button-container">
 
-          <TwitterButton className="twitter" url={this.props.link.url}>
-            <span className="fa fa-twitter"></span>
-          </TwitterButton>
+          <a data-tip data-for="copy">
+            <ClipboardButton className="copy" data-clipboard-text={this.props.link.url}>
+              <span className="fa fa-clipboard"></span>
+            </ClipboardButton>
+          </a>
+          <ReactTooltip id="copy">
+            <span>copy link</span>
+          </ReactTooltip>
+
+          <a data-tip data-for="facebook">
+            <FacebookButton className="facebook" url={this.props.link.url}>
+              <span className="fa fa-facebook"></span>
+            </FacebookButton>
+          </a>
+          <ReactTooltip id="facebook">
+            <span>share on Facebook</span>
+          </ReactTooltip>
+
+          <a data-tip data-for="twitter">
+            <TwitterButton className="twitter" url={this.props.link.url}>
+              <span className="fa fa-twitter"></span>
+            </TwitterButton>
+          </a>
+          <ReactTooltip id="twitter">
+            <span>share on Twitter</span>
+          </ReactTooltip>
 
         </div>
 

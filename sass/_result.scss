@@ -21,7 +21,6 @@
 }
 
 .result .result-art img {
-  border-radius: 100%;
   display: block;
   height: 100%;
   width: auto;
@@ -50,16 +49,16 @@
   font-size: 16px;
 }
 
-// @media #{$breakpoint-small} {
+@media #{$breakpoint-small} {
 
-//   .result .title {
-//     font-size: 14px;
-//   }
+  .result .title {
+    font-size: 14px;
+  }
 
-//   .result .artist,
-//   .result .album {
-//     font-size: 12px;
-//   }
+  .result .artist,
+  .result .album {
+    font-size: 12px;
+  }
    
-// }
+}
 

@@ -3,7 +3,6 @@ import React, { Component, PropTypes } from 'react'
 class Result extends Component {
 
   handleClick() {
-    console.log('handle click called')
     this.props.actions.createLink(this.props.result)
     this.props.actions.clearResults()
     this.props.clearText()

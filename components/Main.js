@@ -24,6 +24,7 @@ class Main extends Component {
 
         <Search 
           actions={this.props.actions}
+          invalidLinks={this.props.invalidLinks}
           loading={this.props.loading}
           results={this.props.results}/>
 
@@ -41,6 +42,7 @@ class Main extends Component {
 
 Main.propTypes = {
   actions: PropTypes.object.isRequired,
+  invalidLinks: PropTypes.object.isRequired,
   links: PropTypes.array.isRequired,
   loading: PropTypes.object.isRequired,
   results: PropTypes.array.isRequired
