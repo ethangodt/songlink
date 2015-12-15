@@ -1,5 +1,6 @@
 .songContainer {
 	display: inline-block;
+	max-width: 480px;
 	position: relative;
 	left: 50%;
 	transform: translate(-50%, 0);
@@ -11,10 +12,16 @@
 	box-shadow: 0 3px 6px #bebebe;
 }
 
+.tableWrapper {
+	display: table;
+	height: 175px;
+	padding-left: 30px;
+}
+
 .songInfo {
-	position: relative;
-	float: right;
-	margin: 45px 0 45px 35px;
+	display: table-cell;
+	vertical-align: middle;
+	margin: 0 0 0 35px;
 	font-size: 30px;
 	color: $slorange;
 }
@@ -29,7 +36,33 @@
 	display: inline;
 }
 
-.disabled {
-  opacity : 0.3;
-  pointer-events : none;
+.songInfo .songTitle {
+	margin-bottom: 10px
 }
+
+.disabled {
+	opacity : 0.3;
+	pointer-events : none;
+}
+
+// Small Breakpoint styles
+@media ($smallBreakRule)  {
+	.songContainer {
+		max-width: 90%;
+
+	}
+	.tableWrapper {
+		height: 100px;
+	}
+	.songContainer .albumArt {
+		width: 100px;
+		height: 100px;
+	}
+	.songInfo {
+		font-size: 24px !important;
+	}
+}
+
+// look into resizing the modal
+// shift margin top to the linksContainer
+// look into elipses limits for realy long titles

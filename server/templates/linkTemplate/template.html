@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
   <title>songlink | {{title}} by {{artist}}</title>
 
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="{{title}} by {{artist}}" />
   <meta property="og:site_name" content="Songl.ink"/>
   <meta property="og:url" content="{{pageUrl}}" />
@@ -44,9 +45,11 @@
     </header>
     <div class="songContainer">
       <img class="albumArt" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
-      <div class="songInfo">
-        <h1 class="songTitle">{{title}}</h1>
-        <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+      <div class="tableWrapper">
+        <div class="songInfo">
+          <h1 class="songTitle">{{title}}</h1>
+          <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+        </div>
       </div>
     </div>
     <div class="contentContainer">
@@ -70,7 +73,7 @@
           <img class="buttonImage" src="images/apple-logo.png" alt="Apple Music Button"/>
         </button>
         <button class="mini youtube" onclick="modalSelection.click('youtube', this)">
-          <img class="buttonImage" src="images/youtube-logo.png" alt="YouTube Button"/> 
+          <img class="buttonImage" src="images/youtube-logo.png" alt="YouTube Button"/>
         </button>
         <br/>
         <button class="mini special" onclick="preferenceSkip()">skip</button>

@@ -1,12 +1,14 @@
 @import 'reset';
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,600);
 
-// GENERIC SITE STYLES //
+// BASE VARIABLE //
 $slorange: #ff671d;
 $slpurple: #3e48ce;
 $sllightgrey: #cecece;
 $sldarkgrey: #545454;
+$smallBreakRule: "max-width: 530px";
 
+// GENERIC SITE STYLES //
 body {
 	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
@@ -20,7 +22,8 @@ p {
 }
 
 .page {
-	width: 800px;
+	max-width: 800px;
+	min-width: 320px;
 	margin: 0 auto;
 }
 
@@ -32,6 +35,5 @@ main {
 @import 'reusableComponents';
 @import 'header';
 @import 'songView';
-@import 'infoBlurb'; // includes .contentContainer
-@import 'listenLinks';
+@import 'listenLinks'; // includes .contentContainer
 @import 'modal';

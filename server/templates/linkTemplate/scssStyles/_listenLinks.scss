@@ -1,5 +1,9 @@
+.contentContainer {
+	width: 480px;
+	margin: 35px auto 0 auto;
+}
+
 .listenLinks {
-	margin-top: 40px;
 	left: 100px;
 	text-align: center;
 }
@@ -20,4 +24,20 @@
 	background: url('images/youtube-logo.png') no-repeat;
 	background-size: 45px;
 	background-position: 22px 15px;
+}
+
+@media ($smallBreakRule) {
+	.contentContainer {
+		width: 90%;
+	}
+	.listenLinks button {
+		font-size: 14px;
+	}
+}
+
+// one-off breakpoint style to accommodate the link font size on the buttons
+@media (max-width: 400px) {
+	.listenLinks button {
+		font-size: 12px;
+	}
 }

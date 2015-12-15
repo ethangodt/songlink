@@ -1,7 +1,8 @@
 // todo fix the y-scroll oversize
 header {
-	margin: 40px 20px 0 20px;
+	margin: 40px auto 0 auto;
 	overflow: auto;
+	width: 90%;
 }
 
 .branding.mainBranding {
@@ -26,4 +27,11 @@ button.settings .buttonImage {
 
 button.settings:hover .buttonImage {
 	transform: rotate(20deg);
+}
+
+@media ($smallBreakRule)  {
+	.header {
+		margin: 40px auto 0 auto;
+		width: 90%;
+	}
 }
