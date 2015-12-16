@@ -10,7 +10,7 @@ module.exports = {
   getNumberOfIds: getNumberOfIds,
   makeSongLinkUrl: makeSongLinkUrl,
   verifyId: verifyId
-}
+};
 
 function addSongToDb(song, callback) {
   songCtrl.create(song, function (err, songFromDb) {
