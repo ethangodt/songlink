@@ -41,6 +41,7 @@ function convertYoutubeDuration(str) {
 
 function fetchSongBySearch(song, callback) {
   var queryString = song.title + ' ' + song.artist;
+  console.log(queryString);
   search(queryString, function(err, ids) {
     if (err) {
       callback(err, null);
@@ -93,13 +94,38 @@ function search(queryString, callback) {
 }
 
 function verify(song, vids, callback) {
+  var results = [];
   for (var i = 0; i < vids.length; i++) {
     var vidDuration = convertYoutubeDuration(vids[i].contentDetails.duration);
     if (compareDurations(vidDuration, song.track_length)) {
-      song.youtube_id = vids[i].id;
-      return callback(null, song);
+      // song.youtube_id = vids[i].id;
+      results.push(vids[i]);
+      // return callback(null, song);
     }
   }
-  
-  passOnWithUndefined(song, callback);
+  var bestMatch = verify2(results);
+  song.youtube_id = bestMatch.id;
+  return callback(null, song);
+  // passOnWithUndefined(song, callback);
+}
+
+function verify2(results) {
+  var best = 0;
+  var index;
+  for (var i=0; i<results.length; i++) {
+    // if (results[i].snippet.channelTitle.toLowerCase().includes('vevo')) {
+    //   return results[i];
+    // }
+    if (results[i].statistics.likeCount > 100) {
+      var stats = results[i].statistics;
+      var rating = (stats.likeCount / stats.dislikeCount) * stats.viewCount;
+      console.log(rating, results[i].snippet.title);
+      if (rating > best) {
+        console.log(results[i])
+        best = rating;
+        index = i
+      }
+    }
+  }
+  return (results[index])
 }
