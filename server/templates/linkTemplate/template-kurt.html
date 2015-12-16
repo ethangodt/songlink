@@ -44,16 +44,18 @@
       </div>
     </div>
 
-    <div class="listenLinks">
-      {{#providers}}
-        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
+  <div class="listenLinks">
+    {{#providers}}
+      <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
+        <div class="logo">
           <span class="fa fa-spotify"></span>
+        </div>
+        <div class="link-text">
           <span>{{text}}</span>
-        </button>
-      {{/providers}}
-    </div>
-
-  </main>
+        </div>
+      </button>
+    {{/providers}}
+  </div>
 
   <div class="modalEnvironment">
     <div class="modalContainer">
