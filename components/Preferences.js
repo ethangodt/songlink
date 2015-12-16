@@ -10,9 +10,11 @@ class Preferences extends Component {
 
   constructor(props, context) {
     super(props, context)
+
+    // get cookie and set as state
+
     this.state = {
-      hasSubmitted: false,
-      preference: this.props.preference
+      hasSubmitted: false
     }
   }
 
@@ -21,28 +23,53 @@ class Preferences extends Component {
     this.setState({ hasSubmitted: true })
   }
 
-  handleChange(value) {
-    this.setState({ preference: value })
+  handleClickSpotify() {
+    this.setState({ preference: 'spotify' })
+  }
+
+  handleClickiTunes() {
+    this.setState({ preference: 'itunes' })
+  }
+
+  handleClickYoutube() {
+    this.setState({ preference: 'youtube' })
+  }
+
+  handleClickNone() {
+    this.setState({ preference: 'none' })
   }
 
   render() {
     return (
-      <div>
-        <h4>your current preference is: {this.props.preference}</h4>
-        <RadioGroup
-          name="preference"
-          onChange={this.handleChange.bind(this)}
-          selectedValue={this.state.preference}>
-          {Radio => (
-            <div>
-              <Radio value="spotify"/>Spotify<br/>
-              <Radio value="itunes"/>iTunes<br/>
-              <Radio value="youtube"/>YouTube<br/>
-              <Radio value="none"/>None<br/>
+      <div className="preferences wrapper">
+
+        <h2 className="header">redirect</h2>
+
+        <p className="redirect-info">Songlink works best when you tell us where you listen to music. 
+          Next time you click on a songlink we’ll open your app for you automatically.
+        </p>
+
+        <div className="radio-group">
+          <div>
+            <div onClick={this.handleClickSpotify.bind(this)} className="radio">
+              <span>Spotify</span><br/>
             </div>
-          )}
-        </RadioGroup>
-        <button onClick={this.handleSubmit.bind(this)}>update preferences</button>
+            <div onClick={this.handleClickiTunes.bind(this)} className="radio">
+              <span>iTunes</span><br/>
+            </div>
+            <div onClick={this.handleClickYoutube.bind(this)} className="radio"> 
+              <span>Youtube</span><br/>
+            </div>
+            <div onClick={this.handleClickNone.bind(this)} className="radio">
+              <span>None - do not redirect me.</span>
+            </div>
+          </div>
+        </div>
+
+        <button className="update-button" onClick={this.handleSubmit.bind(this)}>
+          Update Preference
+        </button>
+
         <div>{this.props.loading.preference ? 'updating preference...' : this.state.hasSubmitted ? 'updated successfully' : ' '}</div>
       </div>
     )
@@ -51,14 +78,12 @@ class Preferences extends Component {
 }
 
 Preferences.propTypes = {
-  loading: PropTypes.object.isRequired,
-  preference: PropTypes.string.isRequired
+  loading: PropTypes.object.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    loading: state.loading,
-    preference: state.preference
+    loading: state.loading
   }
 }
 
