@@ -18,14 +18,6 @@ module.exports = {
         test: /\.js$/,
         exclude: [node_modules_dir],
         loader: 'babel-loader'
-      },
-      {
-        test: /\.scss$/,
-        loader: ExtractTextPlugin.extract('style', 'css!sass')
-      },
-      {
-        test: /\.css$/,
-        loaders: ['style', 'css']
       }
     ]
   }
