@@ -13,18 +13,21 @@
     "node": "5.0.0"
   },
   "scripts": {
-    "build": "NODE_ENV=production webpack --config webpack.production.config.js",
-    "postbuild": "npm run static",
-    "static": "cp -a server/static/images dist/images/ && node-sass server/templates/linkTemplate/scssStyles/main.scss server/static/styles/main.css && grunt mini",
-    "static": "cp -a server/static/images dist/ && node-sass sass/main.scss server/static/styles/main.css && grunt mini",
-    "postinstall": "npm run build",
-    "start": "node server/server.js",
-    "serve": "npm run static && nodemon --debug server/server.js --ignore components --ignore containers",
-    "preserve": "rm -f dist/bundle.js && rm -f dist/app.css",
-    "preserve:prod": "npm run build",
-    "serve:prod": "NODE_ENV=production nodemon --debug server/server.js --ignore components --ignore containers",
-    "test": "NODE_ENV=production mocha test/models test/controllers test/server",
-    "dbCrawl": "grunt dbCrawl"
+    "dbCrawl": "grunt dbCrawl",
+    "js:clean": "rm -rf dist/scripts/*.js",
+    "css:clean": "rm -rf dist/styles",
+    "js:copy": "cp server/static/scripts/listenerTools.js dist/scripts/listenerTools.js",
+    "js:uglify": "uglifyjs server/static/scripts/listenerTools.js -o dist/scripts/listenerTools-min.js",
+    "js:webpack": "NODE_ENV=production webpack --config webpack.production.config.js",
+    "css:sass:prod": "node-sass sass/main.scss server/static/styles/main.css --output-style compressed",
+    "css:sass:dev": "node-sass sass/main.scss server/static/styles/main.css --watch sass",
+    "nodemon": "nodemon --debug server/server.js --ignore components --ignore containers",
+    "serve": "npm run js:clean & npm run css:clean && npm run js:copy && npm run css:sass:dev & npm run nodemon",
+    "serve:prod": "npm run js:clean & npm run css:clean && npm run js:uglify && npm run css:sass:prod && npm run js:webpack",
+    "postserve:prod": "npm run start",
+    "postinstall": "npm run serve:prod",
+    "start": "NODE_ENV=production node server/server.js",
+    "test": "NODE_ENV=production mocha test/models test/controllers test/server"
   },
   "dependencies": {
     "babel-core": "^5.8.3",
@@ -37,6 +40,7 @@
     "classnames": "^2.2.1",
     "cookie-parser": "^1.4.0",
     "css-loader": "^0.23.0",
+    "cssmin": "^0.4.3",
     "dotenv": "^1.2.0",
     "express": "^4.13.3",
     "extract-text-webpack-plugin": "^0.9.1",
@@ -44,7 +48,10 @@
     "grunt-cli": "^0.1.13",
     "grunt-contrib-cssmin": "^0.14.0",
     "grunt-contrib-uglify": "^0.11.0",
+<<<<<<< HEAD
     "grunt-shell": "^1.1.2",
+=======
+>>>>>>> Refactor grunt and npm scripts into all npm scripts
     "history": "^1.13.1",
     "ituner": "^0.1.4",
     "jquery": "^2.1.4",
@@ -70,6 +77,7 @@
     "spotify": "^0.3.0",
     "style-loader": "^0.13.0",
     "supertest": "^1.1.0",
+    "uglify-js": "^2.6.1",
     "underscore": "^1.8.3",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
