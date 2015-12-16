@@ -1,42 +1,47 @@
 import React, { Component, PropTypes } from 'react'
-import * as actions from '../redux/actions';
-import Links from './Links';
-import RadioGroup from 'react-radio-group';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Search from './Search';
+import * as actions from '../redux/actions'
+import Links from './Links'
+import RadioGroup from 'react-radio-group'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import Search from './Search'
+import classnames from 'classnames'
+import docCookies from '../server/templates/linkTemplate/scripts/listenerTools'
 
 class Preferences extends Component {
 
   constructor(props, context) {
     super(props, context)
 
-    // get cookie and set as state
-
     this.state = {
-      hasSubmitted: false
+      updated: false,
+      preference: docCookies.getItem('providerPreference')
     }
   }
 
-  handleSubmit() {
-    this.props.actions.submitPreference(this.state.preference)
-    this.setState({ hasSubmitted: true })
-  }
+  // handleSubmit() {
+  //   docCookies.setItem('providerPreference', this.state.preference)
+  //   this.setState({ hasSubmitted: true })
+  // }
 
   handleClickSpotify() {
     this.setState({ preference: 'spotify' })
+    docCookies.setItem('providerPreference', 'spotify')
   }
 
   handleClickiTunes() {
     this.setState({ preference: 'itunes' })
+    docCookies.setItem('providerPreference', 'itunes')
   }
 
   handleClickYoutube() {
     this.setState({ preference: 'youtube' })
+    docCookies.setItem('providerPreference', 'youtube')
   }
 
   handleClickNone() {
     this.setState({ preference: 'none' })
+    docCookies.setItem('providerPreference', 'none')
   }
 
   render() {
@@ -51,26 +56,45 @@ class Preferences extends Component {
 
         <div className="radio-group">
           <div>
-            <div onClick={this.handleClickSpotify.bind(this)} className="radio">
-              <span>Spotify</span><br/>
+            <div 
+              className={classnames({
+                'radio': true,
+                'selected': this.state.preference === 'spotify'
+              })}
+              onClick={this.handleClickSpotify.bind(this)}
+            > 
+              <span className="fa fa-spotify"></span><span> Spotify</span><br/>
             </div>
-            <div onClick={this.handleClickiTunes.bind(this)} className="radio">
-              <span>iTunes</span><br/>
+            <div 
+              className={classnames({
+                'radio': true,
+                'selected': this.state.preference === 'itunes'
+              })}
+              onClick={this.handleClickiTunes.bind(this)}
+            > 
+              <span className="fa fa-apple"></span><span> iTunes</span><br/>
             </div>
-            <div onClick={this.handleClickYoutube.bind(this)} className="radio"> 
-              <span>Youtube</span><br/>
+            <div 
+              className={classnames({
+                'radio': true,
+                'selected': this.state.preference === 'youtube'
+              })}
+              onClick={this.handleClickYoutube.bind(this)}
+            > 
+              <span className="fa fa-youtube"></span><span> YouTube</span><br/>
             </div>
-            <div onClick={this.handleClickNone.bind(this)} className="radio">
-              <span>None - do not redirect me.</span>
+            <div 
+              className={classnames({
+                'radio': true,
+                'selected': this.state.preference === 'none'
+              })}
+              onClick={this.handleClickNone.bind(this)}
+            > 
+              <span>Do not redirect me</span>
             </div>
           </div>
         </div>
-
-        <button className="update-button" onClick={this.handleSubmit.bind(this)}>
-          Update Preference
-        </button>
-
-        <div>{this.props.loading.preference ? 'updating preference...' : this.state.hasSubmitted ? 'updated successfully' : ' '}</div>
+        
       </div>
     )
   }

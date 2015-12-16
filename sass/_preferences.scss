@@ -4,7 +4,7 @@
 }
 
 .preferences.wrapper {
-  max-width: 400px;
+  max-width: 360px;
 }
 
 .preferences .header {
@@ -22,26 +22,43 @@
 }
 
 .preferences .radio-group {
-  @include paper;
   text-align: left;
   margin-bottom: 14px;
-  padding: 16px;
 }
 
 .preferences .radio {
-  text-align: left;
-  height: 80px;
-  line-height: 80px;
-}
-
-.preferences .radio input {
-  padding: 50px;
-}
-
-.preferences .update-button {
   @include paper;
-  border: none;
-  height: 30px;
-  outline: none;
-  width: 100%;
+  cursor: pointer;
+  font-size: 16px;
+  height: 52px;
+  line-height: 52px;
+  margin-bottom: 14px;
+  text-align: center;
 }
+
+.preferences .radio .fa {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.preferences .radio.selected {
+  border: 1px solid $color-secondary;
+  background-color: mix($color-secondary, white, 5%);
+}
+
+// .preferences .update-button {
+//   @include paper;
+//   background-color: lightgrey;
+//   border: none;
+//   cursor: pointer;
+//   font-size: 16px;
+//   font-weight: 300;
+//   height: 36px;
+//   outline: none;
+//   padding: 0 16px;
+//   width: 40%;
+
+//   &:hover {
+//     border: 1px solid grey;
+//   }
+// }

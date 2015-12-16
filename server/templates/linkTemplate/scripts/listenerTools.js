@@ -88,3 +88,5 @@ var preferenceSkip = function () {
     modalSelection.originalUrl = undefined;
   }
 };
+
+module.exports = docCookies;
