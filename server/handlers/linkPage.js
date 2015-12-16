@@ -88,18 +88,21 @@ function createProvidersArray (song) {
 
   var providersArray = [{
     provider: 'spotify',
+    icon: 'spotify',
     url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
     text : song.spotify_id ? 'Play now in Spotify' : 'Not available on Spotify',
     className : song.spotify_id ? 'fullWidth spotify' : 'fullWidth disabled spotify'
   },
   {
     provider: 'youtube',
+    icon: 'youtube',
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
     text : song.youtube_id ? 'Play now in Youtube' : 'Not available on Youtube',
     className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth disabled youtube'
   },
   {
     provider: 'itunes',
+    icon: 'apple',
     url : iTunesUrl(song),
     text : iTunesText(song),
     className : song.itunes_id ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
