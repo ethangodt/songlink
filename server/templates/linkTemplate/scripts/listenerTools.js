@@ -36,56 +36,55 @@ var docCookies = {
     for (var nLen = aKeys.length, nIdx = 0; nIdx < nLen; nIdx++) { aKeys[nIdx] = decodeURIComponent(aKeys[nIdx]); }
     return aKeys;
   }
-}
-
-var providerClick = function (provider, providerUrl) {
-  if (!docCookies.hasItem('providerPreference')) {
-    $('.mini.'+provider).addClass('highlighted');
-    modalSelection.preference = provider;
-
-    modalSelection.originalUrl = providerUrl;
-
-    $('.mini.special.save').addClass('highlighted2');
-
-    $('.modalEnvironment').css('display','inline');
-  } else {
-    window.location = providerUrl;
-  }
-}
+};
 
 var modalSelection = {
-  click : function (provider, element) {
+  click: function (provider, element) {
     if (provider === this.preference) {
       this.preference = 'none';
-      $('.mini.'+provider).removeClass('highlighted');
+      $('.mini.' + provider).removeClass('highlighted');
       $('.mini.special.save').addClass('disabled');
     } else {
       this.preference = provider;
       $('.mini').removeClass('highlighted');
       $('.mini.special.save').removeClass('disabled');
-      $('.mini.'+provider).addClass('highlighted');
+      $('.mini.' + provider).addClass('highlighted');
     }
   },
-  preference : 'none',
-  originalUrl : undefined
-}
+  preference: 'none',
+  originalUrl: undefined
+};
+
+var providerClick = function (provider, providerUrl) {
+  if (!docCookies.hasItem('providerPreference')) {
+    $('.mini.' + provider).addClass('highlighted');
+    modalSelection.preference = provider;
+    modalSelection.originalUrl = providerUrl;
+    $('.modalEnvironment').css('display', 'inline');
+    $('body > main').addClass('blur');
+  } else {
+    // FYI, this condition can occur when the users preference is 'none', or if the provider they prefer does not stream the song
+    window.location.href = providerUrl;
+  }
+};
 
 var preferenceSave = function (provider) {
   if (provider === 'none') {
     return;
   }
   docCookies.setItem('providerPreference', provider);
-  $('.modalEnvironment').css('display','none');
+  $('.modalEnvironment').css('display', 'none');
+  $('body > main').removeClass('blur');
   document.location.reload(true);
-}
+};
 
 var preferenceSkip = function () {
   docCookies.setItem('providerPreference', 'none');
-  $('.modalEnvironment').css('display','none');
+  $('.modalEnvironment').css('display', 'none');
   if (!modalSelection.originalUrl) {
     document.location.reload(true);
   } else {
     window.location = modalSelection.originalUrl;
     modalSelection.originalUrl = undefined;
   }
-}
+};

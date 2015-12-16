@@ -15,42 +15,45 @@
   <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
+  <main> <!-- main wrapper for modal blur -->
 
-  <div class="top-strip"></div>
-  <header>
+    <div class="top-strip"></div>
+    <header>
+      <div class="wrapper">
+        <div class="logo-container">
+          <div class="logo">
+            <span>songlink</span><br/>
+            <span class="tagline">share with anyone</span>
+          </div>
+        </div>
+        <button class="preferences">
+          <span class="fa fa-cog"></span>
+        </button>
+      </div>
+    </header>
+
     <div class="wrapper">
-      <div class="logo-container">
-        <div class="logo">
-          <span>songlink</span><br/>
-          <span class="tagline">share with anyone</span>
-        </div>
-      </div>
-      <button class="preferences">
-        <span class="fa fa-cog"></span>
-      </button>
-    </div>
-  </header>
-
-  <div class="wrapper">
-    <div class="songContainer">
-      <img class="albumArt" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
-      <div class="tableWrapper">
-        <div class="songInfo">
-          <h1 class="songTitle">{{title}}</h1>
-          <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+      <div class="songContainer">
+        <img class="albumArt" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
+        <div class="tableWrapper">
+          <div class="songInfo">
+            <h1 class="songTitle">{{title}}</h1>
+            <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="listenLinks">
-    {{#providers}}
-      <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
-        <span class="fa fa-spotify"></span>
-        <span>{{text}}</span>
-      </button>
-    {{/providers}}
-  </div>
+    <div class="listenLinks">
+      {{#providers}}
+        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
+          <span class="fa fa-spotify"></span>
+          <span>{{text}}</span>
+        </button>
+      {{/providers}}
+    </div>
+
+  </main>
 
   <div class="modalEnvironment">
     <div class="modalContainer">
@@ -73,6 +76,7 @@
       <p>You can always go to songl.ink and change this later.</p>
     </div>
   </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <script src="scripts/listenerTools.js"></script>
 </body>
