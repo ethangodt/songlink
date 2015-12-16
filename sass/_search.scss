@@ -16,7 +16,7 @@
 
 .search button {
   @include button;
-  color: $color-secondary;
+  color: $color-dark-grey;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   font-weight: 800;
@@ -30,7 +30,7 @@
 
 .search input {
   border-style: none;
-  color: $color-secondary;
+  color: $color-dark-grey;
   font-family: 'Open Sans', sans-serif;
   font-size: 20px;
   font-weight: 300;
@@ -39,21 +39,21 @@
   width: 92%;
 }
 
-.search input::-webkit-input-placeholder {
-   color: $color-secondary-light;
-}
+// .search input::-webkit-input-placeholder {
+//    color: $color-secondary-light;
+// }
 
-.search input::-moz-placeholder { /* Firefox 18- */
-   color: $color-secondary-light;  
-}
+// .search input::-moz-placeholder { /* Firefox 18- */
+//    color: $color-secondary-light;  
+// }
 
-.search input::-moz-placeholder {  /* Firefox 19+ */
-   color: $color-secondary-light;  
-}
+// .search input::-moz-placeholder {  /* Firefox 19+ */
+//    color: $color-secondary-light;  
+// }
 
-.search input::-ms-input-placeholder {  
-   color: $color-secondary-light;  
-}
+// .search input::-ms-input-placeholder {  
+//    color: $color-secondary-light;  
+// }
 
 .search input.is-invalid {
   background-color: $color-light-red;

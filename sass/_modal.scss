@@ -1,0 +1,93 @@
+.blur {
+  -webkit-filter: blur(3px);
+}
+
+.modalEnvironment {
+  position: fixed;
+  display: none;
+  top: 0; bottom: 0; left: 0; right: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, .8);
+}
+
+.modalContainer {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  top: 10%;
+  width: 485px;
+  background-color: white;
+  padding: 65px;
+  box-shadow: 0 10px 16px rgba(0, 0, 0, .2);
+  color: #363636;
+  box-sizing: border-box;
+}
+
+.modalButtonContainer {
+  text-align: center;
+  margin: 45px 0;
+}
+
+.modalContainer button {
+  margin: 5px;
+}
+
+.modalContainer button.mini .buttonImage {
+  width: 27px;
+}
+
+ .modalContainer button.special {
+  background-color: #e7e7e7;
+  border: none;
+  transition: 200ms background;
+}
+
+.modalContainer button.special:hover {
+  background-color: #bebebe;
+}
+
+.mini.youtube {
+  padding: 14px 20px;
+  // strange position anomaly that is pushing the last button down
+  position: relative;
+  top: -5px;
+}
+
+.mini.youtube .buttonImage {
+  margin-bottom: -3px;
+}
+
+.highlighted {
+  background-color: #FFF9EB;
+  border: 1px rgba(243, 141, 45, 1) solid;
+}
+
+.highlighted:hover {
+  border: 1px rgba(243, 141, 45, 1) solid;
+}
+
+// Small Breakpoint styles
+@media ($smallBreakRule)  {
+  .modalContainer {
+    width: 90%;
+    font-size: 15px;
+    padding: 45px;
+  }
+  .modalButtonContainer {
+    margin: 35px 0;
+  }
+}
+
+@media (max-width: 400px)  {
+  .modalContainer {
+    width: 90%;
+    font-size: 15px;
+    padding: 35px;
+  }
+  .modalButtonContainer {
+    margin: 25px 0;
+  }
+  .modalButtonContainer button {
+    margin: 0;
+  }
+}

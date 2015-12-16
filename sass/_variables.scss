@@ -4,22 +4,30 @@ $color-secondary-light: mix($color-secondary, white, 40%);
 $color-light-red: #ffd6d8;
 $color-facebook:  #3b5998;
 $color-twitter: #55acee;
-$color-background: mix(black, white, 3%);
-// $color-background: mix($color-secondary, white, 6%);
-
-$grid-max-width: 700px;
+$color-background: mix(black, white, 4%);
+$color-dark-grey: #545454;
+$color-light-grey: #cecece;
 
 $top-strip-height: 10px;
 $top-strip-height-small: 8px;
+
 $header-height: 96px;
 $header-height-small: 72px;
+
 $search-input-height: 64px;
 $search-input-height-small: 56px;
+
 $search-result-height: 120px;
 $search-result-info-item-padding: 20px;
+
 $link-header-height: 92px;
 $link-header-height-small: 74px;
+
 $link-input-height: 48px;
 $link-input-height-small: 36px;
 
+$song-page-album-art-size: 175px;
+
+$grid-max-width: 700px;
 $breakpoint-small: "only screen and (max-width: 600px)";
+$smallBreakRule: "max-width: 530px";

@@ -22,7 +22,6 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 19px;
   font-weight: 300;
-
   -webkit-font-smoothing: antialiased;
 }
 
@@ -34,3 +33,6 @@ body {
 @import 'explanation';
 @import 'links';
 @import 'link';
+@import 'songView';
+@import 'listenLinks';
+@import 'modal';
