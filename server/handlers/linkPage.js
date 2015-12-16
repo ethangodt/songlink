@@ -41,7 +41,7 @@ function render(req, res) {
 }
 
 function sendNonProvider (req, res, songFromDb) {
-  var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template-kurt.html'),'utf-8', function(err, data) {
+  var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
     if (err) {
       console.error(err);
     }

@@ -4,32 +4,64 @@
   width: 90%;
 }
 
-.listenLinks button {
-  @include button-ethan;
-  @include paper;
-  height: 86px;
-  text-align: left;
-}
-
-.listenLinks button span {
-  line-height: 86px;
-}
-
-.listenLinks button.fullWidth {
+.link .link-header .link-info {
+  display: table-cell;
+  height: 100%;
+  vertical-align: middle;
   width: 100%;
-  margin: 10px 0;
-  font-weight: 400;
-  font-size: 20px;
-  color: $color-dark-grey;
 }
 
-.listenLinks button .fa {
-  font-size: 32px;
+.listenLinks button {
+  @include paper;
+  border: none;
+  cursor: pointer;
+  display: table;
+  height: $song-page-link-height;
+  line-height: $song-page-link-height;
+  margin-bottom: 20px;
+  outline: none;
+  text-align: left;
+  width: 100%;
+}
+
+.listenLinks button .logo {
+  float: left;
+  height: 100%;
+  text-align: center;
+  width: 20%;
+}
+
+.listenLinks button .logo span {
+  font-size: 56px;
+  line-height: $song-page-link-height;
+}
+
+.listenLinks button .link-text {
+  display: table-cell;
+  font-size: 20px;
+  font-weight: 300;
+  height: 100%;
+  vertical-align: middle;
+  width: 80%
+}
+
+.listenLinks button .link-text span {
+  text-align: center;
 }
 
 @media ($smallBreakRule) {
   .listenLinks button {
-    font-size: 14px;
+    height: $song-page-link-height-small;
+    line-height: $song-page-link-height-small;
+  }
+
+  .listenLinks button .link-text {
+    font-size: 16px;
+  }
+
+  .listenLinks button .logo span {
+    font-size: 40px;
+    line-height: $song-page-link-height-small;
   }
 }
 

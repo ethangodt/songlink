@@ -51,7 +51,7 @@ export function createLink(song, id) {
       error: err => {
         console.error(err)
         dispatch(toggleLoadingLink(false))
-        if (err.responseText === 'Link is not valid') {
+        if (err.responseText.match('Could not verify song by').length) {
           dispatch(addInvalidLink(id))
         }
       },

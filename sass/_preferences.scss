@@ -1,0 +1,47 @@
+.preferences {
+  padding: 16px;
+  text-align: center;
+}
+
+.preferences.wrapper {
+  max-width: 400px;
+}
+
+.preferences .header {
+  color: $color-main;
+  font-family: 'Satisfy', 'Open Sans', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.preferences .redirect-info {
+  font-size: 16px;
+  line-height: 26px;
+  margin-bottom: 14px;
+}
+
+.preferences .radio-group {
+  @include paper;
+  text-align: left;
+  margin-bottom: 14px;
+  padding: 16px;
+}
+
+.preferences .radio {
+  text-align: left;
+  height: 80px;
+  line-height: 80px;
+}
+
+.preferences .radio input {
+  padding: 50px;
+}
+
+.preferences .update-button {
+  @include paper;
+  border: none;
+  height: 30px;
+  outline: none;
+  width: 100%;
+}

@@ -12,71 +12,79 @@
   <meta property="og:image" content="{{album_art}}" />
   <meta property="og:description" content= "Listen to {{title}} by {{artist}} on Songlink"/>
 
-  <link rel="stylesheet" href="styles/main-min.css"/>
+  <link rel="stylesheet" href="main.css"/>
 </head>
 <body>
-<main>
-  <div class="topStrip"></div>
-  <div class="page">
+  <main> <!-- main wrapper for modal blur -->
+
+    <div class="top-strip"></div>
     <header>
-      <div class="branding mainBranding">
-        <h1 class="logo mainLogo">songlink</h1>
-        <p class="tagline">share with anyone</p>
+      <div class="wrapper">
+        <div class="logo-container">
+          <div class="logo">
+            <span>songlink</span><br/>
+            <span class="tagline">share with anyone</span>
+          </div>
+        </div>
+        <button class="preferences">
+          <span class="fa fa-cog"></span>
+        </button>
       </div>
-      <button class="mini settings">
-        <?xml version="1.0" encoding="utf-8"?>
-        <svg class="buttonImage" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="-3093 613 412 412" style="enable-background:new -3093 613 412 412;" xml:space="preserve">
-          <path id="gear-icon" d="M-2681,846.7v-55.5l-30-10.7c-11.4-4.1-20.6-12.8-25.3-24c0,0,0,0,0,0c-4.7-11.2-4.3-23.9,0.9-34.9
-            l13.7-28.7l-39.2-39.2l-28.7,13.7c-11,5.2-23.7,5.5-34.9,0.9c0,0,0,0,0,0c-11.2-4.6-19.9-13.8-24-25.3l-10.7-30h-55.5l-10.7,30
-            c-4.1,11.4-12.8,20.6-24,25.3c0,0,0,0,0,0c-11.2,4.7-23.9,4.3-34.9-0.9l-28.7-13.7l-39.2,39.2l13.7,28.7c5.2,11,5.5,23.7,0.9,34.9
-            c0,0,0,0,0,0c-4.6,11.2-13.8,19.9-25.3,24l-30,10.7v55.5l30,10.7c11.4,4.1,20.6,12.8,25.3,24c0,0,0,0,0,0
-            c4.7,11.2,4.3,23.9-0.9,34.9l-13.7,28.7l39.2,39.2l28.7-13.7c11-5.2,23.7-5.5,34.9-0.9c0,0,0,0,0,0c11.2,4.6,19.9,13.8,24,25.3
-            l10.7,30h55.5l10.6-29.8c4.1-11.5,12.9-20.8,24.2-25.5c0,0,0,0,0,0c11.1-4.6,23.7-4.3,34.6,0.9l28.9,13.7l39.2-39.2l-13.7-28.7
-            c-5.2-11-5.5-23.7-0.9-34.9c0,0,0,0,0,0c4.7-11.2,13.8-19.9,25.3-24L-2681,846.7z M-2887,894.5c-41.7,0-75.5-33.8-75.5-75.5
-            s33.8-75.5,75.5-75.5c41.7,0,75.5,33.8,75.5,75.5S-2845.3,894.5-2887,894.5z"></path>
-        </svg>
-      </button>
     </header>
-    <div class="songContainer">
-      <img class="albumArt" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
-      <div class="tableWrapper">
-        <div class="songInfo">
-          <h1 class="songTitle">{{title}}</h1>
-          <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+
+    <div class="wrapper">
+      <div class="songContainer">
+        <img class="albumArt" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
+        <div class="tableWrapper">
+          <div class="songInfo">
+            <h1 class="songTitle">{{title}}</h1>
+            <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+          </div>
         </div>
       </div>
     </div>
-    <div class="contentContainer">
-      <div class="listenLinks">
-        {{#providers}}
-        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">{{text}}</button>
-        {{/providers}}
-      </div>
-    </div>
+
+  <div class="listenLinks">
+    {{#providers}}
+      <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
+        <div class="logo">
+          <!-- Dynamically fill in fa- class below -->
+          <span class="fa fa-spotify"></span>
+        </div>
+        <div class="link-text">
+          <!-- Text below for youtube should be "YouTube"...I think it's currently "Youtube"-->
+          <span>{{text}}</span>
+        </div>
+      </button>
+    {{/providers}}
   </div>
-</main>
+
   <div class="modalEnvironment">
     <div class="modalContainer">
-      <div class="topStrip"></div>
-      <p>Songlink works best when you tell us where you listen to music. Next time we’ll open our links in that app for you automatically.</p>
+      <div class="top-strip"></div>
+      <p>Songlink works best when you tell us where you listen to music. Next time you click on a songlink we’ll open your app for you automatically.</p>
       <div class="modalButtonContainer">
         <button class="mini spotify" onclick="modalSelection.click('spotify', this)">
-          <img class="buttonImage" src="images/spotify-logo.jpg" alt="Spotify Button"/>
+          <span class="fa fa-spotify"></span><span> Spotify</span>
         </button>
         <button class="mini itunes" onclick="modalSelection.click('itunes', this)">
-          <img class="buttonImage" src="images/apple-logo.png" alt="Apple Music Button"/>
+          <span class="fa fa-apple"></span><span> Apple Music</span>
         </button>
         <button class="mini youtube" onclick="modalSelection.click('youtube', this)">
-          <img class="buttonImage" src="images/youtube-logo.png" alt="YouTube Button"/>
+          <span class="fa fa-youtube"></span><span> YouTube</span>
         </button>
-        <br/>
-        <button class="mini special" onclick="preferenceSkip()">skip</button>
-        <button class="mini special save" onclick="preferenceSave(modalSelection.preference)">save</button>
+        <button class="mini" onclick="preferenceSkip()">
+          I do not wish to be redirected
+        </button>
+        <button class="mini special save" onclick="preferenceSave(modalSelection.preference)">
+          Save preference
+        </button>
       </div>
       <p>You can always go to songl.ink and change this later.</p>
     </div>
   </div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="scripts/listenerTools-min.js"></script>
+  <script src="scripts/listenerTools.js"></script>
 </body>
 </html>

@@ -18,7 +18,7 @@ class Header extends Component {
               </div>
             </Link>
             <Link to="/preferences">
-              <button className="preferences">
+              <button className="settings">
                 <span className="fa fa-cog"></span>
               </button>
             </Link>

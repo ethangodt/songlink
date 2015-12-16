@@ -32,27 +32,27 @@ class Search extends Component {
   }
 
   handleChange(e) {
-
-    this.props.actions.toggleLoadingSearch(true)
+    
+    const link = this.getLinkInfo(e.target.value)
+    console.log(link)
+    const last = e.target.value && !link ? Date.now() : undefined
 
     this.setState({
       text: e.target.value,
-      last: Date.now()
+      last: last,
+      link: link
     }, () => {
-      if (this.state.text === '') {
-        this.props.actions.clearResults()
+      
+      if (!this.state.text.length || link) {
         this.props.actions.toggleLoadingSearch(false)
-        this.setState({ link: undefined })
-      } else {
-        const link = this.getLinkInfo(this.state.text)
-        if (!link) {
-          this.setState({ link: undefined })
-          setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
-        } else {
-          this.props.actions.clearResults()
-          this.setState({ link: link })
-        }
+        return this.props.actions.clearResults()
       }
+
+      if (!this.state.link) {
+        this.props.actions.toggleLoadingSearch(true)
+        return setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
+      }
+
     })
 
   }
@@ -112,14 +112,12 @@ class Search extends Component {
   }
 
   getButtonClasses() {
-    if (this.props.loading.search || this.props.loading.link) {
+    if (this.state.link) {
+      return classnames('fa', 'fa-sign-in')
+    } else if (this.props.loading.search || this.props.loading.link) {
       return classnames('fa', 'fa-spinner', 'fa-spin')
     } else {
-      return classnames({
-        'fa': true,
-        'fa-search': !this.state.link,
-        'fa-sign-in': this.state.link
-      })
+      return classnames('fa', 'fa-search')
     }
   }
 
@@ -172,7 +170,7 @@ class Search extends Component {
           <Results
             style={ this.props.results ? {} : {display: 'none'} }
             loading={this.props.loading}
-            results={this.props.results}
+            results={this.state.last ? this.props.results : []}
             actions={this.props.actions}
             clearText={this.clearText.bind(this)}/>
 
@@ -180,7 +178,7 @@ class Search extends Component {
 
         { this.isInvalid() ? this.renderLinkInformation() : undefined }
 
-        { this.state.text.length && !this.props.loading.search && !this.props.results.length ? 
+        { this.state.text.length && !this.props.loading.search && !this.props.results.length && !this.state.link ? 
           this.renderNoResults() : undefined }
 
       </div>
