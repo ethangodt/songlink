@@ -15,7 +15,7 @@
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.production.config.js",
     "postbuild": "npm run static",
-    "static": "cp -a server/static/images dist/ && node-sass server/templates/linkTemplate/scssStyles/main.scss server/static/styles/main.css && grunt mini",
+    "static": "cp -a server/static/images dist/images/ && node-sass server/templates/linkTemplate/scssStyles/main.scss server/static/styles/main.css && grunt mini",
     "postinstall": "npm run build",
     "start": "node server/server.js",
     "serve": "npm run static && nodemon --debug server/server.js --ignore components --ignore containers",
