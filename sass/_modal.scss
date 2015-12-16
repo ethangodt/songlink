@@ -24,37 +24,33 @@
 }
 
 .modalButtonContainer {
-  text-align: center;
-  margin: 45px 0;
+  margin: 30px 0 45px 0;
+  width: 100%;
 }
 
 .modalContainer button {
-  margin: 5px;
-}
-
-.modalContainer button.mini .buttonImage {
-  width: 27px;
-}
-
- .modalContainer button.special {
-  background-color: #e7e7e7;
+  @include paper;
   border: none;
+  font-size: 12px;
+  font-weight: 300;
+  height: 40px;
+  outline: none;
+  margin: 5px;
+  width: 100%;
+}
+
+.modalContainer button .fa {
+  font-size: 18px;
+}
+
+.modalContainer button.special {
+  margin-top: 30px;
+  background-color: #e7e7e7;
   transition: 200ms background;
 }
 
 .modalContainer button.special:hover {
   background-color: #bebebe;
-}
-
-.mini.youtube {
-  padding: 14px 20px;
-  // strange position anomaly that is pushing the last button down
-  position: relative;
-  top: -5px;
-}
-
-.mini.youtube .buttonImage {
-  margin-bottom: -3px;
 }
 
 .highlighted {
