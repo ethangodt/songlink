@@ -1,8 +1,6 @@
 var path = require('path');
 var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 module.exports = {
   entry: path.resolve(__dirname, 'client/client.js'),
   output: {
