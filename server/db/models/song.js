@@ -11,6 +11,7 @@ var songSchema = new mongoose.Schema({
   spotify_id: String,
   itunes_id: String,
   itunes_app_uri: String,
+  itunes_store_uri: String,
   clicks: Number,
   creates: Number,
   track_length: Number,

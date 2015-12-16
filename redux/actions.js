@@ -94,23 +94,11 @@ export function search(text) {
         }
       },
       success: res => {
-        const songs = res.map(song => {
-          return {
-            title: song.title,
-            album_title: song.album_title,
-            artist: song.artist,
-            itunes_id: song.itunes_id,
-            album_art: song.album_art,
-            album_art_size: song.album_art_size,
-            track_length: song.track_length,
-            itunes_app_uri: song.itunes_app_uri
-          }
-        })
-        console.log('received res from /search:', songs)
+        const songs = res;
         dispatch(toggleLoadingSearch(false))
         dispatch(updateResults(songs))
       }
-    })
+    });
 
     // Mimicking res from '/search'
     // setTimeout(() => {

@@ -1,5 +1,5 @@
 var request = require('request');
-var utils = require('./providerUtils.js')
+var utils = require('./providerUtils.js');
 
 module.exports = {
   fetchSongById: fetchSongById,
@@ -48,14 +48,14 @@ function makeSearchUrlWithSong(song) {
   queryString = queryString.substring(0, queryString.length - 1);
 
   return baseSearch + queryString + entity;
-};
+}
 
 function makeSearchUrlWithString(idString) {
   var baseSearch = 'https://itunes.apple.com/search?term=';
   var entity = '&entity=song';
 
   return baseSearch + idString + entity;
-};
+}
 
 function makeFetchByIdUrl(itunesId) {
   return 'https://itunes.apple.com/lookup?id=' + itunesId;
@@ -79,7 +79,8 @@ function search(searchUrl, numResults, callback) {
           album_art: results[i].artworkUrl100,
           album_art_size: 1000,
           itunes_id: results[i].trackId,
-          itunes_app_uri: 'itmss' + results[i].trackViewUrl.substring(5),
+          itunes_app_uri: (results[i].isStreamable) ? 'itmss' + results[i].trackViewUrl.substring(5) : null, // sets the app uri if streamable
+          itunes_store_uri: (!results[i].isStreamable) ? results[i].trackViewUrl : null, // sets the app uri if not streamable,
           track_length: results[i].trackTimeMillis
         });
       }
@@ -96,10 +97,10 @@ function verify(song, itunesTracks, callback){
     var durationsMatch = utils.verifyMsMatch(itunesTracks[i].track_length, song.track_length);
     if (durationsMatch && artistsMatch) {
       song.itunes_id = itunesTracks[i].itunes_id;
-      song.itunes_app_uri = itunesTracks[i].itunes_app_uri;
+      song.itunes_app_uri = (results[i].isStreamable) ? 'itmss' + results[i].trackViewUrl.substring(5) : null; // sets the app uri if streamable
+      song.itunes_store_uri = (!results[i].isStreamable) ? results[i].trackViewUrl : null; // sets the app uri if not streamable
       return callback(null, song);
     }
   }
   passOnWithUndefined(song, callback);
 }
-
