@@ -5,18 +5,26 @@ class Header extends Component {
 
   render() {
     return (
-      <header>
-        <div className="wrapper">
-          <Link to="/">
-            <h1 className="logo">songlink</h1>
-          </Link>
-          <Link to="/preferences">
-            <button className="preferences">
-              <span className="fa fa-cog"></span>
-            </button>
-          </Link>
-        </div>
-      </header>
+      <div>
+        <div className="top-strip"></div>
+        <header>
+          <div className="wrapper">
+            <Link to="/">
+              <div className="logo-container">
+                <div className="logo">
+                  <span>songlink</span><br/>
+                  <span className="tagline">share with anyone</span>
+                </div>
+              </div>
+            </Link>
+            <Link to="/preferences">
+              <button className="preferences">
+                <span className="fa fa-cog"></span>
+              </button>
+            </Link>
+          </div>
+        </header>
+      </div>
     )
   }
 

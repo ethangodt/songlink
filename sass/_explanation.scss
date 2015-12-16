@@ -6,8 +6,8 @@
 }
 
 .explanation .primary {
-  color: grey;
-  font-weight: 400;
+  color: $color-dark-grey;
+  font-weight: 300;
   margin-bottom: 18px;
   padding-left: 16px;
 }
@@ -15,7 +15,7 @@
 .explanation .emphasis {
   color: $color-main;
   font-family: 'Satisfy', 'Open Sans', sans-serif;
-  font-size: 28px;
+  font-size: 30px;
   font-weight: 600;
   margin-right: 6px;
 }
@@ -31,7 +31,7 @@
   }
 
   .explanation .emphasis {
-    font-size: 18px;
+    font-size: 20px;
   }
    
 }
