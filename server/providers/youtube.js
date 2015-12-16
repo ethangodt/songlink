@@ -11,7 +11,7 @@ module.exports = {
 }
 
 function compareDurations(vidDuration, songDuration) {
-  return (Math.abs(vidDuration - songDuration) / songDuration) < 0.05;
+  return (Math.abs(vidDuration - songDuration) / songDuration) < 0.08;
 }
 
 function convertYoutubeDuration(str) {
@@ -41,7 +41,6 @@ function convertYoutubeDuration(str) {
 
 function fetchSongBySearch(song, callback) {
   var queryString = song.title + ' ' + song.artist;
-  console.log(queryString);
   search(queryString, function(err, ids) {
     if (err) {
       callback(err, null);
@@ -79,7 +78,7 @@ function makeLinkFromId(youtubeId) {
 }
 
 function search(queryString, callback) {
-  youtube.search(queryString, 10, function(err, res) {
+  youtube.search(queryString, 20, function(err, res) {
     if (err || !res.items.length) {
       callback(new Error('Could not find any yt search results:', err), null);
     } else {
@@ -95,33 +94,31 @@ function search(queryString, callback) {
 
 function verify(song, vids, callback) {
   var results = [];
+  var vevo = song.artist.split(' ').join('').toLowerCase() + 'vevo';
   for (var i = 0; i < vids.length; i++) {
     var vidDuration = convertYoutubeDuration(vids[i].contentDetails.duration);
+    if (vids[i].snippet.channelTitle.toLowerCase() === vevo) {
+      if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.35) {
+        results.push(vids[i]);
+      }
+    }
     if (compareDurations(vidDuration, song.track_length)) {
-      // song.youtube_id = vids[i].id;
       results.push(vids[i]);
-      // return callback(null, song);
     }
   }
   var bestMatch = verify2(results);
   song.youtube_id = bestMatch.id;
   return callback(null, song);
-  // passOnWithUndefined(song, callback);
 }
 
 function verify2(results) {
   var best = 0;
   var index;
   for (var i=0; i<results.length; i++) {
-    // if (results[i].snippet.channelTitle.toLowerCase().includes('vevo')) {
-    //   return results[i];
-    // }
     if (results[i].statistics.likeCount > 100) {
       var stats = results[i].statistics;
       var rating = (stats.likeCount / stats.dislikeCount) * stats.viewCount;
-      console.log(rating, results[i].snippet.title);
       if (rating > best) {
-        console.log(results[i])
         best = rating;
         index = i
       }
