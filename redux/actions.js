@@ -56,7 +56,6 @@ export function createLink(song, id) {
         }
       },
       success: res => {
-        console.log('received res from /create', res)
         dispatch(addLink({
           url: res.share_link,
           artist: res.artist,
