@@ -37,7 +37,6 @@ function render(req, res) {
     } else {
       sendNonProvider(req, res, songFromDb);
     }
-
   });
 }
 
@@ -62,24 +61,48 @@ function sendNonProvider (req, res, songFromDb) {
   res.send(html);
 }
 
+// todo make function to determine provider text
+//
 
 function createProvidersArray (song) {
 
+  function iTunesText(song) {
+    if (!song.itunes_id) {
+      return undefined;
+    } else if (song.itunes_app_uri) {
+      return 'Play now in Apple Music';
+    } else {
+      return 'Open now in iTunes Store';
+    }
+  }
+
+  function iTunesUrl(song) {
+    if (!song.itunes_id) {
+      return undefined;
+    } else if (song.itunes_app_uri) {
+      return song.itunes_app_uri;
+    } else {
+      return song.itunes_store_uri;
+    }
+  }
+
   var providersArray = [{
-    provider: 'spotify', 
+    provider: 'spotify',
     url : song.spotify_id ? providers.spotify.makeUriFromId(song.spotify_id) : undefined,
     text : song.spotify_id ? 'Play now in Spotify' : 'Not available on Spotify',
     className : song.spotify_id ? 'fullWidth spotify' : 'fullWidth disabled spotify'
-  },{
-    provider: 'youtube', 
+  },
+  {
+    provider: 'youtube',
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
     text : song.youtube_id ? 'Play now in Youtube' : 'Not available on Youtube',
     className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth disabled youtube'
-  },{
-    provider: 'itunes', 
-    url : song.itunes_id ? song.itunes_app_uri : undefined,
-    text : song.itunes_id ? 'Play now in Apple Music' : 'Not available on Itunes',
-    className : song.itunes_id ? 'fullWidth itunes' : 'fullWidth disabled itunes'
+  },
+  {
+    provider: 'itunes',
+    url : iTunesUrl(song),
+    text : iTunesText(song),
+    className : song.itunes_id ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
   }];
 
   return providersArray;
