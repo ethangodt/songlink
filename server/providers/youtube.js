@@ -78,6 +78,7 @@ function makeLinkFromId(youtubeId) {
 }
 
 function search(queryString, callback) {
+  console.log(queryString);
   youtube.search(queryString, 20, function(err, res) {
     if (err || !res.items.length) {
       callback(new Error('Could not find any yt search results:', err), null);
@@ -101,6 +102,9 @@ function verify(song, vids, callback) {
       if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.15) {
         results.push(vids[i]);
       }
+    }
+    if (vids[i].snippet.channelTitle.toLowerCase() === song.artist.toLowerCase()) {
+      results.push(vids[i])
     }
     if (compareDurations(vidDuration, song.track_length)) {
       results.push(vids[i]);
