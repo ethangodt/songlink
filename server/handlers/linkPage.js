@@ -47,8 +47,6 @@ function sendNonProvider (req, res, songFromDb) {
     }
   });
 
-  console.log('ssssss', songFromDb);
-
   var templateObj = {
     pageUrl : utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id),
     title : songFromDb.title,
