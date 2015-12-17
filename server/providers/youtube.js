@@ -97,8 +97,9 @@ function verify(song, vids, callback) {
   var vevo = song.artist.split(' ').join('').toLowerCase() + 'vevo';
   for (var i = 0; i < vids.length; i++) {
     var vidDuration = convertYoutubeDuration(vids[i].contentDetails.duration);
-    if (vids[i].snippet.channelTitle.toLowerCase() === vevo) {
-      if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.35) {
+    console.log(vids[i])
+    if (vids[i].snippet.channelTitle.toLowerCase() === vevo && vids[i].snippet.title.toLowerCase().includes(song.title)) {
+      if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.1) {
         results.push(vids[i]);
       }
     }
@@ -107,7 +108,7 @@ function verify(song, vids, callback) {
     }
   }
   var bestMatch = verify2(results);
-  song.youtube_id = bestMatch.id;
+  bestMatch ? song.youtube_id = bestMatch.id : song.youtube_id = results[0].id;
   return callback(null, song);
 }
 
