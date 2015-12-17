@@ -54,7 +54,12 @@ function makePrettyObject(obj) {
     album_art: obj.album.images[0].url,
     album_art_size: 409600,
     spotify_id: obj.id,
-    track_length: obj.duration_ms
+    track_length: obj.duration_ms,
+    spotify_images: {
+      large_image: obj.album.images[0],
+      medium_image: obj.album.images[1],
+      small_image: obj.album.images[2]
+    }
   };
 };
 
