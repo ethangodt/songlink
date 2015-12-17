@@ -5,7 +5,8 @@ module.exports = {
 };
 
 function convertArtist(artistStr) {
-  return artistStr.toLowerCase().replace(/[^\w\s\\ ]/gi, ' ').replace(/[^\D\s\\ ]/gi, '').replace(/\s+/g, " ");
+  return artistStr.toLowerCase();
+  // return artistStr.toLowerCase().replace(/[^\w\s\\ ]/gi, ' ').replace(/[^\D\s\\ ]/gi, '').replace(/\s+/g, " ");
 };
 
 function verifyArtistMatch(artist1, artist2) {
