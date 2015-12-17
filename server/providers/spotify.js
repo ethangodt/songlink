@@ -11,9 +11,7 @@ module.exports = {
 };
 
 function createQuery(songObj) {
-  var str = songObj.title + ' ' + songObj.artist;
-  var query = str.replace(/[^\w\s]|\bfeat\b|\bft\b|\bprod\b|\s{2,}/gi,' ').replace(/\s+/g, " ");
-  return query;
+  return songObj.title + '+' + songObj.artist;
 };
 
 function fetchSongById(spotifyId, callback) {
