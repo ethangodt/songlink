@@ -1,0 +1,21 @@
+footer {
+  background-color: $color-main;
+  height: 220px;
+  line-height: 72px;
+  margin-top: 200px;
+  text-align: center;
+}
+
+footer span {
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+@media #{$breakpoint-small} {
+
+  footer span {
+    font-size: 12px;
+  }
+   
+}

@@ -112,13 +112,16 @@ class Search extends Component {
   }
 
   getButtonClasses() {
-    if (this.state.link) {
-      return classnames('fa', 'fa-sign-in')
-    } else if (this.props.loading.search || this.props.loading.link) {
+    
+    if (this.props.loading.search || this.props.loading.link) {
       return classnames('fa', 'fa-spinner', 'fa-spin')
-    } else {
-      return classnames('fa', 'fa-search')
     }
+
+    if (this.state.link && !this.props.loading.link) {
+      return classnames('fa', 'fa-sign-in')
+    } 
+    
+    return classnames('fa', 'fa-search')
   }
 
   renderLinkInformation() {
