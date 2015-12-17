@@ -89,14 +89,14 @@ function search(searchUrl, numResults, callback) {
   })
 }
 
-function verify(song, itunesTracks, callback){
-  for (var i=0; i<itunesTracks.length; i++) {
-    var itunesArtist = utils.convertArtist(itunesTracks[i].artist);
+function verify(song, results, callback){
+  for (var i=0; i<results.length; i++) {
+    var itunesArtist = utils.convertArtist(results[i].artist);
     var otherArtist = utils.convertArtist(song.artist);
     var artistsMatch = utils.verifyArtistMatch(itunesArtist, otherArtist);
-    var durationsMatch = utils.verifyMsMatch(itunesTracks[i].track_length, song.track_length);
+    var durationsMatch = utils.verifyMsMatch(results[i].track_length, song.track_length);
     if (durationsMatch && artistsMatch) {
-      song.itunes_id = itunesTracks[i].itunes_id;
+      song.itunes_id = results[i].itunes_id;
       song.itunes_app_uri = (results[i].isStreamable) ? 'itmss' + results[i].trackViewUrl.substring(5) : null; // sets the app uri if streamable
       song.itunes_store_uri = (!results[i].isStreamable) ? results[i].trackViewUrl : null; // sets the app uri if not streamable
       return callback(null, song);
