@@ -112,7 +112,7 @@ describe('spotify module', function () {
       });
     });
 
-    it('verifies song with artist (partial match: song has more info)', function () {
+    it('verifies song with artist (partial match: song has more info)', function (done) {
       
       song.artist = 'kurt feat. timbaland';
       itunesTracks[1].artist = 'stobie';
@@ -124,7 +124,7 @@ describe('spotify module', function () {
 
     });
 
-    it('verifies song with artist (partial match: result has more info)', function () {
+    it('verifies song with artist (partial match: result has more info)', function (done) {
 
       itunesTracks[0].artist = 'kurt feat. timbaland';
       itunesTracks[1].artist = 'stobie';
