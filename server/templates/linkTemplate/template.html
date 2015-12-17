@@ -21,15 +21,19 @@
     <div class="top-strip"></div>
     <header>
       <div class="wrapper">
-        <div class="logo-container">
-          <div class="logo">
-            <span>songlink</span><br/>
-            <span class="tagline">share with anyone</span>
+        <a href="http://songl.ink">
+          <div class="logo-container">
+            <div class="logo">
+              <span>songlink</span><br/>
+              <span class="tagline">share with anyone</span>
+            </div>
           </div>
-        </div>
-        <button class="settings">
-          <span class="fa fa-cog"></span>
-        </button>
+        </a>
+        <a href="http://songl.ink/preferences">
+          <button class="settings">
+            <span class="fa fa-cog"></span>
+          </button>
+        </a>
       </div>
     </header>
 
@@ -47,7 +51,7 @@
 
     <div class="listenLinks">
       {{#providers}}
-        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
+        <button class="{{className}}" onclick="providerClick('{{provider}}','{{url}}')">
           <div class="logo">
             <span class="fa fa-{{icon}}"></span>
           </div>
