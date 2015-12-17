@@ -48,8 +48,7 @@
       {{#providers}}
         <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
           <div class="logo">
-            <!-- Dynamically fill in fa- class below -->
-            <span class="fa fa-spotify"></span>
+            <span class="fa fa-{{icon}}"></span>
           </div>
           <div class="link-text">
             <!-- Text below for youtube should be "YouTube"...I think it's currently "Youtube"-->
@@ -58,7 +57,6 @@
         </button>
       {{/providers}}
     </div>
-
   </main>
 
   <div class="modalEnvironment">
@@ -66,16 +64,16 @@
       <div class="top-strip"></div>
       <p>Songlink works best when you tell us where you listen to music. Next time you click on a songlink we’ll open your app for you automatically.</p>
       <div class="modalButtonContainer">
-        <button class="mini spotify" onclick="modalSelection.click('spotify', this)">
+        <button class="mini spotify" onclick="modalSelection.click('spotify')">
           <span class="fa fa-spotify"></span><span> Spotify</span>
         </button>
-        <button class="mini itunes" onclick="modalSelection.click('itunes', this)">
-          <span class="fa fa-apple"></span><span> Apple Music</span>
-        </button>
-        <button class="mini youtube" onclick="modalSelection.click('youtube', this)">
+        <button class="mini youtube" onclick="modalSelection.click('youtube')">
           <span class="fa fa-youtube"></span><span> YouTube</span>
         </button>
-        <button class="mini" onclick="preferenceSkip()">
+        <button class="mini itunes" onclick="modalSelection.click('itunes')">
+          <span class="fa fa-apple"></span><span> Apple Music</span>
+        </button>
+        <button class="mini none" onclick="modalSelection.click('none')">
           I do not wish to be redirected
         </button>
         <button class="mini special save" onclick="preferenceSave(modalSelection.preference)">

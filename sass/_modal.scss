@@ -53,14 +53,11 @@
   background-color: #bebebe;
 }
 
-.highlighted {
+.modalContainer button.highlighted {
   background-color: #FFF9EB;
   border: 1px rgba(243, 141, 45, 1) solid;
 }
 
-.highlighted:hover {
-  border: 1px rgba(243, 141, 45, 1) solid;
-}
 
 // Small Breakpoint styles
 @media ($smallBreakRule)  {
