@@ -32,8 +32,16 @@
 }
 
 .listenLinks button .logo span {
-  font-size: 56px;
+  font-size: 48px;
   line-height: $song-page-link-height;
+}
+
+.listenLinks button .logo span.fa-spotify {
+  color: $color-spotify;
+}
+
+.listenLinks button .logo span.fa-youtube {
+  color: $color-youtube;
 }
 
 .listenLinks button .link-text {
