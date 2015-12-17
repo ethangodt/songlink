@@ -6,8 +6,6 @@ module.exports = {
 
 function convertArtist(artistStr) {
   return artistStr.toLowerCase();
-  console.log(artistStr);
-  // return artistStr.toLowerCase().replace(/[^\w\s\\ ]/gi, ' ').replace(/[^\D\s\\ ]/gi, '').replace(/\s+/g, " ");
 };
 
 function verifyArtistMatch(artist1, artist2) {

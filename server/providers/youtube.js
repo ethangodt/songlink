@@ -79,7 +79,7 @@ function makeLinkFromId(youtubeId) {
 
 function search(queryString, callback) {
   console.log(queryString);
-  youtube.search(queryString, 20, function(err, res) {
+  youtube.search(queryString, 1, function(err, res) {
     if (err || !res.items.length) {
       callback(new Error('Could not find any yt search results:', err), null);
     } else {
@@ -94,39 +94,41 @@ function search(queryString, callback) {
 }
 
 function verify(song, vids, callback) {
-  var results = [];
-  var vevo = song.artist.split(' ').join('').toLowerCase() + 'vevo';
-  for (var i = 0; i < vids.length; i++) {
-    var vidDuration = convertYoutubeDuration(vids[i].contentDetails.duration);
-    if (vids[i].snippet.channelTitle.toLowerCase() === vevo && vids[i].snippet.title.toLowerCase().includes(song.title)) {
-      if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.15) {
-        results.push(vids[i]);
-      }
-    }
-    if (vids[i].snippet.channelTitle.toLowerCase() === song.artist.toLowerCase()) {
-      results.push(vids[i])
-    }
-    if (compareDurations(vidDuration, song.track_length)) {
-      results.push(vids[i]);
-    }
-  }
-  var bestMatch = verify2(results);
-  bestMatch ? song.youtube_id = bestMatch.id : song.youtube_id = vids[0].id;
-  return callback(null, song);
+  song.youtube_id = vids[0].id;
+  callback(null, song);
+//   var results = [];
+//   var vevo = song.artist.split(' ').join('').toLowerCase() + 'vevo';
+//   for (var i = 0; i < vids.length; i++) {
+//     var vidDuration = convertYoutubeDuration(vids[i].contentDetails.duration);
+//     if (vids[i].snippet.channelTitle.toLowerCase() === vevo && vids[i].snippet.title.toLowerCase().includes(song.title)) {
+//       if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.15) {
+//         results.push(vids[i]);
+//       }
+//     }
+//     if (vids[i].snippet.channelTitle.toLowerCase() === song.artist.toLowerCase()) {
+//       results.push(vids[i])
+//     }
+//     if (compareDurations(vidDuration, song.track_length)) {
+//       results.push(vids[i]);
+//     }
+//   }
+//   var bestMatch = verify2(results);
+//   bestMatch ? song.youtube_id = bestMatch.id : song.youtube_id = vids[0].id;
+//   return callback(null, song);
 }
 
-function verify2(results) {
-  var best = 0;
-  var index;
-  for (var i=0; i<results.length; i++) {
-    if (results[i].statistics.likeCount > 100) {
-      var stats = results[i].statistics;
-      var rating = (stats.likeCount / stats.dislikeCount) * stats.viewCount;
-      if (rating > best) {
-        best = rating;
-        index = i
-      }
-    }
-  }
-  return (results[index])
-}
+// function verify2(results) {
+//   var best = 0;
+//   var index;
+//   for (var i=0; i<results.length; i++) {
+//     if (results[i].statistics.likeCount > 100) {
+//       var stats = results[i].statistics;
+//       var rating = (stats.likeCount / stats.dislikeCount) * stats.viewCount;
+//       if (rating > best) {
+//         best = rating;
+//         index = i
+//       }
+//     }
+//   }
+//   return (results[index])
+// }
