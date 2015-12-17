@@ -14,7 +14,7 @@
   },
   "scripts": {
     "dbCrawl": "node dbCrawl/dbCrawl.js",
-    "js:clean": "rm -rf dist/scripts/*.js",
+    "js:clean": "rm -rf dist/**/*.js",
     "css:clean": "rm -rf dist/styles",
     "js:copy": "cp -a server/templates/linkTemplate/scripts/. dist/scripts/",
     "js:uglify": "uglifyjs server/templates/linkTemplate/scripts/listenerTools.js -o dist/scripts/listenerTools.js",
