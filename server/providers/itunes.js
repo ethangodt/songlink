@@ -32,6 +32,13 @@ function passOnWithUndefined(song, callback) {
   callback(new Error('No itunes tracks verified'), song);
 }
 
+function makeAppUri(trackViewUrl) {
+  var arrAppUri = trackViewUrl.split('');
+  arrAppUri.splice(8, 0, 'geo.');
+  arrAppUri.splice(-4, 4, 'mt=1&app=music');
+  return arrAppUri.join('');
+}
+
 function makeSearchUrlWithSong(song) {
   var baseSearch = 'https://itunes.apple.com/search?term=';
   var entity = '&entity=song';
@@ -79,7 +86,7 @@ function search(searchUrl, numResults, callback) {
           album_art: results[i].artworkUrl100,
           album_art_size: 1000,
           itunes_id: results[i].trackId,
-          itunes_app_uri: (results[i].isStreamable) ? 'itmss' + results[i].trackViewUrl.substring(5) : null, // sets the app uri if streamable
+          itunes_app_uri: (results[i].isStreamable) ? makeAppUri(results[i].trackViewUrl) : null, // sets the app uri if streamable
           itunes_store_uri: (!results[i].isStreamable) ? results[i].trackViewUrl : null, // sets the app uri if not streamable,
           track_length: results[i].trackTimeMillis
         });
