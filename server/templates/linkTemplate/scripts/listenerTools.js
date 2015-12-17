@@ -65,11 +65,10 @@ var providerClick = function (provider, providerUrl) {
 };
 
 var preferenceSave = function (provider) {
-  console.log('yes');
   docCookies.setItem('providerPreference', provider);
   $('.modalEnvironment').css('display', 'none');
   $('body > main').removeClass('blur');
-  document.location.reload(true);
+  window.location.href = modalSelection.originalUrl;
 };
 
 module.exports = docCookies;
