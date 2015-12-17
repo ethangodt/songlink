@@ -109,18 +109,6 @@ export function search(text) {
   }
 }
 
-export function submitPreference(preference) {
-  return dispatch => {
-    dispatch(toggleLoadingPreference(true))
-
-    // Mimicking res from '/preference'
-    setTimeout(() => {
-      dispatch(toggleLoadingPreference(false))
-      dispatch(updatePreference(preference))
-    }, 1300)
-  }
-}
-
 export function toggleLoadingLink(isLoading) {
   return {
     type: 'TOGGLE_LOADING_LINK',
@@ -139,13 +127,6 @@ export function toggleLoadingSearch(isLoading) {
   return {
     type: 'TOGGLE_LOADING_SEARCH',
     isLoading: isLoading
-  }
-}
-
-export function updatePreference(preference) {
-  return {
-    type: 'UPDATE_PREFERENCE',
-    preference: preference
   }
 }
 
