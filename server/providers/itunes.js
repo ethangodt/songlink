@@ -96,16 +96,16 @@ function search(searchUrl, numResults, callback) {
   })
 }
 
-function verify(song, results, callback){
-  for (var i=0; i<results.length; i++) {
-    var itunesArtist = utils.convertArtist(results[i].artist);
-    var otherArtist = utils.convertArtist(song.artist);
-    var artistsMatch = utils.verifyArtistMatch(itunesArtist, otherArtist);
-    var durationsMatch = utils.verifyMsMatch(results[i].track_length, song.track_length);
+function verify(song, formattedResults, callback){
+  for (var i=0; i<formattedResults.length; i++) {
+    var itunesArtist = utils.convertArtist(formattedResults[i].artist);
+    var songArtist = utils.convertArtist(song.artist);
+    var artistsMatch = utils.verifyArtistMatch(itunesArtist, songArtist);
+    var durationsMatch = utils.verifyMsMatch(formattedResults[i].track_length, song.track_length);
     if (durationsMatch && artistsMatch) {
-      song.itunes_id = results[i].itunes_id;
-      song.itunes_app_uri = (results[i].isStreamable) ? 'itmss' + results[i].trackViewUrl.substring(5) : null; // sets the app uri if streamable
-      song.itunes_store_uri = (!results[i].isStreamable) ? results[i].trackViewUrl : null; // sets the app uri if not streamable
+      song.itunes_id = formattedResults[i].itunes_id;
+      song.itunes_app_uri = formattedResults[i].itunes_app_uri || null;
+      song.itunes_store_uri = formattedResults[i].itunes_store_uri || null;
       return callback(null, song);
     }
   }
