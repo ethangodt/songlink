@@ -42,8 +42,8 @@
 }
 
 .preferences .radio.selected {
-  border: 1px solid $color-secondary;
-  background-color: mix($color-secondary, white, 5%);
+  border: 1px solid $color-main;
+  background-color: mix($color-main, white, 5%);
 }
 
 // .preferences .update-button {
