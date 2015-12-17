@@ -26,7 +26,7 @@
             <span class="tagline">share with anyone</span>
           </div>
         </div>
-        <button class="preferences">
+        <button class="settings">
           <span class="fa fa-cog"></span>
         </button>
       </div>
@@ -44,20 +44,22 @@
       </div>
     </div>
 
-  <div class="listenLinks">
-    {{#providers}}
-      <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
-        <div class="logo">
-          <!-- Dynamically fill in fa- class below -->
-          <span class="fa fa-spotify"></span>
-        </div>
-        <div class="link-text">
-          <!-- Text below for youtube should be "YouTube"...I think it's currently "Youtube"-->
-          <span>{{text}}</span>
-        </div>
-      </button>
-    {{/providers}}
-  </div>
+    <div class="listenLinks">
+      {{#providers}}
+        <button class="{{className}}" href="{{url}}" onclick="providerClick('{{provider}}','{{url}}')">
+          <div class="logo">
+            <!-- Dynamically fill in fa- class below -->
+            <span class="fa fa-spotify"></span>
+          </div>
+          <div class="link-text">
+            <!-- Text below for youtube should be "YouTube"...I think it's currently "Youtube"-->
+            <span>{{text}}</span>
+          </div>
+        </button>
+      {{/providers}}
+    </div>
+
+  </main>
 
   <div class="modalEnvironment">
     <div class="modalContainer">
