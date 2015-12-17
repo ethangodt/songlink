@@ -39,16 +39,12 @@ var docCookies = {
 };
 
 var modalSelection = {
-  click: function (provider, element) {
-    if (provider === this.preference) {
-      this.preference = 'none';
-      $('.mini.' + provider).removeClass('highlighted');
-      $('.mini.special.save').addClass('disabled');
-    } else {
+  click: function (provider) {
+    if (provider !== this.preference) {
+      $('.mini.' + this.preference).removeClass('highlighted');
       this.preference = provider;
-      $('.mini').removeClass('highlighted');
-      $('.mini.special.save').removeClass('disabled');
       $('.mini.' + provider).addClass('highlighted');
+      console.log(this.preference);
     }
   },
   preference: 'none',
@@ -69,24 +65,11 @@ var providerClick = function (provider, providerUrl) {
 };
 
 var preferenceSave = function (provider) {
-  if (provider === 'none') {
-    return;
-  }
+  console.log('yes');
   docCookies.setItem('providerPreference', provider);
   $('.modalEnvironment').css('display', 'none');
   $('body > main').removeClass('blur');
   document.location.reload(true);
-};
-
-var preferenceSkip = function () {
-  docCookies.setItem('providerPreference', 'none');
-  $('.modalEnvironment').css('display', 'none');
-  if (!modalSelection.originalUrl) {
-    document.location.reload(true);
-  } else {
-    window.location = modalSelection.originalUrl;
-    modalSelection.originalUrl = undefined;
-  }
 };
 
 module.exports = docCookies;
