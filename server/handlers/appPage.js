@@ -10,7 +10,7 @@ module.exports = {
 
 function create(req, res) {
 
-  var song = req.body;
+  var song = req.body.spotify_id ? {spotify_id : req.body.spotify_id} : {itunes_id : req.body.itunes_id};
 
   utils.checkDb(song, function (err, songFromDb) {
     if (songFromDb) {
