@@ -12,7 +12,7 @@ module.exports = {
 function render(req, res) {
   songCtrl.get({ hash_id : req.params.id }, function(err, songFromDb) {
     if (err || !songFromDb) {
-      res.status(404).send('Sorry cant find that url!');
+      res.status(404).sendFile(path.join(__dirname, '../templates/404.html'));
     } else if (providers[req.cookies.providerPreference] && req.cookies.providerPreference !== 'none') { // ensures we support whatever string is set on cookie
       var provider = req.cookies.providerPreference;
       if (provider === 'youtube') {
