@@ -37,7 +37,11 @@ function create(req, res) {
                       console.error(err)
                     } else {
                       var obj = {};
-                      obj.share_link = utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id);
+                      var url = req.headers.host;
+                      if (req.headers.host.slice(0,4) === "www.") {
+                        url = req.headers.host.slice(4);
+                      }
+                      obj.share_link = utils.makeSongLinkUrl(url, songFromDb.hash_id);
                       obj.artist = songFromDb.artist;
                       obj.title = songFromDb.title;
                       obj.album_title = songFromDb.album_title;
