@@ -65,8 +65,11 @@ class Search extends Component {
     if (text.slice(0,4) === "http") {
       if (text.includes("itun.es")) {
         const arr = text.split('=')
-        const id = arr[arr.length - 1]
-        return { service: 'itunes', id: arr[arr.length - 1] }
+        //checks to make sure it is not a shortened link
+        if (arr.length > 1) {
+          const id = arr[arr.length - 1]
+          return { service: 'itunes', id: arr[arr.length - 1] }
+        }
       } else if (text.includes("spotify")) {
         const arr = text.split('/')
         const id = arr[arr.length - 1]
