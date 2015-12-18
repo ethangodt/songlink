@@ -78,8 +78,7 @@ function makeLinkFromId(youtubeId) {
 }
 
 function search(queryString, callback) {
-  console.log(queryString);
-  youtube.search(queryString, 1, function(err, res) {
+  youtube.search(queryString, 10, function(err, res) {
     if (err || !res.items.length) {
       callback(new Error('Could not find any yt search results:', err), null);
     } else {
