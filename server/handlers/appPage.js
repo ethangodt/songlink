@@ -33,6 +33,7 @@ function create(req, res) {
           } else {
             utils.build(songFromVerification, function (err, songFromBuild) {
               if (err) {
+                res.status(400).send(err.message);
                 console.error(err);
               } else {
                 utils.createHash(songFromBuild, 0, function(songFromHasher) {
