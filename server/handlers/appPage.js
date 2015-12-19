@@ -14,17 +14,7 @@ function create(req, res) {
 
   utils.checkDb(song, function (err, songFromDb) {
     if (songFromDb) {
-      var obj = {};
-      var url = req.headers.host;
-      if (req.headers.host.slice(0,4) === "www.") {
-        url = req.headers.host.slice(4);
-      }
-      obj.share_link = utils.makeSongLinkUrl(url, songFromDb.hash_id);
-      obj.artist = songFromDb.artist;
-      obj.title = songFromDb.title;
-      obj.album_title = songFromDb.album_title;
-      obj.album_art = songFromDb.album_art;
-      res.send(obj);
+      sendSong(req, res, err, songFromDb);
     } else {
       if (!song.title) {
         utils.verifyId(song, function (err, songFromVerification) {
@@ -38,21 +28,7 @@ function create(req, res) {
               } else {
                 utils.createHash(songFromBuild, 0, function(songFromHasher) {
                   utils.addSongToDb(songFromHasher, function (err, songFromDb) {
-                    if (err) {
-                      console.error(err)
-                    } else {
-                      var obj = {};
-                      var url = req.headers.host;
-                      if (req.headers.host.slice(0,4) === "www.") {
-                        url = req.headers.host.slice(4);
-                      }
-                      obj.share_link = utils.makeSongLinkUrl(url, songFromDb.hash_id);
-                      obj.artist = songFromDb.artist;
-                      obj.title = songFromDb.title;
-                      obj.album_title = songFromDb.album_title;
-                      obj.album_art = songFromDb.album_art;
-                      res.send(obj);
-                    }
+                    sendSong(req, res, err, songFromDb);
                   });
                 });
               }
@@ -66,21 +42,7 @@ function create(req, res) {
           } else {
             utils.createHash(songFromBuild, 0, function(songFromHasher) {
               utils.addSongToDb(songFromHasher, function (err, songFromDb) {
-                if (err) {
-                  console.error(err)
-                } else {
-                  var obj = {};
-                  var url = req.headers.host;
-                  if (req.headers.host.slice(0,4) === "www.") {
-                    url = req.headers.host.slice(4);
-                  }
-                  obj.share_link = utils.makeSongLinkUrl(url, songFromDb.hash_id);
-                  obj.artist = songFromDb.artist;
-                  obj.title = songFromDb.title;
-                  obj.album_title = songFromDb.album_title;
-                  obj.album_art = songFromDb.album_art;
-                  res.send(obj);
-                }
+                sendSong(req, res, err, songFromDb);
               });
             });
           }
@@ -89,6 +51,24 @@ function create(req, res) {
     }
   });
 
+}
+
+function sendSong (req, res, err, songFromDb) {
+  if (err) {
+    console.error(err)
+  } else {
+    var obj = {};
+    var url = req.headers.host;
+    if (req.headers.host.slice(0,4) === "www.") {
+      url = req.headers.host.slice(4);
+    }
+    obj.share_link = utils.makeSongLinkUrl(url, songFromDb.hash_id);
+    obj.artist = songFromDb.artist;
+    obj.title = songFromDb.title;
+    obj.album_title = songFromDb.album_title;
+    obj.album_art = songFromDb.album_art;
+    res.send(obj);
+  }
 }
 
 function render(req, res) {
