@@ -19,7 +19,6 @@ function fetchSongBySearch(song, callback) {
   search(makeSearchUrlWithSong(song), 50, function (err, songs) {
     if (err) {
       passOnWithUndefined(song, callback);
-      callback(new Error('iTunes search returned no results'), null);
     } else {
       songs.length ? verify(song, songs, callback) : passOnWithUndefined(song, callback);
     }
@@ -29,7 +28,6 @@ function fetchSongBySearch(song, callback) {
 function passOnWithUndefined(song, callback) {
   song.itunes_id = undefined;
   console.log('No results from itunes (itunes.js)');
-  callback(new Error('No itunes tracks verified'), song);
 }
 
 function makeAppUri(trackViewUrl) {
