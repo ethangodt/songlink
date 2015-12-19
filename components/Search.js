@@ -142,6 +142,12 @@ class Search extends Component {
     )
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.links.length > this.props.links.length && this.state.link) {
+      this.clearText()
+    }
+  }
+
   render() {
 
     return (
@@ -193,6 +199,7 @@ class Search extends Component {
 Search.propTypes = {
   actions: PropTypes.object.isRequired,
   invalidLinks: PropTypes.object.isRequired,
+  links: PropTypes.array.isRequired,
   loading: PropTypes.object.isRequired,
   results: PropTypes.array.isRequired
 }
