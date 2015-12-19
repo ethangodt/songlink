@@ -28,6 +28,7 @@ function fetchSongBySearch(song, callback) {
 function passOnWithUndefined(song, callback) {
   song.itunes_id = undefined;
   console.log('No results from itunes (itunes.js)');
+  callback(null, song);
 }
 
 function makeAppUri(trackViewUrl) {

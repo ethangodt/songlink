@@ -103,8 +103,8 @@ function createProvidersArray (song) {
   {
     provider: 'itunes',
     icon: 'apple',
-    url : iTunesUrl(song),
-    text : iTunesText(song),
+    url : iTunesUrl(song) ? iTunesUrl(song) : undefined,
+    text : iTunesText(song) ? 'Play now in iTunes' : 'Not available on iTunes',
     className : song.itunes_id ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
   }];
 
