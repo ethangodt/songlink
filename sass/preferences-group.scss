@@ -1,0 +1,28 @@
+.preferences-group {
+  text-align: left;
+  margin-bottom: 14px;
+}
+
+.preferences-group .radio {
+  @include paper;
+  cursor: pointer;
+  font-size: 16px;
+  height: 52px;
+  line-height: 52px;
+  margin-bottom: 14px;
+  text-align: center;
+
+  &:hover {
+    background-color: mix($color-main, white, 5%);
+  }
+}
+
+.preferences-group .radio .fa {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+.preferences-group .radio.selected {
+  border: 1px solid $color-main;
+  background-color: mix($color-main, white, 5%);
+}

@@ -1,47 +1,45 @@
-import React, { Component, PropTypes } from 'react'
-import * as actions from '../redux/actions'
-import Links from './Links'
-import RadioGroup from 'react-radio-group'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
-import Search from './Search'
-import classnames from 'classnames'
+import React, { Component } from 'react'
 import docCookies from '../server/templates/linkTemplate/scripts/listenerTools'
+import PreferencesGroup from './PreferencesGroup'
 
 class Preferences extends Component {
 
   constructor(props, context) {
     super(props, context)
-
     this.state = {
       updated: false,
-      preference: docCookies.getItem('providerPreference')
+      selected: docCookies.getItem('providerPreference') || 'none'
     }
   }
 
-  // handleSubmit() {
-  //   docCookies.setItem('providerPreference', this.state.preference)
-  //   this.setState({ hasSubmitted: true })
-  // }
-
-  handleClickSpotify() {
-    this.setState({ preference: 'spotify' })
-    docCookies.setItem('providerPreference', 'spotify')
+  handleSubmit() {
+    docCookies.setItem('providerPreference', this.state.selected)
+    this.displayUpdatedMessage()
   }
 
-  handleClickiTunes() {
-    this.setState({ preference: 'itunes' })
-    docCookies.setItem('providerPreference', 'itunes')
+  displayUpdatedMessage() {
+    this.setState({ updated: true })
+    setTimeout(() => {
+      this.setState({ updated: false })
+    }.bind(this), 2000)
   }
 
-  handleClickYoutube() {
-    this.setState({ preference: 'youtube' })
-    docCookies.setItem('providerPreference', 'youtube')
-  }
+  handleClick(e) {
+    var selected;
 
-  handleClickNone() {
-    this.setState({ preference: 'none' })
-    docCookies.setItem('providerPreference', 'none')
+    if (e.target.classList.contains('spotify')) {
+      selected = 'spotify';
+    } else if (e.target.classList.contains('itunes')) {
+      selected = 'itunes';
+    } else if (e.target.classList.contains('youtube')) {
+      selected = 'youtube';
+    } else {
+      selected = 'none';
+    }
+
+    this.setState({
+      selected: selected
+    });
   }
 
   render() {
@@ -54,70 +52,16 @@ class Preferences extends Component {
           Next time you click on a songlink we’ll open your app for you automatically.
         </p>
 
-        <div className="radio-group">
-          <div>
-            <div 
-              className={classnames({
-                'radio': true,
-                'selected': this.state.preference === 'spotify'
-              })}
-              onClick={this.handleClickSpotify.bind(this)}
-            > 
-              <span className="fa fa-spotify"></span><span> Spotify</span><br/>
-            </div>
-            <div 
-              className={classnames({
-                'radio': true,
-                'selected': this.state.preference === 'itunes'
-              })}
-              onClick={this.handleClickiTunes.bind(this)}
-            > 
-              <span className="fa fa-apple"></span><span> iTunes</span><br/>
-            </div>
-            <div 
-              className={classnames({
-                'radio': true,
-                'selected': this.state.preference === 'youtube'
-              })}
-              onClick={this.handleClickYoutube.bind(this)}
-            > 
-              <span className="fa fa-youtube"></span><span> YouTube</span><br/>
-            </div>
-            <div 
-              className={classnames({
-                'radio': true,
-                'selected': this.state.preference === 'none'
-              })}
-              onClick={this.handleClickNone.bind(this)}
-            > 
-              <span>Do not redirect me</span>
-            </div>
-          </div>
-        </div>
+        <PreferencesGroup selected={this.state.selected} handleClick={this.handleClick.bind(this)}/>
+
+        <button className="save-button" onClick={this.handleSubmit.bind(this)}>Save</button>
         
+        <div className="update-message">{this.state.updated ? 'saved successfully!' : undefined}</div>
+
       </div>
     )
   }
 
 }
 
-Preferences.propTypes = {
-  loading: PropTypes.object.isRequired
-}
-
-function mapStateToProps(state) {
-  return {
-    loading: state.loading
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Preferences)
+export default Preferences
