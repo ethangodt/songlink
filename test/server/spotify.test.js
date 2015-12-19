@@ -44,9 +44,19 @@ describe('spotify module', function () {
     var input = {
       name: 'title',
       artists: [{name: 'artist name'}],
-      album: {name: 'album title', images: [{url: 'image url'}]},
+      album: {name: 'album title', images: 
+      [ { height: 640,
+          url: 'large image',
+          width: 640 },
+        { height: 300,
+          url: 'medium image',
+          width: 300 },
+        { height: 64,
+          url: 'small image',
+          width: 64 } ] },
       id: 0,
-      duration_ms: 1000
+      duration_ms: 1000,
+
     };
 
     it('creates a song object from soptify data', function () {
@@ -55,13 +65,26 @@ describe('spotify module', function () {
           title: 'title',
           artist: 'artist name',
           album_title: 'album title',
-          album_art: 'image url',
+          album_art: 'large image',
           album_art_size: 409600,
           spotify_id: 0,
-          track_length: 1000
+          track_length: 1000,
+          spotify_images: {
+            large_image: { 
+              height: 640,
+              url: 'large image',
+              width: 640 },
+            medium_image: { 
+              height: 300,
+              url: 'medium image',
+              width: 300 },
+            small_image: { 
+              height: 64,
+              url: 'small image',
+              width: 64 }
+          }
         });
     });
-
   });
 
   xdescribe('verify function', function () {
