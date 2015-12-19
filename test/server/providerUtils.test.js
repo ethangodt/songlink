@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var providerUtils = require('../../server/providers/providerUtils.js');
 
-describe('providerUtils module', function () {
+xdescribe('providerUtils module', function () {
 
   describe('convertArtist function', function () {
 
