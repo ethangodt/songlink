@@ -1,5 +1,4 @@
 .preferences {
-  padding: 16px;
   text-align: center;
 }
 
@@ -18,47 +17,31 @@
 .preferences .redirect-info {
   font-size: 16px;
   line-height: 26px;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 
-.preferences .radio-group {
-  text-align: left;
-  margin-bottom: 14px;
-}
-
-.preferences .radio {
+.preferences .save-button {
   @include paper;
+  background-color: $color-main;
+  border: none;
+  color: white;
   cursor: pointer;
-  font-size: 16px;
-  height: 52px;
-  line-height: 52px;
-  margin-bottom: 14px;
-  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  height: 36px;
+  margin-top: 20px; 
+  outline: none;
+  padding: 0 16px;
+  width: 40%;
+
+  &:hover {
+    color: mix($color-main, white, 20%);
+  }
 }
 
-.preferences .radio .fa {
-  font-size: 18px;
-  margin-right: 8px;
+.preferences .update-message {
+  color: $color-main;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 20px;
 }
-
-.preferences .radio.selected {
-  border: 1px solid $color-main;
-  background-color: mix($color-main, white, 5%);
-}
-
-// .preferences .update-button {
-//   @include paper;
-//   background-color: lightgrey;
-//   border: none;
-//   cursor: pointer;
-//   font-size: 16px;
-//   font-weight: 300;
-//   height: 36px;
-//   outline: none;
-//   padding: 0 16px;
-//   width: 40%;
-
-//   &:hover {
-//     border: 1px solid grey;
-//   }
-// }
