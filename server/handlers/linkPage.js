@@ -25,7 +25,8 @@ function render(req, res) {
         if (!songFromDb[provider+'_id']) {
           sendNonProvider(req, res, songFromDb);
         } else {
-          res.status(302).redirect(songFromDb.itunes_app_uri);
+          var itunesLink = songFromDb.itunes_app_uri || songFromDb.itunes_store_uri;
+          res.status(302).redirect(itunesLink);
         }
       } else if (provider === 'spotify'){
         if (!songFromDb[provider+'_id']) {
