@@ -29,11 +29,11 @@ describe('spotify module', function () {
       var title = song.title;
       
       song.artist = 'Alt-J';
-      expect(spotify.createQuery(song)).to.equal(title + ' Alt J');
+      expect(spotify.createQuery(song)).to.equal(title + '+Alt-J');
       song.artist = 'Alt-J feat. $tobie';
-      expect(spotify.createQuery(song)).to.equal(title + ' Alt J tobie');
+      expect(spotify.createQuery(song)).to.equal(title + '+Alt-J feat. $tobie');
       song.artist = 'Alt-J featuring $tobie [prod. by Producer Kurt]';
-      expect(spotify.createQuery(song)).to.equal(title + ' Alt J featuring tobie by Producer Kurt ');
+      expect(spotify.createQuery(song)).to.equal(title + '+Alt-J featuring $tobie [prod. by Producer Kurt]');
 
     });
 

@@ -21,6 +21,10 @@ class Link extends Component {
     this.setState({ inputHasLoaded: true })
   }
 
+  createSocialMessage() {
+    return 'Listen to ' + this.props.link.title + ' by ' + this.props.link.artist + ' '
+  }
+
   render() {
     return (
       <div className="link">
@@ -57,7 +61,7 @@ class Link extends Component {
           </ReactTooltip>
 
           <a data-tip data-for="facebook">
-            <FacebookButton className="facebook" url={this.props.link.url}>
+            <FacebookButton className="facebook" url={this.props.link.url} message={this.createSocialMessage()}>
               <span className="fa fa-facebook"></span>
             </FacebookButton>
           </a>
@@ -66,7 +70,7 @@ class Link extends Component {
           </ReactTooltip>
 
           <a data-tip data-for="twitter">
-            <TwitterButton className="twitter" url={this.props.link.url}>
+            <TwitterButton className="twitter" url={this.props.link.url} message={this.createSocialMessage()}>
               <span className="fa fa-twitter"></span>
             </TwitterButton>
           </a>

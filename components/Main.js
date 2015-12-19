@@ -26,6 +26,7 @@ class Main extends Component {
           actions={this.props.actions}
           invalidLinks={this.props.invalidLinks}
           loading={this.props.loading}
+          links={this.props.links}
           results={this.props.results}/>
 
         { this.renderExplanation() }
