@@ -34,7 +34,6 @@ class Search extends Component {
   handleChange(e) {
 
     const link = this.getLinkInfo(e.target.value);
-    console.log(link);
     const last = e.target.value && !link ? Date.now() : undefined;
 
     this.setState({

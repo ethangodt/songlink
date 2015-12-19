@@ -44,7 +44,6 @@ var modalSelection = {
       $('.mini.' + this.preference).removeClass('highlighted');
       this.preference = provider;
       $('.mini.' + provider).addClass('highlighted');
-      console.log(this.preference);
     }
   },
   preference: 'none',
