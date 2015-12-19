@@ -52,13 +52,10 @@ function checkDb(song, callback) {
 
 function createHash(song, attempt, callback) {
   var str = song.title+song.artist+song.album_title;
-  console.log(str);
   if (attempt !== 0) {
     str += Date.now();
   }
   attempt++;
-  console.log(str, attempt)
-
   var shasum = crypto.createHash('sha1');
   shasum.update(str);
   var url_hash = shasum.digest('hex').slice(0, 5);
