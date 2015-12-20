@@ -14,7 +14,7 @@ class PreferencesGroup extends Component {
             })}
             onClick={this.props.handleClick}
           > 
-            <span className="fa fa-spotify"></span><span>Spotify</span><br/>
+            <span className="fa fa-spotify spotify"></span><span className="spotify">Spotify</span><br/>
           </div>
           <div 
             className={classnames({
@@ -24,7 +24,7 @@ class PreferencesGroup extends Component {
             })}
             onClick={this.props.handleClick}
           > 
-            <span className="fa fa-apple"></span><span>iTunes</span><br/>
+            <span className="fa fa-apple itunes"></span><span className="itunes">iTunes</span><br/>
           </div>
           <div 
             className={classnames({
@@ -34,7 +34,7 @@ class PreferencesGroup extends Component {
             })}
             onClick={this.props.handleClick}
           > 
-            <span className="fa fa-youtube"></span><span>YouTube</span><br/>
+            <span className="fa fa-youtube youtube"></span><span className="youtube">YouTube</span><br/>
           </div>
           <div 
             className={classnames({
@@ -44,7 +44,7 @@ class PreferencesGroup extends Component {
             })}
             onClick={this.props.handleClick}
           > 
-            <span>Do not redirect me</span>
+            <span className="none">Do not redirect me</span>
           </div>
         </div>  
     )
