@@ -7,7 +7,10 @@ class Link extends Component {
 
   constructor(props, context) {
     super(props, context)
-    this.state = { inputHasLoaded: false }
+    this.state = {
+      copied: false,
+      inputHasLoaded: false
+    }
   }
 
   handleFocus(e) {
@@ -23,6 +26,18 @@ class Link extends Component {
 
   createSocialMessage() {
     return 'Listen to ' + this.props.link.title + ' by ' + this.props.link.artist + ' '
+  }
+
+  renderCopyTooltipText() {
+    return this.state.copied ? 'copied!' : 'copy link'
+  }
+
+  handleCopyClick() {
+    this.setState({ copied: true })
+  }
+
+  handleCopyMouseLeave() {
+    this.setState({ copied: false })
   }
 
   render() {
@@ -47,18 +62,22 @@ class Link extends Component {
               this.handleFocusOnLoad.bind(this) : undefined}
             onFocus={this.handleFocus.bind(this)}/>
 
-        </div>
-
-        <div className="button-container">
-
-          <a data-tip data-for="copy">
+          <a 
+            onClick={this.handleCopyClick.bind(this)}
+            onMouseLeave={this.handleCopyMouseLeave.bind(this)}
+            data-tip
+            data-for="copy">
             <ClipboardButton className="copy" data-clipboard-text={this.props.link.url}>
-              <span className="fa fa-clipboard"></span>
+              <span className="fa fa-link"></span>
             </ClipboardButton>
           </a>
           <ReactTooltip id="copy">
-            <span>copy link</span>
+            <span>{this.renderCopyTooltipText()}</span>
           </ReactTooltip>
+
+        </div>
+
+        <div className="button-container">
 
           <a data-tip data-for="facebook">
             <FacebookButton className="facebook" url={this.props.link.url} message={this.createSocialMessage()}>
