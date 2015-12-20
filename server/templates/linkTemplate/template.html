@@ -119,7 +119,7 @@
   <script>
     if ('{{{providerUrl}}}') {
       if ('{{provider}}' === 'youtube' || '{{provider}}' === 'itunes') {
-        window.open('{{{providerUrl}}}', '_blank'); 
+        window.location.href = '{{{providerUrl}}}' 
       } else {
         window.location.href = '{{{providerUrl}}}';
       }
