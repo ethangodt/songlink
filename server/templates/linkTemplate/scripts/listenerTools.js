@@ -47,7 +47,8 @@ var modalSelection = {
     }
   },
   preference: 'none',
-  originalUrl: undefined
+  originalUrl: undefined,
+  originalPref : undefined
 };
 
 var providerClick = function (provider, providerUrl) {
@@ -55,11 +56,17 @@ var providerClick = function (provider, providerUrl) {
     $('.mini.' + provider).addClass('highlighted');
     modalSelection.preference = provider;
     modalSelection.originalUrl = providerUrl;
+    modalSelection.originalPref = provider;
     $('.modalEnvironment').css('display', 'inline');
     $('body > main').addClass('blur');
   } else {
     // FYI, this condition can occur when the users preference is 'none', or if the provider they prefer does not stream the song
-    window.location.href = providerUrl;
+    if (provider === 'youtube' || provider === 'itunes') {
+      window.open(providerUrl, '_blank');
+    } else {
+      window.location.href = providerUrl;
+    }
+
   }
 };
 
@@ -67,7 +74,12 @@ var preferenceSave = function (provider) {
   docCookies.setItem('providerPreference', provider);
   $('.modalEnvironment').css('display', 'none');
   $('body > main').removeClass('blur');
-  window.location.href = modalSelection.originalUrl;
+
+  if (modalSelection.originalPref === 'youtube' || modalSelection.originalPref === 'itunes') {
+    window.open(modalSelection.originalUrl, '_blank');
+  } else {
+    window.location.href = modalSelection.originalUrl;
+  }
 };
 
 module.exports = docCookies;
