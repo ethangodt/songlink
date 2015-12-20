@@ -1,8 +1,5 @@
 .wrapper {
   @extend %clearfix;
-}
-
-.wrapper {
   margin: 0 auto;
   max-width: $grid-max-width; 
   width: 90%;

@@ -8,7 +8,7 @@ class Preferences extends Component {
     super(props, context)
     this.state = {
       updated: false,
-      selected: docCookies.getItem('providerPreference') || 'none'
+      selected: docCookies.getItem('providerPreference')
     }
   }
 
@@ -25,21 +25,22 @@ class Preferences extends Component {
   }
 
   handleClick(e) {
-    var selected;
+    let selected = null
+    let classes = e.target.classList
 
-    if (e.target.classList.contains('spotify')) {
+    if (Array.prototype.indexOf.call(classes, 'spotify') !== -1) {
       selected = 'spotify';
-    } else if (e.target.classList.contains('itunes')) {
+    } else if (Array.prototype.indexOf.call(classes, 'itunes') !== -1) {
       selected = 'itunes';
-    } else if (e.target.classList.contains('youtube')) {
+    } else if (Array.prototype.indexOf.call(classes, 'youtube') !== -1) {
       selected = 'youtube';
-    } else {
+    } else if (Array.prototype.indexOf.call(classes, 'none') !== -1) {
       selected = 'none';
     }
 
     this.setState({
       selected: selected
-    });
+    })
   }
 
   render() {
@@ -49,7 +50,7 @@ class Preferences extends Component {
         <h2 className="header">redirect</h2>
 
         <p className="redirect-info">Songlink works best when you tell us where you listen to music. 
-          Next time you click on a songlink we’ll open your app for you automatically.
+          Next time you click on a songlink we’ll open that song in your music app automatically.
         </p>
 
         <PreferencesGroup selected={this.state.selected} handleClick={this.handleClick.bind(this)}/>
