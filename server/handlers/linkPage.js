@@ -15,38 +15,37 @@ function render(req, res) {
       res.status(404).sendFile(path.join(__dirname, '../templates/404.html'));
     } else if (providers[req.cookies.providerPreference] && req.cookies.providerPreference !== 'none') { // ensures we support whatever string is set on cookie
       var provider = req.cookies.providerPreference;
-      if (provider === 'youtube') {
-        if (!songFromDb[provider+'_id']) {
-          sendNonProvider(req, res, songFromDb);
-        } else {
-          res.status(302).redirect(providers[provider].makeLinkFromId(songFromDb[provider + '_id']));
-        }
-      } else if (provider === 'itunes') {
-        if (!songFromDb[provider+'_id']) {
-          sendNonProvider(req, res, songFromDb);
-        } else {
-          var itunesLink = songFromDb.itunes_app_uri || songFromDb.itunes_store_uri;
-          res.status(302).redirect(itunesLink);
-        }
-      } else if (provider === 'spotify'){
-        if (!songFromDb[provider+'_id']) {
-          sendNonProvider(req, res, songFromDb);
-        } else {
-          res.status(302).redirect(providers[provider].makeUriFromId(songFromDb[provider + '_id']));
-        }
-      }
+      checkProvider(req, res, songFromDb, provider);
     } else {
-      sendNonProvider(req, res, songFromDb);
+      sendProvider(req, res, songFromDb, 'none');
     }
   });
 }
 
-function sendNonProvider (req, res, songFromDb) {
+function checkProvider (req, res, songFromDb, provider) {
+  if (!songFromDb[provider+'_id']) {
+    sendProvider(req, res, songFromDb, 'none');
+  } else {
+    sendProvider(req, res, songFromDb, provider);
+  }
+}
+
+function sendProvider (req, res, songFromDb, provider) {
   var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
     if (err) {
       console.error(err);
     }
   });
+
+  var providerUrl = undefined;
+
+  if (provider === 'youtube') {
+    providerUrl = providers['youtube'].makeLinkFromId(songFromDb['youtube_id']);
+  } else if (provider === 'itunes') {
+    providerUrl = songFromDb.itunes_app_uri || songFromDb.itunes_store_uri;
+  } else if (provider === 'spotify') {
+    providerUrl = providers['spotify'].makeUriFromId(songFromDb['spotify_id']);
+  }
 
   var templateObj = {
     pageUrl : utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id),
@@ -55,7 +54,8 @@ function sendNonProvider (req, res, songFromDb) {
     album_art : songFromDb.spotify_images ? songFromDb.spotify_images.medium_image.url : songFromDb.album_art,
     providers : createProvidersArray(songFromDb),
     clicks : songFromDb.clicks,
-    creates : songFromDb.creates
+    creates : songFromDb.creates,
+    providerUrl : providerUrl
   };
 
   var html = Mustache.render(template, templateObj);
@@ -69,7 +69,7 @@ function createProvidersArray (song) {
 
   function iTunesText(song) {
     if (!song.itunes_id) {
-      return undefined;
+      return 'Not available on iTunes';
     } else if (song.itunes_app_uri) {
       return 'Play now in Apple Music';
     } else {
@@ -98,7 +98,7 @@ function createProvidersArray (song) {
     provider: 'youtube',
     icon: 'youtube',
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
-    text : song.youtube_id ? 'Play now in Youtube' : 'Not available on Youtube',
+    text : song.youtube_id ? 'Play now in YouTube' : 'Not available on YouTube',
     className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth disabled youtube'
   },
   {
