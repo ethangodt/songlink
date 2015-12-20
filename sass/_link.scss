@@ -5,7 +5,6 @@
 }
 
 .link .link-header {
-  //color: black;
   display: table;
   font-weight: 400;
   height: $link-header-height;
@@ -33,12 +32,10 @@
 }
 
 .link .link-header .artist {
-  // color: grey;
   font-size: 16px;
 }
 
 .link .link-header .album {
-  // color: grey;
   font-size: 16px;
   font-weight: 300;
 }
@@ -46,7 +43,22 @@
 .link .link-container {
   height: $link-input-height;
   margin-bottom: 20px;
+  position: relative;
   width: 100%;
+}
+
+.link .link-container button.copy {
+  @include button;
+  color: grey;
+  font-size: 20px;
+  padding: 0 12px;
+  position: absolute;
+  right: 10px;
+  top: ($link-input-height / 2) - 10;
+
+  &:hover {
+    color: black;
+  }
 }
 
 .link input {
@@ -66,7 +78,7 @@
   height: $link-input-height;
 }
 
-.link button {
+.link .button-container button {
   @include button;
   @include paper;
   border-radius: 100%;
@@ -78,9 +90,13 @@
   width: $link-input-height;
 }
 
-.link button.copy {
-  color: white;
-  background-color: $color-main;
+.link button.copy .fa-link{
+  -moz-transform: scaleX(-1);
+  -o-transform: scaleX(-1);
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+  filter: FlipH;
+  -ms-filter: "FlipH";
 }
 
 .link button.facebook {
@@ -132,11 +148,17 @@
     padding: 10px;
   }
 
+  .link .link-container button.copy {
+    font-size: 16px;
+    right: 4px;
+    top: ($link-input-height-small / 2) - 8;
+  } 
+
   .link .button-container {
     height: $link-input-height-small;
   }
 
-  .link button {
+  .link .button-container button {
     font-size: 12px;
     margin-right: 14px;
     width: $link-input-height-small;
