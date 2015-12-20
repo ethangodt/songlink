@@ -55,7 +55,8 @@ function sendProvider (req, res, songFromDb, provider) {
     providers : createProvidersArray(songFromDb),
     clicks : songFromDb.clicks,
     creates : songFromDb.creates,
-    providerUrl : providerUrl
+    providerUrl : providerUrl,
+    provider : provider
   };
 
   var html = Mustache.render(template, templateObj);
