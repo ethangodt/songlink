@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { FacebookButton, TwitterButton } from 'react-social'
+import classnames from 'classnames'
 import ClipboardButton from 'react-clipboard.js'
 import ReactTooltip from 'react-tooltip'
 
@@ -9,7 +10,8 @@ class Link extends Component {
     super(props, context)
     this.state = {
       copied: false,
-      inputHasLoaded: false
+      inputHasLoaded: false,
+      isSafari: Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0
     }
   }
 
@@ -29,11 +31,16 @@ class Link extends Component {
   }
 
   renderCopyTooltipText() {
-    return this.state.copied ? 'copied!' : 'copy link'
+    if (!this.state.isSafari) {
+      return !this.state.copied ? 'Copy link' : 'Copied!'
+    }
+    return 'Please copy manually'
   }
 
   handleCopyClick() {
-    this.setState({ copied: true })
+    if (!this.state.isSafari) {
+      this.setState({ copied: true })
+    }
   }
 
   handleCopyMouseLeave() {
@@ -68,7 +75,11 @@ class Link extends Component {
             data-tip
             data-for="copy">
             <ClipboardButton className="copy" data-clipboard-text={this.props.link.url}>
-              <span className="fa fa-link"></span>
+              <span className={classnames({
+                'fa': true,
+                'fa-link': true,
+                'inactive': this.state.isSafari
+              })}></span>
             </ClipboardButton>
           </a>
           <ReactTooltip id="copy">
@@ -85,7 +96,7 @@ class Link extends Component {
             </FacebookButton>
           </a>
           <ReactTooltip id="facebook">
-            <span>share on Facebook</span>
+            <span>Share on Facebook</span>
           </ReactTooltip>
 
           <a data-tip data-for="twitter">
@@ -94,7 +105,7 @@ class Link extends Component {
             </TwitterButton>
           </a>
           <ReactTooltip id="twitter">
-            <span>share on Twitter</span>
+            <span>Share on Twitter</span>
           </ReactTooltip>
 
         </div>
