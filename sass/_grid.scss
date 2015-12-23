@@ -1,14 +1,13 @@
 .wrapper {
-  @extend %clearfix;
   margin: 0 auto;
-  max-width: $grid-max-width; 
+  max-width: $grid-max-width;
   width: 90%;
 }
 
 @media #{$breakpoint-small} {
 
   .wrapper {
-    width: 95%; 
+    width: 95%;
   }
-   
+
 }
