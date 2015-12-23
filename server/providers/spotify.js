@@ -1,82 +1,70 @@
-var utils = require('./providerUtils.js');
+// var utils = require('../utils/utils');
 var spotify = require('spotify');
 
 module.exports = {
-  createQuery: createQuery,
-  fetchSongById: fetchSongById,
-  fetchSongBySearch: fetchSongBySearch,
-  makePrettyObject: makePrettyObject,
-  makeUriFromId: makeUriFromId,
-  verify: verify
+  lookupSongById: lookupSongById,
+  fetchSearchResults: fetchSearchResults,
+  makeUriFromId: makeUriFromId
 };
 
-function createQuery(songObj) {
-  return songObj.title + '+' + songObj.artist;
-};
 
-function fetchSongById(spotifyId, callback) {
+function lookupSongById(spotifyId, callback) {
   spotify.lookup({ type: 'track', id: spotifyId}, function(err, data) {
-    if ( data.error ) {
+    if ( data.error || err ) {
       callback(new Error('Link is not valid'), null);
     } else {
-      callback(null, makePrettyObject(data));
+      callback(null, data);
     }
   });
 };
 
-function fetchSongBySearch(song, callback) {
-  var searchQuery = createQuery(song);
-  spotify.search({type: 'track', query: searchQuery}, function(err, data) {
+function fetchSearchResults(query, callback) {
+  spotify.search({type: 'track', query: query}, function(err, data) {
     if ( err ) {
       callback(err, null)
     } else {
-      var tracks = data.tracks.items;
-      tracks.length ? verify(song, tracks, callback) : passOnWithUndefined(song, callback);
+      callback(null, data.tracks.items.length ? data.tracks.items : []);
     }
   });
+  
 };
-
-function passOnWithUndefined(song, callback) {
-  song.spotify_id = undefined;
-  console.log('No results from spotify (spotify.js)');
-  callback(null, song);
-}
 
 function makeUriFromId(spotifyId) {
   return 'spotify:track:' + spotifyId;
 };
 
-function makePrettyObject(obj) {
-  return {
-    title: obj.name,
-    artist: obj.artists[0].name,
-    album_title: obj.album.name,
-    album_art: obj.album.images[0].url,
-    album_art_size: 409600,
-    spotify_id: obj.id,
-    track_length: obj.duration_ms,
-    spotify_images: {
-      large_image: obj.album.images[0],
-      medium_image: obj.album.images[1],
-      small_image: obj.album.images[2]
-    }
-  };
-};
+// function makePrettyObject(obj) {
+//   return {
+//     title: obj.name,
+//     artist: obj.artists[0].name,
+//     album_title: obj.album.name,
+//     album_art: obj.album.images[0].url,
+//     album_art_size: 409600,
+//     spotify_id: obj.id,
+//     track_length: obj.duration_ms,
+//     spotify_images: {
+//       large_image: obj.album.images[0],
+//       medium_image: obj.album.images[1],
+//       small_image: obj.album.images[2]
+//     }
+//   };
+// };
 
-function verify(song, spotifyTracks, callback){
-  for (var i=0; i<spotifyTracks.length; i++) {
-    var spotifyArtist = utils.convertArtist(spotifyTracks[i].artists[0].name);
-    var otherArtist = utils.convertArtist(song.artist);
-    var artistsMatch = utils.verifyArtistMatch(spotifyArtist, otherArtist);
-    var durationsMatch = utils.verifyMsMatch(spotifyTracks[i].duration_ms, song.track_length);
-    if (durationsMatch && artistsMatch) {
-      song.spotify_id = spotifyTracks[i].id;
-      song.spotify_images = {};
-      song.spotify_images.large_image = spotifyTracks[i].album.images[0];
-      song.spotify_images.medium_image = spotifyTracks[i].album.images[1];
-      song.spotify_images.small_image = spotifyTracks[i].album.images[2];
-      return callback(null, song);
-    }
-  }
-  passOnWithUndefined(song, callback);
-};
+// function verify(song, spotifyTracks, callback){
+//   for (var i=0; i<spotifyTracks.length; i++) {
+//     var spotifyArtist = utils.convertArtist(spotifyTracks[i].artists[0].name);
+//     var otherArtist = utils.convertArtist(song.artist);
+//     var artistsMatch = utils.verifyArtistMatch(spotifyArtist, otherArtist);
+//     var durationsMatch = utils.verifyMsMatch(spotifyTracks[i].duration_ms, song.track_length);
+//     // if (durationsMatch && artistsMatch) {
+//     if (durationsMatch) {
+//       song.spotify_id = spotifyTracks[i].id;
+//       song.spotify_images = {};
+//       song.spotify_images.large_image = spotifyTracks[i].album.images[0];
+//       song.spotify_images.medium_image = spotifyTracks[i].album.images[1];
+//       song.spotify_images.small_image = spotifyTracks[i].album.images[2];
+//       return callback(null, song);
+//     }
+//   }
+//   passOnWithUndefined(song, callback);
+// };

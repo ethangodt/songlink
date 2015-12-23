@@ -6,7 +6,7 @@ var key = process.env.YOUTUBE_KEY;
 youtube.setKey(key);
 
 module.exports = {
-  fetchSongBySearch: fetchSongBySearch,
+  fetchSearchResults: fetchSearchResults,
   makeLinkFromId: makeLinkFromId
 }
 
@@ -39,9 +39,9 @@ function convertYoutubeDuration(str) {
   return total * 1000;
 }
 
-function fetchSongBySearch(song, callback) {
-  var queryString = song.title + ' ' + song.artist;
-  search(queryString, function(err, ids) {
+function fetchSearchResults(query, callback) {  
+
+  search(query, function(err, ids) {
     if (err) {
       callback(err, null);
     } else {
@@ -49,11 +49,12 @@ function fetchSongBySearch(song, callback) {
         if (err) {
           callback(err, null);
         } else {
-          vids.length ? verify(song, vids, callback) : passOnWithUndefined(song, callback);
+          callback(null, vids.length ? vids : []);
         }
       });
     }
   });
+
 };
 
 function getVideosByIds(ids, callback) {
@@ -67,17 +68,12 @@ function getVideosByIds(ids, callback) {
   });
 }
 
-function passOnWithUndefined(song, callback) {
-  song.youtube_id = undefined;
-  console.log('No results from youtube (youtube.js)');
-  callback(null, song);
-}
-
 function makeLinkFromId(youtubeId) {
   return 'https://www.youtube.com/watch?v=' + youtubeId;
 }
 
 function search(queryString, callback) {
+  console.log(queryString)
   youtube.search(queryString, 10, function(err, res) {
     if (err || !res.items.length) {
       callback(new Error('Could not find any yt search results:', err), null);
@@ -92,9 +88,9 @@ function search(queryString, callback) {
   });
 }
 
-function verify(song, vids, callback) {
-  song.youtube_id = vids[0].id;
-  callback(null, song);
+// function verify(song, vids, callback) {
+//   song.youtube_id = vids[0].id;
+//   callback(null, song);
 //   var results = [];
 //   var vevo = song.artist.split(' ').join('').toLowerCase() + 'vevo';
 //   for (var i = 0; i < vids.length; i++) {
@@ -114,7 +110,7 @@ function verify(song, vids, callback) {
 //   var bestMatch = verify2(results);
 //   bestMatch ? song.youtube_id = bestMatch.id : song.youtube_id = vids[0].id;
 //   return callback(null, song);
-}
+// }
 
 // function verify2(results) {
 //   var best = 0;
