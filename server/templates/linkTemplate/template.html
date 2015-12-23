@@ -5,7 +5,7 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  
+
   <meta property="og:type" content="website" />
   <meta property="og:url" content="{{pageUrl}}" />
   <meta property="og:title" content="{{title}} by {{artist}} | songl.ink" />
@@ -23,7 +23,6 @@
   <link rel="stylesheet" href="main.css"/>
 
   <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
-
 
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -88,7 +87,7 @@
   </main>
 
   <div class="modalEnvironment">
-    <div class="modalContainer">
+    <div class="modalContainer unloaded">
       <div class="top-strip"></div>
       <p>Songlink works best when you tell us where you listen to music. Next time you click on a songlink we’ll open your app for you automatically.</p>
       <div class="modalButtonContainer">
@@ -117,7 +116,7 @@
   <script>
     if ('{{{providerUrl}}}') {
       if ('{{provider}}' === 'youtube' || '{{provider}}' === 'itunes') {
-        window.location.href = '{{{providerUrl}}}' 
+        window.location.href = '{{{providerUrl}}}'
       } else {
         window.location.href = '{{{providerUrl}}}';
       }

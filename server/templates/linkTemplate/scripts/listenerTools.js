@@ -57,8 +57,13 @@ var providerClick = function (provider, providerUrl) {
     modalSelection.preference = provider;
     modalSelection.originalUrl = providerUrl;
     modalSelection.originalPref = provider;
-    $('.modalEnvironment').css('display', 'inline');
+    $('.modalEnvironment').css('display', 'block');
     $('body > main').addClass('blur');
+    // this setTimeout is because the transition was failing if the
+    // modalEnvironment didn't change element to display block
+    setTimeout(function() {
+      $('.modalContainer').removeClass('unloaded');
+    }, 10);
   } else {
     // FYI, this condition can occur when the users preference is 'none', or if the provider they prefer does not stream the song
     if (provider === 'youtube' || provider === 'itunes') {
@@ -82,4 +87,6 @@ var preferenceSave = function (provider) {
   }
 };
 
-module.exports = docCookies;
+$(window).load(function () {
+  $('.albumArt').removeClass('unloaded');
+});

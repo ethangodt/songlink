@@ -13,6 +13,12 @@
 .albumArt {
   float: left;
   box-shadow: 0 3px 6px #bebebe;
+  transition: transform .7s, opacity .7s;
+}
+
+.unloaded {
+  transform: translate(0, 20px);
+  opacity: 0;
 }
 
 .tableWrapper {
