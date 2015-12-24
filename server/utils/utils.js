@@ -88,7 +88,7 @@ function createHash(song) {
           if (!songFromDb) {
             return url_hash;
           } else {
-            return makeHash(str =+ Date.now());
+            return makeHash(str += Date.now());
           }
         })
         .catch(reject);
@@ -104,42 +104,23 @@ function createHash(song) {
   });
 }
 
-function getAlbumArtUrl(song) {
-  if (song.source === 'spotify') {
-    return song.lookup.album.images[1].url;
-  } else {
-    var topResult = getTopSpotifyResult(song);
-    return topResult.album.images[1].url;
-  }
-}
-
-function getTopSpotifyResult(song) {
-  if (song.source === 'spotify') {
-    return song.lookup;
-  } else {
-    return song.results.spotify.full.results.length ? song.results.spotify.full.results[0] : song.results.spotify.partial.results[0];
-  }
-}
-
 function makeSongLinkObject(song, hostname) {
   
   if (hostname.slice(0,4) === "www.") {
     hostname = hostname.slice(4);
   }
 
-  var url = makeSongLinkUrl(hostname, song.hash_id);
+  var shareLink = makeSongLinkUrl(hostname, song.hash_id);
 
   return {
     title: song.title,
     artist: song.artist,
     album_title: song.album_title,
-    album_art: getAlbumArtUrl(song),
+    album_art: providers.spotify.getAlbumArtUrl(song, 'medium') || providers.itunes.getAlbumArtUrl(song),
     source_id: song.source_id,
     source: song.source,
-    share_link: url
+    share_link: shareLink
   }
-
-  return song;
 
 }
 
@@ -167,6 +148,6 @@ function verifyId(song) {
       } else {
         resolve(verifiedSong);
       }
-    })
+    });
   });
 }

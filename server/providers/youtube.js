@@ -7,6 +7,7 @@ youtube.setKey(key);
 
 module.exports = {
   fetchSearchResults: fetchSearchResults,
+  getTopYoutubeResult: getTopYoutubeResult,
   makeLinkFromId: makeLinkFromId
 }
 
@@ -61,6 +62,14 @@ function fetchSearchResults(song, query, queryType, callback) {
     }
   });
 };
+
+function getTopYoutubeResult(song) {
+  if (song.source === 'youtube') {
+    return song.lookup;
+  } else {
+    return song.results.youtube.full.results.length ? song.results.youtube.full.results[0] : song.results.youtube.partial.results[0];
+  }
+}
 
 function getVideosByIds(ids, callback) {
   // ids should be comma separated string of ids
