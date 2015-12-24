@@ -64,17 +64,13 @@ class Search extends Component {
     const itunesTrackLink = /^https:\/\/itun.es\/[a-z]+\/[\w-]+\?i=([\d]+)$/;
     const spotifyTrackLink = /^https:\/\/open.spotify.com\/[\w]+\/([\w\d]+)$/;
     const spotifyUri = /^spotify:track:([\w\d-]+)$/;
-    var id;
 
     if (itunesTrackLink.test(text)) {
-      id = itunesTrackLink.exec(text)[1];
-      return {service: 'itunes', id: id};
+      return {source: 'itunes', id: itunesTrackLink.exec(text)[1]};
     } else if (spotifyTrackLink.test(text)) {
-      id = spotifyTrackLink.exec(text)[1];
-      return {service: 'spotify', id: id};
+      return {source: 'spotify', id: spotifyTrackLink.exec(text)[1]};
     } else if (spotifyUri.test(text)) {
-      id = spotifyUri.exec(text)[1];
-      return {service: 'spotify', id: id};
+      return {source: 'spotify', id: spotifyUri.exec(text)[1]};
     } else {
       return undefined;
     }
@@ -94,9 +90,8 @@ class Search extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.isInvalid()) {
-      let song = {};
-      song[ this.state.link.service + '_id' ] = this.state.link.id;
-      this.props.actions.createLink(song, this.state.link.id)
+      console.log({source: this.state.link.source, source_id: this.state.link.id})
+      this.props.actions.createLink({source: this.state.link.source, source_id: this.state.link.id})
     } else {
       if (this.state.text.length) this.props.actions.search(this.state.text)
     }

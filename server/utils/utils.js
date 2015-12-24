@@ -8,7 +8,6 @@ module.exports = {
   build: build,
   checkDb: checkDb,
   createHash: createHash,
-  getNumberOfIds: getNumberOfIds,
   makeSongLinkObject: makeSongLinkObject,
   makeSongLinkUrl: makeSongLinkUrl,
   makeQuery: makeQuery,
@@ -21,7 +20,7 @@ function addSongToDb(song) {
       if (err) {
         reject(err);
       } else {
-        resolve(songFromDb);
+        resolve(song);
       }
     });
   });
@@ -44,21 +43,16 @@ function build(song, callback) {
         queryTypes.forEach(function(queryType) {
           var query = makeQuery(song, queryType);
 
-          song.results[provider][queryType] = {};
-          song.results[provider][queryType].query = query;
-
-          providers[provider].fetchSearchResults(query, function(err, results) {
+          providers[provider].fetchSearchResults(song, query, queryType, function(err, songFromBuild) {
             if (err) {
               reject(err);
             } else {
-              song.results[provider].queryTypes.push(queryType)
-              song.results[provider][queryType].results = results;
-              
-              if (song.results[provider].queryTypes.length === queryTypes.length) {
-                if (song.searches.length === Object.keys(providers).length - 1) {
-                  resolve(song);
+              for (provider in songFromBuild.results) {
+                if (songFromBuild.results[provider].queryTypes.length !== song.searches.length) {
+                  return;
                 }
               }
+              resolve(songFromBuild);
             }
           });
         });        
@@ -110,14 +104,21 @@ function createHash(song) {
   });
 }
 
-function getNumberOfIds(songData) {
-  // just gets the number of ids to determine the number of providers this song currently supports
-  var keys = Object.keys(songData);
-  var keyExpression = /(\w+(_id))/i;
-  var ids = keys.filter(function (key) {
-    return keyExpression.test(key);
-  });
-  return ids.length;
+function getAlbumArtUrl(song) {
+  if (song.source === 'spotify') {
+    return song.lookup.album.images[1].url;
+  } else {
+    var topResult = getTopSpotifyResult(song);
+    return topResult.album.images[1].url;
+  }
+}
+
+function getTopSpotifyResult(song) {
+  if (song.source === 'spotify') {
+    return song.lookup;
+  } else {
+    return song.results.spotify.full.results.length ? song.results.spotify.full.results[0] : song.results.spotify.partial.results[0];
+  }
 }
 
 function makeSongLinkObject(song, hostname) {
@@ -132,7 +133,7 @@ function makeSongLinkObject(song, hostname) {
     title: song.title,
     artist: song.artist,
     album_title: song.album_title,
-    album_art: song.album_art,
+    album_art: getAlbumArtUrl(song),
     source_id: song.source_id,
     source: song.source,
     share_link: url
@@ -147,27 +148,25 @@ function makeSongLinkUrl(host, hash_id) {
 }
 
 function makeQuery(song, queryType) {
+  var query;
+
   if (queryType === 'full') {
-    return song.title + ' ' + song.artist + ' ' + song.album_title;
+    query = song.title + ' ' + song.artist + ' ' + song.album_title;
   } else if (queryType === 'partial') {
-    return song.title + ' ' + song.artist;
+    query = song.title + ' ' + song.artist;
   }
+
+  return query.toLowerCase();
 }
 
 function verifyId(song) {
-  //TODO: have this do a lookup on whatever is "source" and append a lookup object
   return new Promise(function (resolve, reject) {
-    if (song.title) {
-      resolve(song);
-    } else {
-      providers[song.source].lookupSongById(song.source_id, function (err, verifiedSong) {
-        if (err) {
-          reject(err);
-        } else {
-          song.lookup = verifiedSong;
-          resolve(verifiedSong);
-        }
-      })
-    }
+    providers[song.source].lookupSongById(song, function (err, verifiedSong) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(verifiedSong);
+      }
+    })
   });
 }

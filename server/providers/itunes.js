@@ -8,22 +8,30 @@ module.exports = {
   search: search
 };
 
-function lookupSongById(itunesId, callback) {
-  search(makeFetchByIdUrl(itunesId), 1, function(err, songs) {
-    if (err || !songs.length) {
+function lookupSongById(song, callback) {
+  search(makeFetchByIdUrl(song.source_id), 1, function(err, results) {
+    if (err || !results.length) {
       callback(new Error('Link is not valid'), null);
     } else {
-      callback(null, songs[0]);
+      song.lookup = results[0];
+      callback(null, song);
     }
   });
 }
 
-function fetchSearchResults(query, callback) {
+function fetchSearchResults(song, query, queryType, callback) {
   search(makeSearchUrlWithQuery(query), 10, function (err, songs) {
     if (err) {
       callback(err, null)
     } else {
-      callback(null, songs.length ? songs : []);
+      var results = songs.length ? songs : [];
+
+      song.results.itunes.queryTypes.push(queryType);
+      song.results.itunes[queryType] = {};
+      song.results.itunes[queryType].query = query;
+      song.results.itunes[queryType].results = results;
+
+      callback(null, song);
     }
   });
 }

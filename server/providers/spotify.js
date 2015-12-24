@@ -7,26 +7,35 @@ module.exports = {
   makeUriFromId: makeUriFromId
 };
 
-
-function lookupSongById(spotifyId, callback) {
-  spotify.lookup({ type: 'track', id: spotifyId}, function(err, data) {
+function lookupSongById(song, callback) {
+  spotify.lookup({ type: 'track', id: song.source_id}, function(err, data) {
     if ( data.error || err ) {
       callback(new Error('Link is not valid'), null);
     } else {
-      callback(null, data);
+      song.lookup = data;
+      song.title = data.name;
+      song.artist = data.artists[0].name;
+      song.album_title = data.album.name;
+      callback(null, song);
     }
   });
 };
 
-function fetchSearchResults(query, callback) {
+function fetchSearchResults(song, query, queryType, callback) {
   spotify.search({type: 'track', query: query}, function(err, data) {
     if ( err ) {
       callback(err, null)
     } else {
-      callback(null, data.tracks.items.length ? data.tracks.items : []);
+      var results = data.tracks.items.length ? data.tracks.items : [];
+
+      song.results.spotify.queryTypes.push(queryType);
+      song.results.spotify[queryType] = {};
+      song.results.spotify[queryType].query = query;
+      song.results.spotify[queryType].results = results;
+
+      callback(null, song);
     }
   });
-  
 };
 
 function makeUriFromId(spotifyId) {

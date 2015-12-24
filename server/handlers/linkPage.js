@@ -51,10 +51,8 @@ function sendProvider (req, res, songFromDb, provider) {
     pageUrl : utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id),
     title : songFromDb.title,
     artist : songFromDb.artist,
-    album_art : songFromDb.spotify_images ? songFromDb.spotify_images.medium_image.url : songFromDb.album_art,
+    album_art : utils.getAlbumArtUrl(songFromDb),
     providers : createProvidersArray(songFromDb),
-    clicks : songFromDb.clicks,
-    creates : songFromDb.creates,
     providerUrl : providerUrl,
     provider : provider
   };
@@ -62,9 +60,6 @@ function sendProvider (req, res, songFromDb, provider) {
   var html = Mustache.render(template, templateObj);
   res.send(html);
 }
-
-// todo make function to determine provider text
-//
 
 function createProvidersArray (song) {
 

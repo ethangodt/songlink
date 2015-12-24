@@ -39,8 +39,7 @@ function convertYoutubeDuration(str) {
   return total * 1000;
 }
 
-function fetchSearchResults(query, callback) {  
-
+function fetchSearchResults(song, query, queryType, callback) {  
   search(query, function(err, ids) {
     if (err) {
       callback(err, null);
@@ -49,12 +48,18 @@ function fetchSearchResults(query, callback) {
         if (err) {
           callback(err, null);
         } else {
-          callback(null, vids.length ? vids : []);
+          var results = vids.length ? vids : [];
+
+          song.results.youtube.queryTypes.push(queryType);
+          song.results.youtube[queryType] = {};
+          song.results.youtube[queryType].query = query;
+          song.results.youtube[queryType].results = results;
+
+          callback(null, song);
         }
       });
     }
   });
-
 };
 
 function getVideosByIds(ids, callback) {
@@ -73,7 +78,6 @@ function makeLinkFromId(youtubeId) {
 }
 
 function search(queryString, callback) {
-  console.log(queryString)
   youtube.search(queryString, 10, function(err, res) {
     if (err || !res.items.length) {
       callback(new Error('Could not find any yt search results:', err), null);
