@@ -31,6 +31,10 @@ function fetchSearchResults(song, query, queryType, callback) {
 }
 
 function getAlbumArtUrl(song) {
+  if (song.itunes_id) {
+    return song.album_art;
+  }
+
   if (song.source === 'itunes') {
     return song.lookup.artworkUrl100;
   } else {
@@ -44,15 +48,28 @@ function getAlbumArtUrl(song) {
 }
 
 function getTopItunesResult(song) {
-  if (song.source === 'itunes') {
+  if (song.itunes_id) {
+    return { id: song.itunes_id }
+  } else if (song.source === 'itunes') {
     return song.lookup;
   } else {
-    return song.results.itunes.full.results.length ? song.results.itunes.full.results[0] : song.results.itunes.partial.results[0];
+    
+    var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
+    
+    for (var i = 0; i < queryTypes.length; i++) {
+      var results = song.results.itunes[queryTypes[i]].results;
+      for (var j = 0; j < results.length; j++) {
+        if (Math.abs((results[j].trackTimeMillis - song.track_length) / song.track_length) < .02) {
+          return results[j]
+        }
+      }
+    }
+
   }
 }
 
 function lookupSongById(song, callback) {
-  if (!song.lookup) {
+  if (song.lookup) {
     return callback(null, song);
   }
 
@@ -61,6 +78,11 @@ function lookupSongById(song, callback) {
       callback(new Error('Link is not valid'), null);
     } else {
       song.lookup = results[0];
+      song.title = results[0].trackName;
+      song.artist = results[0].artisttistName;
+      song.album_title = results[0].collectionName;
+      song.track_length = results[0].trackTimeMillis;
+      
       callback(null, song);
     }
   });
@@ -86,6 +108,7 @@ function makeSearchResultsObjects(results) {
       artist: song.artistName,
       album_title: song.collectionName,
       album_art: song.artworkUrl100,
+      track_length: song.trackTimeMillis,
       source_id: song.trackId,
       source: 'itunes',
       lookup: song
@@ -117,7 +140,14 @@ function makeText(itunesSong) {
 
 function search(searchUrl, numResults, callback) {
   request(searchUrl, function (err, response, body) {
-    body = JSON.parse(body);
+    
+    try {
+      body = JSON.parse(body);
+    } catch (e) {
+      body = {};
+      body.results = [];
+    }
+
     if (err) {
       callback(err, null);
     } else {

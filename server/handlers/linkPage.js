@@ -36,9 +36,9 @@ function sendProvider (req, res, song, provider) {
     }
   });
 
-  var topSpotifyResult = providers.spotify.getTopSpotifyResult(song)
-  var topItunesResult = providers.itunes.getTopItunesResult(song)
-  var topYoutubeResult = providers.youtube.getTopYoutubeResult(song)
+  var topSpotifyResult = providers.spotify.getTopSpotifyResult(song);
+  var topItunesResult = providers.itunes.getTopItunesResult(song);
+  var topYoutubeResult = providers.youtube.getTopYoutubeResult(song);
 
   var providerUrl;
 

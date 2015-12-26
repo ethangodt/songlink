@@ -41,15 +41,26 @@ function getAlbumArtUrl(song, size) {
 }
 
 function getTopSpotifyResult(song) {
-  if (song.source === 'spotify') {
+  if (song.spotify_id) {
+    return { id: song.spotify_id }
+  } else if (song.source === 'spotify') {
     return song.lookup;
   } else {
-    return song.results.spotify.full.results.length ? song.results.spotify.full.results[0] : song.results.spotify.partial.results[0];
+    var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
+
+    for (var i = 0; i < queryTypes.length; i++) {
+      var results = song.results.spotify[queryTypes[i]].results;
+      for (var j = 0; j < results.length; j++) {
+        if (Math.abs((results[j].duration_ms - song.track_length) / song.track_length) < .02) {
+          return results[j]
+        }
+      }
+    }
   }
 }
 
 function lookupSongById(song, callback) {
-  if (!song.lookup) {
+  if (song.lookup) {
     return callback(null, song);
   }
 
@@ -61,6 +72,7 @@ function lookupSongById(song, callback) {
       song.title = data.name;
       song.artist = data.artists[0].name;
       song.album_title = data.album.name;
+      song.track_length = data.duration_ms;
       callback(null, song);
     }
   });

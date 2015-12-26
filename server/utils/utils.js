@@ -38,17 +38,17 @@ function build(song, callback) {
         song.results[provider] = {};
         song.results[provider].queryTypes = [];
 
-        var queryTypes = ['full', 'partial'];
+        var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
 
         queryTypes.forEach(function(queryType) {
           var query = makeQuery(song, queryType);
-
+          
           providers[provider].fetchSearchResults(song, query, queryType, function(err, songFromBuild) {
             if (err) {
               reject(err);
             } else {
               for (provider in songFromBuild.results) {
-                if (songFromBuild.results[provider].queryTypes.length !== song.searches.length) {
+                if (songFromBuild.results[provider].queryTypes.length !== queryTypes.length) {
                   return;
                 }
               }
@@ -131,10 +131,79 @@ function makeSongLinkUrl(host, hash_id) {
 function makeQuery(song, queryType) {
   var query;
 
-  if (queryType === 'full') {
-    query = song.title + ' ' + song.artist + ' ' + song.album_title;
-  } else if (queryType === 'partial') {
-    query = song.title + ' ' + song.artist;
+  switch (queryType) {
+    case 'full':
+      query = song.title + ' ' + song.artist + ' ' + song.album_title;
+
+      break;
+
+    case 'partial':
+      query = song.title + ' ' + song.artist;
+
+      break;
+
+    case 'full-punc-keywords':
+      query = song.title + ' ' + song.artist + ' ' + song.album_title;
+
+      // Remove punctation (no inside content): parens, brackets, pound and ampersand
+      query = query.replace(/[&#\[\]()]/gi, ' ');
+
+      // Remove ' - '
+      query = query.replace(/ - /, ' ');
+
+      // Remove '- Single'
+      query = query.replace(/- Single/g, ' ');
+
+      break;
+
+    case 'full-albumParensBrackets':
+      // Remove parens and contents inside parens of album title
+      query = song.album_title.replace(/ *\([^)]*\) */g, ' ');
+
+      // Remove brackets and contents inside brackets of album title
+      query = query.replace(/ *\[[^)]*\] */g, ' ');
+
+      // Combine title, artist and new album title
+      query = song.title + ' ' + song.artist + ' ' + query
+      break;
+
+    case 'full-allParensBrackets':
+      query = song.title + ' ' + song.artist + ' ' + song.album_title;
+
+      // Remove parens and contents inside parens
+      query = query.replace(/ *\([^)]*\) */g, ' ');
+
+      // Remove brackets and contents inside brackets
+      query = query.replace(/ *\[[^)]*\] */g, ' ');
+      break;
+
+    case 'partial-punc-keywords':
+      query = song.title + ' ' + song.artist
+
+      // Remove punctation (no inside content): parens, brackets, pound and ampersand
+      query = query.replace(/[&#\[\]()]/gi, ' ');
+
+      // Remove ' - '
+      query = query.replace(/ - /, ' ');
+
+      // Remove '- Single'
+      query = query.replace(/- Single/g, ' ');
+
+      break;
+
+    case 'partial-allParensBrackets':
+      query = song.title + ' ' + song.artist
+
+      // Remove parens and contents inside parens
+      query = query.replace(/ *\([^)]*\) */g, ' ');
+
+      // Remove brackets and contents inside brackets
+      query = query.replace(/ *\[[^)]*\] */g, ' ');
+      break;
+
+    default: 
+      return undefined;
+      break;
   }
 
   return query.toLowerCase();

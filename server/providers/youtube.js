@@ -11,10 +11,6 @@ module.exports = {
   makeLinkFromId: makeLinkFromId
 }
 
-function compareDurations(vidDuration, songDuration) {
-  return (Math.abs(vidDuration - songDuration) / songDuration) < 0.08;
-}
-
 function convertYoutubeDuration(str) {
   var fromHours, fromMinutes, fromSeconds;
 
@@ -64,10 +60,23 @@ function fetchSearchResults(song, query, queryType, callback) {
 };
 
 function getTopYoutubeResult(song) {
-  if (song.source === 'youtube') {
+  if (song.youtube_id) {
+    return { id: song.youtube_id }
+  } else if (song.source === 'youtube') {
     return song.lookup;
   } else {
-    return song.results.youtube.full.results.length ? song.results.youtube.full.results[0] : song.results.youtube.partial.results[0];
+    
+    var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
+
+    for (var i = 0; i < queryTypes.length; i++) {
+      var results = song.results.youtube[queryTypes[i]].results;
+      for (var j = 0; j < results.length; j++) {
+        if (Math.abs((convertYoutubeDuration(results[j].contentDetails.duration) - song.track_length) / song.track_length) < .05) {
+          return results[j]
+        }
+      }
+    }
+
   }
 }
 
