@@ -24,7 +24,7 @@ export default function loading(loading = initial, action) {
         preference: loading.preference,
         search: action.isLoading
       })
-    default: 
+    default:
       return loading
   }
 }
