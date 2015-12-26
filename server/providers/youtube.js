@@ -60,7 +60,7 @@ function fetchSearchResults(song, query, queryType, callback) {
 };
 
 function getTopYoutubeResult(song) {
-  if (song.spotify_id || song.itunes_id || song.youtube_id) {
+  if (!song.results && !song.lookup) {
     return { id: song.youtube_id }
   } else if (song.source === 'youtube') {
     return song.lookup;
