@@ -61,13 +61,11 @@ function fetchSearchResults(song, query, queryType, callback) {
 
 function getTopYoutubeResult(song) {
   if (!song.results && !song.lookup) {
-    return { id: song.youtube_id }
+    return song.youtube_id ? { id: song.youtube_id }: undefined;
   } else if (song.source === 'youtube') {
     return song.lookup;
   } else {
-    
     var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
-
     for (var i = 0; i < queryTypes.length; i++) {
       var results = song.results.youtube[queryTypes[i]].results;
       for (var j = 0; j < results.length; j++) {
@@ -76,7 +74,6 @@ function getTopYoutubeResult(song) {
         }
       }
     }
-
   }
 }
 

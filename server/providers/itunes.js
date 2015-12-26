@@ -49,7 +49,7 @@ function getAlbumArtUrl(song) {
 
 function getTopItunesResult(song) {
   if (!song.results && !song.lookup) {
-    return { id: song.itunes_id }
+    return song.itunes_app_uri || song.itunes_store_uri ? { id: song.itunes_id, isStreamable: !!song.itunes_app_uri } : undefined;
   } else if (song.source === 'itunes') {
     return song.lookup;
   } else {
