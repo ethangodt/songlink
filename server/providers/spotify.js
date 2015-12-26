@@ -27,8 +27,10 @@ function fetchSearchResults(song, query, queryType, callback) {
 };
 
 function getAlbumArtUrl(song, size) {
-  var sizes = ['large', 'medium', 'small']
-  if (song.source === 'spotify') {
+  var sizes = ['large', 'medium', 'small'];
+  if (!song.lookup && !song.result) {
+    return song.album_art;
+  } else if (song.source === 'spotify') {
     return song.lookup.album.images[sizes.indexOf(size)].url;
   } else {
     var topSpotifyResult = getTopSpotifyResult(song);
