@@ -41,7 +41,7 @@ function getAlbumArtUrl(song, size) {
 }
 
 function getTopSpotifyResult(song) {
-  if (song.spotify_id) {
+  if (song.spotify_id || song.itunes_id || song.youtube_id) {
     return { id: song.spotify_id }
   } else if (song.source === 'spotify') {
     return song.lookup;

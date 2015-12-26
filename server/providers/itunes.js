@@ -48,7 +48,7 @@ function getAlbumArtUrl(song) {
 }
 
 function getTopItunesResult(song) {
-  if (song.itunes_id) {
+  if (song.spotify_id || song.itunes_id || song.youtube_id) {
     return { id: song.itunes_id }
   } else if (song.source === 'itunes') {
     return song.lookup;
