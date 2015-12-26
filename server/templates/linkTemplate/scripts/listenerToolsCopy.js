@@ -87,3 +87,6 @@ var preferenceSave = function (provider) {
   }
 };
 
+$(window).load(function () {
+  $('.albumArt').removeClass('unloaded');
+});
