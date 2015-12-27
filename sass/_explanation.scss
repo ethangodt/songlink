@@ -1,37 +1,49 @@
-.explanation {
-  line-height: 38px;
-  margin: 40px auto 0 auto;
-  margin-top: 40px;
-  width: 100%
+.explanationContainer {
+	margin-top: 30px;
+	padding-left: 30px;
+	color: $color-main;
+
+	p {
+		font-size: 28px;
+		margin-bottom: 25px;
+	}
+
+	ul {
+		padding-left: 30px;
+		font-size: 24px;
+	}
+
+	li {
+		margin-bottom: 15px;
+		transition: opacity 2s, transform 2s;
+	}
+
+	li .fa {
+		font-size: 20px;
+		margin-right: 25px;
+		color: $color-main !important;
+	}
+
+	li span{
+		color: #fd8a60;
+	}
 }
 
-.explanation .primary {
-  color: $color-dark-grey;
-  font-weight: 300;
-  margin-bottom: 18px;
-  padding-left: 16px;
-}
-
-.explanation .emphasis {
-  color: $color-main;
-  font-family: 'Satisfy', 'Open Sans', sans-serif;
-  font-size: 30px;
-  font-weight: 600;
-  margin-right: 6px;
+.explanationContainer .unloaded {
+	transform: translate(0, 10px);
+	opacity: 0;
 }
 
 @media #{$breakpoint-small} {
-
-  .explanation {
-    line-height: 26px;
-  }
-
-  .explanation .primary {
-    font-size: 14px;
-  }
-
-  .explanation .emphasis {
+  .explanationContainer p {
     font-size: 20px;
   }
-   
+
+  .explanationContainer ul {
+    font-size: 16px;
+  }
+
+	.explanationContainer li .fa {
+		margin-right: 10px;
+	}
 }
