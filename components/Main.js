@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import Search from './Search';
 import Explanation from './Explanation';
 import Promo from './Promo';
+import PreferencesHighlight from './PreferencesHighlight';
 
 class Main extends Component {
 
@@ -41,6 +42,8 @@ class Main extends Component {
         </div>
 
         <Promo />
+
+        <PreferencesHighlight />
       </div>
 
     )
