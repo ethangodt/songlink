@@ -10,14 +10,12 @@ module.exports = {
 };
 
 function fetchSearchResults(song, query, queryType, callback) {
-  console.log(query)
   spotify.search({type: 'track', query: query}, function(err, data) {
     if ( err ) {
       callback(err, null)
     } else {
       var results = data.tracks.items.length ? data.tracks.items : [];
 
-      song.results.spotify.queryTypes.push(queryType);
       song.results.spotify[queryType] = {};
       song.results.spotify[queryType].query = query;
       song.results.spotify[queryType].results = results;
@@ -47,10 +45,11 @@ function getTopSpotifyResult(song) {
   if (song.source === 'spotify') {
     return song.lookup;
   } else {
-    var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
+    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
 
     for (var i = 0; i < queryTypes.length; i++) {
       var results = song.results.spotify[queryTypes[i]].results;
+      console.log(song.results.spotify[queryTypes[i]].query);
       for (var j = 0; j < results.length; j++) {
         if (Math.abs((results[j].duration_ms - song.track_length) / song.track_length) < .02) {
           return results[j]

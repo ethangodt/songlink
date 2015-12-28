@@ -20,7 +20,6 @@ function fetchSearchResults(song, query, queryType, callback) {
     } else {
       var results = songs.length ? songs : [];
 
-      song.results.itunes.queryTypes.push(queryType);
       song.results.itunes[queryType] = {};
       song.results.itunes[queryType].query = query;
       song.results.itunes[queryType].results = results;
@@ -52,7 +51,7 @@ function getTopItunesResult(song) {
     return song.lookup;
   } else {
     
-    var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
+    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
     
     for (var i = 0; i < queryTypes.length; i++) {
       var results = song.results.itunes[queryTypes[i]].results;

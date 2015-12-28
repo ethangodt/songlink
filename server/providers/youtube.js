@@ -47,7 +47,6 @@ function fetchSearchResults(song, query, queryType, callback) {
         } else {
           var results = vids.length ? vids : [];
 
-          song.results.youtube.queryTypes.push(queryType);
           song.results.youtube[queryType] = {};
           song.results.youtube[queryType].query = query;
           song.results.youtube[queryType].results = results;
@@ -63,7 +62,7 @@ function getTopYoutubeResult(song) {
   if (song.source === 'youtube') {
     return song.lookup;
   } else {
-    var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
+    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
     for (var i = 0; i < queryTypes.length; i++) {
       var results = song.results.youtube[queryTypes[i]].results;
       for (var j = 0; j < results.length; j++) {
