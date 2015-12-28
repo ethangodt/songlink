@@ -87,4 +87,14 @@ var preferenceSave = function (provider) {
   }
 };
 
-module.exports = docCookies;
+
+
+window.addEventListener('load', function () {
+  var album = document.querySelector('.albumArt');
+  var className = 'unloaded';
+  if (album.classList) {
+    album.classList.remove(className);
+  } else {
+    album.className = album.className.replace(new RegExp('(^|\\b)' + className.split(' ').join('|') + '(\\b|$)', 'gi'), ' ');
+  }
+});

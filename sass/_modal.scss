@@ -21,6 +21,12 @@
   box-shadow: 0 10px 16px rgba(0, 0, 0, .2);
   color: #363636;
   box-sizing: border-box;
+  transition: transform .5s, opacity .25s;
+}
+
+.modalContainer.unloaded {
+  opacity: 0;
+  transform: translate(-50%, 20px);
 }
 
 .modalButtonContainer {

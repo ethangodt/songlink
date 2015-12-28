@@ -1,5 +1,5 @@
 .listenLinks {
-  margin: 35px auto 0 auto;
+  margin: 35px auto 100px auto;
   max-width: 480px;
   width: 90%;
 }
@@ -32,7 +32,7 @@
 }
 
 .listenLinks button .logo span {
-  font-size: 48px;
+  font-size: 33px;
   line-height: $song-page-link-height;
 }
 
@@ -45,16 +45,27 @@
 }
 
 .listenLinks button .link-text {
-  display: table-cell;
-  font-size: 20px;
-  font-weight: 300;
-  height: 100%;
-  vertical-align: middle;
-  width: 80%
+	display: table-cell;
+	font-size: 18px;
+	font-weight: 400;
+	height: 100%;
+	vertical-align: middle;
+	color: $color-dark-grey;
+	font-family: 'Open Sans', sans-serif;
+	float: left;
 }
 
 .listenLinks button .link-text span {
   text-align: center;
+}
+
+.listenLinks button .share {
+	float: right;
+	height: 100%;
+	text-align: center;
+	width: 20%;
+	font-size: 18px;
+	color: $color-dark-grey;
 }
 
 @media ($smallBreakRule) {

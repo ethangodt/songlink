@@ -10,7 +10,6 @@
 }
 
 header {
-  @include paper;
   background-color: white;
   border-radius: 0;
   height: $header-height;
@@ -22,6 +21,7 @@ header .logo-container {
   display: table;
   float: left;
   height: $header-height;
+	margin-left: 16px;
 }
 
 header .logo {
@@ -30,7 +30,6 @@ header .logo {
   font-size: 32px;
   font-weight: 800;
   line-height: 20px;
-  padding-left: 16px;
   vertical-align: middle;
 }
 
@@ -41,23 +40,33 @@ header .logo .tagline {
   letter-spacing: 1.3px;
 }
 
-header button {
-  @include button;
-  float: right;
-  font-size: 28px;
-  line-height: $header-height;
-  padding-right: 16px;
-  width: 60px;
-  text-align: right;
+header .nav-container {
+	display: table;
+	float: right;
+	height: $header-height;
+	margin-right: 16px;
 }
 
-header .fa-cog {
-  color: $color-dark-grey;
-  transition: 100ms transform;
-}
+header .nav {
+	display: table-cell;
+	vertical-align: middle;
 
-header button:hover .fa-cog {
-  transform: rotate(20deg);
+	li {
+		float: left;
+		margin-left: 30px;
+		color: #484848;
+	}
+
+	li > a {
+		color: inherit;
+		text-decoration: none;
+	}
+
+	li > a:hover {
+		color: $color-main;
+	}
+
+
 }
 
 @media #{$breakpoint-small} {
@@ -86,9 +95,18 @@ header button:hover .fa-cog {
     letter-spacing: 1px;
   }
 
+	header .nav-container {
+		height: $header-height-small;
+	}
+
+	header .nav li {
+		font-size: 14px;
+		margin-left: 20px;
+	}
+
   header button {
     font-size: 18px;
     line-height: $header-height-small;
   }
-   
+
 }

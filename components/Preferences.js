@@ -47,16 +47,16 @@ class Preferences extends Component {
     return (
       <div className="preferences wrapper">
 
-        <h2 className="header">redirect</h2>
+        <h2 className="header">automatic redirects</h2>
 
-        <p className="redirect-info">Songlink works best when you tell us where you listen to music. 
+        <p className="redirect-info">Songlink works best when you tell us where you listen to music.
           Next time you click on a songlink we’ll open that song in your music app automatically.
         </p>
 
         <PreferencesGroup selected={this.state.selected} handleClick={this.handleClick.bind(this)}/>
 
         <button className="save-button" onClick={this.handleSubmit.bind(this)}>Save</button>
-        
+
         <div className="update-message">{this.state.updated ? 'saved successfully!' : undefined}</div>
 
       </div>
