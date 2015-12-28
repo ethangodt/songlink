@@ -10,7 +10,7 @@ class PreferencesHighlight extends Component {
           <Link to="/preferences">
             <span>
               <span className="fa fa-cog"></span>
-              <span>Do something with preferences by clicking on the thingy</span>
+              <span>Change your <span id="preferenceHighlight">preferences</span> so that songlinks open automatically in your music app of choice</span>
               <span className="hoverArrow">></span>
             </span>
           </Link>
