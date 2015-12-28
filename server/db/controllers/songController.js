@@ -2,7 +2,8 @@ var Song = require('../models/song');
 
 module.exports = {
   create: create,
-  get: get
+  get: get,
+  getAll: getAll
 }
 
 function create(songData, callback) {
@@ -17,6 +18,15 @@ function create(songData, callback) {
 function get(songObj, callback) {
   // allows you to search with misc. song criteria
   Song.findOne(songObj, function (err, response) {
+    if (err) {
+      console.error(err);
+    }
+    callback(err, response);
+  })
+}
+
+function getAll(callback) {
+  Song.find({}, function (err, response) {
     if (err) {
       console.error(err);
     }

@@ -36,6 +36,7 @@
     "babel-plugin-react-display-name": "^2.0.0",
     "babel-plugin-react-transform": "^1.1.0",
     "babel-runtime": "^5.8.20",
+    "bluebird": "^3.1.1",
     "body-parser": "^1.14.1",
     "chai": "^3.4.1",
     "classnames": "^2.2.1",

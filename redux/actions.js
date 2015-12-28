@@ -1,24 +1,5 @@
 import $ from 'jquery'
 
-const testSongs = [
-  {
-    title: 'Intro',
-    album: 'This Is All Yours',
-    artist: 'Alt-J',
-    itunes_id: 'some_itunes_string',
-    album_art: 'http://is2.mzstatic.com/image/thumb/Music2/v4/09/26/76/092676ce-d446-9406-e1c6-79aecce2d0d7/source/100x100bb.jpg',
-    album_art_size: 10000
-  },
-  {
-    title: 'Stairway to Heaven',
-    album: 'Led Zeppelin IV',
-    artist: 'Led Zeppelin',
-    itunes_id: 'another_itunes_string',
-    album_art: 'http://is2.mzstatic.com/image/thumb/Music1/v4/b0/43/4d/b0434dcd-2cef-1a9d-a35d-486b8dbe2f2c/source/100x100bb.jpg',
-    album_art_size: 10000
-  }
-]
-
 export function addLink(link) {
   return {
     type: 'ADD_LINK',
@@ -39,7 +20,7 @@ export function clearResults() {
   }
 }
 
-export function createLink(song, id) {
+export function createLink(song) {
   return (dispatch, getState) => {
     dispatch(toggleLoadingLink(true))
     $.ajax({

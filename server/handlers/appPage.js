@@ -10,65 +10,25 @@ module.exports = {
 
 function create(req, res) {
 
-  var song = req.body.spotify_id ? {spotify_id : req.body.spotify_id} : {itunes_id : req.body.itunes_id};
-
-  utils.checkDb(song, function (err, songFromDb) {
-    if (songFromDb) {
-      sendSong(req, res, err, songFromDb);
-    } else {
-      if (!song.title) {
-        utils.verifyId(song, function (err, songFromVerification) {
-          if (err) {
-            res.status(400).send(err.message);
-          } else {
-            utils.build(songFromVerification, function (err, songFromBuild) {
-              if (err) {
-                res.status(400).send(err.message);
-                console.error(err);
-              } else {
-                utils.createHash(songFromBuild, 0, function(songFromHasher) {
-                  utils.addSongToDb(songFromHasher, function (err, songFromDb) {
-                    sendSong(req, res, err, songFromDb);
-                  });
-                });
-              }
-            });
-          }
-        });
+  utils.checkDb(req.body)
+    .then(function(songFromDb) {
+      if (songFromDb) {
+        return res.send(utils.makeSongLinkObject(songFromDb, req.headers.host));
       } else {
-        utils.build(song, function (err, songFromBuild) {
-          if (err) {
-            console.error(err);
-          } else {
-            utils.createHash(songFromBuild, 0, function(songFromHasher) {
-              utils.addSongToDb(songFromHasher, function (err, songFromDb) {
-                sendSong(req, res, err, songFromDb);
-              });
-            });
-          }
-        });
+        return utils.verifyId(req.body)
+          .then(utils.build)
+          .then(utils.createHash)
+          .then(utils.addSongToDb)
+          .then(function(finalSong) {
+            res.send(utils.makeSongLinkObject(finalSong, req.headers.host));
+          });
       }
-    }
-  });
+    })
+    .catch(function (err) {
+      res.status(400).send(err.message);
+      console.error(err);
+    });
 
-}
-
-function sendSong (req, res, err, songFromDb) {
-  if (err) {
-    console.error(err)
-  } else {
-    var obj = {};
-    var url = req.headers.host;
-    if (req.headers.host.slice(0,4) === "www.") {
-      url = req.headers.host.slice(4);
-    }
-    obj.share_link = utils.makeSongLinkUrl(url, songFromDb.hash_id);
-    obj.artist = songFromDb.artist;
-    obj.title = songFromDb.title;
-    obj.album_title = songFromDb.album_title;
-    obj.album_art = songFromDb.album_art;
-    res.send(obj);
-  }
 }
 
 function render(req, res) {
@@ -76,12 +36,12 @@ function render(req, res) {
 }
 
 function search(req, res) {
-  var queryString = providers.itunes.makeSearchUrlWithString(req.query.search);
+  var queryString = providers.itunes.makeSearchUrlWithQuery(req.query.search);
   providers.itunes.search(queryString, 10, function (err, songs) {
     if (err) {
       res.status(400).send(err.message);
     } else {
-      res.status(200).send(songs)
+      res.status(200).send(providers.itunes.makeSearchResultsObjects(songs));
     }
   });
 }
