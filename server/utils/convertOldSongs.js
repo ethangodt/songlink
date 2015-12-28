@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 var mongoose = require('mongoose');
 var utils = require('./utils');
 var providers = require('../providers');
@@ -18,8 +20,6 @@ controller.getAll(function (err, songs) {
         songs[i].source = 'spotify';
         songs[i].source_id = songs[i].spotify_id;
       }
-
-      if (i === 0) console.log(songs[i]);
 
       utils.verifyId(songs[i])
         .then(utils.build)

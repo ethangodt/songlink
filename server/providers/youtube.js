@@ -92,8 +92,11 @@ function makeLinkFromId(youtubeId) {
 
 function search(queryString, callback) {
   youtube.search(queryString, 10, function(err, res) {
-    if (err || !res.items.length) {
-      callback(new Error('Could not find any yt search results:', err), null);
+    if (err) {
+      console.error(err);
+      callback(new Error('Could not find any yt search results due to error'), null);
+    } else if (!res.items.length) {
+      callback(null, []);
     } else {
       var ids = _.map(res.items, function(item) {
         if (item.id.kind === 'youtube#video') {
