@@ -11,17 +11,17 @@
 *:before,
 *:after {
   @include border-box;
-  
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: $color-background;
-  color: black;
+  background: radial-gradient(circle at top right, #DADADA, #F5F5F5 50%);;
+  color: #545454;
   font-family: 'Open Sans', sans-serif;
-  font-size: 19px;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 400;
+	-moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -39,3 +39,5 @@ body {
 @import 'preferences';
 @import 'preferences-group';
 @import 'footer';
+@import 'promo';
+@import 'preferencesHighlight';

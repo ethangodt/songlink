@@ -17,11 +17,12 @@ class Header extends Component {
                 </div>
               </div>
             </Link>
-            <Link to="/preferences">
-              <button className="settings">
-                <span className="fa fa-cog"></span>
-              </button>
-            </Link>
+            <div className="nav-container">
+              <ul className="nav">
+                <li style={ {display: this.props.showCreateLinksLink ? '' : 'none'} }><Link to="/">create link</Link></li>
+                <li><Link to="/preferences">preferences</Link></li>
+              </ul>
+            </div>
           </div>
         </header>
       </div>

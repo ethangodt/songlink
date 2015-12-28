@@ -1,18 +1,17 @@
 .songContainer {
-  // display: inline-block;
-  // max-width: 480px;
-  // position: relative;
-  // left: 50%;
-  // transform: translate(-50%, 0);
-  
-  margin: 0 auto;
-  max-width: 480px;
-  width: 90%;
+	margin: 0 auto;
+	max-width: 480px;
 }
 
 .albumArt {
   float: left;
   box-shadow: 0 3px 6px #bebebe;
+  transition: transform .7s, opacity .7s;
+}
+
+.unloaded {
+  transform: translate(0, 20px);
+  opacity: 0;
 }
 
 .tableWrapper {
@@ -25,7 +24,7 @@
   display: table-cell;
   vertical-align: middle;
   margin: 0 0 0 35px;
-  font-size: 30px;
+  font-size: 28px;
   color: $color-main;
 }
 

@@ -1,13 +1,10 @@
 footer {
-  background-color: $color-main;
-  height: 220px;
-  line-height: 72px;
-  margin-top: 200px;
+  background-color: $color-light-grey;
+  line-height: 50px;
   text-align: center;
 }
 
 footer span {
-  color: white;
   font-size: 14px;
   font-weight: 400;
 }
@@ -17,5 +14,5 @@ footer span {
   footer span {
     font-size: 12px;
   }
-   
+
 }

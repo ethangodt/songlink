@@ -61,6 +61,14 @@
   }
 }
 
+.link .link-container button.copy .inactive {
+  color: lightgrey;
+
+  &:hover {
+    color: lightgrey;
+  }
+}
+
 .link input {
   display: inline-block;
   border: 1px solid lightgrey;
@@ -90,7 +98,7 @@
   width: $link-input-height;
 }
 
-.link button.copy .fa-link{
+.link button.copy .fa-link {
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);
   -webkit-transform: scaleX(-1);

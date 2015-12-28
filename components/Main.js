@@ -4,7 +4,9 @@ import Links from './Links';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Search from './Search';
-import Explanation from './Explanation'
+import Explanation from './Explanation';
+import Promo from './Promo';
+import PreferencesHighlight from './PreferencesHighlight';
 
 class Main extends Component {
 
@@ -20,22 +22,30 @@ class Main extends Component {
 
   render() {
     return (
-      <div className="wrapper">
 
-        <Search 
-          actions={this.props.actions}
-          invalidLinks={this.props.invalidLinks}
-          loading={this.props.loading}
-          links={this.props.links}
-          results={this.props.results}/>
+      <div>
+        <div className="wrapper">
 
-        { this.renderExplanation() }
+          <Search
+            actions={this.props.actions}
+            invalidLinks={this.props.invalidLinks}
+            loading={this.props.loading}
+            links={this.props.links}
+            results={this.props.results}/>
 
-        <Links 
-          links={this.props.links}
-          loading={this.props.loading}/>
+          { this.renderExplanation() }
 
+          <Links
+            links={this.props.links}
+            loading={this.props.loading}/>
+
+        </div>
+
+        <Promo />
+
+        <PreferencesHighlight />
       </div>
+
     )
   }
 
