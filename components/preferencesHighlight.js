@@ -10,7 +10,7 @@ class PreferencesHighlight extends Component {
           <Link to="/preferences">
             <span>
               <span className="fa fa-cog"></span>
-              <span>Do something with preferences by clicking on the thingy.</span>
+              <span>Do something with preferences by clicking on the thingy</span>
               <span className="hoverArrow">></span>
             </span>
           </Link>
