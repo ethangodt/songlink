@@ -11,8 +11,15 @@ mongoose.connect(mongoUrl);
 
 controller.getAll(function (err, songs) {
 
+  var found = 0;
+  var completed = 0;
+
   for (var i = 0; i < songs.length; i++) {
     if (!songs[i].lookup && !songs[i].results) {
+
+      found++;
+      console.log('Found old song, number ' + i + 'of ' + songs.length);
+
       if (songs[i].itunes_id) {
         songs[i].source = 'itunes';
         songs[i].source_id = songs[i].itunes_id;
@@ -21,12 +28,17 @@ controller.getAll(function (err, songs) {
         songs[i].source_id = songs[i].spotify_id;
       }
 
+      var hash_id = songs[i].hash_id;
+
       utils.verifyId(songs[i])
         .then(utils.build)
         .then(function(songFromBuild) {
-          console.log('Finished');
+          songFromBuild.hash_id = hash_id;
           songFromBuild.save(function() {
-            if (i === songs.length - 1) {
+            completed++;
+            console.log('Completed number' + i);
+            if (completed === found) {
+              console.log('done');
               mongoose.disconnect();
             }
           });
