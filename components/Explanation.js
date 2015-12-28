@@ -39,6 +39,6 @@ var init = function () {
   loadTip(tips[0], 1);
 };
 
-window.onload = init;
+window.addEventListener('load', init);
 
 export default Explanation
