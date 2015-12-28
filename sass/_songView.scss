@@ -1,10 +1,6 @@
 .songContainer {
-   display: inline-block;
-   max-width: 480px;
-   position: relative;
-   left: 50%;
-   transform: translate(-50%, 0);
-	 overflow: hidden;
+	margin: 0 auto;
+	max-width: 480px;
 }
 
 .albumArt {
@@ -21,15 +17,14 @@
 .tableWrapper {
   display: table;
   height: $song-page-album-art-size;
-  margin-left: 30px;
-	float: left;
+  padding-left: 30px;
 }
 
 .songInfo {
   display: table-cell;
   vertical-align: middle;
   margin: 0 0 0 35px;
-  font-size: 30px;
+  font-size: 28px;
   color: $color-main;
 }
 
