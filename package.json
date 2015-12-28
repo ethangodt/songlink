@@ -19,7 +19,7 @@
     "js:copy": "cp -a server/templates/linkTemplate/scripts/. dist/scripts/",
     "js:uglify": "uglifyjs server/templates/linkTemplate/scripts/listenerTools.js -o dist/scripts/listenerTools.js",
     "js:webpack": "NODE_ENV=production webpack --config webpack.production.config.js",
-    "images:copy": "cp server/static/assets/favicon.ico dist/assets/favicon.ico && cp server/static/assets/siteImage.jpeg dist/assets/siteImage.jpeg",
+    "images:copy": "cp -a server/static/assets/. dist/assets/",
     "css:sass:prod": "node-sass sass/main.scss dist/main.css --output-style compressed",
     "css:sass:dev": "node-sass sass/main.scss dist/main.css",
     "css:sass:watch": "nodemon -e scss --watch ./sass -x \"npm run css:sass:dev\"",

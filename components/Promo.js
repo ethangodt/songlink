@@ -37,7 +37,7 @@ class Promo extends Component {
             <h3>Share with anyone.</h3>
             <p>Use songlinks to share your favorite songs with friends regardless of what service they’re subscribed to.</p>
           </div>
-          <img id="songPageScreenshot" src="assets/songPageScreenshot.png" alt="" width="550px"/>
+          <img id="songPageScreenshot" src="assets/songPageScreenshot.jpg" alt="" width="550px"/>
         </div>
       </div>
     )
