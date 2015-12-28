@@ -60,9 +60,7 @@ function fetchSearchResults(song, query, queryType, callback) {
 };
 
 function getTopYoutubeResult(song) {
-  if (!song.results && !song.lookup) {
-    return song.youtube_id ? { id: song.youtube_id }: undefined;
-  } else if (song.source === 'youtube') {
+  if (song.source === 'youtube') {
     return song.lookup;
   } else {
     var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];

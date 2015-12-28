@@ -10,6 +10,7 @@ module.exports = {
 };
 
 function fetchSearchResults(song, query, queryType, callback) {
+  console.log(query)
   spotify.search({type: 'track', query: query}, function(err, data) {
     if ( err ) {
       callback(err, null)
@@ -43,9 +44,7 @@ function getAlbumArtUrl(song, size) {
 }
 
 function getTopSpotifyResult(song) {
-  if (!song.results && !song.lookup) {
-    return song.spotify_id ? { id: song.spotify_id } : undefined;
-  } else if (song.source === 'spotify') {
+  if (song.source === 'spotify') {
     return song.lookup;
   } else {
     var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];

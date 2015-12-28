@@ -48,9 +48,7 @@ function getAlbumArtUrl(song) {
 }
 
 function getTopItunesResult(song) {
-  if (!song.results && !song.lookup) {
-    return song.itunes_app_uri || song.itunes_store_uri ? { id: song.itunes_id, isStreamable: !!song.itunes_app_uri } : undefined;
-  } else if (song.source === 'itunes') {
+  if (song.source === 'itunes') {
     return song.lookup;
   } else {
     
@@ -79,7 +77,7 @@ function lookupSongById(song, callback) {
     } else {
       song.lookup = results[0];
       song.title = results[0].trackName;
-      song.artist = results[0].artisttistName;
+      song.artist = results[0].artistName;
       song.album_title = results[0].collectionName;
       song.track_length = results[0].trackTimeMillis;
       

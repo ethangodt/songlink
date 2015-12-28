@@ -130,7 +130,7 @@ function makeSongLinkUrl(host, hash_id) {
 
 function makeQuery(song, queryType) {
   var query;
-
+  console.log(song)
   switch (queryType) {
     case 'full':
       query = song.title + ' ' + song.artist + ' ' + song.album_title;
