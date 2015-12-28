@@ -45,7 +45,7 @@ function fetchSearchResults(song, query, queryType, callback) {
         if (err) {
           callback(err, null);
         } else {
-          var results = vids.length ? vids : [];
+          var results = vids.length ? vids.slice(0, 5) : [];
 
           song.results.youtube[queryType] = {};
           song.results.youtube[queryType].query = query;
