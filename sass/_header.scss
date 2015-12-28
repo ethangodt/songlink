@@ -10,7 +10,6 @@
 }
 
 header {
-  @include paper;
   background-color: white;
   border-radius: 0;
   height: $header-height;
