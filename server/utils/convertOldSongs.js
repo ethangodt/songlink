@@ -26,7 +26,9 @@ controller.getAll(function (err, songs) {
         .then(function(songFromBuild) {
           console.log('Finished');
           songFromBuild.save(function() {
-            mongoose.disconnect();
+            if (i === songs.length - 1) {
+              mongoose.disconnect();
+            }
           });
         })
         .catch(function (err) {
