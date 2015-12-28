@@ -78,12 +78,15 @@
           <div class="link-text">
             <span>{{text}}</span>
           </div>
+          <div class="share">
+            <span class="fa fa-share-square-o"></span>
+          </div>
         </button>
       {{/providers}}
     </div>
 
     <footer>
-      <span>&copy; 2015 songl.ink</span>
+      <span>&copy; 2015 songl.ink | <a href="mailto:">contact</a></span>
     </footer>
   </main>
 
@@ -91,6 +94,8 @@
     <div class="modalContainer unloaded">
       <div class="top-strip"></div>
       <p>Songlink works best when you tell us where you listen to music. Next time you click on a songlink we’ll open your app for you automatically.</p>
+      <br/>
+      <p>You can always go to <a href="http://songl.ink/">songl.ink</a> and change this later.</p>
       <div class="modalButtonContainer">
         <button class="mini spotify" onclick="modalSelection.click('spotify')">
           <span class="fa fa-spotify"></span><span> Spotify</span>
@@ -108,7 +113,6 @@
           Save preference
         </button>
       </div>
-      <p>You can always go to songl.ink and change this later.</p>
     </div>
   </div>
 
