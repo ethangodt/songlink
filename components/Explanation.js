@@ -19,7 +19,7 @@ class Explanation extends Component {
 }
 
 var init = function () {
-  var tips = document.querySelector('.explanationContainer').getElementsByClassName('unloaded');
+  var tips = document.querySelectorAll('.explanationContainer .unloaded');
   tips = Array.prototype.slice.call(tips);
   var className = 'unloaded';
   var loadTip = function(tip, count){
