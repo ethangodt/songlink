@@ -9,7 +9,7 @@ class Promo extends Component {
         <img className="album2" src="https://i.scdn.co/image/f4b70346a9ecdac98cd63cd0e07c0aa8381bc90d" width="160px"/>
         <img className="album3" src="https://i.scdn.co/image/5227b0dd98d2a435479a633a59b5028ed06fb4b4" width="170px"/>
         <img className="album4" src="https://i.scdn.co/image/04da6dfc1f5f45fdeba938a0cc71cf372524fd43" width="140px"/>
-        <img className="album5" src="https://i.scdn.co/image/19d8730694d33cb588d78ab1bf5043ac5b8d8aec" width="120px"/>
+        <img className="album5" src="https://i.scdn.co/image/5020a71a285a2063573d388167471c84678e3e71" width="120px"/>
         <img className="album6" src="https://i.scdn.co/image/f71517e8919892273de8d8677e42cdcf1b976aa7" width="140px"/>
         <div className="wrapper">
           <div className="blurb">
