@@ -49,7 +49,6 @@ function getTopSpotifyResult(song) {
 
     for (var i = 0; i < queryTypes.length; i++) {
       var results = song.results.spotify[queryTypes[i]].results;
-      console.log(song.results.spotify[queryTypes[i]].query);
       for (var j = 0; j < results.length; j++) {
         if (Math.abs((results[j].duration_ms - song.track_length) / song.track_length) < .02) {
           return results[j]
