@@ -34,7 +34,7 @@ class PreferencesGroup extends Component {
             })}
             onClick={this.props.handleClick}
           > 
-            <span className="fa fa-youtube youtube"></span><span className="youtube">YouTube</span><br/>
+            <span className="fa fa-youtube-play youtube"></span><span className="youtube">YouTube</span><br/>
           </div>
           <div 
             className={classnames({

@@ -2,6 +2,27 @@ import React, { Component } from 'react'
 
 class Promo extends Component {
 
+  constructor(props, context) {
+    super(props, context)
+    this.state = {
+      albums: [],
+      movementRates: [.3, .3, .5, .3, .2, .3]
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      albums: document.querySelectorAll('.promoContainer > img')
+    }, () => {
+      window.addEventListener('scroll', () => {
+        for (var i = 0; i < this.state.albums.length; i++) {
+          var y = -1 * window.scrollY * this.state.movementRates[i];
+          this.state.albums[i].style.transform = "translate(0px, " + y + "px)";
+        }
+      })
+    })
+  }
+
   render() {
     return (
       <div className="promoContainer">
@@ -23,22 +44,5 @@ class Promo extends Component {
   }
 
 }
-
-// parallax album logic
-var albums;
-var movementRates;
-
-// the page must load before the DOM elements can be selected
-window.addEventListener('load', function () {
-  albums = document.querySelectorAll('.promoContainer > img');
-  movementRates = [.3, .3, .5, .3, .2, .3];
-});
-
-window.addEventListener('scroll', function () {
-  for (var i = 0; i < albums.length; i++) {
-    var y = -1 * window.scrollY * movementRates[i];
-    albums[i].style.transform = "translate(0px, " + y + "px)";
-  }
-});
 
 export default Promo

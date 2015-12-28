@@ -97,7 +97,7 @@ function createProvidersArray (song) {
   },
   {
     provider: 'youtube',
-    icon: 'youtube',
+    icon: 'youtube-play',
     url : song.youtube_id ? providers.youtube.makeLinkFromId(song.youtube_id) :undefined,
     text : song.youtube_id ? 'Play now in YouTube' : 'Not available on YouTube',
     className : song.youtube_id ? 'fullWidth youtube' : 'fullWidth disabled youtube'
