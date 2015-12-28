@@ -1,5 +1,7 @@
 .preferences {
   text-align: center;
+	margin-top: 50px;
+	margin-bottom: 100px;
 }
 
 .preferences.wrapper {
@@ -8,7 +10,7 @@
 
 .preferences .header {
   color: $color-main;
-  font-family: 'Satisfy', 'Open Sans', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 14px;
@@ -29,7 +31,7 @@
   font-size: 14px;
   font-weight: 600;
   height: 36px;
-  margin-top: 20px; 
+  margin-top: 20px;
   outline: none;
   padding: 0 16px;
   width: 40%;
