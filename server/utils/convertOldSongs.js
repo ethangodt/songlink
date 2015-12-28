@@ -24,7 +24,10 @@ controller.getAll(function (err, songs) {
       utils.verifyId(songs[i])
         .then(utils.build)
         .then(function(songFromBuild) {
-          songFromBuild.save();
+          console.log('Finished');
+          songFromBuild.save(function() {
+            mongoose.disconnect();
+          });
         })
         .catch(function (err) {
           console.error(err);
