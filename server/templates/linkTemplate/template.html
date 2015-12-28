@@ -35,6 +35,8 @@
 
   </script>
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
 </head>
 <body>
   <main> <!-- main wrapper for modal blur -->
@@ -118,13 +120,18 @@
 
   <script src="scripts/listenerToolsCopy.js"></script>
   <script>
-    if ('{{{providerUrl}}}') {
-      if ('{{provider}}' === 'youtube' || '{{provider}}' === 'itunes') {
-        window.location.href = '{{{providerUrl}}}'
-      } else {
-        window.location.href = '{{{providerUrl}}}';
+
+    window.addEventListener('load', function () {
+      if ('{{{providerUrl}}}') {
+        if ('{{provider}}' === 'youtube' || '{{provider}}' === 'itunes') {
+          window.location.href = '{{{providerUrl}}}'
+        } else {
+          window.location.href = '{{{providerUrl}}}';
+        }
       }
-    }
+    });
+
   </script>
+
 </body>
 </html>
