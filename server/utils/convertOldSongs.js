@@ -19,7 +19,7 @@ controller.getAll(function (err, songs) {
         songs[i].source_id = songs[i].spotify_id;
       }
 
-      // console.log(songs[i]);
+      if (i === 0) console.log(songs[i]);
 
       utils.verifyId(songs[i])
         .then(utils.build)
@@ -32,13 +32,4 @@ controller.getAll(function (err, songs) {
     }
   }
 });
-
-
-// get all songs with song controller
-
-// loop through songs
-
-// if not lookup and not results
-
-  // do like app page handler and build song
 
