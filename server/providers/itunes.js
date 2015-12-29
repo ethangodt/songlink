@@ -129,9 +129,9 @@ function makeLink(itunesSong) {
 
 function makeText(itunesSong) {
   if (itunesSong.isStreamable) {
-    return 'Play now on Apple Music';
+    return 'Play on Apple Music';
   } else {
-    return 'Open now in iTunes Store';
+    return 'Open in iTunes Store';
   }
 }
 
