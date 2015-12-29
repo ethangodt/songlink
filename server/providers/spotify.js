@@ -14,7 +14,8 @@ function fetchSearchResults(song, query, queryType, callback) {
     if ( err ) {
       callback(err, null)
     } else {
-      var results = data.tracks.items.length ? data.tracks.items.slice(0, 5) : [];
+      
+      var results = data.tracks && data.tracks.items.length ? data.tracks.items.slice(0, 5) : [];
 
       song.results.spotify[queryType] = {};
       song.results.spotify[queryType].query = query;
