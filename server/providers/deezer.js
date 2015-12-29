@@ -25,18 +25,23 @@ function fetchSearchResults(song, query, queryType, callback) {
 function getTopDeezerResult(song) {
   if (song.source === 'deezer') {
     return song.lookup;
-  } else {
-    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+  } 
 
-    for (var i = 0; i < queryTypes.length; i++) {
-      var results = song.results.deezer[queryTypes[i]].results;
-      for (var j = 0; j < results.length; j++) {
-        if (Math.abs(((results[j].duration * 1000) - song.track_length) / song.track_length) < .02) {
-          return results[j]
-        }
+  if (!song.results.deezer) {
+    return undefined;
+  }
+
+  var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+
+  for (var i = 0; i < queryTypes.length; i++) {
+    var results = song.results.deezer[queryTypes[i]].results;
+    for (var j = 0; j < results.length; j++) {
+      if (Math.abs(((results[j].duration * 1000) - song.track_length) / song.track_length) < .02) {
+        return results[j]
       }
     }
   }
+
 }
 
 // function lookupSongById(song, callback) {

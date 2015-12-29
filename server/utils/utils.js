@@ -135,11 +135,20 @@ function makeQuery(song, queryType) {
       // Remove '- Single'
       query = query.replace(/- Single/g, ' ');
 
+      // Remove 'feat.'
+      query = query.replace(/feat\./g, '');
+
+      // Remove 'Pt.'
+      query = query.replace(/Pt\./g, '');
+
+      // Remove 'Pts.'
+      query = query.replace(/Pts\./g, '');
+
+      // Remove numbers
+      query = query.replace(/\d/g, '');
+
       // Remove ' - '
       query = query.replace(/ - /g, ' ');
-
-      // Remove 'feat.'
-      query = query.replace(/feat\./g, ' ');
 
       break;
 
