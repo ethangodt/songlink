@@ -43,6 +43,7 @@ function sendProvider (req, res, song, provider) {
   var topSpotifyResult = providers.spotify.getTopSpotifyResult(song);
   var topItunesResult = providers.itunes.getTopItunesResult(song);
   var topYoutubeResult = providers.youtube.getTopYoutubeResult(song);
+  var topDeezerResult = providers.deezer.getTopDeezerResult(song);
 
   var providerUrl;
 
@@ -52,6 +53,8 @@ function sendProvider (req, res, song, provider) {
     providerUrl = providers.itunes.makeLink(topItunesResult.trackId);
   } else if (provider === 'spotify') {
     providerUrl = providers.spotify.makeUriFromId(topSpotifyResult.id);
+  } else if (provider === 'deezer') {
+    providerUrl = providers.deezer.getLink(topDeezerResult);
   }
 
   var templateObj = {
@@ -59,7 +62,7 @@ function sendProvider (req, res, song, provider) {
     title : song.title,
     artist : song.artist,
     album_art : providers.spotify.getAlbumArtUrl(song, 'large') || providers.itunes.getAlbumArtUrl(song),
-    providers : createProvidersArray(topSpotifyResult, topItunesResult, topYoutubeResult),
+    providers : createProvidersArray(topSpotifyResult, topItunesResult, topYoutubeResult, topDeezerResult),
     providerUrl : providerUrl,
     provider : provider
   };
@@ -68,7 +71,7 @@ function sendProvider (req, res, song, provider) {
   res.send(html);
 }
 
-function createProvidersArray (spotifySong, itunesSong, youtubeSong) {
+function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong) {
 
   return [
   {
@@ -91,6 +94,13 @@ function createProvidersArray (spotifySong, itunesSong, youtubeSong) {
     url : itunesSong ? providers.itunes.makeLink(itunesSong) : undefined,
     text : itunesSong ? providers.itunes.makeText(itunesSong) : 'Not available on iTunes',
     className : itunesSong ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
+  },
+  {
+    provider : 'deezer',
+    icon: 'spotify',
+    url : deezerSong ? providers.deezer.getLink(deezerSong) : undefined,
+    text : deezerSong ? 'Play now in Deezer' : 'Not available on Deezer',
+    className : deezerSong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
   }];
 
 }
