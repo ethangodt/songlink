@@ -66,7 +66,7 @@ var providerClick = function (provider, providerUrl) {
     }, 10);
   } else {
     // FYI, this condition can occur when the users preference is 'none', or if the provider they prefer does not stream the song
-    if (provider === 'youtube' || provider === 'itunes') {
+    if (provider === 'youtube' || provider === 'itunes' || provider === 'deezer') {
       window.open(providerUrl, '_blank');
     } else {
       window.location.href = providerUrl;
@@ -80,7 +80,7 @@ var preferenceSave = function (provider) {
   $('.modalEnvironment').css('display', 'none');
   $('body > main').removeClass('blur');
 
-  if (modalSelection.originalPref === 'youtube' || modalSelection.originalPref === 'itunes') {
+  if (modalSelection.originalPref === 'youtube' || modalSelection.originalPref === 'itunes' || modalSelection.originalPref === 'deezer') {
     window.open(modalSelection.originalUrl, '_blank');
   } else {
     window.location.href = modalSelection.originalUrl;
