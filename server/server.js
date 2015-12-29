@@ -1,5 +1,6 @@
 require('dotenv').load();
 
+var compress = require('compression');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var db = require('./config/db.config');
@@ -10,6 +11,7 @@ db();
 
 var app = express();
 
+app.use(compress());
 app.use(express.static('./dist'));
 
 

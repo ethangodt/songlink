@@ -33,14 +33,14 @@ function build(song) {
 
     for (var provider in providers) {
       if (provider !== song.source) {
-        
+
         song.results[provider] = {};
 
         var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
 
         queryTypes.forEach(function(queryType) {
           var query = makeQuery(song, queryType);
-          
+
           providers[provider].fetchSearchResults(song, query, queryType, function(err, songFromBuild) {
             if (err) {
               reject(err);
@@ -53,7 +53,7 @@ function build(song) {
               resolve(songFromBuild);
             }
           });
-        });        
+        });
       }
     }
   });
@@ -90,10 +90,10 @@ function createHash(song) {
           }
         })
         .catch(reject);
-    }
-    
+    };
+
     var str = song.title + song.artist + song.album_title;
-    
+
     makeHash(str)
       .then(function(hash_id) {
         song.hash_id = hash_id;
@@ -102,13 +102,9 @@ function createHash(song) {
   });
 }
 
-function makeSongLinkObject(song, hostname) {
-  
-  if (hostname.slice(0,4) === "www.") {
-    hostname = hostname.slice(4);
-  }
+function makeSongLinkObject(song) {
 
-  var shareLink = makeSongLinkUrl(hostname, song.hash_id);
+  var shareLink = makeSongLinkUrl(song.hash_id);
 
   return {
     title: song.title,
@@ -122,13 +118,14 @@ function makeSongLinkObject(song, hostname) {
 
 }
 
-function makeSongLinkUrl(host, hash_id) {
+function makeSongLinkUrl(hash_id) {
+  var host = process.env.APP_HOST || 'localhost:3000';
   return 'http://' + host + '/' + hash_id;
 }
 
 function makeQuery(song, queryType) {
   var query;
-  
+
   switch (queryType) {
     case 'full':
       query = song.title + ' ' + song.artist + ' ' + song.album_title;
@@ -221,7 +218,7 @@ function makeQuery(song, queryType) {
 
       break;
 
-    default: 
+    default:
       return undefined;
       break;
   }

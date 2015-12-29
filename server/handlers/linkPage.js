@@ -33,7 +33,7 @@ function render(req, res) {
 }
 
 function sendProvider (req, res, song, provider) {
-  
+
   var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
     if (err) {
       console.error(err);
@@ -58,7 +58,7 @@ function sendProvider (req, res, song, provider) {
   }
 
   var templateObj = {
-    pageUrl : utils.makeSongLinkUrl(req.headers.host, song.hash_id),
+    pageUrl : utils.makeSongLinkUrl(song.hash_id),
     title : song.title,
     artist : song.artist,
     album_art : providers.spotify.getAlbumArtUrl(song, 'large') || providers.itunes.getAlbumArtUrl(song),
@@ -110,7 +110,7 @@ function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong)
 }
 
 function sendProviderOld(req, res, songFromDb, provider) {
-  
+
   var template = fs.readFileSync(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, data) {
       if (err) {
         console.error(err);
@@ -128,7 +128,7 @@ function sendProviderOld(req, res, songFromDb, provider) {
     }
 
     var templateObj = {
-      pageUrl : utils.makeSongLinkUrl(req.headers.host, songFromDb.hash_id),
+      pageUrl : utils.makeSongLinkUrl(songFromDb.hash_id),
       title : songFromDb.title,
       artist : songFromDb.artist,
       album_art : songFromDb.spotify_images ? songFromDb.spotify_images.medium_image.url : songFromDb.album_art,

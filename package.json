@@ -40,6 +40,7 @@
     "body-parser": "^1.14.1",
     "chai": "^3.4.1",
     "classnames": "^2.2.1",
+    "compression": "^1.6.0",
     "cookie-parser": "^1.4.0",
     "dotenv": "^1.2.0",
     "express": "^4.13.3",

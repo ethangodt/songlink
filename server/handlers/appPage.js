@@ -13,14 +13,14 @@ function create(req, res) {
   utils.checkDb(req.body)
     .then(function(songFromDb) {
       if (songFromDb) {
-        return res.send(utils.makeSongLinkObject(songFromDb, req.headers.host));
+        return res.send(utils.makeSongLinkObject(songFromDb));
       } else {
         return utils.verifyId(req.body)
           .then(utils.build)
           .then(utils.createHash)
           .then(utils.addSongToDb)
           .then(function(finalSong) {
-            res.send(utils.makeSongLinkObject(finalSong, req.headers.host));
+            res.send(utils.makeSongLinkObject(finalSong));
           });
       }
     })
