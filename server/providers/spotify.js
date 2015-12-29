@@ -1,4 +1,3 @@
-// var utils = require('../utils/utils');
 var spotify = require('spotify');
 
 module.exports = {

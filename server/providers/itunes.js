@@ -129,7 +129,7 @@ function makeLink(itunesSong) {
 
 function makeText(itunesSong) {
   if (itunesSong.isStreamable) {
-    return 'Play now in Apple Music';
+    return 'Play now on Apple Music';
   } else {
     return 'Open now in iTunes Store';
   }

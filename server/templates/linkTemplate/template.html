@@ -99,15 +99,13 @@
       <br/>
       <p>You can always go to <a href="http://songl.ink/">songl.ink</a> and change this later.</p>
       <div class="modalButtonContainer">
-        <button class="mini spotify" onclick="modalSelection.click('spotify')">
-          <span class="fa fa-spotify"></span><span> Spotify</span>
-        </button>
-        <button class="mini youtube" onclick="modalSelection.click('youtube')">
-          <span class="fa fa-youtube-play"></span><span> YouTube</span>
-        </button>
-        <button class="mini itunes" onclick="modalSelection.click('itunes')">
-          <span class="fa fa-apple"></span><span> Apple Music</span>
-        </button>
+
+        {{#providers}}
+          <button class="mini {{provider}}" onclick="modalSelection.click('{{provider}}')">
+            <span class="fa fa-{{icon}}"></span><span> {{name}}</span>
+          </button>
+        {{/providers}}
+
         <button class="mini none" onclick="modalSelection.click('none')">
           No auto redirect preference
         </button>
@@ -123,11 +121,7 @@
 
     window.addEventListener('load', function () {
       if ('{{{providerUrl}}}') {
-        if ('{{provider}}' === 'youtube' || '{{provider}}' === 'itunes') {
-          window.location.href = '{{{providerUrl}}}'
-        } else {
-          window.location.href = '{{{providerUrl}}}';
-        }
+        window.location.href = '{{{providerUrl}}}';
       }
     });
 

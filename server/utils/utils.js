@@ -26,7 +26,7 @@ function addSongToDb(song) {
   });
 }
 
-function build(song, callback) {
+function build(song) {
   return new Promise(function (resolve, reject) {
 
     song.results = {};
