@@ -32,6 +32,8 @@ class Preferences extends Component {
       selected = 'spotify';
     } else if (Array.prototype.indexOf.call(classes, 'itunes') !== -1) {
       selected = 'itunes';
+    } else if (Array.prototype.indexOf.call(classes, 'google') !== -1) {
+      selected = 'google';
     } else if (Array.prototype.indexOf.call(classes, 'youtube') !== -1) {
       selected = 'youtube';
     } else if (Array.prototype.indexOf.call(classes, 'deezer') !== -1) {
