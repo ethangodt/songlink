@@ -76,7 +76,7 @@ var providerClick = function (provider, providerUrl) {
 };
 
 var preferenceSave = function (provider) {
-  docCookies.setItem('providerPreference', provider);
+  docCookies.setItem('providerPreference', provider, 'Fri, 31 Dec 2030 23:59:59 GMT');
   $('.modalEnvironment').css('display', 'none');
   $('body > main').removeClass('blur');
 
