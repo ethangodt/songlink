@@ -63,14 +63,17 @@ class Search extends Component {
   getLinkInfo(text) {
     const itunesTrackLink = /^https:\/\/itun.es\/[a-z]+\/[\w-]+\?i=([\d]+)$/;
     const spotifyTrackLink = /^https:\/\/open.spotify.com\/[\w]+\/([\w\d]+)$/;
+    const spotifyPlayLink = /^https:\/\/play.spotify.com\/[\w]+\/([\w\d]+)?(.*)$/;
     const spotifyUri = /^spotify:track:([\w\d-]+)$/;
 
     if (itunesTrackLink.test(text)) {
       return {source: 'itunes', id: itunesTrackLink.exec(text)[1]};
     } else if (spotifyTrackLink.test(text)) {
       return {source: 'spotify', id: spotifyTrackLink.exec(text)[1]};
-    } else if (spotifyUri.test(text)) {
+    }  else if (spotifyUri.test(text)) {
       return {source: 'spotify', id: spotifyUri.exec(text)[1]};
+    } else if (spotifyPlayLink.test(text)) {
+      return {source: 'spotify', id: spotifyPlayLink.exec(text)[1]};
     } else {
       return undefined;
     }
