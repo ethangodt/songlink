@@ -42,6 +42,7 @@ function sendProvider (req, res, song, provider) {
 
   var topSpotifyResult = providers.spotify.getTopSpotifyResult(song);
   var topItunesResult = providers.itunes.getTopItunesResult(song);
+  var topGoogleResult = providers.google.getTopGoogleResult(song);
   var topYoutubeResult = providers.youtube.getTopYoutubeResult(song);
   var topDeezerResult = providers.deezer.getTopDeezerResult(song);
 
@@ -62,7 +63,7 @@ function sendProvider (req, res, song, provider) {
     title : song.title,
     artist : song.artist,
     album_art : providers.spotify.getAlbumArtUrl(song, 'large') || providers.itunes.getAlbumArtUrl(song),
-    providers : createProvidersArray(topSpotifyResult, topItunesResult, topYoutubeResult, topDeezerResult),
+    providers : createProvidersArray(topSpotifyResult, topItunesResult, topGoogleResult, topYoutubeResult, topDeezerResult),
     providerUrl : providerUrl,
     provider : provider
   };
@@ -71,7 +72,7 @@ function sendProvider (req, res, song, provider) {
   res.send(html);
 }
 
-function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong) {
+function createProvidersArray (spotifySong, itunesSong, googleSong, youtubeSong, deezerSong) {
 
   return [
   {
@@ -83,20 +84,28 @@ function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong)
     className : spotifySong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
   },
   {
-    provider: 'youtube',
-    name: 'YouTube',
-    icon: 'youtube-play',
-    url : youtubeSong ? providers.youtube.makeLinkFromId(youtubeSong.id) :undefined,
-    text : youtubeSong ? 'Play now on YouTube' : 'Not available on YouTube',
-    className : youtubeSong ? 'fullWidth youtube' : 'fullWidth disabled youtube'
-  },
-  {
     provider: 'itunes',
     name: 'Apple Music',
     icon: 'apple',
     url : itunesSong ? providers.itunes.makeLink(itunesSong) : undefined,
     text : itunesSong ? providers.itunes.makeText(itunesSong) : 'Not available on iTunes',
     className : itunesSong ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
+  },
+  {
+    provider: 'google',
+    name: 'Google Play Music',
+    icon: 'google',
+    url : googleSong ? providers.google.makeUrlFromId(googleSong.nid) : undefined,
+    text : googleSong ? 'Play now on Google Play Music' : 'Not available on Google Play Music',
+    className : googleSong ? 'fullWidth google' : 'fullWidth disabled google'
+  },
+  {
+    provider: 'youtube',
+    name: 'YouTube',
+    icon: 'youtube-play',
+    url : youtubeSong ? providers.youtube.makeLinkFromId(youtubeSong.id) :undefined,
+    text : youtubeSong ? 'Play now on YouTube' : 'Not available on YouTube',
+    className : youtubeSong ? 'fullWidth youtube' : 'fullWidth disabled youtube'
   },
   {
     provider : 'deezer',
@@ -108,6 +117,9 @@ function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong)
   }];
 
 }
+
+
+// Old functions to handle old data
 
 function sendProviderOld(req, res, songFromDb, provider) {
 
