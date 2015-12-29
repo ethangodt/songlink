@@ -76,20 +76,23 @@ function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong)
   return [
   {
     provider: 'spotify',
+    name: 'Spotify',
     icon: 'spotify',
     url : spotifySong ? providers.spotify.makeUriFromId(spotifySong.id) : undefined,
-    text : spotifySong ? 'Play now in Spotify' : 'Not available on Spotify',
+    text : spotifySong ? 'Play now on Spotify' : 'Not available on Spotify',
     className : spotifySong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
   },
   {
     provider: 'youtube',
+    name: 'YouTube',
     icon: 'youtube-play',
     url : youtubeSong ? providers.youtube.makeLinkFromId(youtubeSong.id) :undefined,
-    text : youtubeSong ? 'Play now in YouTube' : 'Not available on YouTube',
+    text : youtubeSong ? 'Play now on YouTube' : 'Not available on YouTube',
     className : youtubeSong ? 'fullWidth youtube' : 'fullWidth disabled youtube'
   },
   {
     provider: 'itunes',
+    name: 'Apple Music',
     icon: 'apple',
     url : itunesSong ? providers.itunes.makeLink(itunesSong) : undefined,
     text : itunesSong ? providers.itunes.makeText(itunesSong) : 'Not available on iTunes',
@@ -97,9 +100,10 @@ function createProvidersArray (spotifySong, itunesSong, youtubeSong, deezerSong)
   },
   {
     provider : 'deezer',
-    icon: 'spotify',
+    name: 'Deezer',
+    icon: 'play-circle-o',
     url : deezerSong ? providers.deezer.getLink(deezerSong) : undefined,
-    text : deezerSong ? 'Play now in Deezer' : 'Not available on Deezer',
+    text : deezerSong ? 'Play now on Deezer' : 'Not available on Deezer',
     className : deezerSong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
   }];
 
