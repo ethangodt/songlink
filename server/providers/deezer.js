@@ -4,8 +4,6 @@ module.exports = {
   fetchSearchResults: fetchSearchResults,
   getTopDeezerResult: getTopDeezerResult,
   getLink : getLink
-  // lookupSongById: lookupSongById,
-  // makeUriFromId: makeUriFromId
 };
 
 function fetchSearchResults(song, query, queryType, callback) {
