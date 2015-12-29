@@ -9,26 +9,31 @@ module.exports = {
 };
 
 function create(req, res) {
-
-  utils.checkDb(req.body)
+  utils.checkDb({source_id: req.body.source_id})
     .then(function(songFromDb) {
       if (songFromDb) {
         return res.send(utils.makeSongLinkObject(songFromDb));
       } else {
         return utils.verifyId(req.body)
           .then(utils.build)
-          .then(utils.createHash)
-          .then(utils.addSongToDb)
-          .then(function(finalSong) {
-            res.send(utils.makeSongLinkObject(finalSong));
-          });
+          .then(function(song) {
+            var str = song.title + song.artist + song.album_title;
+            return utils.createUniqueHash(str)
+              .then(function(hash_id) {
+                song.hash_id = hash_id;
+                return song;
+              })
+              .then(utils.addSongToDb)
+              .then(function(finalSong) {
+                res.send(utils.makeSongLinkObject(finalSong, req.headers.host));
+              });
+          })  
       }
     })
     .catch(function (err) {
       res.status(400).send(err.message);
       console.error(err);
     });
-
 }
 
 function render(req, res) {

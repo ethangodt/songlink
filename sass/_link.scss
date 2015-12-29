@@ -115,6 +115,18 @@
   background-color: $color-twitter;
 }
 
+.link button.google-plus {
+  background-color: $color-google-plus;
+}
+
+.link button.reddit {
+  background-color: $color-reddit;
+}
+
+.link button.email {
+  background-color: $color-main;
+}
+
 @media #{$breakpoint-small} {
 
   .link {

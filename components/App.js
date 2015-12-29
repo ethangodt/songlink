@@ -5,7 +5,7 @@ import Footer from './Footer'
 class App extends Component {
 
   render() {
-    console.log(this.props.location.pathname)
+
     return (
       <div>
         <Header showCreateLinksLink={this.props.location.pathname !== '/'}/>

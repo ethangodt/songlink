@@ -7,7 +7,7 @@ module.exports = {
   addSongToDb: addSongToDb,
   build: build,
   checkDb: checkDb,
-  createHash: createHash,
+  createUniqueHash: createUniqueHash,
   makeSongLinkObject: makeSongLinkObject,
   makeSongLinkUrl: makeSongLinkUrl,
   makeQuery: makeQuery,
@@ -59,9 +59,9 @@ function build(song) {
   });
 }
 
-function checkDb(lookup) {
+function checkDb(song) {
   return new Promise(function (resolve, reject) {
-    songCtrl.get(lookup, function (err, songFromDb) {
+    songCtrl.get(song, function (err, songFromDb) {
       if (err) {
         reject(err);
       } else {
@@ -71,34 +71,23 @@ function checkDb(lookup) {
   });
 }
 
-function createHash(song) {
+function createUniqueHash(str) {
 
   return new Promise(function (resolve, reject) {
 
-    var makeHash = function(str, attempt) {
-
-      var shasum = crypto.createHash('sha1');
-      shasum.update(str);
-      var url_hash = shasum.digest('hex').slice(0, 5);
-
-      return checkDb({ hash_id: url_hash })
-        .then(function(songFromDb) {
-          if (!songFromDb) {
-            return url_hash;
-          } else {
-            return makeHash(str += Date.now());
-          }
-        })
-        .catch(reject);
-    };
-
-    var str = song.title + song.artist + song.album_title;
-
-    makeHash(str)
-      .then(function(hash_id) {
-        song.hash_id = hash_id;
-        resolve(song);
-      });
+    var shasum = crypto.createHash('sha1');
+    shasum.update(str);
+    var url_hash = shasum.digest('hex').slice(0, 5);
+    
+    checkDb({ hash_id: url_hash })
+      .then(function(songFromDb) {
+        if (!songFromDb) {
+          resolve(url_hash);
+        } else {
+          return createUniqueHash(str += Date.now());
+        }
+      })
+      .catch(reject);
   });
 }
 
@@ -146,11 +135,20 @@ function makeQuery(song, queryType) {
       // Remove '- Single'
       query = query.replace(/- Single/g, ' ');
 
+      // Remove 'feat.'
+      query = query.replace(/feat\./g, '');
+
+      // Remove 'Pt.'
+      query = query.replace(/Pt\./g, '');
+
+      // Remove 'Pts.'
+      query = query.replace(/Pts\./g, '');
+
+      // Remove numbers
+      query = query.replace(/\d/g, '');
+
       // Remove ' - '
       query = query.replace(/ - /g, ' ');
-
-      // Remove 'feat.'
-      query = query.replace(/feat\./g, ' ');
 
       break;
 

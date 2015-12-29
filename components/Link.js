@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { FacebookButton, TwitterButton } from 'react-social'
+import { FacebookButton, TwitterButton, GooglePlusButton, RedditButton, EmailButton } from 'react-social'
 import classnames from 'classnames'
 import ClipboardButton from 'react-clipboard.js'
 import ReactTooltip from 'react-tooltip'
@@ -106,6 +106,33 @@ class Link extends Component {
           </a>
           <ReactTooltip id="twitter">
             <span>Share on Twitter</span>
+          </ReactTooltip>
+
+          <a data-tip data-for="google-plus">
+            <GooglePlusButton className="google-plus" url={this.props.link.url}>
+              <span className="fa fa-google-plus"></span>
+            </GooglePlusButton>
+          </a>
+          <ReactTooltip id="google-plus">
+            <span>Share on Google+</span>
+          </ReactTooltip>
+
+          <a data-tip data-for="reddit">
+            <RedditButton className="reddit" url={this.props.link.url}>
+              <span className="fa fa-reddit"></span>
+            </RedditButton>
+          </a>
+          <ReactTooltip id="reddit">
+            <span>Share on reddit</span>
+          </ReactTooltip>
+
+          <a data-tip data-for="email">
+            <EmailButton className="email" url={this.props.link.url} message={this.createSocialMessage()}>
+              <span className="fa fa-envelope"></span>
+            </EmailButton>
+          </a>
+          <ReactTooltip id="email">
+            <span>Share via email</span>
           </ReactTooltip>
 
         </div>

@@ -6,6 +6,7 @@ class PreferencesGroup extends Component {
   render() {
     return (
         <div className="preferences-group">
+          
           <div
             className={classnames({
               'radio': true,
@@ -16,6 +17,7 @@ class PreferencesGroup extends Component {
           >
             <span className="fa fa-spotify spotify"></span><span className="spotify">Spotify</span><br/>
           </div>
+
           <div
             className={classnames({
               'radio': true,
@@ -26,6 +28,18 @@ class PreferencesGroup extends Component {
           >
             <span className="fa fa-apple itunes"></span><span className="itunes">iTunes</span><br/>
           </div>
+
+          <div
+            className={classnames({
+              'radio': true,
+              'google': true,
+              'selected': this.props.selected === 'google'
+            })}
+            onClick={this.props.handleClick}
+          >
+            <span className="fa fa-google google"></span><span className="google">Google Play Music</span><br/>
+          </div>
+
           <div
             className={classnames({
               'radio': true,
@@ -36,6 +50,7 @@ class PreferencesGroup extends Component {
           >
             <span className="fa fa-youtube-play youtube"></span><span className="youtube">YouTube</span><br/>
           </div>
+
           <div
             className={classnames({
               'radio': true,
@@ -46,6 +61,7 @@ class PreferencesGroup extends Component {
           >
             <span className="fa fa-play-circle-o"></span><span className="deezer">Deezer</span><br/>
           </div>
+
           <div
             className={classnames({
               'radio': true,
