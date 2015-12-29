@@ -39,6 +39,16 @@ class PreferencesGroup extends Component {
           <div
             className={classnames({
               'radio': true,
+              'deezer': true,
+              'selected': this.props.selected === 'deezer'
+            })}
+            onClick={this.props.handleClick}
+          >
+            <span className="fa fa-play-circle-o"></span><span className="deezer">Deezer</span><br/>
+          </div>
+          <div
+            className={classnames({
+              'radio': true,
               'none': true,
               'selected': this.props.selected === 'none'
             })}

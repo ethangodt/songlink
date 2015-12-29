@@ -13,7 +13,7 @@ class Preferences extends Component {
   }
 
   handleSubmit() {
-    docCookies.setItem('providerPreference', this.state.selected)
+    docCookies.setItem('providerPreference', this.state.selected, 'Fri, 31 Dec 2030 23:59:59 GMT')
     this.displayUpdatedMessage()
   }
 
@@ -34,6 +34,8 @@ class Preferences extends Component {
       selected = 'itunes';
     } else if (Array.prototype.indexOf.call(classes, 'youtube') !== -1) {
       selected = 'youtube';
+    } else if (Array.prototype.indexOf.call(classes, 'deezer') !== -1) {
+      selected = 'deezer';
     } else if (Array.prototype.indexOf.call(classes, 'none') !== -1) {
       selected = 'none';
     }
