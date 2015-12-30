@@ -13,7 +13,7 @@ header {
   background-color: white;
   border-radius: 0;
   height: $header-height;
-  margin: $top-strip-height 0 40px 0;
+  margin-bottom: 40px;
   overflow: auto;
 }
 
@@ -22,6 +22,7 @@ header .logo-container {
   float: left;
   height: $header-height;
 	margin-left: 16px;
+	padding-top: $top-strip-height;
 }
 
 header .logo {
@@ -83,6 +84,7 @@ header .nav {
 
   header .logo-container {
     height: $header-height-small;
+		padding-top: $top-strip-height-small;
   }
 
   header .logo {
