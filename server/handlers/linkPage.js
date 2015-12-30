@@ -51,7 +51,7 @@ function sendProvider (req, res, song, provider) {
   if (provider === 'youtube') {
     providerUrl = providers.youtube.makeLinkFromId(topYoutubeResult.id);
   } else if (provider === 'itunes') {
-    providerUrl = providers.itunes.makeLink(topItunesResult.trackId);
+    providerUrl = providers.itunes.makeLink(topItunesResult);
   } else if (provider === 'google') {
     providerUrl = providers.google.makeUrlFromId(topGoogleResult.nid);
   } else if (provider === 'spotify') {
