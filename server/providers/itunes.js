@@ -14,18 +14,21 @@ module.exports = {
 
 
 function fetchSearchResults(song, query, queryType, callback) {
+  
   search(makeSearchUrlWithQuery(query), 10, function (err, songs) {
+    
+    song.results.itunes[queryType] = {};
+    song.results.itunes[queryType].query = query;
+
     if (err) {
-      callback(err, null)
+      console.error(err);
+      song.results.itunes[queryType].results = [];
     } else {
-      var results = songs.length ? songs : [];
-
-      song.results.itunes[queryType] = {};
-      song.results.itunes[queryType].query = query;
-      song.results.itunes[queryType].results = results;
-
-      callback(null, song);
+      song.results.itunes[queryType].results = songs.length ? songs : [];
     }
+
+    callback(null, song);
+
   });
 }
 
@@ -49,20 +52,25 @@ function getAlbumArtUrl(song) {
 function getTopItunesResult(song) {
   if (song.source === 'itunes') {
     return song.lookup;
-  } else {
+  } 
+
+  if (!song.results.itunes) {
+    return undefined;
+  }
     
-    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
-    
-    for (var i = 0; i < queryTypes.length; i++) {
-      var results = song.results.itunes[queryTypes[i]].results;
-      for (var j = 0; j < results.length; j++) {
-        if (Math.abs((results[j].trackTimeMillis - song.track_length) / song.track_length) < .02) {
-          return results[j]
-        }
+  var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+  
+  for (var i = 0; i < queryTypes.length; i++) {
+    var results = song.results.itunes[queryTypes[i]].results;
+    for (var j = 0; j < results.length; j++) {
+      if (Math.abs((results[j].trackTimeMillis - song.track_length) / song.track_length) < .02) {
+        return results[j]
       }
     }
-
   }
+
+  return undefined;
+
 }
 
 function lookupSongById(song, callback) {
@@ -146,7 +154,7 @@ function search(searchUrl, numResults, callback) {
     }
 
     if (err) {
-      callback(err, null);
+      body.results = [];
     } else {
       callback(null, body.results.length ? body.results.slice(0, numResults) : []);      
     }

@@ -9,42 +9,51 @@ module.exports = {
 };
 
 function fetchSearchResults(song, query, queryType, callback) {
+
   pm.init({
     email: process.env.GOOGLE_MUSIC_EMAIL,
     password: process.env.GOOGLE_MUSIC_PASSWORD
   }, function(err, res) {
       if (err) {
         console.error(err);
-        return [];
-      }
-
-      pm.search(query, 20, function(err, data) {
-
         song.results.google[queryType] = {};
         song.results.google[queryType].query = query;
-        
-
-        if (!data.entries) {
         song.results.google[queryType].results = [];
-        } else {
-          var songs = [];
+        callback(null, song);
+      } else {
+        pm.search(query, 20, function(err, data) {
 
-          var results = data.entries.sort(function(a, b) {
-            return a.score < b.score;
-          });
+          song.results.google[queryType] = {};
+          song.results.google[queryType].query = query;
 
-          for (var i = 0; i < results.length; i++) {
-            if (results[i].track) {
-              songs.push(results[i].track)
+          if (err) {
+            console.error(err);
+            song.results.google[queryType].results = [];
+          } else if (!data.entries) {
+            console.error(new Error('There were no search results found on Google for query:'));
+            console.log('query:', query);
+            song.results.google[queryType].results = [];
+          } else {
+            var songs = [];
+
+            var results = data.entries.sort(function(a, b) {
+              return a.score < b.score;
+            });
+
+            for (var i = 0; i < results.length; i++) {
+              if (results[i].track) {
+                songs.push(results[i].track)
+              }
             }
+
+            song.results.google[queryType].results = songs.slice(0, 5);
           }
 
-          song.results.google[queryType].results = songs.slice(0, 5);
-        }
+          callback(null, song);
+          
+        });
+      }
 
-        callback(null, song);
-        
-      });
   });
 };
 
@@ -67,6 +76,8 @@ function getTopGoogleResult(song) {
       }
     }
   }
+
+  return undefined;
   
 };
 

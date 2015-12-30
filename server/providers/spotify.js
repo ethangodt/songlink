@@ -9,19 +9,22 @@ module.exports = {
 };
 
 function fetchSearchResults(song, query, queryType, callback) {
+
   spotify.search({type: 'track', query: query}, function(err, data) {
-    if ( err ) {
-      callback(err, null)
+    
+    song.results.spotify[queryType] = {};
+    song.results.spotify[queryType].query = query;
+
+    if (err) {
+      console.error(err);
+      song.results.spotify[queryType].results = [];
     } else {
-      
       var results = data.tracks && data.tracks.items.length ? data.tracks.items.slice(0, 5) : [];
-
-      song.results.spotify[queryType] = {};
-      song.results.spotify[queryType].query = query;
       song.results.spotify[queryType].results = results;
-
-      callback(null, song);
     }
+
+    callback(null, song);
+
   });
 };
 
@@ -44,18 +47,25 @@ function getAlbumArtUrl(song, size) {
 function getTopSpotifyResult(song) {
   if (song.source === 'spotify') {
     return song.lookup;
-  } else {
-    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+  } 
 
-    for (var i = 0; i < queryTypes.length; i++) {
-      var results = song.results.spotify[queryTypes[i]].results;
-      for (var j = 0; j < results.length; j++) {
-        if (Math.abs((results[j].duration_ms - song.track_length) / song.track_length) < .02) {
-          return results[j]
-        }
+  if (!song.results.spotify) {
+    return undefined;
+  }
+
+  var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+
+  for (var i = 0; i < queryTypes.length; i++) {
+    var results = song.results.spotify[queryTypes[i]].results;
+    for (var j = 0; j < results.length; j++) {
+      if (Math.abs((results[j].duration_ms - song.track_length) / song.track_length) < .02) {
+        return results[j]
       }
     }
   }
+
+  return undefined;
+
 }
 
 function lookupSongById(song, callback) {
