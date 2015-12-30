@@ -119,7 +119,7 @@ class Link extends Component {
 
           <a data-tip data-for="reddit">
             <RedditButton className="reddit" url={this.props.link.url}>
-              <span className="fa fa-reddit"></span>
+              <span className="fa fa-reddit-alien"></span>
             </RedditButton>
           </a>
           <ReactTooltip id="reddit">

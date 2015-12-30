@@ -37,41 +37,58 @@ function convertYoutubeDuration(str) {
 }
 
 function fetchSearchResults(song, query, queryType, callback) {  
+
   search(query, function(err, ids) {
+    
     if (err) {
-      callback(err, null);
+      console.error(err);
+      song.results.youtube[queryType] = {};
+      song.results.youtube[queryType].query = query;
+      song.results.youtube[queryType].results = [];
+      callback(null, song);
     } else {
       getVideosByIds(ids.toString(), function (err, vids) {
+
+        song.results.youtube[queryType] = {};
+        song.results.youtube[queryType].query = query;
+          
         if (err) {
-          callback(err, null);
+          console.error(err);
+          song.results.youtube[queryType].results = [];
         } else {
-          var results = vids.length ? vids.slice(0, 5) : [];
-
-          song.results.youtube[queryType] = {};
-          song.results.youtube[queryType].query = query;
-          song.results.youtube[queryType].results = results;
-
-          callback(null, song);
+          song.results.youtube[queryType].results = vids.length ? vids.slice(0, 5) : [];
         }
+        
+        callback(null, song);
+
       });
     }
+    
   });
 };
 
 function getTopYoutubeResult(song) {
   if (song.source === 'youtube') {
     return song.lookup;
-  } else {
-    var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
-    for (var i = 0; i < queryTypes.length; i++) {
-      var results = song.results.youtube[queryTypes[i]].results;
-      for (var j = 0; j < results.length; j++) {
-        if (Math.abs((convertYoutubeDuration(results[j].contentDetails.duration) - song.track_length) / song.track_length) < .05) {
-          return results[j]
-        }
+  } 
+
+  if (!song.results.youtube) {
+    return undefined;
+  }
+
+  var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+  
+  for (var i = 0; i < queryTypes.length; i++) {
+    var results = song.results.youtube[queryTypes[i]].results;
+    for (var j = 0; j < results.length; j++) {
+      if (Math.abs((convertYoutubeDuration(results[j].contentDetails.duration) - song.track_length) / song.track_length) < .05) {
+        return results[j]
       }
     }
   }
+
+  return undefined;
+
 }
 
 function getVideosByIds(ids, callback) {

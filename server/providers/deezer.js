@@ -7,18 +7,21 @@ module.exports = {
 };
 
 function fetchSearchResults(song, query, queryType, callback) {
+
   search(makeSearchUrlWithQuery(query), 5, function (err, songs) {
+
+    song.results.deezer[queryType] = {};
+    song.results.deezer[queryType].query = query;
+
     if (err) {
-      callback(err, null)
+      console.error(err);
+      song.results.deezer[queryType].results = [];
     } else {
-      var results = songs.length ? songs : [];
-
-      song.results.deezer[queryType] = {};
-      song.results.deezer[queryType].query = query;
-      song.results.deezer[queryType].results = results;
-
-      callback(null, song);
+      song.results.deezer[queryType].results = songs.length ? songs : [];
     }
+
+    callback(null, song);
+
   });
 }
 
@@ -41,6 +44,8 @@ function getTopDeezerResult(song) {
       }
     }
   }
+
+  return undefined;
 
 }
 
@@ -83,7 +88,7 @@ function search(searchUrl, numResults, callback) {
     }
 
     if (err) {
-      callback(err, null);
+      body.data = [];
     } else {
       callback(null, body.data.length ? body.data.slice(0, numResults) : []);      
     }
