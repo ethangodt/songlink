@@ -19,7 +19,7 @@ class Header extends Component {
             </Link>
             <div className="nav-container">
               <ul className="nav">
-                <li style={ {display: this.props.showCreateLinksLink ? '' : 'none'} }><Link to="/">create link</Link></li>
+                <li style={ {display: this.props.showCreateLinksLink ? '' : 'none'} }><Link to="/">home</Link></li>
                 <li style={ {display: this.props.showCreateLinksLink ? 'none' : ''} }><Link to="/preferences">preferences</Link></li>
               </ul>
             </div>
