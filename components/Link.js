@@ -73,7 +73,7 @@ class Link extends Component {
             onClick={this.handleCopyClick.bind(this)}
             onMouseLeave={this.handleCopyMouseLeave.bind(this)}
             data-tip
-            data-for="copy">
+            data-for={''+this.props.index}>
             <ClipboardButton className="copy" data-clipboard-text={this.props.link.url}>
               <span className={classnames({
                 'fa': true,
@@ -82,7 +82,7 @@ class Link extends Component {
               })}></span>
             </ClipboardButton>
           </a>
-          <ReactTooltip id="copy">
+          <ReactTooltip id={''+this.props.index}>
             <span>{this.renderCopyTooltipText()}</span>
           </ReactTooltip>
 
