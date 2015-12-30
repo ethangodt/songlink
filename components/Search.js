@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Results from './Results'
+import $ from 'jquery'
 
 const elapsedTimeAfterKeyStroke = 450;
 
@@ -14,7 +15,8 @@ class Search extends Component {
     this.state = {
       last: Date.now(),
       text: '',
-      link: undefined
+      link: undefined,
+      showResults: true
     }
   }
 
@@ -82,15 +84,13 @@ class Search extends Component {
   }
 
   handleFocus(e) {
-    if (this.state.text.length && !this.state.link) {
-      this.props.actions.toggleErrorCreateLink(false)
-      this.props.actions.search(this.state.text)
-    }
-  }
+    this.props.actions.toggleErrorCreateLink(false)
 
-  handleBlur(e) {
-    e.preventDefault();
-    this.props.actions.clearResults()
+    if (this.state.text.length && !this.state.link && !this.props.results.length) {
+      this.props.actions.search(this.state.text)
+      this.setState({ showResults: true })
+    }
+
   }
 
   handleSubmit(e) {
@@ -159,12 +159,15 @@ class Search extends Component {
     if (nextProps.links.length > this.props.links.length && this.state.link) {
       this.clearText()
     }
+  }
 
-    // if (nextProps.errors.createLink) {
-    //   setTimeout(() => {
-    //     this.props.actions.toggleErrorCreateLink(false);
-    //   }.bind(this), 3000)
-    // }
+  componentDidMount() {
+    $('html').on('click', (e) => {
+      if (!$(e.target).closest('.search').length) {
+        this.setState({ showResults: false })
+        this.props.actions.clearResults()
+      }
+    })
   }
 
   render() {
@@ -192,11 +195,9 @@ class Search extends Component {
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}
-            onBlur={this.handleBlur.bind(this)}
             onKeyUp={this.handleKeyUp.bind(this)}/>
 
           <Results
-            style={ this.props.results ? {} : {display: 'none'} }
             loading={this.props.loading}
             results={this.state.last ? this.props.results : []}
             actions={this.props.actions}
@@ -206,7 +207,7 @@ class Search extends Component {
 
         { this.isInvalid() ? this.renderLinkInformation() : undefined }
 
-        { this.state.text.length && !this.props.loading.search && !this.props.results.length && !this.state.link ?
+        { this.state.text.length && !this.props.loading.search && !this.props.results.length && this.state.showResults && !this.state.link ?
           this.renderNoResults() : undefined }
 
         { this.props.errors.createLink ? this.renderErrorMessage() : undefined }
@@ -219,6 +220,7 @@ class Search extends Component {
 
 Search.propTypes = {
   actions: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   invalidLinks: PropTypes.object.isRequired,
   links: PropTypes.array.isRequired,
   loading: PropTypes.object.isRequired,
