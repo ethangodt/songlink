@@ -75,7 +75,7 @@ function lookupSongById(song, callback) {
 
   spotify.lookup({ type: 'track', id: song.source_id}, function(err, data) {
     if ( data.error || err ) {
-      callback(new Error('Link is not valid'), null);
+      callback(new Error('Could not verify ID'), null);
     } else {
       song.lookup = data;
       song.title = data.name;

@@ -80,7 +80,7 @@ function lookupSongById(song, callback) {
 
   search(makeFetchByIdUrl(song.source_id), 1, function(err, results) {
     if (err || !results.length) {
-      callback(new Error('Link is not valid'), null);
+      callback(new Error('Could not verify ID'), null);
     } else {
       song.lookup = results[0];
       song.title = results[0].trackName;

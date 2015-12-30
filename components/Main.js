@@ -28,6 +28,7 @@ class Main extends Component {
 
           <Search
             actions={this.props.actions}
+            errors={this.props.errors}
             invalidLinks={this.props.invalidLinks}
             loading={this.props.loading}
             links={this.props.links}

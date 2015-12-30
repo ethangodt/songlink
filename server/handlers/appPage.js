@@ -30,7 +30,7 @@ function create(req, res) {
           })  
       }
     })
-    .catch(function (err) {
+    .catch(function(err) {
       res.status(400).send(err.message);
       console.error(err);
     });

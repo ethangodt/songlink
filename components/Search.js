@@ -43,12 +43,13 @@ class Search extends Component {
     }, () => {
 
       if (!this.state.text.length || link) {
-        this.props.actions.toggleLoadingSearch(false);
+        this.props.actions.toggleLoadingSearch(false)
         return this.props.actions.clearResults()
       }
 
       if (!this.state.link) {
-        this.props.actions.toggleLoadingSearch(true);
+        this.props.actions.toggleErrorCreateLink(false)
+        this.props.actions.toggleLoadingSearch(true)
         return setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
       }
 
@@ -68,13 +69,13 @@ class Search extends Component {
     const spotifyUri = /^spotify:track:([\w\d-]+)$/;
 
     if (itunesTrackLink.test(text)) {
-      return {source: 'itunes', id: itunesTrackLink.exec(text)[1]};
+      return {source: 'itunes', id: itunesTrackLink.exec(text)[1]}
     } else if (spotifyTrackLink.test(text)) {
-      return {source: 'spotify', id: spotifyTrackLink.exec(text)[1]};
+      return {source: 'spotify', id: spotifyTrackLink.exec(text)[1]}
     }  else if (spotifyUri.test(text)) {
       return {source: 'spotify', id: spotifyUri.exec(text)[1]};
     } else if (spotifyPlayLink.test(text)) {
-      return {source: 'spotify', id: spotifyPlayLink.exec(text)[1]};
+      return {source: 'spotify', id: spotifyPlayLink.exec(text)[1]}
     } else {
       return undefined;
     }
@@ -82,6 +83,7 @@ class Search extends Component {
 
   handleFocus(e) {
     if (this.state.text.length && !this.state.link) {
+      this.props.actions.toggleErrorCreateLink(false)
       this.props.actions.search(this.state.text)
     }
   }
@@ -94,10 +96,13 @@ class Search extends Component {
   handleSubmit(e) {
     e.preventDefault();
     if (!this.isInvalid()) {
-      console.log({source: this.state.link.source, source_id: this.state.link.id})
+      this.props.actions.toggleErrorCreateLink(false)
       this.props.actions.createLink({source: this.state.link.source, source_id: this.state.link.id})
     } else {
-      if (this.state.text.length) this.props.actions.search(this.state.text)
+      if (this.state.text.length) {
+        this.props.actions.toggleErrorCreateLink(false)
+        this.props.actions.search(this.state.text)
+      }
     }
   }
 
@@ -127,7 +132,7 @@ class Search extends Component {
     return (
       <div className="search-information invalid">
         <span className="fa fa-warning"></span>
-        <span> invalid link url</span>
+        <span> Invalid link url</span>
       </div>
     )
   }
@@ -136,7 +141,16 @@ class Search extends Component {
     return (
       <div className="search-information no-results">
         <span className="fa fa-warning"></span>
-        <span> no results found</span>
+        <span> No results found</span>
+      </div>
+    )
+  }
+
+  renderErrorMessage() {
+    return (
+      <div className="search-information invalid">
+        <span className="fa fa-warning"></span>
+        <span> Error creating link</span>
       </div>
     )
   }
@@ -145,6 +159,12 @@ class Search extends Component {
     if (nextProps.links.length > this.props.links.length && this.state.link) {
       this.clearText()
     }
+
+    // if (nextProps.errors.createLink) {
+    //   setTimeout(() => {
+    //     this.props.actions.toggleErrorCreateLink(false);
+    //   }.bind(this), 3000)
+    // }
   }
 
   render() {
@@ -188,6 +208,8 @@ class Search extends Component {
 
         { this.state.text.length && !this.props.loading.search && !this.props.results.length && !this.state.link ?
           this.renderNoResults() : undefined }
+
+        { this.props.errors.createLink ? this.renderErrorMessage() : undefined }
 
       </div>
     )
