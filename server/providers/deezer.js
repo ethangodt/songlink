@@ -34,7 +34,7 @@ function getTopDeezerResult(song) {
     return undefined;
   }
 
-  var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+  var queryTypes = ['full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
 
   for (var i = 0; i < queryTypes.length; i++) {
     var results = song.results.deezer[queryTypes[i]].results;
