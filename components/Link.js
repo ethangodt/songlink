@@ -27,7 +27,7 @@ class Link extends Component {
   }
 
   createSocialMessage() {
-    return 'Listen to ' + this.props.link.title + ' by ' + this.props.link.artist + ' '
+    return 'Listen to ' + this.props.link.title + ' by ' + this.props.link.artist
   }
 
   renderCopyTooltipText() {
