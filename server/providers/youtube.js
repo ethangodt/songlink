@@ -89,6 +89,30 @@ function getTopYoutubeResult(song) {
 
   return undefined;
 
+
+  // loop through queryTypes
+    // for each, pull out first result
+    // check if channel name contains 'vevo' || exact name e.g. Punch Brothers || any record label || channel name ends in TV
+      // if yes: return this result
+
+  // loop through queryTypes
+    // for each, loop through all results
+      // for each, check if '#' at beginning and duration matches (looser duration)
+        // if yes: return this result
+
+  // loop through queryTypes
+    // for each, loop through all results
+      // for each, check if duration matches (stricter? duration)
+        // if yes: return this result
+
+  // retun undefined
+
+
+
+
+
+
+
 }
 
 function getVideosByIds(ids, callback) {
