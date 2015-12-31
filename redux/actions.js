@@ -32,8 +32,10 @@ export function createLink(song) {
       error: err => {
         console.error(err)
         dispatch(toggleLoadingLink(false))
-        if (err.responseText.match('Could not verify song by').length) {
-          dispatch(addInvalidLink(id))
+        if (err.responseText === 'Could not verify ID') {
+          dispatch(addInvalidLink(song.source_id))
+        } else {
+          dispatch(toggleErrorCreateLink(true))
         }
       },
       success: res => {
@@ -47,12 +49,6 @@ export function createLink(song) {
         dispatch(toggleLoadingLink(false))
       }
     })
-
-    // Mimicking res from '/create with song.album_art url'
-    // setTimeout( () => {
-    //   dispatch(addLink(song.itunes_id))
-    //   dispatch(toggleLoadingLink(false))
-    // }, 1000)
   }
 }
 
@@ -79,13 +75,13 @@ export function search(text) {
         dispatch(updateResults(songs))
       }
     });
+  }
+}
 
-    // Mimicking res from '/search'
-    // setTimeout(() => {
-    //   dispatch(toggleLoadingSearch(false))
-    //   dispatch(updateResults(testSongs))
-    // }, 1000)
-
+export function toggleErrorCreateLink(isError) {
+  return {
+    type: 'TOGGLE_ERROR_CREATE_LINK',
+    isError: isError
   }
 }
 

@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react';
-import * as actions from '../redux/actions';
-import Links from './Links';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import Search from './Search';
-import Explanation from './Explanation';
-import Promo from './Promo';
-import PreferencesHighlight from './PreferencesHighlight';
+import React, { Component, PropTypes } from 'react'
+import * as actions from '../redux/actions'
+import Links from './Links'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import Search from './Search'
+import Explanation from './Explanation'
+import Promo from './Promo'
+import PreferencesHighlight from './PreferencesHighlight'
 
 class Main extends Component {
 
@@ -28,6 +28,7 @@ class Main extends Component {
 
           <Search
             actions={this.props.actions}
+            errors={this.props.errors}
             invalidLinks={this.props.invalidLinks}
             loading={this.props.loading}
             links={this.props.links}

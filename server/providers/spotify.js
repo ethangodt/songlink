@@ -53,7 +53,7 @@ function getTopSpotifyResult(song) {
     return undefined;
   }
 
-  var queryTypes = ['full', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
+  var queryTypes = ['full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
 
   for (var i = 0; i < queryTypes.length; i++) {
     var results = song.results.spotify[queryTypes[i]].results;
@@ -75,7 +75,7 @@ function lookupSongById(song, callback) {
 
   spotify.lookup({ type: 'track', id: song.source_id}, function(err, data) {
     if ( data.error || err ) {
-      callback(new Error('Link is not valid'), null);
+      callback(new Error('Could not verify ID'), null);
     } else {
       song.lookup = data;
       song.title = data.name;

@@ -49,15 +49,15 @@ function sendProvider (req, res, song, provider) {
   var providerUrl;
 
   if (provider === 'youtube') {
-    providerUrl = providers.youtube.makeLinkFromId(topYoutubeResult.id);
+    providerUrl = topYoutubeResult ? providers.youtube.makeLinkFromId(topYoutubeResult.id) : undefined;
   } else if (provider === 'itunes') {
-    providerUrl = providers.itunes.makeLink(topItunesResult);
+    providerUrl = topItunesResult ? providers.itunes.makeLink(topItunesResult) : undefined;
   } else if (provider === 'google') {
-    providerUrl = providers.google.makeUrlFromId(topGoogleResult.nid);
+    providerUrl = topGoogleResult ? providers.google.makeUrlFromId(topGoogleResult.nid) : undefined;
   } else if (provider === 'spotify') {
-    providerUrl = providers.spotify.makeUriFromId(topSpotifyResult.id);
+    providerUrl = topSpotifyResult ? providers.spotify.makeUriFromId(topSpotifyResult.id) : undefined;
   } else if (provider === 'deezer') {
-    providerUrl = providers.deezer.getLink(topDeezerResult);
+    providerUrl = topDeezerResult ? providers.deezer.getLink(topDeezerResult) : undefined;
   }
 
   var templateObj = {

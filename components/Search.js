@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Results from './Results'
+import $ from 'jquery'
 
 const elapsedTimeAfterKeyStroke = 450;
 
@@ -14,7 +15,8 @@ class Search extends Component {
     this.state = {
       last: Date.now(),
       text: '',
-      link: undefined
+      link: undefined,
+      showResults: true
     }
   }
 
@@ -43,12 +45,13 @@ class Search extends Component {
     }, () => {
 
       if (!this.state.text.length || link) {
-        this.props.actions.toggleLoadingSearch(false);
+        this.props.actions.toggleLoadingSearch(false)
         return this.props.actions.clearResults()
       }
 
       if (!this.state.link) {
-        this.props.actions.toggleLoadingSearch(true);
+        this.props.actions.toggleErrorCreateLink(false)
+        this.props.actions.toggleLoadingSearch(true)
         return setTimeout(this.updateSearch.bind(this), elapsedTimeAfterKeyStroke)
       }
 
@@ -68,36 +71,38 @@ class Search extends Component {
     const spotifyUri = /^spotify:track:([\w\d-]+)$/;
 
     if (itunesTrackLink.test(text)) {
-      return {source: 'itunes', id: itunesTrackLink.exec(text)[1]};
+      return {source: 'itunes', id: itunesTrackLink.exec(text)[1]}
     } else if (spotifyTrackLink.test(text)) {
-      return {source: 'spotify', id: spotifyTrackLink.exec(text)[1]};
+      return {source: 'spotify', id: spotifyTrackLink.exec(text)[1]}
     }  else if (spotifyUri.test(text)) {
       return {source: 'spotify', id: spotifyUri.exec(text)[1]};
     } else if (spotifyPlayLink.test(text)) {
-      return {source: 'spotify', id: spotifyPlayLink.exec(text)[1]};
+      return {source: 'spotify', id: spotifyPlayLink.exec(text)[1]}
     } else {
       return undefined;
     }
   }
 
   handleFocus(e) {
-    if (this.state.text.length && !this.state.link) {
-      this.props.actions.search(this.state.text)
-    }
-  }
+    this.props.actions.toggleErrorCreateLink(false)
 
-  handleBlur(e) {
-    e.preventDefault();
-    this.props.actions.clearResults()
+    if (this.state.text.length && !this.state.link && !this.props.results.length) {
+      this.props.actions.search(this.state.text)
+      this.setState({ showResults: true })
+    }
+
   }
 
   handleSubmit(e) {
     e.preventDefault();
     if (!this.isInvalid()) {
-      console.log({source: this.state.link.source, source_id: this.state.link.id})
+      this.props.actions.toggleErrorCreateLink(false)
       this.props.actions.createLink({source: this.state.link.source, source_id: this.state.link.id})
     } else {
-      if (this.state.text.length) this.props.actions.search(this.state.text)
+      if (this.state.text.length) {
+        this.props.actions.toggleErrorCreateLink(false)
+        this.props.actions.search(this.state.text)
+      }
     }
   }
 
@@ -127,7 +132,7 @@ class Search extends Component {
     return (
       <div className="search-information invalid">
         <span className="fa fa-warning"></span>
-        <span> invalid link url</span>
+        <span> Invalid link url</span>
       </div>
     )
   }
@@ -136,7 +141,16 @@ class Search extends Component {
     return (
       <div className="search-information no-results">
         <span className="fa fa-warning"></span>
-        <span> no results found</span>
+        <span> No results found</span>
+      </div>
+    )
+  }
+
+  renderErrorMessage() {
+    return (
+      <div className="search-information invalid">
+        <span className="fa fa-warning"></span>
+        <span> Error creating link</span>
       </div>
     )
   }
@@ -145,6 +159,15 @@ class Search extends Component {
     if (nextProps.links.length > this.props.links.length && this.state.link) {
       this.clearText()
     }
+  }
+
+  componentDidMount() {
+    $('html').on('click', (e) => {
+      if (!$(e.target).closest('.search').length) {
+        this.setState({ showResults: false })
+        this.props.actions.clearResults()
+      }
+    })
   }
 
   render() {
@@ -172,11 +195,9 @@ class Search extends Component {
             value={this.state.text}
             onChange={this.handleChange.bind(this)}
             onFocus={this.handleFocus.bind(this)}
-            onBlur={this.handleBlur.bind(this)}
             onKeyUp={this.handleKeyUp.bind(this)}/>
 
           <Results
-            style={ this.props.results ? {} : {display: 'none'} }
             loading={this.props.loading}
             results={this.state.last ? this.props.results : []}
             actions={this.props.actions}
@@ -186,8 +207,10 @@ class Search extends Component {
 
         { this.isInvalid() ? this.renderLinkInformation() : undefined }
 
-        { this.state.text.length && !this.props.loading.search && !this.props.results.length && !this.state.link ?
+        { this.state.text.length && !this.props.loading.search && !this.props.results.length && this.state.showResults && !this.state.link ?
           this.renderNoResults() : undefined }
+
+        { this.props.errors.createLink ? this.renderErrorMessage() : undefined }
 
       </div>
     )
@@ -197,6 +220,7 @@ class Search extends Component {
 
 Search.propTypes = {
   actions: PropTypes.object.isRequired,
+  errors: PropTypes.object.isRequired,
   invalidLinks: PropTypes.object.isRequired,
   links: PropTypes.array.isRequired,
   loading: PropTypes.object.isRequired,
