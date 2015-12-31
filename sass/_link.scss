@@ -127,6 +127,14 @@
   background-color: $color-main;
 }
 
+#linkbutton {
+  float: right;
+}
+
+#emailbutton {
+  background-color: #1BBC9B;
+}
+
 @media #{$breakpoint-small} {
 
   .link {
@@ -183,5 +191,7 @@
     margin-right: 14px;
     width: $link-input-height-small;
   }
+
+
    
 }
