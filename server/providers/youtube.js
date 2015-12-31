@@ -9,8 +9,9 @@ module.exports = {
   fetchSearchResults: fetchSearchResults,
   getTopYoutubeResult: getTopYoutubeResult,
   makeLinkFromId: makeLinkFromId
-}
+};
 
+// returns time in milliseconds
 function convertYoutubeDuration(str) {
   var fromHours, fromMinutes, fromSeconds;
 
@@ -36,10 +37,10 @@ function convertYoutubeDuration(str) {
   return total * 1000;
 }
 
-function fetchSearchResults(song, query, queryType, callback) {  
+function fetchSearchResults(song, query, queryType, callback) {
 
   search(query, function(err, ids) {
-    
+
     if (err) {
       console.error(err);
       song.results.youtube[queryType] = {};
@@ -51,68 +52,162 @@ function fetchSearchResults(song, query, queryType, callback) {
 
         song.results.youtube[queryType] = {};
         song.results.youtube[queryType].query = query;
-          
+
         if (err) {
           console.error(err);
           song.results.youtube[queryType].results = [];
         } else {
-          song.results.youtube[queryType].results = vids.length ? vids.slice(0, 5) : [];
+          song.results.youtube[queryType].results = vids.length ? vids : [];
         }
-        
+
         callback(null, song);
 
       });
     }
-    
+
   });
-};
+}
 
 function getTopYoutubeResult(song) {
   if (song.source === 'youtube') {
     return song.lookup;
-  } 
+  }
 
   if (!song.results.youtube) {
     return undefined;
   }
 
   var queryTypes = ['full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
-  
-  for (var i = 0; i < queryTypes.length; i++) {
-    var results = song.results.youtube[queryTypes[i]].results;
-    for (var j = 0; j < results.length; j++) {
-      if (Math.abs((convertYoutubeDuration(results[j].contentDetails.duration) - song.track_length) / song.track_length) < .05) {
-        return results[j]
+
+  var heuristics = {
+    containsVevo: function (channelTitle) {
+      return (channelTitle.search(/VEVO$/) !== -1);
+    },
+    isExactRecordLabel: function (channelTitle) {
+      var recordLabels = [
+        'RCA Records',
+        'Capitol Records',
+        'CapitolMusic',
+        'Interscope Records',
+        'Warner Music Group',
+        'Fueled By Ramen',
+        'emimusic',
+        'Columbia Records UK',
+        'Columbia Records',
+        'Def Jam Recordings',
+        'Atlantic Records',
+        'SONY Music Entertainment'
+      ];
+      return recordLabels.some(function (label) {
+        var re = new RegExp('^' + label + '$');
+        return (channelTitle.search(re) !== -1);
+      });
+    },
+    containsTV: function (channelTitle) {
+      return (channelTitle.search(/TV$/) !== -1);
+    },
+    isExactArtistName: function (channelTitle, artist) {
+      return channelTitle === artist;
+    },
+    containsHashtag: function (channelTitle) {
+      return (channelTitle.search(/^#/) !== -1)
+    },
+    isApproxDuration: function (apiResultDuration, localSongDuration) {
+      return Math.abs((apiResultDuration - localSongDuration) / localSongDuration) < .05;
+    },
+    isNotTwiceAsLong: function (apiResultDuration, localSongDuration) {
+      return (apiResultDuration / localSongDuration) < 2;
+    }
+  };
+
+  var testTopResults = function () {
+    var sequence = [
+      heuristics.containsVevo,
+      heuristics.isExactRecordLabel,
+      heuristics.containsTV,
+      heuristics.isExactArtistName
+    ];
+
+    for (var i = 0; i < queryTypes.length; i++) {
+      var topResult = song.results.youtube[queryTypes[i]].results[0];
+
+      // this checks for queryType that might return nothing
+      if (!topResult) {
+        continue;
+      }
+
+      // runs the sequence of checks specifically for topResults, and also checks that the vid is not album with isNotTwiceAsLong
+      var someCheck = function (test) {
+        var currentDuration = convertYoutubeDuration(topResult.contentDetails.duration);
+        return test(topResult.snippet.channelTitle) && heuristics.isNotTwiceAsLong(currentDuration, song.track_length);
+      };
+
+      if (sequence.some(someCheck)) {
+        return topResult;
       }
     }
-  }
 
-  return undefined;
+    return undefined;
+  };
 
+  var testAllResults = function () {
+    // 1. EXTRAORDINARY EXCEPTION: checks for 'The Beatles' as the channelTitle because they're huge
+    for (var i = 0; i < queryTypes.length; i++) {
+      var allResults = song.results.youtube[queryTypes[i]].results;
 
-  // loop through queryTypes
-    // for each, pull out first result
-    // check if channel name contains 'vevo' || exact name e.g. Punch Brothers || any record label || channel name ends in TV
-      // if yes: return this result
+      // this checks for queryType that might return nothing
+      if (!allResults.length) {
+        continue;
+      }
 
-  // loop through queryTypes
-    // for each, loop through all results
-      // for each, check if '#' at beginning and duration matches (looser duration)
-        // if yes: return this result
+      for (var j = 0; j < allResults.length; j++) {
+        var currentChannel = allResults[j].snippet.channelTitle;
+        if (currentChannel === 'The Beatles') {
+          return allResults[j];
+        }
+      }
+    }
 
-  // loop through queryTypes
-    // for each, loop through all results
-      // for each, check if duration matches (stricter? duration)
-        // if yes: return this result
+    // 2. check for vids with hashtag in channel and approxDuration
+    for (i = 0; i < queryTypes.length; i++) {
+      allResults = song.results.youtube[queryTypes[i]].results;
 
-  // retun undefined
+      // this checks for queryType that might return nothing
+      if (!allResults.length) {
+        continue;
+      }
 
+      for (j = 0; j < allResults.length; j++) {
+        currentChannel = allResults[j].snippet.channelTitle;
+        currentDuration = convertYoutubeDuration(allResults[j].contentDetails.duration);
+        if (heuristics.containsHashtag(currentChannel) && heuristics.isApproxDuration(currentDuration, song.track_length)) {
+          return allResults[j];
+        }
+      }
+    }
 
+    // 3. check for vids with just approxDuration
+    for (i = 0; i < queryTypes.length; i++) {
+      allResults = song.results.youtube[queryTypes[i]].results;
 
+      // this checks for queryType that might return nothing
+      if (!allResults.length) {
+        continue;
+      }
 
+      for (j = 0; j < allResults.length; j++) {
+        currentDuration = convertYoutubeDuration(allResults[j].contentDetails.duration);
+        if (heuristics.isApproxDuration(currentDuration, song.track_length)) {
+          return allResults[j];
+        }
+      }
+    }
 
+    // if everything fails
+    return undefined;
+  };
 
-
+  return testTopResults() || testAllResults() || undefined;
 }
 
 function getVideosByIds(ids, callback) {
@@ -131,7 +226,7 @@ function makeLinkFromId(youtubeId) {
 }
 
 function search(queryString, callback) {
-  youtube.search(queryString, 10, function(err, res) {
+  youtube.search(queryString, 20, function(err, res) {
     if (err) {
       console.error(err);
       callback(new Error('Could not find any yt search results due to error'), null);
@@ -141,49 +236,9 @@ function search(queryString, callback) {
       var ids = _.map(res.items, function(item) {
         if (item.id.kind === 'youtube#video') {
           return item.id.videoId;
-        } 
+        }
       });
       callback(null, ids);
     }
   });
 }
-
-// function verify(song, vids, callback) {
-//   song.youtube_id = vids[0].id;
-//   callback(null, song);
-//   var results = [];
-//   var vevo = song.artist.split(' ').join('').toLowerCase() + 'vevo';
-//   for (var i = 0; i < vids.length; i++) {
-//     var vidDuration = convertYoutubeDuration(vids[i].contentDetails.duration);
-//     if (vids[i].snippet.channelTitle.toLowerCase() === vevo && vids[i].snippet.title.toLowerCase().includes(song.title)) {
-//       if ((Math.abs(vidDuration - song.track_length) / song.track_length) < 0.15) {
-//         results.push(vids[i]);
-//       }
-//     }
-//     if (vids[i].snippet.channelTitle.toLowerCase() === song.artist.toLowerCase()) {
-//       results.push(vids[i])
-//     }
-//     if (compareDurations(vidDuration, song.track_length)) {
-//       results.push(vids[i]);
-//     }
-//   }
-//   var bestMatch = verify2(results);
-//   bestMatch ? song.youtube_id = bestMatch.id : song.youtube_id = vids[0].id;
-//   return callback(null, song);
-// }
-
-// function verify2(results) {
-//   var best = 0;
-//   var index;
-//   for (var i=0; i<results.length; i++) {
-//     if (results[i].statistics.likeCount > 100) {
-//       var stats = results[i].statistics;
-//       var rating = (stats.likeCount / stats.dislikeCount) * stats.viewCount;
-//       if (rating > best) {
-//         best = rating;
-//         index = i
-//       }
-//     }
-//   }
-//   return (results[index])
-// }

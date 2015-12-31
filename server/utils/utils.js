@@ -118,7 +118,7 @@ function makeQuery(song, queryType) {
 
   switch (queryType) {
     case 'full':
-      query = song.title + ' ' + song.artist + ' ' + song.album_title;
+      query = song.title + ' ' + song.album_title + ' ' + song.artist;
 
       break;
 
@@ -128,7 +128,7 @@ function makeQuery(song, queryType) {
       break;
 
     case 'full-punc-keywords':
-      query = song.title + ' ' + song.artist + ' ' + song.album_title;
+      query = song.title + ' ' + song.album_title + ' ' + song.artist;
 
       // Remove punctation (no inside content): parens, brackets, pound and ampersand
       query = query.replace(/[&#\[\]()]/gi, ' ');
@@ -164,7 +164,7 @@ function makeQuery(song, queryType) {
       query = query.replace(/ - (.*)/, ' ');
 
       // Combine title, artist and new album title
-      query = song.title + ' ' + song.artist + ' ' + query;
+      query = song.title  + ' ' + query + ' ' + song.artist;
 
       break;
 
@@ -174,7 +174,7 @@ function makeQuery(song, queryType) {
       var artist = song.artist.replace(/ - (.*)/, ' ');
       var album = song.album_title.replace(/ - (.*)/, ' ');
 
-      query = title + ' ' + artist + ' ' + album;
+      query = title  + ' ' + album + ' ' + artist;
 
       // Remove parens and contents inside parens
       query = query.replace(/ *\([^)]*\) */g, ' ');
@@ -186,7 +186,7 @@ function makeQuery(song, queryType) {
       break;
 
     case 'partial-punc-keywords':
-      query = song.title + ' ' + song.artist
+      query = song.title + ' ' + song.artist;
 
       // Remove punctation (no inside content): parens, brackets, pound and ampersand
       query = query.replace(/[&#\[\]()]/gi, ' ');
