@@ -10,4 +10,4 @@ module.exports = {
   itunes: itunes,
   spotify: spotify,
   youtube: youtube
-}
+};
