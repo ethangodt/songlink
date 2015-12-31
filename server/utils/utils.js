@@ -71,20 +71,21 @@ function checkDb(song) {
   });
 }
 
-function createUniqueHash(str) {
+function createUniqueHash(str, parentResolve, parentReject) {
 
   return new Promise(function (resolve, reject) {
-
+    resolve = parentResolve || resolve;
+    reject = parentReject || reject;
     var shasum = crypto.createHash('sha1');
     shasum.update(str);
     var url_hash = shasum.digest('hex').slice(0, 5);
-    
+
     checkDb({ hash_id: url_hash })
       .then(function(songFromDb) {
         if (!songFromDb) {
           resolve(url_hash);
         } else {
-          return createUniqueHash(str += Date.now());
+          return createUniqueHash(str += Date.now(), resolve, reject);
         }
       })
       .catch(reject);
