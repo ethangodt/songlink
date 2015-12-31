@@ -66,7 +66,6 @@ class Search extends Component {
   getLinkInfo(text) {
     const itunesTrackLink = /^https:\/\/itun.es\/[a-z]+\/[\w-]+\?i=([\d]+)$/;
     const spotifyTrackLink = /^https:\/\/open.spotify.com\/[\w]+\/([\w\d]+)$/;
-    // const spotifyShortenedLink = /^spoti.fi\/([\w\d]+)$/;
     const spotifyPlayLink = /^https:\/\/play.spotify.com\/[\w]+\/([\w\d]+)?(.*)$/;
     const spotifyUri = /^spotify:track:([\w\d-]+)$/;
 
