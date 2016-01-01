@@ -127,12 +127,21 @@ class Link extends Component {
           </ReactTooltip>
 
           <a data-tip data-for="email">
-            <EmailButton className="email" url={this.props.link.url} message={this.createSocialMessage()}>
+            <EmailButton id="emailbutton" className="email" url={this.props.link.url} message={this.createSocialMessage()}>
               <span className="fa fa-envelope"></span>
             </EmailButton>
           </a>
           <ReactTooltip id="email">
             <span>Share via email</span>
+          </ReactTooltip>
+
+          <a href={this.props.link.url} data-tip data-for="linkbutton">
+            <button id="linkbutton" className="email" url={this.props.link.url}>
+              <span className="fa fa-share-square-o"></span>
+            </button>
+          </a>
+          <ReactTooltip id="linkbutton">
+            <span>Go to Link</span>
           </ReactTooltip>
 
         </div>
