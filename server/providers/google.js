@@ -1,12 +1,35 @@
 var playmusic = require('playmusic');
 var pm = new playmusic();
+var queries = require('../queries');
 
 module.exports = {
-  fetchSearchResults: fetchSearchResults,
+  buildSearchResults: buildSearchResults,
   getTopGoogleResult: getTopGoogleResult,
-  // lookupSongById: lookupSongById,
   makeUrlFromId: makeUrlFromId
 };
+
+function buildSearchResults(song, callback) {
+
+  if (song.source === 'google') {
+    return callback(null, song)
+  }
+
+  song.results.google = {};
+ 
+  for (var queryType in queries) {
+    var query = queries[queryType].makeQuery(song);
+
+    fetchSearchResults(song, query, queryType, function(err, songFromFetch) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (Object.keys(songFromFetch.results.google).length === Object.keys(queries).length) {
+          callback(null, songFromFetch);
+        }
+      }
+    });
+  }
+}
 
 function fetchSearchResults(song, query, queryType, callback) {
 
@@ -29,9 +52,9 @@ function fetchSearchResults(song, query, queryType, callback) {
           if (err) {
             console.error(err);
             song.results.google[queryType].results = [];
-          } else if (!data.entries) {
-            console.error(new Error('There were no search results found on Google for query:'));
-            console.log('query:', query);
+          }
+
+          if (err || !data.entries) {
             song.results.google[queryType].results = [];
           } else {
             var songs = [];
@@ -66,16 +89,15 @@ function getTopGoogleResult(song) {
     return undefined;
   }
 
-  var queryTypes = ['full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
-
-  for (var i = 0; i < queryTypes.length; i++) {
-    var results = song.results.google[queryTypes[i]].results;
-    for (var j = 0; j < results.length; j++) {
-      if (Math.abs((results[j].durationMillis - song.track_length) / song.track_length) < .02) {
-        return results[j]
+  for (var queryType in queries) {
+    var results = song.results.google[queryType].results;
+    for (var i = 0; i < results.length; i++) {
+      if (Math.abs(((results[i].durationMillis) - song.track_length) / song.track_length) < .02) {
+        return results[i]
       }
-    }
+    };
   }
+
 
   return undefined;
   
