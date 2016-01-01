@@ -20,8 +20,12 @@ function buildSearchResults(song, callback) {
   }
 
   song.results.itunes = {};
- 
-  for (var queryType in queries) {
+
+  var queryTypes = Array.prototype.slice.call(Object.keys(queries), 0);
+
+  var getNextSearchResults = function() {
+
+    var queryType = queryTypes.pop();
     var query = queries[queryType].makeQuery(song);
 
     fetchSearchResults(song, query, queryType, function(err, songFromFetch) {
@@ -33,7 +37,15 @@ function buildSearchResults(song, callback) {
         }
       }
     });
-  }
+
+    if (queryTypes.length) {
+      setTimeout(function() {
+        getNextSearchResults()
+      }, 400);
+    }
+  };
+
+  getNextSearchResults();
 }
 
 function fetchSearchResults(song, query, queryType, callback) {
