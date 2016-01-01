@@ -2,6 +2,7 @@
   cursor: pointer;
   height: $search-result-height;
   overflow: auto;
+	background-color: white;
 
   &:hover {
     background-color: mix($color-main, white, 6%);
@@ -59,6 +60,6 @@
   .result .album {
     font-size: 12px;
   }
-   
+
 }
 

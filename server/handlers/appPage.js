@@ -27,7 +27,7 @@ function create(req, res) {
               .then(function(finalSong) {
                 res.send(utils.makeSongLinkObject(finalSong, req.headers.host));
               });
-          })  
+          })
       }
     })
     .catch(function(err) {
@@ -42,7 +42,7 @@ function render(req, res) {
 
 function search(req, res) {
   var queryString = providers.itunes.makeSearchUrlWithQuery(req.query.search);
-  providers.itunes.search(queryString, 10, function (err, songs) {
+  providers.itunes.search(queryString, 6, function (err, songs) {
     if (err) {
       res.status(400).send(err.message);
     } else {
@@ -50,4 +50,3 @@ function search(req, res) {
     }
   });
 }
-

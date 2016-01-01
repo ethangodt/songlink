@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import docCookies from '../server/templates/linkTemplate/scripts/listenerTools'
+import docCookies from '../server/utils/cookie'
 import PreferencesGroup from './PreferencesGroup'
 
 class Preferences extends Component {

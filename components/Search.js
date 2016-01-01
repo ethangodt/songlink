@@ -180,21 +180,26 @@ class Search extends Component {
             'is-invalid': this.isInvalid()
           })}>
 
-          <button onClick={this.handleSubmit.bind(this)}>
-            <span className={this.getButtonClasses()}></span>
-          </button>
+          <form action="">
 
-          <input
-            className={classnames({
-              'is-invalid': this.isInvalid()
-            })}
-            type="text"
-            placeholder={this.props.loading.link ? "Creating link..." : "Search or paste song URL"}
-            autoFocus="true"
-            value={this.state.text}
-            onChange={this.handleChange.bind(this)}
-            onFocus={this.handleFocus.bind(this)}
-            onKeyUp={this.handleKeyUp.bind(this)}/>
+            <input style={{width: '0', position: 'absolute', visibility: '0'}} type="submit"/>
+            <button onClick={this.handleSubmit.bind(this)}>
+              <span className={this.getButtonClasses()}></span>
+            </button>
+
+            <input
+              className={classnames({
+                'is-invalid': this.isInvalid()
+              })}
+              type="text"
+              placeholder={this.props.loading.link ? "Creating link..." : "Search or paste song URL"}
+              autoFocus="true"
+              value={this.state.text}
+              onChange={this.handleChange.bind(this)}
+              onFocus={this.handleFocus.bind(this)}
+              onKeyUp={this.handleKeyUp.bind(this)}/>
+
+          </form>
 
           <Results
             loading={this.props.loading}
