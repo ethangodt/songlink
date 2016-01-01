@@ -17,7 +17,7 @@
     "clean": "rm -rf dist",
     "postclean": "mkdir dist && mkdir dist/scripts && mkdir dist/assets",
     "js:copy": "cp -a server/templates/linkTemplate/scripts/. dist/scripts/",
-    "js:uglify": "uglifyjs server/templates/linkTemplate/scripts/listenerToolsCopy.js -o dist/scripts/listenerToolsCopy.js",
+    "js:uglify": "uglifyjs server/templates/linkTemplate/scripts/listenerTools.js -o dist/scripts/listenerTools.js",
     "js:webpack": "NODE_ENV=production webpack --config webpack.production.config.js",
     "images:copy": "cp -a server/static/assets/. dist/assets/",
     "css:sass:prod": "node-sass sass/main.scss dist/main.css --output-style compressed",
