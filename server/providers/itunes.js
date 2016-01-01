@@ -1,7 +1,8 @@
 var request = require('request');
+var queries = require('../queries');
 
 module.exports = {
-  fetchSearchResults: fetchSearchResults,
+  buildSearchResults: buildSearchResults,
   getAlbumArtUrl: getAlbumArtUrl,
   getTopItunesResult: getTopItunesResult,
   lookupSongById: lookupSongById,
@@ -12,6 +13,28 @@ module.exports = {
   search: search
 };
 
+function buildSearchResults(song, callback) {
+
+  if (song.source === 'itunes') {
+    return callback(null, song)
+  }
+
+  song.results.itunes = {};
+ 
+  for (var queryType in queries) {
+    var query = queries[queryType].makeQuery(song);
+
+    fetchSearchResults(song, query, queryType, function(err, songFromFetch) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (Object.keys(songFromFetch.results.itunes).length === Object.keys(queries).length) {
+          callback(null, songFromFetch);
+        }
+      }
+    });
+  }
+}
 
 function fetchSearchResults(song, query, queryType, callback) {
   
@@ -57,16 +80,14 @@ function getTopItunesResult(song) {
   if (!song.results.itunes) {
     return undefined;
   }
-    
-  var queryTypes = ['full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
-  
-  for (var i = 0; i < queryTypes.length; i++) {
-    var results = song.results.itunes[queryTypes[i]].results;
-    for (var j = 0; j < results.length; j++) {
-      if (Math.abs((results[j].trackTimeMillis - song.track_length) / song.track_length) < .02) {
-        return results[j]
+
+  for (var queryType in queries) {
+    var results = song.results.itunes[queryType].results;
+    for (var i = 0; i < results.length; i++) {
+      if (Math.abs(((results[i].trackTimeMillis) - song.track_length) / song.track_length) < .02) {
+        return results[i]
       }
-    }
+    };
   }
 
   return undefined;

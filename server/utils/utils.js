@@ -2,6 +2,7 @@ var crypto = require('crypto');
 var providers = require('../providers');
 var songCtrl = require('../db/controllers/songController');
 var Promise = require('bluebird');
+var queries = require('../queries');
 
 module.exports = {
   addSongToDb: addSongToDb,
@@ -32,29 +33,18 @@ function build(song) {
     song.results = {};
 
     for (var provider in providers) {
-      if (provider !== song.source) {
-
-        song.results[provider] = {};
-
-        var queryTypes = ['full', 'partial', 'full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial-punc-keywords', 'partial-allParensBrackets'];
-
-        queryTypes.forEach(function(queryType) {
-          var query = makeQuery(song, queryType);
-
-          providers[provider].fetchSearchResults(song, query, queryType, function(err, songFromBuild) {
-            if (err) {
-              reject(err);
-            } else {
-              for (provider in songFromBuild.results) {
-                if (Object.keys(songFromBuild.results[provider]).length !== queryTypes.length) {
-                  return;
-                }
-              }
-              resolve(songFromBuild);
+      providers[provider].buildSearchResults(song, function(err, songFromBuild) {
+        if (err) {
+          reject(err);
+        } else {
+          for (var prov in songFromBuild.results) {
+            if (Object.keys(songFromBuild.results[prov]).length !== Object.keys(queries).length) {
+              return;
             }
-          });
-        });
-      }
+          }
+          resolve(songFromBuild);
+        }
+      });
     }
   });
 }

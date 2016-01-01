@@ -1,15 +1,39 @@
 var _ = require('underscore');
 var ytnode = require('youtube-node');
+var queries = require('../queries');
 
 var youtube = new ytnode();
 var key = process.env.YOUTUBE_KEY;
 youtube.setKey(key);
 
 module.exports = {
-  fetchSearchResults: fetchSearchResults,
+  buildSearchResults: buildSearchResults,
   getTopYoutubeResult: getTopYoutubeResult,
   makeLinkFromId: makeLinkFromId
 };
+
+function buildSearchResults(song, callback) {
+
+  if (song.source === 'youtube') {
+    return callback(null, song)
+  }
+
+  song.results.youtube = {};
+ 
+  for (var queryType in queries) {
+    var query = queries[queryType].makeQuery(song);
+
+    fetchSearchResults(song, query, queryType, function(err, songFromFetch) {
+      if (err) {
+        console.log(err);
+      } else {
+        if (Object.keys(songFromFetch.results.youtube).length === Object.keys(queries).length) {
+          callback(null, songFromFetch);
+        }
+      }
+    });
+  }
+}
 
 // returns time in milliseconds
 function convertYoutubeDuration(str) {
