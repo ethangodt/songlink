@@ -135,7 +135,7 @@ class Link extends Component {
             <span>Share via email</span>
           </ReactTooltip>
 
-          <a href={this.props.link.url} data-tip data-for="linkbutton">
+          <a href={this.props.link.url} data-tip data-for="linkbutton" target="_blank">
             <button id="linkbutton" className="email" url={this.props.link.url}>
               <span className="fa fa-external-link"></span>
             </button>
