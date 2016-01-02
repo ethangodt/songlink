@@ -134,19 +134,6 @@ function lookupSongById(song, callback) {
       callback(null, song);
     }
   });
-
-  // spotify.lookup({ type: 'track', id: song.source_id}, function(err, data) {
-  //   if ( data.error || err ) {
-  //     callback(new Error('Could not verify ID'), null);
-  //   } else {
-  //     song.lookup = data;
-  //     song.title = data.name;
-  //     song.artist = data.artists[0].name;
-  //     song.album_title = data.album.name;
-  //     song.track_length = data.duration_ms;
-  //     callback(null, song);
-  //   }
-  // });
 }
 
 function makeLookupUrlWIthId(id) {
