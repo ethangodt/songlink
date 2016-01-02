@@ -22,7 +22,7 @@ class Link extends Component {
   handleFocusOnLoad(el) {
     if (!this.state.inputHasLoaded) {
       el.select()
-    }  
+    }
     this.setState({ inputHasLoaded: true })
   }
 
@@ -62,14 +62,14 @@ class Link extends Component {
 
         <div className="link-container">
 
-          <input 
+          <input
             type="text"
             value={this.props.link.url}
-            ref={this.props.index === 0 && !this.state.inputHasLoaded ? 
+            ref={this.props.index === 0 && !this.state.inputHasLoaded ?
               this.handleFocusOnLoad.bind(this) : undefined}
             onFocus={this.handleFocus.bind(this)}/>
 
-          <a 
+          <a
             onClick={this.handleCopyClick.bind(this)}
             onMouseLeave={this.handleCopyMouseLeave.bind(this)}
             data-tip
@@ -137,7 +137,7 @@ class Link extends Component {
 
           <a href={this.props.link.url} data-tip data-for="linkbutton">
             <button id="linkbutton" className="email" url={this.props.link.url}>
-              <span className="fa fa-share-square-o"></span>
+              <span className="fa fa-external-link"></span>
             </button>
           </a>
           <ReactTooltip id="linkbutton">
