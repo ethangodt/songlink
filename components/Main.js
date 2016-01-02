@@ -15,9 +15,7 @@ class Main extends Component {
   }
 
   renderExplanation() {
-    return this.props.results.length ||
-      this.props.links.length ?
-        undefined : <Explanation/>
+    return !this.props.links.length ? <Explanation/> : undefined;
   }
 
   render() {
