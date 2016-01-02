@@ -17,7 +17,7 @@ function buildSearchResults(song, callback) {
   }
 
   song.results.spotify = {};
- 
+
   for (var queryType in queries) {
     var query = queries[queryType].makeQuery(song);
 
@@ -36,7 +36,7 @@ function buildSearchResults(song, callback) {
 function fetchSearchResults(song, query, queryType, callback) {
 
   spotify.search({type: 'track', query: query}, function(err, data) {
-    
+
     song.results.spotify[queryType] = {};
     song.results.spotify[queryType].query = query;
 
@@ -72,19 +72,39 @@ function getAlbumArtUrl(song, size) {
 function getTopSpotifyResult(song) {
   if (song.source === 'spotify') {
     return song.lookup;
-  } 
+  }
 
   if (!song.results.spotify) {
     return undefined;
   }
 
+  var heuristics = {
+    isNotTribute: function (title, album, artist) {
+      var re = /\boriginally\b|\boriginal\b|orig\.|\bcover\b|\bcovers\b|\btribute\b|\btributes\b|\bperforms\b|\bperforming\b|\blullaby\b|\bMotion Picture\b|\bsoundtrack\b/gi;
+      return !(re.test(title) || re.test(album) || re.test(artist));
+    },
+    isApproxDuration: function (apiResultDuration, localSongDuration) {
+      return Math.abs((apiResultDuration - localSongDuration) / localSongDuration) < .05;
+    }
+  };
+
   for (var queryType in queries) {
     var results = song.results.spotify[queryType].results;
-    for (var i = 0; i < results.length; i++) {
-      if (Math.abs(((results[i].duration_ms) - song.track_length) / song.track_length) < .02) {
-        return results[i]
+    var isNotTribute = heuristics.isNotTribute(song.title, song.album_title, song.artist);
+    var max = (results.length > 2) ? 2: results.length;
+    for (var i = 0; i < max; i++) {
+      if (isNotTribute) {
+        // if source is not a tribute, make sure match isn't either
+        if (heuristics.isNotTribute(results[i].name, results[i].album.name, results[i].artists[0].name) && heuristics.isApproxDuration(results[i].duration_ms, song.track_length)) {
+          return results[i];
+        }
+      } else {
+        // if source is a tribute, don't prevent against tribute matches
+        if (heuristics.isApproxDuration(results[i].duration_ms, song.track_length)) {
+          return results[i];
+        }
       }
-    };
+    }
   }
 
   return undefined;
