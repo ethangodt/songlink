@@ -182,7 +182,8 @@ class Search extends Component {
 
           <form action="">
 
-            <input style={{width: '0', position: 'absolute', visibility: '0'}} type="submit"/>
+            <input style={{width: '0', position: 'absolute', visibility: '0'}} type="submit" disabled/>
+            
             <button onClick={this.handleSubmit.bind(this)}>
               <span className={this.getButtonClasses()}></span>
             </button>
