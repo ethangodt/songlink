@@ -19,7 +19,7 @@ function buildSearchResults(song, callback) {
   }
 
   song.results.youtube = {};
- 
+
   for (var queryType in queries) {
     var query = queries[queryType].makeQuery(song);
 
@@ -127,6 +127,9 @@ function getTopYoutubeResult(song) {
         return (channelTitle.search(re) !== -1);
       });
     },
+    containsRecords: function (channelTitle) {
+      return (channelTitle.search(/Records/) !== -1);
+    },
     containsTV: function (channelTitle) {
       return (channelTitle.search(/TV$/) !== -1);
     },
@@ -148,6 +151,7 @@ function getTopYoutubeResult(song) {
     var sequence = [
       heuristics.containsVevo,
       heuristics.isExactRecordLabel,
+      heuristics.containsRecords,
       heuristics.containsTV,
       heuristics.isExactArtistName
     ];
@@ -160,7 +164,7 @@ function getTopYoutubeResult(song) {
         continue;
       }
 
-      // runs the sequence of checks specifically for topResults, and also checks that the vid is not album with isNotTwiceAsLong
+      // runs the sequence of checks specifically for topResults, and also checks that the vid is not a full album with isNotTwiceAsLong
       var someCheck = function (test) {
         var currentDuration = convertYoutubeDuration(topResult.contentDetails.duration);
         return test(topResult.snippet.channelTitle) && heuristics.isNotTwiceAsLong(currentDuration, song.track_length);

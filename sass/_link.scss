@@ -42,7 +42,7 @@
 
 .link .link-container {
   height: $link-input-height;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   position: relative;
   width: 100%;
 }
@@ -92,10 +92,16 @@
   border-radius: 100%;
   color: white;
   height: 100%;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
-  margin-right: 20px;
+  margin-right: 10px;
   width: $link-input-height;
+}
+
+// for the open link button
+.link .button-container a:nth-last-of-type(1) button {
+	float: right;
+	margin-right: 0;
 }
 
 .link button.copy .fa-link {
@@ -127,10 +133,6 @@
   background-color: $color-main;
 }
 
-#linkbutton {
-  float: right;
-}
-
 #emailbutton {
   background-color: #1BBC9B;
 }
@@ -140,7 +142,7 @@
   .link {
     padding: 16px;
   }
-  
+
   .link .link-header {
     font-size: 12px;
     height: $link-header-height-small;
@@ -165,7 +167,7 @@
   .link .link-header .album {
     font-size: 12px;
   }
-  
+
   .link .link-container {
     height: $link-input-height-small;
     width: 100%;
@@ -180,7 +182,7 @@
     font-size: 16px;
     right: 4px;
     top: ($link-input-height-small / 2) - 8;
-  } 
+  }
 
   .link .button-container {
     height: $link-input-height-small;
@@ -193,5 +195,5 @@
   }
 
 
-   
+
 }
