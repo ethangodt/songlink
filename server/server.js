@@ -17,9 +17,9 @@ app.use(cors());
 app.use(compress());
 app.use(express.static('./dist'));
 
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(cookieParser());
-app.use(bodyParser.urlencoded({extended: true}));
 
 if (process.env.NODE_ENV === 'development') {
   require('./config/server.development.config')(app);
