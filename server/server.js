@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var db = require('./config/db.config');
 var express = require('express');
 var routes = require('./routes');
+var cors = require('cors');
 
 db();
 
