@@ -11,8 +11,10 @@ Head over to [songlink](http://songl.ink) to create a link for a song you'd like
 - Redux
 - Webpack
 - Sass
-- Mustache templates
-- CDNs
+- Cloudfront CDN
+- Mustache templating
 - Mocha/Chai
+
+If you have any questions or comments, please contact songlinkapp@gmail.com.
 
 
