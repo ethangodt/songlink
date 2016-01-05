@@ -6,13 +6,29 @@ var cookieParser = require('cookie-parser');
 var db = require('./config/db.config');
 var express = require('express');
 var routes = require('./routes');
-var cors = require('cors');
+// var cors = require('cors');
+
+var enableCORS = function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+ 
+    // intercept OPTIONS method
+    if ('OPTIONS' == req.method) {
+      res.send(200);
+    }
+    else {
+      next();
+    }
+};
 
 db();
 
 var app = express();
 
-app.use(cors());
+// app.use(cors());
+
+app.use(enableCORS);
 
 app.use(compress());
 app.use(express.static('./dist'));
