@@ -12,7 +12,7 @@ describe('spotify module', function () {
 
   });
 
-  describe('createQuery function', function () {
+  xdescribe('createQuery function', function () {
     // feat, ft, prod, symbols to spaces
     var song;
 
@@ -39,7 +39,7 @@ describe('spotify module', function () {
 
   });
 
-  describe('makePrettyObject function', function () {
+  xdescribe('makePrettyObject function', function () {
 
     var input = {
       name: 'title',

@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var itunes = require('../../server/providers/itunes')
 
-describe('itunes module', function () {
+xdescribe('itunes module', function () {
 
   describe('makeSearchUrlWithSong function', function () {
 
