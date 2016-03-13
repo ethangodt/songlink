@@ -10,6 +10,7 @@ module.exports = {
   makeSearchResultsObjects: makeSearchResultsObjects,
   makeSearchUrlWithQuery: makeSearchUrlWithQuery,
   makeText: makeText,
+  pruneSearchResults: pruneSearchResults,
   search: search
 };
 
@@ -87,10 +88,14 @@ function getAlbumArtUrl(song) {
 function getTopItunesResult(song) {
   if (song.source === 'itunes') {
     return song.lookup;
-  } 
+  }
+
+  if (song.results_pruned && song.results_pruned.hasOwnProperty('itunes')) {
+    return song.results_pruned.itunes;
+  }
 
   if (!song.results.itunes) {
-    return undefined;
+    return null;
   }
 
   for (var queryType in queries) {
@@ -102,7 +107,7 @@ function getTopItunesResult(song) {
     };
   }
 
-  return undefined;
+  return null;
 
 }
 
@@ -174,6 +179,16 @@ function makeText(itunesSong) {
   } else {
     return 'Open in iTunes Store';
   }
+}
+
+function pruneSearchResults(song, callback) {
+  if (song.source === 'itunes') {
+    song.results_pruned.itunes = song.lookup;
+    return callback(null, song);
+  }
+
+  song.results_pruned.itunes = getTopItunesResult(song);
+  callback(null, song);
 }
 
 function search(searchUrl, numResults, callback) {

@@ -5,7 +5,8 @@ var queries = require('../queries');
 module.exports = {
   buildSearchResults: buildSearchResults,
   getTopGoogleResult: getTopGoogleResult,
-  makeUrlFromId: makeUrlFromId
+  makeUrlFromId: makeUrlFromId,
+  pruneSearchResults: pruneSearchResults
 };
 
 function buildSearchResults(song, callback) {
@@ -78,15 +79,19 @@ function fetchSearchResults(song, query, queryType, callback) {
       }
 
   });
-};
+}
 
 function getTopGoogleResult(song) {
   if (song.source === 'google') {
     return song.lookup;
-  } 
+  }
+
+  if (song.results_pruned && song.results_pruned.hasOwnProperty('google')) {
+    return song.results_pruned.google;
+  }
 
   if (!song.results.google) {
-    return undefined;
+    return null;
   }
 
   for (var queryType in queries) {
@@ -99,9 +104,9 @@ function getTopGoogleResult(song) {
   }
 
 
-  return undefined;
+  return null;
   
-};
+}
 
 // function lookupSongById(song, callback) {
 //   if (song.lookup) {
@@ -124,4 +129,14 @@ function getTopGoogleResult(song) {
 
 function makeUrlFromId(googleId) {
   return 'https://play.google.com/music/m/' + googleId + '?signup_if_needed=1';
-};
+}
+
+function pruneSearchResults(song, callback) {
+  if (song.source === 'google') {
+    song.results_pruned.google = song.lookup;
+    return callback(null, song);
+  }
+
+  song.results_pruned.google = getTopGoogleResult(song);
+  callback(null, song);
+}

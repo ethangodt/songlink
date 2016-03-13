@@ -26,7 +26,7 @@ function get(songObj, callback) {
 }
 
 function getAll(callback) {
-  Song.find({}, function (err, response) {
+  Song.find({}, 'title hash_id', function (err, response) {
     if (err) {
       console.error(err);
     }
