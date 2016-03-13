@@ -1,8 +1,8 @@
 var appPageHandlers = require('./handlers/appPage');
 var linkPageHandlers = require('./handlers/linkPage');
+var pruneHandler = require('./handlers/prune');
 
 module.exports = function (app) {
-
   app.get('/search', appPageHandlers.search);
   
   app.get('/preferences', appPageHandlers.render);
@@ -13,4 +13,5 @@ module.exports = function (app) {
 
   app.get('/', appPageHandlers.render);
 
+  app.put('/prune', pruneHandler)
 };

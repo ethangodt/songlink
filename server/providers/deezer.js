@@ -4,7 +4,8 @@ var queries = require('../queries');
 module.exports = {
   buildSearchResults: buildSearchResults,
   getTopDeezerResult: getTopDeezerResult,
-  getLink : getLink
+  getLink : getLink,
+  pruneSearchResults: pruneSearchResults
 };
 
 function buildSearchResults(song, callback) {
@@ -52,10 +53,14 @@ function fetchSearchResults(song, query, queryType, callback) {
 function getTopDeezerResult(song) {
   if (song.source === 'deezer') {
     return song.lookup;
-  } 
+  }
+
+  if (song.results_pruned && song.results_pruned.hasOwnProperty('deezer')) {
+    return song.results_pruned.deezer;
+  }
 
   if (!song.results.deezer) {
-    return undefined;
+    return null;
   }
 
   for (var queryType in queries) {
@@ -67,7 +72,7 @@ function getTopDeezerResult(song) {
     };
   }
 
-  return undefined;
+  return null;
 
 }
 
@@ -97,6 +102,16 @@ function getLink (song) {
 function makeSearchUrlWithQuery(query) {
   query = query.replace(/\s+/g, "+");
   return 'https://api.deezer.com/search?q=' + query;
+}
+
+function pruneSearchResults(song, callback) {
+  if (song.source === 'deezer') {
+    song.results_pruned.deezer = song.lookup;
+    return callback(null, song);
+  }
+
+  song.results_pruned.deezer = getTopDeezerResult(song);
+  callback(null, song);
 }
 
 function search(searchUrl, numResults, callback) {
