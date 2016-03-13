@@ -7,7 +7,8 @@ module.exports = {
   getAlbumArtUrl: getAlbumArtUrl,
   getTopSpotifyResult: getTopSpotifyResult,
   lookupSongById: lookupSongById,
-  makeUriFromId: makeUriFromId
+  makeUriFromId: makeUriFromId,
+  pruneSearchResults: pruneSearchResults
 };
 
 function buildSearchResults(song, callback) {
@@ -74,8 +75,12 @@ function getTopSpotifyResult(song) {
     return song.lookup;
   }
 
-  if (!song.results.spotify) {
-    return undefined;
+  if (song.results_pruned && song.results_pruned.hasOwnProperty('spotify')) {
+    return song.results_pruned.spotify;
+  }
+
+  if (song.results && !song.results.spotify) {
+    return null;
   }
 
   var heuristics = {
@@ -107,7 +112,7 @@ function getTopSpotifyResult(song) {
     }
   }
 
-  return undefined;
+  return null;
 
 }
 
@@ -142,4 +147,14 @@ function makeLookupUrlWIthId(id) {
 
 function makeUriFromId(spotifyId) {
   return 'spotify:track:' + spotifyId;
+}
+
+function pruneSearchResults(song, callback) {
+  if (song.source === 'spotify') {
+    song.results_pruned.spotify = song.lookup;
+    return callback(null, song);
+  }
+
+  song.results_pruned.spotify = getTopSpotifyResult(song);
+  callback(null, song);
 }

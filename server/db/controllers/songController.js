@@ -3,7 +3,8 @@ var Song = require('../models/song');
 module.exports = {
   create: create,
   get: get,
-  getAll: getAll
+  getAll: getAll,
+  getSongWithTooMuchData: getSongWithTooMuchData
 }
 
 function create(songData, callback) {
@@ -26,10 +27,23 @@ function get(songObj, callback) {
 }
 
 function getAll(callback) {
-  Song.find({}, function (err, response) {
+  Song.find({}, 'title hash_id', function (err, response) {
     if (err) {
       console.error(err);
     }
     callback(err, response);
+  })
+}
+
+function getSongWithTooMuchData(callback) {
+  Song.findOne({ 
+    results: { $exists: true },
+    results_pruned: { $exists: false }
+  }, function(err, song) {
+    if (err) {
+      return callback(err, null)
+    }
+    
+    callback(null, song)
   })
 }

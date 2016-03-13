@@ -9,7 +9,8 @@ youtube.setKey(key);
 module.exports = {
   buildSearchResults: buildSearchResults,
   getTopYoutubeResult: getTopYoutubeResult,
-  makeLinkFromId: makeLinkFromId
+  makeLinkFromId: makeLinkFromId,
+  pruneSearchResults: pruneSearchResults
 };
 
 function buildSearchResults(song, callback) {
@@ -97,8 +98,12 @@ function getTopYoutubeResult(song) {
     return song.lookup;
   }
 
+  if (song.results_pruned && song.results_pruned.hasOwnProperty('youtube')) {
+    return song.results_pruned.youtube;
+  }
+
   if (!song.results.youtube) {
-    return undefined;
+    return null;
   }
 
   var queryTypes = ['full-punc-keywords', 'full-albumParensBrackets', 'full-allParensBrackets', 'partial', 'partial-punc-keywords', 'partial-allParensBrackets'];
@@ -175,7 +180,7 @@ function getTopYoutubeResult(song) {
       }
     }
 
-    return undefined;
+    return null;
   };
 
   var testAllResults = function () {
@@ -232,10 +237,10 @@ function getTopYoutubeResult(song) {
     }
 
     // if everything fails
-    return undefined;
+    return null;
   };
 
-  return testTopResults() || testAllResults() || undefined;
+  return testTopResults() || testAllResults() || null;
 }
 
 function getVideosByIds(ids, callback) {
@@ -251,6 +256,16 @@ function getVideosByIds(ids, callback) {
 
 function makeLinkFromId(youtubeId) {
   return 'https://www.youtube.com/watch?v=' + youtubeId;
+}
+
+function pruneSearchResults(song, callback) {
+  if (song.source === 'youtube') {
+    song.results_pruned.youtube = song.lookup;
+    return callback(null, song);
+  }
+
+  song.results_pruned.youtube = getTopYoutubeResult(song);
+  callback(null, song);
 }
 
 function search(queryString, callback) {

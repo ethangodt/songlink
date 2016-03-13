@@ -16,7 +16,9 @@ var songSchema = new mongoose.Schema({
   itunes_store_uri: String,
   itunes_id: String,
   spotify_id: String,
-  youtube_id: String
+  youtube_id: String,
+
+  results_pruned: Object
 });
 
 var Song = mongoose.model('song', songSchema);

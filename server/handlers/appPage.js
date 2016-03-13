@@ -23,6 +23,7 @@ function create(req, res) {
                 song.hash_id = hash_id;
                 return song;
               })
+              .then(utils.pruneSong)
               .then(utils.addSongToDb)
               .then(function(finalSong) {
                 res.send(utils.makeSongLinkObject(finalSong, req.headers.host));

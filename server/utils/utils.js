@@ -11,6 +11,7 @@ module.exports = {
   createUniqueHash: createUniqueHash,
   makeSongLinkObject: makeSongLinkObject,
   makeSongLinkUrl: makeSongLinkUrl,
+  pruneSong: pruneSong,
   verifyId: verifyId
 };
 
@@ -100,6 +101,33 @@ function makeSongLinkObject(song) {
 function makeSongLinkUrl(hash_id) {
   var host = process.env.APP_HOST || 'localhost:3000';
   return 'http://' + host + '/' + hash_id;
+}
+
+function pruneSong(song) {
+  return new Promise(function (resolve, reject) {
+
+    // if it's old data or doesn't have results, resolve song and return out of function
+    if (song.itunes_id || !song.results) {
+      return resolve(song)
+    }
+    
+    song.results_pruned = {};
+
+    for (var provider in providers) {
+      if (song.results && song.results[provider]) {
+        providers[provider].pruneSearchResults(song, function(err, songFromPrune) {
+          if (err) {
+            reject(err);
+          } else {
+            if (Object.keys(songFromPrune.results_pruned).length === Object.keys(songFromPrune.results).length) {
+              songFromPrune.results = undefined;
+              resolve(songFromPrune);
+            }
+          }
+        });
+      }
+    }
+  })
 }
 
 function verifyId(song) {
