@@ -110,7 +110,7 @@ function pruneSong(song) {
     if (song.itunes_id || !song.results) {
       return resolve(song)
     }
-    
+
     song.results_pruned = {};
 
     for (var provider in providers) {

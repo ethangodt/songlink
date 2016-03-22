@@ -4,6 +4,7 @@ module.exports = {
   create: create,
   get: get,
   getAll: getAll,
+	getOldSong: getOldSong,
   getSongWithTooMuchData: getSongWithTooMuchData
 }
 
@@ -35,15 +36,32 @@ function getAll(callback) {
   })
 }
 
+/*
+ * Finds a song in the db that has the results property and not results_pruned.
+ * This will be a song that has too much data. All of these songs should be pruned
+ * and this controller is likely not needed anymore.
+ */
 function getSongWithTooMuchData(callback) {
-  Song.findOne({ 
+  Song.findOne({
     results: { $exists: true },
     results_pruned: { $exists: false }
   }, function(err, song) {
     if (err) {
       return callback(err, null)
     }
-    
+
     callback(null, song)
   })
+}
+
+function getOldSong(callback) {
+	Song.findOne({
+		itunes_id: { $exists: true }
+	}, function(err, song) {
+		if (err) {
+			return callback(err, null)
+		}
+
+		callback(null, song)
+	})
 }
