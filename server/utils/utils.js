@@ -106,8 +106,8 @@ function makeSongLinkUrl(hash_id) {
 function pruneSong(song) {
   return new Promise(function (resolve, reject) {
 
-    // if it's old data or doesn't have results, resolve song and return out of function
-    if (song.itunes_id || !song.results) {
+    // if it doesn't have results, resolve song and return out of function
+    if (!song.results) {
       return resolve(song)
     }
 
