@@ -40,7 +40,7 @@ function updateOldSongs(req, res) {
 				.then(utils.build)
 				.then(utils.pruneSong)
 				.then(function(prunedSong) {
-					console.log(Objecy.keys(prunedSong))
+					console.log(Object.keys(prunedSong))
 					prunedSong.album_art = undefined
 					prunedSong.album_art_size = undefined
 					prunedSong.itunes_app_uri = undefined
