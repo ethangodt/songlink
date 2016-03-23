@@ -21,7 +21,6 @@ function render(req, res) {
 
   songCtrl.get({ hash_id : req.params.id }, function(err, songFromDb) {
     if (songFromDb) {
-      console.log(songFromDb)
       if (songFromDb.itunes_id) {
         sendProviderOld(req, res, songFromDb, provider);
       } else {
@@ -205,4 +204,3 @@ function createProvidersArrayOld(song) {
     return providersArray;
 
 }
-

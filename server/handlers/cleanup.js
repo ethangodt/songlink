@@ -33,6 +33,7 @@ function updateOldSongs(req, res) {
 		}
 
 		if (songFromDb) {
+			console.log('Pulled ' + songFromDb.title + ' from db')
 			songFromDb.source = 'itunes'
 			songFromDb.source_id = songFromDb.itunes_id
 			utils.verifyId(songFromDb)
@@ -48,10 +49,13 @@ function updateOldSongs(req, res) {
 					prunedSong.youtube_id = undefined
 					prunedSong.itunes_id = undefined
 					prunedSong.save()
+					console.log('Success; updated ' + prunedSong.title)
 					res.sendStatus(200)
 				})
 				.catch(function(error) {
 					songFromDb.remove();
+					console.log('Error; removed ' + songFromDb.title + ' from db')
+
 					res.sendStatus(200);
 				})
 		} else {
