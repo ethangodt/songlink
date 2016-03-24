@@ -40,15 +40,15 @@ function updateOldSongs(req, res) {
 				.then(utils.build)
 				.then(utils.pruneSong)
 				.then(function(prunedSong) {
-					prunedSong.album_art = undefined
-					prunedSong.album_art_size = undefined
-					prunedSong.itunes_app_uri = undefined
-					prunedSong.itunes_store_uri = undefined
-					prunedSong.spotify_id = undefined
-					prunedSong.spotify_images = undefined
-					prunedSong.youtube_id = undefined
-					prunedSong.itunes_id = undefined
-					console.log(prunedSong)
+					prunedSong.album_art = undefined;
+					prunedSong.album_art_size = undefined;
+					prunedSong.itunes_app_uri = undefined;
+					prunedSong.itunes_store_uri = undefined;
+					prunedSong.spotify_id = undefined;
+					prunedSong.spotify_images = undefined;
+					prunedSong.youtube_id = undefined;
+					prunedSong.itunes_id = undefined;
+					console.log(prunedSong);
 					prunedSong.save()
 					res.sendStatus(200)
 				})
