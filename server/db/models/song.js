@@ -11,7 +11,6 @@ var songSchema = new mongoose.Schema({
   lookup: Object,
 	results_pruned: Object,
 
-	// TODO: delete these once all pruned
   itunes_app_uri: String,
   itunes_store_uri: String,
   itunes_id: String,
