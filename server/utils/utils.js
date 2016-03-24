@@ -108,7 +108,7 @@ function pruneSong(song) {
 
     // if it doesn't have results, resolve song and return out of function
     if (!song.results) {
-      return resolve(song)
+      //return resolve(song)
     }
 
     song.results_pruned = {};
