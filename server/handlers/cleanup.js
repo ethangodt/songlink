@@ -40,7 +40,6 @@ function updateOldSongs(req, res) {
 				.then(utils.build)
 				.then(utils.pruneSong)
 				.then(function(prunedSong) {
-					console.log(prunedSong)
 					prunedSong.album_art = undefined
 					prunedSong.album_art_size = undefined
 					prunedSong.itunes_app_uri = undefined
@@ -49,6 +48,7 @@ function updateOldSongs(req, res) {
 					prunedSong.spotify_images = undefined
 					prunedSong.youtube_id = undefined
 					prunedSong.itunes_id = undefined
+					console.log(prunedSong)
 					prunedSong.save(function() {
 						console.log('Success; updated ' + prunedSong.title)
 						res.sendStatus(200)
