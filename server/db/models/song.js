@@ -12,13 +12,13 @@ var songSchema = new mongoose.Schema({
 	results_pruned: Object,
 
 	// TODO: delete these once all pruned
-  // itunes_app_uri: String,
-  // itunes_store_uri: String,
-  // itunes_id: String,
-  // spotify_id: String,
-  // youtube_id: String,
-	// results: Object,
-	// searches: Array
+  itunes_app_uri: String,
+  itunes_store_uri: String,
+  itunes_id: String,
+  spotify_id: String,
+  youtube_id: String,
+	results: Object,
+	searches: Array
 
 });
 
