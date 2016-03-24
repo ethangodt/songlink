@@ -49,10 +49,8 @@ function updateOldSongs(req, res) {
 					prunedSong.youtube_id = undefined
 					prunedSong.itunes_id = undefined
 					console.log(prunedSong)
-					prunedSong.save(function() {
-						console.log('Success; updated ' + prunedSong.title)
-						res.sendStatus(200)
-					})
+					prunedSong.save()
+					res.sendStatus(200)
 				})
 				.catch(function(error) {
 					songFromDb.remove();
