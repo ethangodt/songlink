@@ -8,9 +8,11 @@ module.exports = {
   addSongToDb: addSongToDb,
   build: build,
   checkDb: checkDb,
+	createProvidersArray: createProvidersArray,
   createUniqueHash: createUniqueHash,
+	getAlbumArtUrl: getAlbumArtUrl,
   makeSongLinkObject: makeSongLinkObject,
-  makeSongLinkUrl: makeSongLinkUrl,
+  makeSonglinkUrl: makeSonglinkUrl,
   pruneSong: pruneSong,
   verifyId: verifyId
 };
@@ -61,6 +63,16 @@ function checkDb(song) {
   });
 }
 
+function createProvidersArray(song) {
+	return [
+		providers.spotify.makeTemplateObject(song),
+		providers.itunes.makeTemplateObject(song),
+		providers.google.makeTemplateObject(song),
+		providers.youtube.makeTemplateObject(song),
+		providers.deezer.makeTemplateObject(song)
+	]
+}
+
 function createUniqueHash(str, parentResolve, parentReject) {
 
   return new Promise(function (resolve, reject) {
@@ -82,9 +94,13 @@ function createUniqueHash(str, parentResolve, parentReject) {
   });
 }
 
+function getAlbumArtUrl(song) {
+	return providers.spotify.getAlbumArtUrl(song, 'large') || providers.itunes.getAlbumArtUrl(song);
+}
+
 function makeSongLinkObject(song) {
 
-  var shareLink = makeSongLinkUrl(song.hash_id);
+  var shareLink = makeSonglinkUrl(song);
 
   return {
     title: song.title,
@@ -98,9 +114,9 @@ function makeSongLinkObject(song) {
 
 }
 
-function makeSongLinkUrl(hash_id) {
+function makeSonglinkUrl(song) {
   var host = process.env.APP_HOST || 'localhost:3000';
-  return 'http://' + host + '/' + hash_id;
+  return 'http://' + host + '/' + song.hash_id;
 }
 
 function pruneSong(song) {

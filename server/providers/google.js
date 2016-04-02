@@ -5,7 +5,8 @@ var queries = require('../queries');
 module.exports = {
   buildSearchResults: buildSearchResults,
   getTopGoogleResult: getTopGoogleResult,
-  makeUrlFromId: makeUrlFromId,
+  makeLink: makeLink,
+	makeTemplateObject: makeTemplateObject,
   pruneSearchResults: pruneSearchResults
 };
 
@@ -16,7 +17,7 @@ function buildSearchResults(song, callback) {
   }
 
   song.results.google = {};
- 
+
   for (var queryType in queries) {
     var query = queries[queryType].makeQuery(song);
 
@@ -74,7 +75,7 @@ function fetchSearchResults(song, query, queryType, callback) {
           }
 
           callback(null, song);
-          
+
         });
       }
 
@@ -105,7 +106,7 @@ function getTopGoogleResult(song) {
 
 
   return null;
-  
+
 }
 
 // function lookupSongById(song, callback) {
@@ -127,8 +128,27 @@ function getTopGoogleResult(song) {
 //   });
 // };
 
-function makeUrlFromId(googleId) {
-  return 'https://play.google.com/music/m/' + googleId + '?signup_if_needed=1';
+function makeLink(song) {
+	var googleSong = getTopGoogleResult(song);
+
+	if (!googleSong) {
+		return undefined;
+	}
+
+  return 'https://play.google.com/music/m/' + googleSong.nid + '?signup_if_needed=1';
+}
+
+function makeTemplateObject(song) {
+	var googleSong = getTopGoogleResult(song);
+
+	return {
+		provider: 'google',
+    name: 'Google Play Music',
+    icon: 'google',
+    url: googleSong && makeLink(song),
+    text: googleSong ? 'Play on Google Music' : 'Not available on Google Music',
+    className: googleSong ? 'fullWidth google' : 'fullWidth disabled google'
+	}
 }
 
 function pruneSearchResults(song, callback) {

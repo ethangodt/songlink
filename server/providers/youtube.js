@@ -9,7 +9,8 @@ youtube.setKey(key);
 module.exports = {
   buildSearchResults: buildSearchResults,
   getTopYoutubeResult: getTopYoutubeResult,
-  makeLinkFromId: makeLinkFromId,
+  makeLink: makeLink,
+	makeTemplateObject: makeTemplateObject,
   pruneSearchResults: pruneSearchResults
 };
 
@@ -254,8 +255,27 @@ function getVideosByIds(ids, callback) {
   });
 }
 
-function makeLinkFromId(youtubeId) {
-  return 'https://www.youtube.com/watch?v=' + youtubeId;
+function makeLink(song) {
+	var youtubeSong = getTopYoutubeResult(song);
+
+	if (!youtubeSong) {
+		return undefined;
+	}
+
+  return 'https://www.youtube.com/watch?v=' + youtubeSong.id;
+}
+
+function makeTemplateObject(song) {
+	var youtubeSong = getTopYoutubeResult(song);
+
+	return {
+		provider: 'youtube',
+    name: 'YouTube',
+    icon: 'youtube-play',
+    url: youtubeSong && makeLink(song),
+    text: youtubeSong ? 'Play on YouTube' : 'Not available on YouTube',
+    className: youtubeSong ? 'fullWidth youtube' : 'fullWidth disabled youtube'
+	}
 }
 
 function pruneSearchResults(song, callback) {

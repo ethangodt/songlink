@@ -4,7 +4,8 @@ var queries = require('../queries');
 module.exports = {
   buildSearchResults: buildSearchResults,
   getTopDeezerResult: getTopDeezerResult,
-  getLink : getLink,
+  makeLink : makeLink,
+	makeTemplateObject: makeTemplateObject,
   pruneSearchResults: pruneSearchResults
 };
 
@@ -15,7 +16,7 @@ function buildSearchResults(song, callback) {
   }
 
   song.results.deezer = {};
- 
+
   for (var queryType in queries) {
     var query = queries[queryType].makeQuery(song);
 
@@ -95,13 +96,32 @@ function getTopDeezerResult(song) {
 //   });
 // };
 
-function getLink (song) {
-  return song.link;
+function makeLink (song) {
+	var deezerSong = getTopDeezerResult(song);
+
+	if (!deezerSong) {
+		return undefined;
+	}
+
+  return deezerSong.link;
 }
 
 function makeSearchUrlWithQuery(query) {
   query = query.replace(/\s+/g, "+");
   return 'https://api.deezer.com/search?q=' + query;
+}
+
+function makeTemplateObject(song) {
+	var deezerSong = getTopDeezerResult(song);
+
+	return {
+		provider : 'deezer',
+    name: 'Deezer',
+    icon: 'play-circle-o',
+    url: deezerSong && makeLink(song),
+    text: deezerSong ? 'Play on Deezer' : 'Not available on Deezer',
+    className: deezerSong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
+	}
 }
 
 function pruneSearchResults(song, callback) {
@@ -116,7 +136,7 @@ function pruneSearchResults(song, callback) {
 
 function search(searchUrl, numResults, callback) {
   request(searchUrl, function (err, response, body) {
-    
+
     try {
       body = JSON.parse(body);
     } catch (e) {
@@ -127,7 +147,7 @@ function search(searchUrl, numResults, callback) {
     if (err) {
       body.data = [];
     } else {
-      callback(null, body.data.length ? body.data.slice(0, numResults) : []);      
+      callback(null, body.data.length ? body.data.slice(0, numResults) : []);
     }
   });
 }

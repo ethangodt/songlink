@@ -1,6 +1,5 @@
 var appPageHandlers = require('./handlers/appPage');
 var linkPageHandlers = require('./handlers/linkPage');
-var cleanupHandler = require('./handlers/cleanup');
 
 module.exports = function (app) {
   app.get('/search', appPageHandlers.search);
@@ -9,10 +8,7 @@ module.exports = function (app) {
 
   app.post('/create', appPageHandlers.create);
 
-  app.get('/:id', linkPageHandlers.render);
+  app.get('/:id', linkPageHandlers.getSong, linkPageHandlers.render);
 
 	app.get('/', appPageHandlers.render);
-
-	app.put('/prune', cleanupHandler.prune);
-	app.put('/updateOldSongs', cleanupHandler.updateOldSongs);
 };

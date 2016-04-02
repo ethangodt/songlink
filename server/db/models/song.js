@@ -9,16 +9,7 @@ var songSchema = new mongoose.Schema({
   source: String,
   source_id: String,
   lookup: Object,
-	results_pruned: Object,
-
-  itunes_app_uri: String,
-  itunes_store_uri: String,
-  itunes_id: String,
-  spotify_id: String,
-  youtube_id: String,
-	results: Object,
-	searches: Array
-
+	results_pruned: Object
 });
 
 var Song = mongoose.model('song', songSchema);

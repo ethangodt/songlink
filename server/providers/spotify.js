@@ -7,7 +7,8 @@ module.exports = {
   getAlbumArtUrl: getAlbumArtUrl,
   getTopSpotifyResult: getTopSpotifyResult,
   lookupSongById: lookupSongById,
-  makeUriFromId: makeUriFromId,
+  makeLink: makeLink,
+	makeTemplateObject: makeTemplateObject,
   pruneSearchResults: pruneSearchResults
 };
 
@@ -145,8 +146,27 @@ function makeLookupUrlWIthId(id) {
   return 'https://api.spotify.com/v1/tracks/' + id;
 }
 
-function makeUriFromId(spotifyId) {
-  return 'spotify:track:' + spotifyId;
+function makeTemplateObject(song) {
+	var spotifySong = getTopSpotifyResult(song);
+
+	return {
+    provider: 'spotify',
+    name: 'Spotify',
+    icon: 'spotify',
+    url: spotifySong && makeLink(song),
+    text: spotifySong ? 'Play on Spotify' : 'Not available on Spotify',
+    className: spotifySong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
+	}
+}
+
+function makeLink(song) {
+	var spotifySong = getTopSpotifyResult(song);
+
+	if (!spotifySong) {
+		return undefined;
+	}
+
+  return 'spotify:track:' + spotifySong.id;
 }
 
 function pruneSearchResults(song, callback) {
