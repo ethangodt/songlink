@@ -262,7 +262,7 @@ function makeLink(song) {
 		return undefined;
 	}
 
-  return 'https://www.youtube.com/watch?v=' + youtubeSong.id;
+	return 'https://www.youtube.com/watch?v=' + youtubeSong.id;
 }
 
 function makeTemplateObject(song) {
@@ -270,11 +270,11 @@ function makeTemplateObject(song) {
 
 	return {
 		provider: 'youtube',
-    name: 'YouTube',
-    icon: 'youtube-play',
-    url: youtubeSong && makeLink(song),
-    text: youtubeSong ? 'Play on YouTube' : 'Not available on YouTube',
-    className: youtubeSong ? 'fullWidth youtube' : 'fullWidth disabled youtube'
+		name: 'YouTube',
+		icon: 'youtube-play',
+		url: youtubeSong && makeLink(song),
+		text: youtubeSong ? 'Play on YouTube' : 'Not available on YouTube',
+		className: youtubeSong ? 'fullWidth youtube' : 'fullWidth disabled youtube'
 	}
 }
 

@@ -95,7 +95,7 @@ function createUniqueHash(str, parentResolve, parentReject) {
 }
 
 function getAlbumArtUrl(song) {
-	return providers.spotify.getAlbumArtUrl(song, 'large') || providers.itunes.getAlbumArtUrl(song);
+	return 	providers.spotify.getAlbumArtUrl(song, 'large') || providers.itunes.getAlbumArtUrl(song);
 }
 
 function makeSongLinkObject(song) {

@@ -1,0 +1,300 @@
+[
+	{
+	    "source": "spotify",
+	    "source_id": "1ySdjlU5Vc24w81xam2MHR",
+	    "lookup": {
+	        "uri": "spotify:track:1ySdjlU5Vc24w81xam2MHR",
+	        "type": "track",
+	        "track_number": 2,
+	        "preview_url": "https://p.scdn.co/mp3-preview/e60a7055699e34bd823f7539c6707602306536d6",
+	        "popularity": 55,
+	        "name": "Lazaretto",
+	        "id": "1ySdjlU5Vc24w81xam2MHR",
+	        "href": "https://api.spotify.com/v1/tracks/1ySdjlU5Vc24w81xam2MHR",
+	        "external_urls": {
+	            "spotify": "https://open.spotify.com/track/1ySdjlU5Vc24w81xam2MHR"
+	        },
+	        "external_ids": {
+	            "isrc": "US3JJ1400638"
+	        },
+	        "explicit": false,
+	        "duration_ms": 219399,
+	        "disc_number": 1,
+	        "available_markets": [
+	            "AD",
+	            "AT",
+	            "BE",
+	            "BG",
+	            "CH",
+	            "CY",
+	            "CZ",
+	            "DE",
+	            "DK",
+	            "EE",
+	            "ES",
+	            "FI",
+	            "FR",
+	            "GB",
+	            "GR",
+	            "HU",
+	            "IE",
+	            "IS",
+	            "IT",
+	            "LI",
+	            "LT",
+	            "LU",
+	            "LV",
+	            "MC",
+	            "MT",
+	            "NL",
+	            "NO",
+	            "PL",
+	            "PT",
+	            "RO",
+	            "SE",
+	            "SI",
+	            "SK",
+	            "TR"
+	        ],
+	        "artists": [
+	            {
+	                "uri": "spotify:artist:4FZ3j1oH43e7cukCALsCwf",
+	                "type": "artist",
+	                "name": "Jack White",
+	                "id": "4FZ3j1oH43e7cukCALsCwf",
+	                "href": "https://api.spotify.com/v1/artists/4FZ3j1oH43e7cukCALsCwf",
+	                "external_urls": {
+	                    "spotify": "https://open.spotify.com/artist/4FZ3j1oH43e7cukCALsCwf"
+	                }
+	            }
+	        ],
+	        "album": {
+	            "uri": "spotify:album:75224XX4gZg2PjWeXzRjsa",
+	            "type": "album",
+	            "name": "Lazaretto",
+	            "images": [
+	                {
+	                    "width": 640,
+	                    "url": "https://i.scdn.co/image/f48bd647c7e3bf43f5342075b3184c2ea1fe4cb8",
+	                    "height": 640
+	                },
+	                {
+	                    "width": 300,
+	                    "url": "https://i.scdn.co/image/bd57bc8a47a2f9ca0ffbf66f684f0980a4c76c3c",
+	                    "height": 300
+	                },
+	                {
+	                    "width": 64,
+	                    "url": "https://i.scdn.co/image/c9176d6989c0eb295d1faf75007839f70a72d6e3",
+	                    "height": 64
+	                }
+	            ],
+	            "id": "75224XX4gZg2PjWeXzRjsa",
+	            "href": "https://api.spotify.com/v1/albums/75224XX4gZg2PjWeXzRjsa",
+	            "external_urls": {
+	                "spotify": "https://open.spotify.com/album/75224XX4gZg2PjWeXzRjsa"
+	            },
+	            "available_markets": [
+	                "AD",
+	                "AT",
+	                "BE",
+	                "BG",
+	                "CH",
+	                "CY",
+	                "CZ",
+	                "DE",
+	                "DK",
+	                "EE",
+	                "ES",
+	                "FI",
+	                "FR",
+	                "GB",
+	                "GR",
+	                "HU",
+	                "IE",
+	                "IS",
+	                "IT",
+	                "LI",
+	                "LT",
+	                "LU",
+	                "LV",
+	                "MC",
+	                "MT",
+	                "NL",
+	                "NO",
+	                "PL",
+	                "PT",
+	                "RO",
+	                "SE",
+	                "SI",
+	                "SK",
+	                "TR"
+	            ],
+	            "album_type": "album"
+	        }
+	    },
+	    "title": "Lazaretto",
+	    "artist": "Jack White",
+	    "album_title": "Lazaretto",
+	    "track_length": 219399,
+	    "hash_id": "8c2c9",
+	    "searches": [],
+	    "results_pruned": {
+	        "youtube": {
+	            "kind": "youtube#video",
+	            "etag": "\"DsOZ7qVJA4mxdTxZeNzis6uE6ck/ZJGgFfBFuD_uOAjN4H0yjflvHAc\"",
+	            "id": "qI-95cTMeLM",
+	            "snippet": {
+	                "publishedAt": "2014-06-04T14:30:01.000Z",
+	                "channelId": "UCHYKkKW0MpX5-nDQQas-b6w",
+	                "title": "Jack White - Lazaretto",
+	                "description": "Music video for Jack White's \"Lazaretto\" directed by Jonas & Francois. From Jack White's new album LAZARETTO - available now.\n \nDownload LAZARETTO on iTunes: http://smarturl.it/Lazaretto\nDownload LAZARETTO on AmazonMP3: http://smarturl.it/LazarettoAmazonMP3\nPurchase the LAZARETTO Ultra LP: http://smarturl.it/LazarettoUltraLP\n \nMusic video by Jack White performing Lazaretto. (C) 2014 Third Man Records under exclusive license to Columbia Records, a division of Sony Music Entertainment",
+	                "thumbnails": {
+	                    "default": {
+	                        "url": "https://i.ytimg.com/vi/qI-95cTMeLM/default.jpg",
+	                        "width": 120,
+	                        "height": 90
+	                    },
+	                    "medium": {
+	                        "url": "https://i.ytimg.com/vi/qI-95cTMeLM/mqdefault.jpg",
+	                        "width": 320,
+	                        "height": 180
+	                    },
+	                    "high": {
+	                        "url": "https://i.ytimg.com/vi/qI-95cTMeLM/hqdefault.jpg",
+	                        "width": 480,
+	                        "height": 360
+	                    },
+	                    "standard": {
+	                        "url": "https://i.ytimg.com/vi/qI-95cTMeLM/sddefault.jpg",
+	                        "width": 640,
+	                        "height": 480
+	                    },
+	                    "maxres": {
+	                        "url": "https://i.ytimg.com/vi/qI-95cTMeLM/maxresdefault.jpg",
+	                        "width": 1280,
+	                        "height": 720
+	                    }
+	                },
+	                "channelTitle": "JackWhiteVEVO",
+	                "tags": [
+	                    "Jack White",
+	                    "Alternative",
+	                    "Lazaretto",
+	                    "Third",
+	                    "Man",
+	                    "Records/Columbia"
+	                ],
+	                "categoryId": "10",
+	                "liveBroadcastContent": "none",
+	                "localized": {
+	                    "title": "Jack White - Lazaretto",
+	                    "description": "Music video for Jack White's \"Lazaretto\" directed by Jonas & Francois. From Jack White's new album LAZARETTO - available now.\n \nDownload LAZARETTO on iTunes: http://smarturl.it/Lazaretto\nDownload LAZARETTO on AmazonMP3: http://smarturl.it/LazarettoAmazonMP3\nPurchase the LAZARETTO Ultra LP: http://smarturl.it/LazarettoUltraLP\n \nMusic video by Jack White performing Lazaretto. (C) 2014 Third Man Records under exclusive license to Columbia Records, a division of Sony Music Entertainment"
+	                }
+	            },
+	            "contentDetails": {
+	                "duration": "PT3M52S",
+	                "dimension": "2d",
+	                "definition": "hd",
+	                "caption": "false",
+	                "licensedContent": true,
+	                "regionRestriction": {
+	                    "blocked": [
+	                        "DE"
+	                    ]
+	                }
+	            },
+	            "status": {
+	                "uploadStatus": "processed",
+	                "privacyStatus": "public",
+	                "license": "youtube",
+	                "embeddable": true,
+	                "publicStatsViewable": true
+	            },
+	            "statistics": {
+	                "viewCount": "11344987",
+	                "likeCount": "67559",
+	                "dislikeCount": "2720",
+	                "favoriteCount": "0",
+	                "commentCount": "4369"
+	            }
+	        },
+	        "itunes": {
+	            "wrapperType": "track",
+	            "kind": "song",
+	            "artistId": 826980,
+	            "collectionId": 855605167,
+	            "trackId": 855605175,
+	            "artistName": "Jack White",
+	            "collectionName": "Lazaretto",
+	            "trackName": "Lazaretto",
+	            "collectionCensoredName": "Lazaretto",
+	            "trackCensoredName": "Lazaretto",
+	            "artistViewUrl": "https://itunes.apple.com/us/artist/jack-white/id826980?uo=4",
+	            "collectionViewUrl": "https://itunes.apple.com/us/album/lazaretto/id855605167?i=855605175&uo=4",
+	            "trackViewUrl": "https://itunes.apple.com/us/album/lazaretto/id855605167?i=855605175&uo=4",
+	            "previewUrl": "http://a1273.phobos.apple.com/us/r1000/021/Music4/v4/e6/78/e9/e678e9ee-3c08-8c5a-0db5-69243eae1bb5/mzaf_5617241651472552666.plus.aac.p.m4a",
+	            "artworkUrl30": "http://is4.mzstatic.com/image/thumb/Music2/v4/15/57/2a/15572ad7-d59d-9a5a-94c3-5df973308289/source/30x30bb.jpg",
+	            "artworkUrl60": "http://is4.mzstatic.com/image/thumb/Music2/v4/15/57/2a/15572ad7-d59d-9a5a-94c3-5df973308289/source/60x60bb.jpg",
+	            "artworkUrl100": "http://is4.mzstatic.com/image/thumb/Music2/v4/15/57/2a/15572ad7-d59d-9a5a-94c3-5df973308289/source/100x100bb.jpg",
+	            "collectionPrice": 10.99,
+	            "trackPrice": 1.29,
+	            "releaseDate": "2014-06-10T07:00:00Z",
+	            "collectionExplicitness": "notExplicit",
+	            "trackExplicitness": "notExplicit",
+	            "discCount": 1,
+	            "discNumber": 1,
+	            "trackCount": 11,
+	            "trackNumber": 2,
+	            "trackTimeMillis": 219402,
+	            "country": "USA",
+	            "currency": "USD",
+	            "primaryGenreName": "Alternative",
+	            "radioStationUrl": "https://itunes.apple.com/station/idra.855605175",
+	            "isStreamable": true
+	        },
+	        "google": {
+	            "kind": "sj#track",
+	            "title": "Lazaretto",
+	            "artist": "Jack White",
+	            "composer": "",
+	            "album": "Lazaretto",
+	            "albumArtist": "Jack White",
+	            "year": 2014,
+	            "trackNumber": 2,
+	            "genre": "'10s Rock",
+	            "durationMillis": "219000",
+	            "albumArtRef": [
+	                {
+	                    "url": "http://lh5.ggpht.com/H5pSwhMr-7VVYVRzb2VHPzp0051vnw-IK8VdOTYZSZ7mElxC2y5TMO-bnKJpBpn2AbiUq21jTjI"
+	                }
+	            ],
+	            "discNumber": 1,
+	            "estimatedSize": "8778214",
+	            "trackType": "7",
+	            "storeId": "Twmckz42atknmodmu4eryclexty",
+	            "albumId": "Bhdubec75aauvzg4req6gtxu7ku",
+	            "artistId": [
+	                "Acebnvh5qz3kx7tlwhexopwvz3u"
+	            ],
+	            "nid": "Twmckz42atknmodmu4eryclexty",
+	            "trackAvailableForSubscription": true,
+	            "trackAvailableForPurchase": true,
+	            "albumAvailableForPurchase": true,
+	            "contentType": "2",
+	            "primaryVideo": {
+	                "kind": "sj#video",
+	                "id": "qI-95cTMeLM",
+	                "thumbnails": [
+	                    {
+	                        "url": "https://i.ytimg.com/vi/qI-95cTMeLM/mqdefault.jpg",
+	                        "width": 320,
+	                        "height": 180
+	                    }
+	                ]
+	            }
+	        },
+	        "deezer": null
+	    }
+	}
+]

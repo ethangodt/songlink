@@ -1,4 +1,4 @@
- var Song = require('../models/song');
+var Song = require('../models/song');
 
 module.exports = {
   create: create,

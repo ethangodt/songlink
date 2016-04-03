@@ -103,7 +103,7 @@ function makeLink (song) {
 		return undefined;
 	}
 
-  return deezerSong.link;
+	return deezerSong.link;
 }
 
 function makeSearchUrlWithQuery(query) {
@@ -116,11 +116,11 @@ function makeTemplateObject(song) {
 
 	return {
 		provider : 'deezer',
-    name: 'Deezer',
-    icon: 'play-circle-o',
-    url: deezerSong && makeLink(song),
-    text: deezerSong ? 'Play on Deezer' : 'Not available on Deezer',
-    className: deezerSong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
+		name: 'Deezer',
+		icon: 'play-circle-o',
+		url: deezerSong && makeLink(song),
+		text: deezerSong ? 'Play on Deezer' : 'Not available on Deezer',
+		className: deezerSong ? 'fullWidth spotify' : 'fullWidth disabled spotify'
 	}
 }
 

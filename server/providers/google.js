@@ -135,7 +135,7 @@ function makeLink(song) {
 		return undefined;
 	}
 
-  return 'https://play.google.com/music/m/' + googleSong.nid + '?signup_if_needed=1';
+	return 'https://play.google.com/music/m/' + googleSong.nid + '?signup_if_needed=1';
 }
 
 function makeTemplateObject(song) {
@@ -143,11 +143,11 @@ function makeTemplateObject(song) {
 
 	return {
 		provider: 'google',
-    name: 'Google Play Music',
-    icon: 'google',
-    url: googleSong && makeLink(song),
-    text: googleSong ? 'Play on Google Music' : 'Not available on Google Music',
-    className: googleSong ? 'fullWidth google' : 'fullWidth disabled google'
+		name: 'Google Play Music',
+		icon: 'google',
+		url: googleSong && makeLink(song),
+		text: googleSong ? 'Play on Google Music' : 'Not available on Google Music',
+		className: googleSong ? 'fullWidth google' : 'fullWidth disabled google'
 	}
 }
 

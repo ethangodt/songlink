@@ -143,6 +143,20 @@ function makeFetchByIdUrl(itunesId) {
   return 'https://itunes.apple.com/lookup?id=' + itunesId;
 }
 
+function makeLink(song) {
+	var itunesSong = getTopItunesResult(song);
+
+	if (!itunesSong) {
+		return undefined;
+	}
+
+	if (itunesSong.isStreamable) {
+		return makeAppUri(itunesSong.trackViewUrl);
+	} else {
+		return itunesSong.trackViewUrl;
+	}
+}
+
 function makeSearchResultsObjects(results) {
   songs = [];
 
@@ -166,30 +180,16 @@ function makeSearchUrlWithQuery(query) {
   return 'https://itunes.apple.com/search?term=' + query + '&entity=song';
 }
 
-function makeLink(song) {
-	var itunesSong = getTopItunesResult(song);
-
-	if (!itunesSong) {
-		return undefined;
-	}
-
-  if (itunesSong.isStreamable) {
-    return makeAppUri(itunesSong.trackViewUrl);
-  } else {
-    return itunesSong.trackViewUrl;
-  }
-}
-
 function makeTemplateObject(song) {
 	var itunesSong = getTopItunesResult(song);
 
 	return {
 		provider: 'itunes',
-    name: 'Apple Music',
-    icon: 'apple',
-    url: itunesSong && makeLink(song),
-    text: itunesSong ? makeText(itunesSong) : 'Not available on iTunes',
-    className: itunesSong ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
+		name: 'Apple Music',
+		icon: 'apple',
+		url: itunesSong && makeLink(song),
+		text: itunesSong ? makeText(itunesSong) : 'Not available on iTunes',
+		className: itunesSong ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
 	}
 }
 

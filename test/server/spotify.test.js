@@ -1,13 +1,14 @@
 var expect = require('chai').expect;
 var spotify = require('../../server/providers/spotify')
+var songs = require('../../mocks/songlink_songs/source_itunes/songs.json')
 
 describe('spotify module', function () {
 
-  describe('makeUriFromId function', function () {
+  describe('makeLink function', function () {
 
-    it('creates a spotify uri', function () {
-      expect(spotify.makeUriFromId('abc123abc123'))
-        .to.equal('spotify:track:abc123abc123');
+    it('should create a spotify uri given a song object', function () {
+      expect(spotify.makeLink(songs[0]))
+        .to.equal('spotify:track:126TblwXGNTUZ7RPMnThkU');
     });
 
   });
@@ -27,7 +28,7 @@ describe('spotify module', function () {
     it('creates a query string from song object', function () {
 
       var title = song.title;
-      
+
       song.artist = 'Alt-J';
       expect(spotify.createQuery(song)).to.equal(title + '+Alt-J');
       song.artist = 'Alt-J feat. $tobie';
@@ -44,7 +45,7 @@ describe('spotify module', function () {
     var input = {
       name: 'title',
       artists: [{name: 'artist name'}],
-      album: {name: 'album title', images: 
+      album: {name: 'album title', images:
       [ { height: 640,
           url: 'large image',
           width: 640 },
@@ -70,15 +71,15 @@ describe('spotify module', function () {
           spotify_id: 0,
           track_length: 1000,
           spotify_images: {
-            large_image: { 
+            large_image: {
               height: 640,
               url: 'large image',
               width: 640 },
-            medium_image: { 
+            medium_image: {
               height: 300,
               url: 'medium image',
               width: 300 },
-            small_image: { 
+            small_image: {
               height: 64,
               url: 'small image',
               width: 64 }
@@ -136,10 +137,10 @@ describe('spotify module', function () {
     });
 
     it('verifies song with artist (partial match: song has more info)', function (done) {
-      
+
       song.artist = 'kurt feat. timbaland';
       itunesTracks[1].artist = 'stobie';
-      
+
       itunes.verify(song, itunesTracks, function(err, verifiedSong) {
         expect(verifiedSong.itunes_id).to.equal(1);
         done();
@@ -160,5 +161,5 @@ describe('spotify module', function () {
     });
 
   });
-  
+
 });
