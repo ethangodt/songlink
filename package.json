@@ -2,18 +2,17 @@
   "name": "music-share",
   "version": "1.0.0",
   "description": "share music to anyone on any platform",
-  "main": "server.js",
-  "author": "juvenile-orca",
+  "main": "server/server.js",
+  "author": "songlink",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/juvenile-orca/songlink"
+    "url": "https://github.com/songlink/songlink"
   },
   "engines": {
     "node": "5.0.0"
   },
   "scripts": {
-    "dbCrawl": "node dbCrawl/dbCrawl.js",
     "clean": "rm -rf dist",
     "postclean": "mkdir dist && mkdir dist/scripts && mkdir dist/assets",
     "js:copy": "cp -a server/templates/linkTemplate/scripts/. dist/scripts/",

@@ -9,6 +9,7 @@ module.exports = {
   makeLink: makeLink,
   makeSearchResultsObjects: makeSearchResultsObjects,
   makeSearchUrlWithQuery: makeSearchUrlWithQuery,
+	makeTemplateObject: makeTemplateObject,
   makeText: makeText,
   pruneSearchResults: pruneSearchResults,
   search: search
@@ -50,9 +51,9 @@ function buildSearchResults(song, callback) {
 }
 
 function fetchSearchResults(song, query, queryType, callback) {
-  
+
   search(makeSearchUrlWithQuery(query), 10, function (err, songs) {
-    
+
     song.results.itunes[queryType] = {};
     song.results.itunes[queryType].query = query;
 
@@ -125,7 +126,7 @@ function lookupSongById(song, callback) {
       song.artist = results[0].artistName;
       song.album_title = results[0].collectionName;
       song.track_length = results[0].trackTimeMillis;
-      
+
       callback(null, song);
     }
   });
@@ -140,6 +141,20 @@ function makeAppUri(trackViewUrl) {
 
 function makeFetchByIdUrl(itunesId) {
   return 'https://itunes.apple.com/lookup?id=' + itunesId;
+}
+
+function makeLink(song) {
+	var itunesSong = getTopItunesResult(song);
+
+	if (!itunesSong) {
+		return undefined;
+	}
+
+	if (itunesSong.isStreamable) {
+		return makeAppUri(itunesSong.trackViewUrl);
+	} else {
+		return itunesSong.trackViewUrl;
+	}
 }
 
 function makeSearchResultsObjects(results) {
@@ -165,12 +180,17 @@ function makeSearchUrlWithQuery(query) {
   return 'https://itunes.apple.com/search?term=' + query + '&entity=song';
 }
 
-function makeLink(itunesSong) {
-  if (itunesSong.isStreamable) {
-    return makeAppUri(itunesSong.trackViewUrl);
-  } else {
-    return itunesSong.trackViewUrl;
-  }
+function makeTemplateObject(song) {
+	var itunesSong = getTopItunesResult(song);
+
+	return {
+		provider: 'itunes',
+		name: 'Apple Music',
+		icon: 'apple',
+		url: itunesSong && makeLink(song),
+		text: itunesSong ? makeText(itunesSong) : 'Not available on iTunes',
+		className: itunesSong ? 'fullWidth iTunes' : 'fullWidth disabled iTunes'
+	}
 }
 
 function makeText(itunesSong) {
@@ -193,7 +213,7 @@ function pruneSearchResults(song, callback) {
 
 function search(searchUrl, numResults, callback) {
   request(searchUrl, function (err, response, body) {
-    
+
     try {
       body = JSON.parse(body);
     } catch (e) {
@@ -204,7 +224,7 @@ function search(searchUrl, numResults, callback) {
     if (err) {
       body.results = [];
     } else {
-      callback(null, body.results.length ? body.results.slice(0, numResults) : []);      
+      callback(null, body.results.length ? body.results.slice(0, numResults) : []);
     }
   });
 }
