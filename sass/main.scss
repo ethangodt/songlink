@@ -10,9 +10,9 @@
 *,
 *:before,
 *:after {
-  @include border-box;
-  margin: 0;
-  padding: 0;
+	@include border-box;
+	margin: 0;
+	padding: 0;
 }
 
 /*
@@ -24,12 +24,12 @@ body {
 }
 
 body {
-  color: #545454;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 400;
+	color: #545454;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 400;
 	-moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+	-webkit-font-smoothing: antialiased;
 	position: relative;
 }
 
@@ -50,12 +50,12 @@ body {
 .mainContent {
 	background: radial-gradient(circle at top right, #DADADA, #F5F5F5 50%);
 	min-height: 100%;
-  margin-bottom: -$footer-height;
+	margin-bottom: -$footer-height;
 }
 
 .mainContent:after {
-  content: "";
-  display: block;
+	content: "";
+	display: block;
 	height: $footer-height;
 }
 

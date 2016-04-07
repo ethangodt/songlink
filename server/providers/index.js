@@ -5,9 +5,9 @@ var spotify = require('./spotify');
 var youtube = require('./youtube');
 
 module.exports = {
-  deezer: deezer,
-  google: google,
-  itunes: itunes,
-  spotify: spotify,
-  youtube: youtube
+	deezer: deezer,
+	google: google,
+	itunes: itunes,
+	spotify: spotify,
+	youtube: youtube
 };

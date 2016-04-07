@@ -1,8 +1,8 @@
 module.exports = {
-  makeQuery: makeQuery
+	makeQuery: makeQuery
 };
 
 function makeQuery(song) {
-  var query = song.title + ' ' + song.album_title + ' ' + song.artist;
-  return query.toLowerCase();
+	var query = song.title + ' ' + song.album_title + ' ' + song.artist;
+	return query.toLowerCase();
 }

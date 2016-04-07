@@ -10,65 +10,65 @@ import PreferencesHighlight from './PreferencesHighlight'
 
 class Main extends Component {
 
-  constructor(props, context) {
-    super(props, context)
-  }
+	constructor(props, context) {
+		super(props, context)
+	}
 
-  renderExplanation() {
-    return !this.props.links.length ? <Explanation/> : undefined;
-  }
+	renderExplanation() {
+		return !this.props.links.length ? <Explanation/> : undefined;
+	}
 
-  render() {
-    return (
+	render() {
+		return (
 
-      <div>
-        <div className="wrapper">
+			<div>
+				<div className="wrapper">
 
-          <Search
-            actions={this.props.actions}
-            errors={this.props.errors}
-            invalidLinks={this.props.invalidLinks}
-            loading={this.props.loading}
-            links={this.props.links}
-            results={this.props.results}/>
+					<Search
+						actions={this.props.actions}
+						errors={this.props.errors}
+						invalidLinks={this.props.invalidLinks}
+						loading={this.props.loading}
+						links={this.props.links}
+						results={this.props.results}/>
 
-          { this.renderExplanation() }
+					{ this.renderExplanation() }
 
-          <Links
-            links={this.props.links}
-            loading={this.props.loading}/>
+					<Links
+						links={this.props.links}
+						loading={this.props.loading}/>
 
-        </div>
+				</div>
 
-        <Promo />
+				<Promo />
 
-        <PreferencesHighlight />
-      </div>
+				<PreferencesHighlight />
+			</div>
 
-    )
-  }
+		)
+	}
 
 }
 
 Main.propTypes = {
-  actions: PropTypes.object.isRequired,
-  invalidLinks: PropTypes.object.isRequired,
-  links: PropTypes.array.isRequired,
-  loading: PropTypes.object.isRequired,
-  results: PropTypes.array.isRequired
+	actions: PropTypes.object.isRequired,
+	invalidLinks: PropTypes.object.isRequired,
+	links: PropTypes.array.isRequired,
+	loading: PropTypes.object.isRequired,
+	results: PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
-  return state
+	return state
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch)
-  }
+	return {
+		actions: bindActionCreators(actions, dispatch)
+	}
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Main)

@@ -1,29 +1,29 @@
 var regex = require('./regex');
 
 module.exports = {
-  makeQuery: makeQuery
+	makeQuery: makeQuery
 };
 
 function makeQuery(song) {
-  var album = song.album_title;
+	var album = song.album_title;
 
-  album = regex.removeParensContents(album);
-  album = regex.removeBracketsContents(album);
-  album = regex.removeAnythingAfterDash(album);
+	album = regex.removeParensContents(album);
+	album = regex.removeBracketsContents(album);
+	album = regex.removeAnythingAfterDash(album);
 
-  var query = song.title + ' ' + album + ' ' + song.artist;
+	var query = song.title + ' ' + album + ' ' + song.artist;
 
-  query = regex.removePunctuation(query);
+	query = regex.removePunctuation(query);
 
-  var keywords = [
-    ' - Single',
-    'feat.',
-    'Pt.',
-    'Pts.',
-    ' - ',
-  ];
+	var keywords = [
+		' - Single',
+		'feat.',
+		'Pt.',
+		'Pts.',
+		' - ',
+	];
 
-  query = regex.removeKeywords(query, keywords);
+	query = regex.removeKeywords(query, keywords);
 
-  return query.toLowerCase();
+	return query.toLowerCase();
 }
