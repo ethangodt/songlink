@@ -1,65 +1,65 @@
 .result {
-  cursor: pointer;
-  height: $search-result-height;
-  overflow: auto;
+	cursor: pointer;
+	height: $search-result-height;
+	overflow: auto;
 	background-color: white;
 
-  &:hover {
-    background-color: mix($color-main, white, 6%);
-  }
+	&:hover {
+		background-color: mix($color-main, white, 6%);
+	}
 }
 
 .result .result-art,
 .result .result-info {
-  height: 100%;
-  padding: $search-result-info-item-padding 0;
+	height: 100%;
+	padding: $search-result-info-item-padding 0;
 }
 
 .result .result-art {
-  float: left;
-  padding-left: 20px;
-  width: $search-result-height;
+	float: left;
+	padding-left: 20px;
+	width: $search-result-height;
 }
 
 .result .result-art img {
-  display: block;
-  height: 100%;
-  width: auto;
+	display: block;
+	height: 100%;
+	width: auto;
 }
 
 .result .result-info {
-  display: block;
-  height: 100%;
-  line-height: ($search-result-height - ($search-result-info-item-padding * 2)) / 3;
-  padding-left: 0;
-  width: 100%;
+	display: block;
+	height: 100%;
+	line-height: ($search-result-height - ($search-result-info-item-padding * 2)) / 3;
+	padding-left: 0;
+	width: 100%;
 }
 
 .result .result-info .result-info-item {
-    @include no-wrap;
-    padding-right: 10px;
+		@include no-wrap;
+		padding-right: 10px;
 }
 
 .result .title {
-  font-size: 18px;
-  font-weight: 400;
+	font-size: 18px;
+	font-weight: 400;
 }
 
 .result .artist,
 .result .album {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 @media #{$breakpoint-small} {
 
-  .result .title {
-    font-size: 14px;
-  }
+	.result .title {
+		font-size: 14px;
+	}
 
-  .result .artist,
-  .result .album {
-    font-size: 12px;
-  }
+	.result .artist,
+	.result .album {
+		font-size: 12px;
+	}
 
 }
 
