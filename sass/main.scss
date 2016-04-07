@@ -16,18 +16,14 @@
 }
 
 /*
- * For sticky footer, we need to make sure all parent elements to the mainContent
- * (which encloses everything above the footer) has a height of 100%
+ * For sticky footer, we need to make sure html and body have a height of 100%
  */
 html,
-body,
-#app,
-.app {
+body {
 	height: 100%;
 }
 
 body {
-  background: radial-gradient(circle at top right, #DADADA, #F5F5F5 50%);;
   color: #545454;
   font-family: 'Open Sans', sans-serif;
   font-size: 18px;
@@ -38,10 +34,21 @@ body {
 }
 
 /*
- * mainContent encloses the content above the footer.
- * These CSS rules are used to achieve a stick footer.
+ * For sticky footer, all parent elements to mainContent (which encloses all content
+ * except footer) need to have a min-height of 100%; this allows it to stretch below
+ * the initial height of the window when user scrolls down.
+ */
+#app,
+.app {
+	min-height: 100%;
+}
+
+/*
+ * mainContent encloses all content that is not the footer.
+ * These CSS rules are used to achieve a sticky footer.
  */
 .mainContent {
+	background: radial-gradient(circle at top right, #DADADA, #F5F5F5 50%);
 	min-height: 100%;
   margin-bottom: -$footer-height;
 }

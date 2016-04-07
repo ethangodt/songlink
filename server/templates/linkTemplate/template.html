@@ -42,55 +42,62 @@
 <body>
   <main> <!-- main wrapper for modal blur -->
 
-    <div class="top-strip"></div>
-    <header>
-      <div class="wrapper">
-        <a href="/">
-          <div class="logo-container">
-            <div class="logo">
-              <span>songlink</span><br/>
-              <span class="tagline">share with anyone</span>
-            </div>
-          </div>
-        </a>
-        <div class="nav-container">
-          <ul class="nav">
-            <li><a href="/">Create Link</a></li>
-            <li><a href="/preferences">Preferences</a></li>
-          </ul>
-        </div>
-      </div>
-    </header>
+		<div class="mainContent"> <!-- for sticky footer; includes all content except footer -->
+	    <div class="top-strip"></div>
+	    <header>
+	      <div class="wrapper">
+	        <a href="/">
+	          <div class="logo-container">
+	            <div class="logo">
+	              <span>songlink</span><br/>
+	              <span class="tagline">share with anyone</span>
+	            </div>
+	          </div>
+	        </a>
+	        <div class="nav-container">
+	          <ul class="nav">
+	            <li><a href="/">Create Link</a></li>
+	            <li><a href="/preferences">Preferences</a></li>
+	          </ul>
+	        </div>
+	      </div>
+	    </header>
 
-    <div class="songContainer">
-      <img class="albumArt unloaded" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
-      <div class="tableWrapper">
-        <div class="songInfo">
-          <h1 class="songTitle">{{title}}</h1>
-          <span>by</span><h1 class="songAlbum">{{artist}}</h1>
-        </div>
-      </div>
-    </div>
+	    <div class="songContainer">
+	      <img class="albumArt unloaded" src="{{album_art}}" alt="Album Art" width="175px" height="175px"/>
+	      <div class="tableWrapper">
+	        <div class="songInfo">
+	          <h1 class="songTitle">{{title}}</h1>
+	          <span>by</span><h1 class="songAlbum">{{artist}}</h1>
+	        </div>
+	      </div>
+	    </div>
 
-    <div class="listenLinks">
-      {{#providers}}
-        <button class="{{className}}" onclick="providerClick('{{provider}}','{{url}}')">
-          <div class="logo">
-            <span class="fa fa-{{icon}}"></span>
-          </div>
-          <div class="link-text">
-            <span>{{text}}</span>
-          </div>
-          <div class="share">
-            <span class="fa fa-share-square-o"></span>
-          </div>
-        </button>
-      {{/providers}}
-    </div>
+	    <div class="listenLinks">
+	      {{#providers}}
+	        <button class="{{className}}" onclick="providerClick('{{provider}}','{{url}}')">
+	          <div class="logo">
+	            <span class="fa fa-{{icon}}"></span>
+	          </div>
+	          <div class="link-text">
+	            <span>{{text}}</span>
+	          </div>
+	          <div class="share">
+	            <span class="fa fa-share-square-o"></span>
+	          </div>
+	        </button>
+	      {{/providers}}
+	    </div>
+		</div>
 
-    <footer>
-      <span>&copy; 2015 songl.ink | <a href="mailto:songlinkapp@gmail.com">contact</a></span>
-    </footer>
+		<footer>
+			<span>
+				&copy; 2016 Songlink |&nbsp;
+				<a className="footerLink" href="mailto:songlinkapp@gmail.com">email</a> |&nbsp;
+				<a className="footerLink" href="http://twitter.com/songlinkapp">twitter</a>
+			</span>
+		</footer>
+
   </main>
 
   <div class="modalEnvironment">
