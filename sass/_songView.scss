@@ -4,65 +4,65 @@
 }
 
 .albumArt {
-  float: left;
-  box-shadow: 0 3px 6px #bebebe;
-  transition: transform .7s, opacity .7s;
+	float: left;
+	box-shadow: 0 3px 6px #bebebe;
+	transition: transform .7s, opacity .7s;
 }
 
 .unloaded {
-  transform: translate(0, 20px);
-  opacity: 0;
+	transform: translate(0, 20px);
+	opacity: 0;
 }
 
 .tableWrapper {
-  display: table;
-  height: $song-page-album-art-size;
-  padding-left: 30px;
+	display: table;
+	height: $song-page-album-art-size;
+	padding-left: 30px;
 }
 
 .songInfo {
-  display: table-cell;
-  vertical-align: middle;
-  margin: 0 0 0 35px;
-  font-size: 28px;
-  color: $color-main;
+	display: table-cell;
+	vertical-align: middle;
+	margin: 0 0 0 35px;
+	font-size: 28px;
+	color: $color-main;
 }
 
 .songInfo span {
-  font-size: 20px;
-  margin-right: 10px;
-  color: #797979;
+	font-size: 20px;
+	margin-right: 10px;
+	color: #797979;
 }
 
 .songInfo .songAlbum {
-  display: inline;
+	display: inline;
 }
 
 .songInfo .songTitle {
-  margin-bottom: 10px
+	margin-bottom: 10px
 }
 
 .disabled {
-  opacity : 0.3;
-  pointer-events : none;
+	opacity : 0.3;
+	pointer-events : none;
 }
 
 // Small Breakpoint styles
-@media ($smallBreakRule)  {
-  .songContainer {
-    max-width: 90%;
+@media ($smallBreakRule)	{
+	.songContainer {
+		max-width: 90%;
 
-  }
-  .tableWrapper {
-    height: 100px;
-  }
-  .songContainer .albumArt {
-    width: 100px;
-    height: 100px;
-  }
-  .songInfo {
-    font-size: 24px !important;
-  }
+	}
+	.tableWrapper {
+		height: 100px;
+	}
+	.songContainer .albumArt {
+		width: 100px;
+		height: 100px;
+	}
+	.songInfo {
+		font-size: 24px !important;
+	}
 }
 
 // look into resizing the modal

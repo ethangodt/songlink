@@ -35,18 +35,18 @@
 }
 
 @media #{$breakpoint-small} {
-  .explanationContainer {
+	.explanationContainer {
 		padding-left: 20px;
 	}
 
 	.explanationContainer p {
-    font-size: 20px;
-  }
+		font-size: 20px;
+	}
 
-  .explanationContainer ul {
-    font-size: 16px;
+	.explanationContainer ul {
+		font-size: 16px;
 		padding-left: 20px;
-  }
+	}
 
 	.explanationContainer li .fa {
 		margin-right: 10px;

@@ -1,14 +1,14 @@
 footer {
-  background-color: white;
+	background-color: white;
 	// Must set height for sticky footer
 	height: $footer-height;
-  line-height: $footer-height;
-  text-align: center;
+	line-height: $footer-height;
+	text-align: center;
 }
 
 footer span {
-  font-size: 14px;
-  font-weight: 400;
+	font-size: 14px;
+	font-weight: 400;
 }
 
 footer .footerLink {
@@ -19,8 +19,8 @@ footer .footerLink {
 
 @media #{$breakpoint-small} {
 
-  footer span {
-    font-size: 12px;
-  }
+	footer span {
+		font-size: 12px;
+	}
 
 }

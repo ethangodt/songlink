@@ -1,49 +1,49 @@
 .preferences {
-  text-align: center;
+	text-align: center;
 	margin-top: 50px;
 	margin-bottom: 100px;
 }
 
 .preferences.wrapper {
-  max-width: 360px;
+	max-width: 360px;
 }
 
 .preferences .header {
-  color: $color-main;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 14px;
+	color: $color-main;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 26px;
+	font-weight: 600;
+	margin-bottom: 14px;
 }
 
 .preferences .redirect-info {
-  font-size: 16px;
-  line-height: 26px;
-  margin-bottom: 20px;
+	font-size: 16px;
+	line-height: 26px;
+	margin-bottom: 20px;
 }
 
 .preferences .save-button {
-  @include paper;
-  background-color: $color-main;
-  border: none;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 600;
-  height: 36px;
-  margin-top: 20px;
-  outline: none;
-  padding: 0 16px;
-  width: 40%;
+	@include paper;
+	background-color: $color-main;
+	border: none;
+	color: white;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: 600;
+	height: 36px;
+	margin-top: 20px;
+	outline: none;
+	padding: 0 16px;
+	width: 40%;
 
-  &:hover {
-    color: mix($color-main, white, 20%);
-  }
+	&:hover {
+		color: mix($color-main, white, 20%);
+	}
 }
 
 .preferences .update-message {
-  color: $color-main;
-  font-size: 14px;
-  font-weight: 600;
-  margin-top: 20px;
+	color: $color-main;
+	font-size: 14px;
+	font-weight: 600;
+	margin-top: 20px;
 }
