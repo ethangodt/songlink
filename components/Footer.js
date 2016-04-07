@@ -5,7 +5,11 @@ class Footer extends Component {
   render() {
     return (
       <footer>
-        <span>&copy; 2015 songlink | <a href="mailto:songlinkapp@gmail.com">contact</a></span>
+        <span>
+					&copy; 2016 Songlink |&nbsp;
+					<a className="footerLink" href="mailto:songlinkapp@gmail.com">email</a> |&nbsp;
+					<a className="footerLink" href="http://twitter.com/songlinkapp">twitter</a>
+				</span>
       </footer>
     )
   }

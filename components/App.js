@@ -4,16 +4,18 @@ import Footer from './Footer'
 
 class App extends Component {
 
-  render() {
+	render() {
 
-    return (
-      <div>
-        <Header showCreateLinksLink={this.props.location.pathname !== '/'}/>
-        {this.props.children}
-        <Footer/>
-      </div>
-    )
-  }
+		return (
+			<div className="app">
+				<div className='mainContent'>
+					<Header showCreateLinksLink={this.props.location.pathname !== '/'}/>
+					{this.props.children}
+				</div>
+				<Footer/>
+			</div>
+		)
+	}
 
 }
 

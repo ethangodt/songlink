@@ -15,6 +15,17 @@
   padding: 0;
 }
 
+/*
+ * For sticky footer, we need to make sure all parent elements to the mainContent
+ * (which encloses everything above the footer) has a height of 100%
+ */
+html,
+body,
+#app,
+.app {
+	height: 100%;
+}
+
 body {
   background: radial-gradient(circle at top right, #DADADA, #F5F5F5 50%);;
   color: #545454;
@@ -24,6 +35,21 @@ body {
 	-moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 	position: relative;
+}
+
+/*
+ * mainContent encloses the content above the footer.
+ * These CSS rules are used to achieve a stick footer.
+ */
+.mainContent {
+	min-height: 100%;
+  margin-bottom: -$footer-height;
+}
+
+.mainContent:after {
+  content: "";
+  display: block;
+	height: $footer-height;
 }
 
 @import 'grid';
