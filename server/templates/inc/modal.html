@@ -1,0 +1,23 @@
+<div class="modalEnvironment">
+	<div class="modalContainer unloaded">
+		<div class="top-strip"></div>
+		<p>Songlink works best when you tell us where you listen to music. Next time you click on a songlink we’ll open your app for you automatically.</p>
+		<br/>
+		<p>You can always go to <a href="http://songl.ink/">songl.ink</a> and change this later.</p>
+		<div class="modalButtonContainer">
+
+			{{#providers}}
+				<button class="mini {{provider}}" onclick="modalSelection.click('{{provider}}')">
+					<span class="fa fa-{{icon}}"></span><span> {{name}}</span>
+				</button>
+			{{/providers}}
+
+			<button class="mini none" onclick="modalSelection.click('none')">
+				No auto redirect preference
+			</button>
+			<button class="mini special save" onclick="preferenceSave(modalSelection.preference)">
+				Save preference
+			</button>
+		</div>
+	</div>
+</div>

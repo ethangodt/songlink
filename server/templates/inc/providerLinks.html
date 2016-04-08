@@ -1,0 +1,15 @@
+<div class="listenLinks">
+	{{#providers}}
+		<button class="{{className}}" onclick="providerClick('{{provider}}','{{url}}')">
+			<div class="logo">
+				<span class="fa fa-{{icon}}"></span>
+			</div>
+			<div class="link-text">
+				<span>{{text}}</span>
+			</div>
+			<div class="share">
+				<span class="fa fa-share-square-o"></span>
+			</div>
+		</button>
+	{{/providers}}
+</div>

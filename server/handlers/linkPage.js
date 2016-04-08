@@ -16,7 +16,9 @@ function getSong(req, res, next) {
 			req.song = songFromDb;
 			next();
 		} else {
-			res.status(404).sendFile(path.join(__dirname, '../templates/404.html'));
+			var template = fs.readFileSync(path.join(__dirname, '../templates/error.html'), 'utf-8');
+			var html = Mustache.render(template, undefined, getPartialsObject());
+			res.send(html);
 		}
 	});
 }
@@ -35,15 +37,20 @@ function render(req, res) {
 		preferredProviderUrl: preference && providers[preference].makeLink(req.song)
 	};
 
-	fs.readFile(path.join(__dirname, '../templates/linkTemplate/template.html'),'utf-8', function(err, template) {
-		if (err) {
-			console.error(err);
+	var template = fs.readFileSync(path.join(__dirname, '../templates/linkPage.html'), 'utf-8');
+	var html = Mustache.render(template, data, getPartialsObject());
+	res.send(html);
+}
 
-			// this should probably be a 500 error page
-			return res.status(404).sendFile(path.join(__dirname, '../templates/404.html'));
-		}
-
-		var html = Mustache.render(template, data);
-		res.send(html);
-	});
+function getPartialsObject() {
+	return {
+		analytics: fs.readFileSync(path.join(__dirname, '../templates/inc/analytics.html'), 'utf-8'),
+		footer: fs.readFileSync(path.join(__dirname, '../templates/inc/footer.html'), 'utf-8'),
+		header: fs.readFileSync(path.join(__dirname, '../templates/inc/header.html'), 'utf-8'),
+		modal: fs.readFileSync(path.join(__dirname, '../templates/inc/modal.html'), 'utf-8'),
+		og: fs.readFileSync(path.join(__dirname, '../templates/inc/og.html'), 'utf-8'),
+		providerLinks: fs.readFileSync(path.join(__dirname, '../templates/inc/providerLinks.html'), 'utf-8'),
+		songContainer: fs.readFileSync(path.join(__dirname, '../templates/inc/songContainer.html'), 'utf-8'),
+		twitter: fs.readFileSync(path.join(__dirname, '../templates/inc/twitter.html'), 'utf-8')
+	}
 }
