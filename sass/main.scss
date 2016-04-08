@@ -59,6 +59,10 @@ body {
 	height: $footer-height;
 }
 
+.mainContent.errorPage {
+	text-align: center;
+}
+
 @import 'grid';
 @import 'header';
 @import 'search';
