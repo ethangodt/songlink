@@ -15,10 +15,10 @@
 	"scripts": {
 		"clean": "rm -rf dist",
 		"postclean": "mkdir dist && mkdir dist/scripts && mkdir dist/assets",
-		"js:copy": "cp -a server/templates/linkTemplate/scripts/. dist/scripts/",
-		"js:uglify": "uglifyjs server/templates/linkTemplate/scripts/listenerTools.js -o dist/scripts/listenerTools.js",
+		"js:copy": "cp -a scripts/. dist/scripts/",
+		"js:uglify": "uglifyjs scripts/linkPage.js -o dist/scripts/linkPage.js",
 		"js:webpack": "NODE_ENV=production webpack --config webpack.production.config.js",
-		"images:copy": "cp -a server/static/assets/. dist/assets/",
+		"images:copy": "cp -a assets/. dist/assets/",
 		"css:sass:prod": "node-sass sass/main.scss dist/main.css --output-style compressed",
 		"css:sass:dev": "node-sass sass/main.scss dist/main.css",
 		"css:sass:watch": "nodemon -e scss --watch ./sass -x \"npm run css:sass:dev\"",
