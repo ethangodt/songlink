@@ -9,13 +9,13 @@ import { IndexRoute, Route, Router } from 'react-router';
 import configureStore from '../redux/store';
 
 render(
-  <Provider store={ configureStore() }>
-    <Router history={ createHistory() }>
-      <Route path="/" component={ App }>
-        <IndexRoute component={ Main }/>
-        <Route path="preferences" component={ Preferences }/>
-      </Route>
-    </Router>
-  </Provider>,
-  document.getElementById('app')
+	<Provider store={ configureStore() }>
+		<Router history={ createHistory() }>
+			<Route path="/" component={ App }>
+				<IndexRoute component={ Main }/>
+				<Route path="preferences" component={ Preferences }/>
+			</Route>
+		</Router>
+	</Provider>,
+	document.getElementById('app')
 );

@@ -1,21 +1,15 @@
 var mongoose = require('mongoose');
 
 var songSchema = new mongoose.Schema({
-  title: String,
-  artist: String,
-  hash_id: String,
-  album_title: String,
-  album_art: String,
-  album_art_size: Number,
-  youtube_id: String,
-  spotify_id: String,
-  itunes_id: String,
-  itunes_app_uri: String,
-  itunes_store_uri: String,
-  clicks: Number,
-  creates: Number,
-  track_length: Number,
-  spotify_images: Object
+	hash_id: String,
+	title: String,
+	artist: String,
+	album_title: String,
+	track_length: Number,
+	source: String,
+	source_id: String,
+	lookup: Object,
+	results_pruned: Object
 });
 
 var Song = mongoose.model('song', songSchema);

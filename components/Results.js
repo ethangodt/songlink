@@ -3,34 +3,34 @@ import Result from './Result'
 
 class Results extends Component {
 
-  constructor(props, context) {
-    super(props, context)
-  }
+	constructor(props, context) {
+		super(props, context)
+	}
 
-  render() {
+	render() {
 
-    return (
-      <div className="results wrapper">
-        {
-          this.props.results.map((result, i) => {
-            return (
-              <Result 
-                key={i} 
-                result={result}
-                actions={this.props.actions}
-                clearText={this.props.clearText}/>
-          )})
-        }
-      </div>
-    ) 
-  }
+		return (
+			<div className="results wrapper">
+				{
+					this.props.results.map((result, i) => {
+						return (
+							<Result 
+								key={i} 
+								result={result}
+								actions={this.props.actions}
+								clearText={this.props.clearText}/>
+					)})
+				}
+			</div>
+		) 
+	}
 
 }
 
 Results.propTypes = {
-  actions: PropTypes.object.isRequired,
-  clearText: PropTypes.func.isRequired,
-  results: PropTypes.array.isRequired
+	actions: PropTypes.object.isRequired,
+	clearText: PropTypes.func.isRequired,
+	results: PropTypes.array.isRequired
 }
 
 export default Results

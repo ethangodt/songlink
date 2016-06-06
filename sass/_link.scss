@@ -1,175 +1,199 @@
 .link {
-  @include paper;
-  padding: 16px;
-  margin-bottom: 20px;
+	@include paper;
+	padding: 16px;
+	margin-bottom: 20px;
 }
 
 .link .link-header {
-  display: table;
-  font-weight: 400;
-  height: $link-header-height;
-  margin-bottom: 20px;
+	display: table;
+	font-weight: 400;
+	height: $link-header-height;
+	margin-bottom: 20px;
 }
 
 .link .link-header img {
-  @include paper;
-  float: left;
-  height: auto;
-  margin-right: 20px;
-  width: $link-header-height;
+	@include paper;
+	float: left;
+	height: auto;
+	margin-right: 20px;
+	width: $link-header-height;
 }
 
 .link .link-header .link-info {
-  display: table-cell;
-  height: 100%;
-  line-height: 22px;
-  vertical-align: middle;
-  width: 100%;
+	display: table-cell;
+	height: 100%;
+	line-height: 22px;
+	vertical-align: middle;
+	width: 100%;
 }
 
 .link .link-header .title {
-  font-size: 18px;
+	font-size: 18px;
 }
 
 .link .link-header .artist {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .link .link-header .album {
-  font-size: 16px;
-  font-weight: 300;
+	font-size: 16px;
+	font-weight: 300;
 }
 
 .link .link-container {
-  height: $link-input-height;
-  margin-bottom: 20px;
-  position: relative;
-  width: 100%;
+	height: $link-input-height;
+	margin-bottom: 16px;
+	position: relative;
+	width: 100%;
 }
 
 .link .link-container button.copy {
-  @include button;
-  color: grey;
-  font-size: 20px;
-  padding: 0 12px;
-  position: absolute;
-  right: 10px;
-  top: ($link-input-height / 2) - 10;
+	@include button;
+	color: grey;
+	font-size: 20px;
+	padding: 0 12px;
+	position: absolute;
+	right: 10px;
+	top: ($link-input-height / 2) - 10;
 
-  &:hover {
-    color: black;
-  }
+	&:hover {
+		color: black;
+	}
 }
 
 .link .link-container button.copy .inactive {
-  color: lightgrey;
+	color: lightgrey;
 
-  &:hover {
-    color: lightgrey;
-  }
+	&:hover {
+		color: lightgrey;
+	}
 }
 
 .link input {
-  display: inline-block;
-  border: 1px solid lightgrey;
-  border-radius: 4px;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 18px;
-  font-weight: 300;
-  height: 100%;
-  outline: none;
-  padding-left: 16px;
-  width: 100%;
+	display: inline-block;
+	border: 1px solid lightgrey;
+	border-radius: 4px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 300;
+	height: 100%;
+	outline: none;
+	padding-left: 16px;
+	width: 100%;
 }
 
 .link .button-container {
-  height: $link-input-height;
+	height: $link-input-height;
 }
 
 .link .button-container button {
-  @include button;
-  @include paper;
-  border-radius: 100%;
-  color: white;
-  height: 100%;
-  font-size: 20px;
-  font-weight: 600;
-  margin-right: 20px;
-  width: $link-input-height;
+	@include button;
+	@include paper;
+	border-radius: 100%;
+	color: white;
+	height: 100%;
+	font-size: 16px;
+	font-weight: 600;
+	margin-right: 10px;
+	width: $link-input-height;
+}
+
+// for the open link button
+.link .button-container a:nth-last-of-type(1) button {
+	float: right;
+	margin-right: 0;
 }
 
 .link button.copy .fa-link {
-  -moz-transform: scaleX(-1);
-  -o-transform: scaleX(-1);
-  -webkit-transform: scaleX(-1);
-  transform: scaleX(-1);
-  filter: FlipH;
-  -ms-filter: "FlipH";
+	-moz-transform: scaleX(-1);
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
 }
 
 .link button.facebook {
-  background-color: $color-facebook;
+	background-color: $color-facebook;
 }
 
 .link button.twitter {
-  background-color: $color-twitter;
+	background-color: $color-twitter;
+}
+
+.link button.google-plus {
+	background-color: $color-google-plus;
+}
+
+.link button.reddit {
+	background-color: $color-reddit;
+}
+
+.link button.email {
+	background-color: $color-main;
+}
+
+#emailbutton {
+	background-color: #1BBC9B;
 }
 
 @media #{$breakpoint-small} {
 
-  .link {
-    padding: 16px;
-  }
-  
-  .link .link-header {
-    font-size: 12px;
-    height: $link-header-height-small;
-  }
+	.link {
+		padding: 16px;
+	}
 
-  .link .link-header img {
-    width: $link-header-height-small;
-  }
+	.link .link-header {
+		font-size: 12px;
+		height: $link-header-height-small;
+	}
 
-  .link .link-header .link-info {
-    line-height: 18px;
-  }
+	.link .link-header img {
+		width: $link-header-height-small;
+	}
 
-  .link .link-header .title {
-    font-size: 14px;
-  }
+	.link .link-header .link-info {
+		line-height: 18px;
+	}
 
-  .link .link-header .artist {
-    font-size: 12px;
-  }
+	.link .link-header .title {
+		font-size: 14px;
+	}
 
-  .link .link-header .album {
-    font-size: 12px;
-  }
-  
-  .link .link-container {
-    height: $link-input-height-small;
-    width: 100%;
-  }
+	.link .link-header .artist {
+		font-size: 12px;
+	}
 
-  .link input{
-    font-size: 12px;
-    padding: 10px;
-  }
+	.link .link-header .album {
+		font-size: 12px;
+	}
 
-  .link .link-container button.copy {
-    font-size: 16px;
-    right: 4px;
-    top: ($link-input-height-small / 2) - 8;
-  } 
+	.link .link-container {
+		height: $link-input-height-small;
+		width: 100%;
+	}
 
-  .link .button-container {
-    height: $link-input-height-small;
-  }
+	.link input{
+		font-size: 12px;
+		padding: 10px;
+	}
 
-  .link .button-container button {
-    font-size: 12px;
-    margin-right: 14px;
-    width: $link-input-height-small;
-  }
-   
+	.link .link-container button.copy {
+		font-size: 16px;
+		right: 4px;
+		top: ($link-input-height-small / 2) - 8;
+	}
+
+	.link .button-container {
+		height: $link-input-height-small;
+	}
+
+	.link .button-container button {
+		font-size: 12px;
+		margin-right: 14px;
+		width: $link-input-height-small;
+	}
+
+
+
 }

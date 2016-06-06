@@ -1,47 +1,55 @@
 .listenLinks {
-  margin: 35px auto 100px auto;
-  max-width: 480px;
-  width: 90%;
+	margin: 35px auto 100px auto;
+	max-width: 480px;
+	width: 90%;
 }
 
 .link .link-header .link-info {
-  display: table-cell;
-  height: 100%;
-  vertical-align: middle;
-  width: 100%;
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
+	width: 100%;
 }
 
 .listenLinks button {
-  @include paper;
-  border: none;
-  cursor: pointer;
-  display: table;
-  height: $song-page-link-height;
-  line-height: $song-page-link-height;
-  margin-bottom: 20px;
-  outline: none;
-  text-align: left;
-  width: 100%;
+	@include paper;
+	border: none;
+	cursor: pointer;
+	display: table;
+	height: $song-page-link-height;
+	line-height: $song-page-link-height;
+	margin-bottom: 20px;
+	outline: none;
+	text-align: left;
+	width: 100%;
 }
 
 .listenLinks button .logo {
-  float: left;
-  height: 100%;
-  text-align: center;
-  width: 20%;
+	float: left;
+	height: 100%;
+	text-align: center;
+	width: 20%;
 }
 
 .listenLinks button .logo span {
-  font-size: 33px;
-  line-height: $song-page-link-height;
+	font-size: 33px;
+	line-height: $song-page-link-height;
 }
 
 .listenLinks button .logo span.fa-spotify {
-  color: $color-spotify;
+	color: $color-spotify;
+}
+
+.listenLinks button .logo span.fa-google {
+	color: $color-google;
 }
 
 .listenLinks button .logo span.fa-youtube-play {
-  color: $color-youtube;
+	color: $color-youtube;
+}
+
+.listenLinks button .logo span.fa-play-circle-o {
+	color: purple;
 }
 
 .listenLinks button .link-text {
@@ -56,7 +64,7 @@
 }
 
 .listenLinks button .link-text span {
-  text-align: center;
+	text-align: center;
 }
 
 .listenLinks button .share {
@@ -69,24 +77,24 @@
 }
 
 @media ($smallBreakRule) {
-  .listenLinks button {
-    height: $song-page-link-height-small;
-    line-height: $song-page-link-height-small;
-  }
+	.listenLinks button {
+		height: $song-page-link-height-small;
+		line-height: $song-page-link-height-small;
+	}
 
-  .listenLinks button .link-text {
-    font-size: 16px;
-  }
+	.listenLinks button .link-text {
+		font-size: 16px;
+	}
 
-  .listenLinks button .logo span {
-    font-size: 40px;
-    line-height: $song-page-link-height-small;
-  }
+	.listenLinks button .logo span {
+		font-size: 27px;
+		line-height: $song-page-link-height-small;
+	}
 }
 
 // one-off breakpoint style to accommodate the link font size on the buttons
 @media (max-width: 400px) {
-  .listenLinks button {
-    font-size: 12px;
-  }
+	.listenLinks button {
+		font-size: 12px;
+	}
 }

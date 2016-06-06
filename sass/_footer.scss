@@ -1,18 +1,26 @@
 footer {
-  background-color: $color-light-grey;
-  line-height: 50px;
-  text-align: center;
+	background-color: white;
+	// Must set height for sticky footer
+	height: $footer-height;
+	line-height: $footer-height;
+	text-align: center;
 }
 
 footer span {
-  font-size: 14px;
-  font-weight: 400;
+	font-size: 14px;
+	font-weight: 400;
+}
+
+footer .footerLink {
+	&:hover {
+		color: $color-main;
+	}
 }
 
 @media #{$breakpoint-small} {
 
-  footer span {
-    font-size: 12px;
-  }
+	footer span {
+		font-size: 12px;
+	}
 
 }
